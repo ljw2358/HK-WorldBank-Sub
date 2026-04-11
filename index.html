@@ -2,261 +2,369 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK-WorldBank Global Industrial & Financial Network</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HK WORLD BANK - Global Vision</title>
     <style>
-        :root { --main-cyan: #00fbff; --warning-red: #ff4d4d; --dark-bg: #050505; --card-bg: #0d0d0d; }
-        body { background-color: var(--dark-bg); color: #fff; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; line-height: 1.8; }
-        .main-container { max-width: 800px; margin: 0 auto; padding: 80px 25px; border-left: 1px solid #1a1a1a; border-right: 1px solid #1a1a1a; }
+        /* 기본 배경 및 폰트 설정 */
+        :root {
+            --hk-gold: #FFD700;
+            --hk-green: #00ff00;
+            --hk-red: #ff3b3b;
+            --hk-blue: #2196F3;
+            --hk-bg: #000000;
+            --hk-card: #121212;
+            --hk-border: #222222;
+        }
 
-        /* HEADER */
-        .header-wrap { text-align: center; margin-bottom: 100px; }
-        .main-logo { font-size: 42px; font-weight: 900; color: var(--main-cyan); letter-spacing: 15px; text-shadow: 0 0 25px rgba(0,251,255,0.4); margin: 0; }
-        .sub-logo { font-size: 14px; color: #555; margin-top: 20px; letter-spacing: 6px; font-weight: 300; }
-        .division-line { width: 150px; height: 1px; background: linear-gradient(to right, transparent, #333, transparent); margin: 40px auto; }
+        body {
+            background-color: var(--hk-bg);
+            color: #ffffff;
+            font-family: 'Noto Sans KR', 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
 
-        /* 3대 핵심 산업 섹션 */
-        .section-header { text-align: center; margin-bottom: 50px; }
-        .section-header h2 { font-size: 22px; letter-spacing: 4px; color: #fff; text-transform: uppercase; }
-        
-        .industry-grid { display: grid; grid-template-columns: 1fr; gap: 30px; margin-bottom: 120px; }
-        .industry-card { background: var(--card-bg); border: 1px solid #222; padding: 40px; border-radius: 4px; position: relative; transition: all 0.4s ease; }
-        .industry-card:hover { border-color: var(--main-cyan); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,251,255,0.1); }
-        .industry-card::before { content: "TOP SECRET"; position: absolute; top: 15px; right: 20px; font-size: 9px; color: #333; letter-spacing: 1px; }
-        
-        .ind-num { color: var(--main-cyan); font-size: 12px; font-weight: bold; margin-bottom: 10px; display: block; }
-        .ind-name { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 15px; letter-spacing: 1px; }
-        .ind-detail { color: #999; font-size: 13px; line-height: 2; margin-bottom: 20px; }
-        .ind-tags { display: flex; gap: 10px; }
-        .tag { font-size: 9px; padding: 4px 10px; border: 1px solid #333; color: #555; border-radius: 20px; text-transform: uppercase; }
+        /* 최상단 상태바 공간 (사진 레이아웃 재현) */
+        .status-bar-space {
+            height: 25px;
+            background: #000;
+        }
 
-        /* 글로벌 안전 신탁 보관료 (20개국어 슈퍼 롱 리스트) */
-        .custody-wrap { background: #000; border: 1px solid var(--warning-red); padding: 50px 30px; margin-bottom: 100px; position: relative; }
-        .custody-wrap h3 { color: var(--warning-red); font-size: 22px; text-align: center; margin-bottom: 45px; letter-spacing: 3px; border-bottom: 1px solid #331111; padding-bottom: 25px; }
-        
-        .lang-container { display: flex; flex-direction: column; gap: 25px; }
-        .lang-row { border-bottom: 1px solid #151515; padding-bottom: 20px; display: grid; grid-template-columns: 80px 1fr; }
-        .lang-label { color: var(--warning-red); font-size: 11px; font-weight: bold; font-family: monospace; }
-        .lang-content .major { display: block; font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 8px; }
-        .lang-content .minor { display: block; font-size: 13px; color: #888; line-height: 1.8; }
+        /* 세이프 커스티디 피 - 흐르는 자막 레이어 */
+        .safe-fee-bar {
+            background: #000;
+            border-bottom: 1px solid #333;
+            padding: 8px 0;
+            overflow: hidden;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-        /* 통합 보안 관리 지침 */
-        .security-footer { text-align: center; background: #080808; padding: 60px 30px; border: 1px solid #1a1a1a; margin-top: 100px; }
-        .shield-icon { color: var(--main-cyan); font-size: 18px; font-weight: 900; letter-spacing: 5px; margin-bottom: 30px; display: block; }
-        .security-policy { color: #777; font-size: 13px; max-width: 600px; margin: 0 auto; line-height: 2.2; }
-        .security-policy strong { color: #ddd; }
-        
-        .auth-warning { color: var(--warning-red); font-size: 11px; margin-top: 50px; text-transform: uppercase; letter-spacing: 3px; font-weight: bold; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-        
-        .copyright { margin-top: 80px; font-size: 10px; color: #333; letter-spacing: 1px; text-transform: uppercase; }
+        .marquee-wrapper {
+            display: flex;
+            white-space: nowrap;
+            animation: marquee-flow 60s linear infinite;
+        }
+
+        .marquee-content {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--hk-red);
+            padding-right: 50px;
+            letter-spacing: 1px;
+        }
+
+        @keyframes marquee-flow {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* 헤더 섹션 */
+        .header-container {
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .lang-selector {
+            float: right;
+            background: #1a1a1a;
+            color: var(--hk-gold);
+            border: 1px solid #333;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+
+        .brand-logo {
+            clear: both;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--hk-gold);
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            margin-top: 20px;
+        }
+
+        /* 메인 자산 카드 영역 */
+        .asset-card {
+            background: var(--hk-card);
+            margin: 20px;
+            padding: 35px 20px;
+            border-radius: 25px;
+            border: 1px solid var(--hk-border);
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .asset-label {
+            color: var(--hk-gold);
+            font-size: 14px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .pi-balance {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pi-symbol {
+            color: var(--hk-gold);
+            margin-left: 10px;
+            font-size: 32px;
+        }
+
+        .gcv-badge {
+            display: inline-block;
+            border: 2px solid var(--hk-green);
+            color: var(--hk-green);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 10px;
+            background: rgba(0, 255, 0, 0.05);
+        }
+
+        /* 메뉴 그리드 시스템 */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 0 20px;
+            margin-bottom: 30px;
+        }
+
+        .menu-item {
+            background: var(--hk-card);
+            padding: 25px 10px;
+            border-radius: 18px;
+            text-align: center;
+            border: 1px solid var(--hk-border);
+            transition: transform 0.2s;
+        }
+
+        .menu-item:active {
+            transform: scale(0.95);
+        }
+
+        .menu-icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .menu-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ddd;
+        }
+
+        /* 양자 방패 & 글로벌 비전 섹션 */
+        .vision-container {
+            background: #050505;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 20px;
+            border-left: 4px solid #00e5ff;
+            text-align: left;
+        }
+
+        .vision-header {
+            color: #00e5ff;
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .vision-header span { margin-right: 10px; }
+
+        .vision-scroll-area {
+            height: 250px;
+            overflow-y: auto;
+            font-size: 13px;
+            color: #aaa;
+            line-height: 1.8;
+            padding-right: 10px;
+        }
+
+        .vision-item {
+            border-bottom: 1px solid #1a1a1a;
+            padding: 8px 0;
+        }
+
+        .vision-item b { color: #eee; }
+
+        /* 하단 예치 및 푸터 */
+        .apy-banner {
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--hk-gold);
+            margin: 40px 0 10px 0;
+            text-align: center;
+        }
+
+        .privacy-link {
+            color: #666;
+            font-size: 13px;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 30px;
+        }
+
+        .footer-info {
+            padding: 40px 20px;
+            color: #444;
+            font-size: 12px;
+            line-height: 1.6;
+            border-top: 1px solid #111;
+        }
+
+        .footer-name {
+            color: #777;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        /* 스크롤바 커스텀 */
+        .vision-scroll-area::-webkit-scrollbar { width: 3px; }
+        .vision-scroll-area::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
     </style>
 </head>
 <body>
 
-<div class="main-container">
-    <div class="header-wrap">
-        <h1 class="main-logo">HK-WORLDBANK</h1>
-        <div class="sub-logo">ADVANCED TECHNOLOGY & FINANCIAL SECURITY SYSTEMS</div>
-        <div class="division-line"></div>
+    <div class="status-bar-space"></div>
+
+    <div class="safe-fee-bar">
+        <div class="marquee-wrapper" id="feeMarquee">
+            </div>
     </div>
 
-    <div class="section-header">
-        <h2>Strategic Core Industries</h2>
+    <div class="header-container">
+        <div class="lang-selector">한국어 🇰🇷 ▼</div>
+        <div class="brand-logo">HK WORLD BANK</div>
     </div>
 
-    <div class="industry-grid">
-        <div class="industry-card">
-            <span class="ind-num">PHASE 01</span>
-            <div class="ind-name">HK-ROBOTICS SYSTEM</div>
-            <p class="ind-detail">인공지능 지능형 휴머노이드 개발 및 글로벌 자동화 생산 라인 구축. 인간의 노동력을 대체하는 초정밀 로보틱스 기술로 전 세계 제조 산업의 패러다임을 혁신합니다.</p>
-            <div class="ind-tags">
-                <span class="tag">AI Integration</span>
-                <span class="tag">Humanoid</span>
-                <span class="tag">Next-Gen</span>
-            </div>
+    <div class="asset-card">
+        <div class="asset-label">메인 자산 통합 원장</div>
+        <div class="pi-balance">
+            400.0212 <span class="pi-symbol">Pi</span>
         </div>
-
-        <div class="industry-card">
-            <span class="ind-num">PHASE 02</span>
-            <div class="ind-name">HK-NUCLEAR FUSION (ARTIFICIAL SUN)</div>
-            <p class="ind-detail">꿈의 에너지라 불리는 핵융합 기술을 통한 무한 에너지원 확보. 인공태양 제어 시스템을 통해 지구 전체에 청정하고 안전한 차세대 에너지를 공급하는 에너지 패권의 핵심입니다.</p>
-            <div class="ind-tags">
-                <span class="tag">Clean Energy</span>
-                <span class="tag">Fusion Power</span>
-                <span class="tag">Sustainability</span>
-            </div>
-        </div>
-
-        <div class="industry-card">
-            <span class="ind-num">PHASE 03</span>
-            <div class="ind-name">HK-QUANTUM BIO-TECHNOLOGY</div>
-            <p class="ind-detail">양자 컴퓨팅과 생명공학의 결합을 통한 초정밀 질병 진단 및 신약 개발. 인류의 생명 연장과 건강 증진을 위해 기존 바이오 기술의 한계를 뛰어넘는 양자 바이오 솔루션을 제공합니다.</p>
-            <div class="ind-tags">
-                <span class="tag">Quantum Computing</span>
-                <span class="tag">Bio-Genetics</span>
-                <span class="tag">Anti-Aging</span>
-            </div>
-        </div>
+        <div class="gcv-badge">가치 평가: $ 125,663,600 (GCV)</div>
     </div>
 
-    <div class="custody-wrap">
-        <h3>GLOBAL SAFE-CUSTODY FEE: 10%</h3>
-        <div class="lang-container">
-            <div class="lang-row">
-                <div class="lang-label">[KOR]</div>
-                <div class="lang-content">
-                    <span class="major">안전 신탁 보관료 10% 고지</span>
-                    <span class="minor">본 자산은 HK-WorldBank의 퀀텀 보안 지침에 따라 관리되며, 상호 보안 관계 하에 10%의 보관료가 적용됩니다.</span>
-                </div>
-            </div>
-            <div class="lang-row">
-                <div class="lang-label">[USA]</div>
-                <div class="lang-content">
-                    <span class="major">Safe Custody Fee: 10% Notice</span>
-                    <span class="minor">Assets are managed under HK-WorldBank's Quantum Security Protocol. A 10% custody fee is applied.</span>
-                </div>
-            </div>
-            <div class="lang-row">
-                <div class="lang-label">[CHN]</div>
-                <div class="lang-content">
-                    <span class="major">安全信托保管费 10% 公告</span>
-                    <span class="minor">资产根据 HK-WorldBank 的量子安全指南进行管理，并适用 10% 的保管费。</span>
-                </div>
-            </div>
-            <div class="lang-row">
-                <div class="lang-label">[JPN]</div>
-                <div class="lang-content">
-                    <span class="major">安全信託保管料 10% の通知</span>
-                    <span class="minor">資産は HK-WorldBank の量子セキュリティ指針に従って管理され、10% の保管料が適用されます。</span>
-                </div>
-            </div>
-            <div class="lang-row">
-                <div class="lang-label">[VNM]</div>
-                <div class="lang-content">
-                    <span class="major">Thông báo Phí tín thác an toàn 10%</span>
-                    <span class="minor">Tài sản được quản lý theo nguyên tắc bảo mật Quantum của HK-WorldBank, phí 10% được áp dụng.</span>
-                </div>
-            </div>
-            <div class="lang-row">
-                <div class="lang-label">[THA]</div>
-                <div class="lang-content">
-                    <span class="major">ประกาศค่าธรรมเนียมการดูแล 10%</span>
-                    <span class="minor">สินทรัพย์ได้รับการจัดการภายใต้แนวทางความปลอดภัยควอนตัมของ HK-WorldBank และมีค่าธรรมเนียม 10%</span>
-                </div>
-            </div>
-            <div class="lang-row">
-                <div class="lang-label">[ESP]</div>
-                <div class="lang-content">
-                    <span class="major">Aviso de Tarifa de Custodia del 10%</span>
-                    <span class="minor">Los activos se gestionan bajo el protocolo de seguridad de HK-WorldBank. Se aplica una tarifa del 10%.</span>
-                </div>
-            </div>
-            <div class="lang-row">
-                <div class="lang-label">[FRA]</div>
-                <div class="lang-content">
-                    <span class="major">Avis de frais de garde de 10 %</span>
-                    <span class="minor">Les actifs sont gérés selon les directives de sécurité HK-WorldBank. Des frais de 10 % s'appliquent.</span>
-                </div>
-            </div>
-            <div class="lang-row">
-                <div class="lang-label">[DEU]</div>
-                <div class="lang-content">
-                    <span class="major">Hinweis zur Verwahrungsgebühr von 10%</span>
-                    <span class="minor">Vermögenswerte werden gemäß den HK-WorldBank-Sicherheitsrichtlinien verwaltet. 10% Gebühr.</span>
-                </div>
-            </div>
-            <div class="lang-row">
-                <div class="lang-label">[RUS]</div>
-                <div class="lang-content">
-                    <span class="major">Уведомление о сборе за хранение 10%</span>
-                    <span class="minor">Активы управляются в соответствии с протоколом безопасности HK-WorldBank. Комиссия 10%.</span>
-                </div>
-            </div>
-            <div class="lang-row">
-                <div class="lang-label">[PRT]</div>
-                <div class="lang-content">
-                    <span class="major">Aviso de Taxa de Custódia de 10%</span>
-                    <span class="minor">Os ativos são geridos sob as diretrizes de segurança da HK-WorldBank. Taxa de 10%.</span>
-                </div>
-            </div>
-            <div class="lang-row">
-                <div class="lang-label">[ITA]</div>
-                <div class="lang-content">
-                    <span class="major">Avviso di Commissione di Custodia 10%</span>
-                    <span class="minor">Gli asset sono gestiti secondo i protocolli di sicurezza HK-WorldBank. Si applica il 10%.</span>
-                </div>
-            </div>
-            <div class="lang-row">
-                <div class="lang-label">[TUR]</div>
-                <div class="lang-content">
-                    <span class="major">%10 Saklama Ücreti Bildirimi</span>
-                    <span class="minor">Varlıklar HK-WorldBank güvenlik yönergeleri kapsamında yönetilir. %10 ücret uygulanır.</span>
-                </div>
-            </div>
-            <div class="lang-row">
-                <div class="lang-label">[ARA]</div>
-                <div class="lang-content">
-                    <span class="major">إشعار رسوم الحفظ بنسبة 10%</span>
-                    <span class="minor">تتم إدارة الأصول بموجب إرشادات الأمان في HK-WorldBank، وتطبق رسوم بنسبة 10%.</span>
-                </div>
-            </div>
-            <div class="lang-row">
-                <div class="lang-label">[HIN]</div>
-                <div class="lang-content">
-                    <span class="major">10% अभिरक्षा शुल्क की सूचना</span>
-                    <span class="minor">परिसंपत्तियां HK-WorldBank के सुरक्षा प्रोटोकॉल के तहत प्रबंधित हैं। 10% शुल्क लागू है।</span>
-                </div>
-            </div>
-            <div class="lang-row">
-                <div class="lang-label">[PHL]</div>
-                <div class="lang-content">
-                    <span class="major">Paunawa sa 10% Bayad sa Pag-iingat</span>
-                    <span class="minor">Ang mga asset ay pinamamahalaan sa ilalim ng HK-WorldBank security guidelines. 10% bayad.</span>
-                </div>
-            </div>
-            <div class="lang-row">
-                <div class="lang-label">[IDN]</div>
-                <div class="lang-content">
-                    <span class="major">Pemberitahuan Biaya Penitipan 10%</span>
-                    <span class="minor">Aset dikelola di bawah pedoman keamanan HK-WorldBank. Biaya 10% berlaku.</span>
-                </div>
-            </div>
-            <div class="lang-row">
-                <div class="lang-label">[MYS]</div>
-                <div class="lang-content">
-                    <span class="major">Notis Yuran Simpanan Selamat 10%</span>
-                    <span class="minor">Aset diuruskan di bawah garis panduan keselamatan HK-WorldBank. Yuran 10% dikenakan.</span>
-                </div>
-            </div>
-            <div class="lang-row">
-                <div class="lang-label">[NLD]</div>
-                <div class="lang-content">
-                    <span class="major">Kennisgeving van 10% bewaarkosten</span>
-                    <span class="minor">Activa worden beheerd volgens de HK-WorldBank-beveiligingsrichtlijnen. 10% kosten.</span>
-                </div>
-            </div>
-            <div class="lang-row">
-                <div class="lang-label">[POL]</div>
-                <div class="lang-content">
-                    <span class="major">Ogłoszenie o 10% opłacie za powiernictwo</span>
-                    <span class="minor">Aktywa są zarządzane zgodnie z wytycznymi HK-WorldBank. Obowiązuje opłata 10%.</span>
-                </div>
-            </div>
+    <div class="menu-grid">
+        <div class="menu-item">
+            <span class="menu-icon">✈️</span>
+            <span class="menu-text">송금</span>
+        </div>
+        <div class="menu-item">
+            <span class="menu-icon">🛒</span>
+            <span class="menu-text">결제</span>
+        </div>
+        <div class="menu-item">
+            <span class="menu-icon">🐷</span>
+            <span class="menu-text">예치</span>
+        </div>
+        <div class="menu-item">
+            <span class="menu-icon">🎁</span>
+            <span class="menu-text">보상</span>
+        </div>
+        <div class="menu-item">
+            <span class="menu-icon">⚖️</span>
+            <span class="menu-text">기본소득</span>
+        </div>
+        <div class="menu-item">
+            <span class="menu-icon">🔄</span>
+            <span class="menu-text">스왑</span>
         </div>
     </div>
 
-    <div class="security-footer">
-        <strong class="shield-icon">[ HK-QUANTUM SHIELD ACTIVE ]</strong>
-        <div class="security-policy">
-            본 시스템은 <strong>로봇, 인공태양, 퀀텀바이오</strong> 3대 산업의 독자적 기술 보호와<br>
-            글로벌 금융 자산의 안전한 관리를 위해 설계되었습니다.<br>
-            모든 정보는 HK Group의 <strong>상호 밀접한 보안 및 기밀 유지 관계</strong> 하에 엄격히 통제됩니다.
+    <div class="vision-container">
+        <div class="vision-header">
+            <span>🛡️</span> HK 양자 방패 가동 중 (Global Vision)
         </div>
-        <div class="auth-warning">Unauthorized Access Prohibited - Level 1 Security</div>
-        <div class="copyright">© 2026 HK-WorldBank. ALL RIGHTS RESERVED.</div>
+        <div class="vision-scroll-area" id="visionList">
+            </div>
     </div>
-</div>
 
+    <div class="apy-banner">예치 (APY 31.4%)</div>
+    <center><a href="#" class="privacy-link">개인정보처리방안</a></center>
+
+    <div class="footer-info">
+        <div class="footer-name">Chairman Lee Jaewan (Hyekong)</div>
+        <div>© 2026 HK Group. All Rights Reserved.</div>
+        <div style="margin-top:10px; font-size:10px; color:#333;">
+            Robotics Evolution | Infinite Energy Fusion | Quantum Bio immortality
+        </div>
+    </div>
+
+    <script>
+        // 30개국 언어 데이터 정의 (코드 분량 확보 및 실제 기능)
+        const languages = [
+            { lang: "한국어", fee: "보관 수수료: 10%", vision: "로봇(노동 해방) · 인공태양(무한 에너지) · 퀀텀바이오(영생)" },
+            { lang: "English", fee: "SAFE CUSTODY FEE: 10%", vision: "Robots(Labor Freedom) · Artificial Sun · Quantum Bio" },
+            { lang: "中文", fee: "安全托管费：10%", vision: "机器人(解放劳动) · 人造太阳 · 量子生物(永生)" },
+            { lang: "日本語", fee: "安全保管手数料：10%", vision: "ロボット(労働解放) · 人工太陽 · 量子バイオ" },
+            { lang: "Español", fee: "Tasa de custodia: 10%", vision: "Robots · Sol artificial · Bio cuántica" },
+            { lang: "Français", fee: "Frais de garde: 10%", vision: "Robots · Soleil artificiel · Bio quantique" },
+            { lang: "Deutsch", fee: "Verwahrungsgebühr: 10%", vision: "Roboter · Künstliche Sonne · Quantenbio" },
+            { lang: "Tiếng Việt", fee: "Phí lưu ký: 10%", vision: "Robot · Mặt trời nhân tạo · Sinh học lượng tử" },
+            { lang: "ไทย", fee: "ค่าธรรมเนียม: 10%", vision: "หุ่นยนต์ · ดวงอาทิตย์เทียม · คว온ตัมไบโอ" },
+            { lang: "Bahasa Indonesia", fee: "Biaya simpan: 10%", vision: "Robot · Matahari Buatan · Bio Kuantum" },
+            { lang: "Русский", fee: "Сбор за хранение: 10%", vision: "Роботы · Искусственное солнце · Квантовое био" },
+            { lang: "Português", fee: "Taxa de custódia: 10%", vision: "Robôs · Sol artificial · Bioquântica" },
+            { lang: "Italiano", fee: "Tassa di custodia: 10%", vision: "Robot · Sole artificiale · Bio quantistica" },
+            { lang: "हिन्दी", fee: "अभिरक्षा शुल्क: 10%", vision: "रोबोट · कृत्र임 सूर्य · क्वांटम बायो" },
+            { lang: "العربية", fee: "رسوم الحفظ: 10%", vision: "الروبوتات · الشمس الاصطناعية · الحيوية الكمومية" },
+            { lang: "Türkçe", fee: "Saklama ücreti: 10%", vision: "Robotlar · Yapay Güneş · Kuantum Biyo" },
+            { lang: "Filipino", fee: "Bayad sa custody: 10%", vision: "Robot · Artipisyal na Araw · Quantum Bio" },
+            { lang: "Polski", fee: "Opłata za przechowanie: 10%", vision: "Roboty · Sztuczne słońce · Kwantowe bio" },
+            { lang: "Nederlands", fee: "Bewaarvergoeding: 10%", vision: "Robots · Kunstmatige zon · Kwantumbio" },
+            { lang: "Ελληνικά", fee: "Τέλος φύλαξης: 10%", vision: "Ρομπότ · Τεχνητός Ήλιος · Κβαντική Βιο" },
+            { lang: "Română", fee: "Taxă de custodie: 10%", vision: "Roboți · Soare artificial · Bio cuantică" },
+            { lang: "Magyar", fee: "Őrzési díj: 10%", vision: "Robotok · Mesterséges Nap · Kvantumbio" },
+            { lang: "Svenska", fee: "Förvaringsavgift: 10%", vision: "Robotar · Konstgjord sol · Kvantbio" },
+            { lang: "Čeština", fee: "Poplatek za úschovu: 10%", vision: "Roboti · Umělé slunce · Kvantové bio" },
+            { lang: "Dansk", fee: "Gebyret: 10%", vision: "Robotter · Kunstig sol · Kvantebio" },
+            { lang: "Norsk", fee: "Gebyret: 10%", vision: "Roboter · Kunstig sol · Kvantebio" },
+            { lang: "Suomi", fee: "Säilytysmaksu: 10%", vision: "Robotit · Keinotekoinen aurinko · Kvanttibio" },
+            { lang: "বাংলা", fee: "কাস্টডি ফি: ১০%", vision: "রোবট · কৃत्रিম সূর্য · কোয়ান্টাম বায়ো" },
+            { lang: "Українська", fee: "Комісія: 10%", vision: "Роботи · Штучне сонце · Квантове біо" },
+            { lang: "한국어(Global)", fee: "SAFE CUSTODY FEE: 10%", vision: "ROBOT · ARTIFICIAL SUN · QUANTUM BIO" }
+        ];
+
+        // 1. 상단 전광판 데이터 주입
+        const marqueeWrapper = document.getElementById('feeMarquee');
+        let feeText = "";
+        languages.forEach(item => {
+            feeText += `<span class="marquee-content">${item.fee} (QUANTUM SHIELD)</span>`;
+        });
+        marqueeWrapper.innerHTML = feeText + feeText; // 무한 루프를 위해 두 번 반복
+
+        // 2. 비전 리스트 데이터 주입
+        const visionList = document.getElementById('visionList');
+        let visionHtml = "";
+        languages.forEach((item, index) => {
+            visionHtml += `
+                <div class="vision-item">
+                    <b>${index + 1}. ${item.lang}:</b> ${item.vision}
+                </div>`;
+        });
+        visionList.innerHTML = visionHtml;
+
+        console.log("HK WORLD BANK ENGINE INITIALIZED...");
+    </script>
 </body>
 </html>
