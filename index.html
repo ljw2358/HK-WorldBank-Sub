@@ -1,208 +1,262 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HK UMB | Urban Air Mobility & Drone Taxi</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HK-WorldBank Global Industrial & Financial Network</title>
+    <style>
+        :root { --main-cyan: #00fbff; --warning-red: #ff4d4d; --dark-bg: #050505; --card-bg: #0d0d0d; }
+        body { background-color: var(--dark-bg); color: #fff; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; line-height: 1.8; }
+        .main-container { max-width: 800px; margin: 0 auto; padding: 80px 25px; border-left: 1px solid #1a1a1a; border-right: 1px solid #1a1a1a; }
 
-<style>
-body{
-margin:0;
-font-family:'Segoe UI',sans-serif;
-background: radial-gradient(circle at top, #0a1a2a, #000000 70%);
-color:#e6f7ff;
-overflow-x:hidden;
-}
+        /* HEADER */
+        .header-wrap { text-align: center; margin-bottom: 100px; }
+        .main-logo { font-size: 42px; font-weight: 900; color: var(--main-cyan); letter-spacing: 15px; text-shadow: 0 0 25px rgba(0,251,255,0.4); margin: 0; }
+        .sub-logo { font-size: 14px; color: #555; margin-top: 20px; letter-spacing: 6px; font-weight: 300; }
+        .division-line { width: 150px; height: 1px; background: linear-gradient(to right, transparent, #333, transparent); margin: 40px auto; }
 
-.container{
-max-width:1100px;
-margin:auto;
-padding:80px 30px;
-animation: fadeIn 1.2s ease-in-out;
-}
+        /* 3대 핵심 산업 섹션 */
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-size: 22px; letter-spacing: 4px; color: #fff; text-transform: uppercase; }
+        
+        .industry-grid { display: grid; grid-template-columns: 1fr; gap: 30px; margin-bottom: 120px; }
+        .industry-card { background: var(--card-bg); border: 1px solid #222; padding: 40px; border-radius: 4px; position: relative; transition: all 0.4s ease; }
+        .industry-card:hover { border-color: var(--main-cyan); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,251,255,0.1); }
+        .industry-card::before { content: "TOP SECRET"; position: absolute; top: 15px; right: 20px; font-size: 9px; color: #333; letter-spacing: 1px; }
+        
+        .ind-num { color: var(--main-cyan); font-size: 12px; font-weight: bold; margin-bottom: 10px; display: block; }
+        .ind-name { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 15px; letter-spacing: 1px; }
+        .ind-detail { color: #999; font-size: 13px; line-height: 2; margin-bottom: 20px; }
+        .ind-tags { display: flex; gap: 10px; }
+        .tag { font-size: 9px; padding: 4px 10px; border: 1px solid #333; color: #555; border-radius: 20px; text-transform: uppercase; }
 
-h1{
-font-size:56px;
-color:#00d9ff;
-letter-spacing:3px;
-text-shadow:0 0 25px rgba(0,217,255,0.6);
-margin-bottom:10px;
-}
+        /* 글로벌 안전 신탁 보관료 (20개국어 슈퍼 롱 리스트) */
+        .custody-wrap { background: #000; border: 1px solid var(--warning-red); padding: 50px 30px; margin-bottom: 100px; position: relative; }
+        .custody-wrap h3 { color: var(--warning-red); font-size: 22px; text-align: center; margin-bottom: 45px; letter-spacing: 3px; border-bottom: 1px solid #331111; padding-bottom: 25px; }
+        
+        .lang-container { display: flex; flex-direction: column; gap: 25px; }
+        .lang-row { border-bottom: 1px solid #151515; padding-bottom: 20px; display: grid; grid-template-columns: 80px 1fr; }
+        .lang-label { color: var(--warning-red); font-size: 11px; font-weight: bold; font-family: monospace; }
+        .lang-content .major { display: block; font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .lang-content .minor { display: block; font-size: 13px; color: #888; line-height: 1.8; }
 
-h2{
-color:#7adfff;
-margin-top:50px;
-}
-
-p{
-line-height:1.8;
-font-size:18px;
-}
-
-.buttons{
-position:fixed;
-top:20px;
-right:20px;
-}
-
-button{
-background:transparent;
-border:1px solid #00d9ff;
-color:#00d9ff;
-padding:8px 16px;
-margin-left:8px;
-cursor:pointer;
-transition:0.3s;
-}
-
-button:hover{
-background:#00d9ff;
-color:#000;
-box-shadow:0 0 15px #00d9ff;
-}
-
-.footer{
-margin-top:80px;
-font-size:14px;
-opacity:0.6;
-}
-
-@keyframes fadeIn{
-from{opacity:0; transform:translateY(20px);}
-to{opacity:1; transform:translateY(0);}
-}
-</style>
+        /* 통합 보안 관리 지침 */
+        .security-footer { text-align: center; background: #080808; padding: 60px 30px; border: 1px solid #1a1a1a; margin-top: 100px; }
+        .shield-icon { color: var(--main-cyan); font-size: 18px; font-weight: 900; letter-spacing: 5px; margin-bottom: 30px; display: block; }
+        .security-policy { color: #777; font-size: 13px; max-width: 600px; margin: 0 auto; line-height: 2.2; }
+        .security-policy strong { color: #ddd; }
+        
+        .auth-warning { color: var(--warning-red); font-size: 11px; margin-top: 50px; text-transform: uppercase; letter-spacing: 3px; font-weight: bold; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+        
+        .copyright { margin-top: 80px; font-size: 10px; color: #333; letter-spacing: 1px; text-transform: uppercase; }
+    </style>
 </head>
-
 <body>
 
-<div class="buttons">
-<button onclick="setLang('en')">English</button>
-<button onclick="setLang('ko')">한국어</button>
-<button onclick="setLang('zh')">中文</button>
-<button onclick="setLang('ar')">العربية</button>
+<div class="main-container">
+    <div class="header-wrap">
+        <h1 class="main-logo">HK-WORLDBANK</h1>
+        <div class="sub-logo">ADVANCED TECHNOLOGY & FINANCIAL SECURITY SYSTEMS</div>
+        <div class="division-line"></div>
+    </div>
+
+    <div class="section-header">
+        <h2>Strategic Core Industries</h2>
+    </div>
+
+    <div class="industry-grid">
+        <div class="industry-card">
+            <span class="ind-num">PHASE 01</span>
+            <div class="ind-name">HK-ROBOTICS SYSTEM</div>
+            <p class="ind-detail">인공지능 지능형 휴머노이드 개발 및 글로벌 자동화 생산 라인 구축. 인간의 노동력을 대체하는 초정밀 로보틱스 기술로 전 세계 제조 산업의 패러다임을 혁신합니다.</p>
+            <div class="ind-tags">
+                <span class="tag">AI Integration</span>
+                <span class="tag">Humanoid</span>
+                <span class="tag">Next-Gen</span>
+            </div>
+        </div>
+
+        <div class="industry-card">
+            <span class="ind-num">PHASE 02</span>
+            <div class="ind-name">HK-NUCLEAR FUSION (ARTIFICIAL SUN)</div>
+            <p class="ind-detail">꿈의 에너지라 불리는 핵융합 기술을 통한 무한 에너지원 확보. 인공태양 제어 시스템을 통해 지구 전체에 청정하고 안전한 차세대 에너지를 공급하는 에너지 패권의 핵심입니다.</p>
+            <div class="ind-tags">
+                <span class="tag">Clean Energy</span>
+                <span class="tag">Fusion Power</span>
+                <span class="tag">Sustainability</span>
+            </div>
+        </div>
+
+        <div class="industry-card">
+            <span class="ind-num">PHASE 03</span>
+            <div class="ind-name">HK-QUANTUM BIO-TECHNOLOGY</div>
+            <p class="ind-detail">양자 컴퓨팅과 생명공학의 결합을 통한 초정밀 질병 진단 및 신약 개발. 인류의 생명 연장과 건강 증진을 위해 기존 바이오 기술의 한계를 뛰어넘는 양자 바이오 솔루션을 제공합니다.</p>
+            <div class="ind-tags">
+                <span class="tag">Quantum Computing</span>
+                <span class="tag">Bio-Genetics</span>
+                <span class="tag">Anti-Aging</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="custody-wrap">
+        <h3>GLOBAL SAFE-CUSTODY FEE: 10%</h3>
+        <div class="lang-container">
+            <div class="lang-row">
+                <div class="lang-label">[KOR]</div>
+                <div class="lang-content">
+                    <span class="major">안전 신탁 보관료 10% 고지</span>
+                    <span class="minor">본 자산은 HK-WorldBank의 퀀텀 보안 지침에 따라 관리되며, 상호 보안 관계 하에 10%의 보관료가 적용됩니다.</span>
+                </div>
+            </div>
+            <div class="lang-row">
+                <div class="lang-label">[USA]</div>
+                <div class="lang-content">
+                    <span class="major">Safe Custody Fee: 10% Notice</span>
+                    <span class="minor">Assets are managed under HK-WorldBank's Quantum Security Protocol. A 10% custody fee is applied.</span>
+                </div>
+            </div>
+            <div class="lang-row">
+                <div class="lang-label">[CHN]</div>
+                <div class="lang-content">
+                    <span class="major">安全信托保管费 10% 公告</span>
+                    <span class="minor">资产根据 HK-WorldBank 的量子安全指南进行管理，并适用 10% 的保管费。</span>
+                </div>
+            </div>
+            <div class="lang-row">
+                <div class="lang-label">[JPN]</div>
+                <div class="lang-content">
+                    <span class="major">安全信託保管料 10% の通知</span>
+                    <span class="minor">資産は HK-WorldBank の量子セキュリティ指針に従って管理され、10% の保管料が適用されます。</span>
+                </div>
+            </div>
+            <div class="lang-row">
+                <div class="lang-label">[VNM]</div>
+                <div class="lang-content">
+                    <span class="major">Thông báo Phí tín thác an toàn 10%</span>
+                    <span class="minor">Tài sản được quản lý theo nguyên tắc bảo mật Quantum của HK-WorldBank, phí 10% được áp dụng.</span>
+                </div>
+            </div>
+            <div class="lang-row">
+                <div class="lang-label">[THA]</div>
+                <div class="lang-content">
+                    <span class="major">ประกาศค่าธรรมเนียมการดูแล 10%</span>
+                    <span class="minor">สินทรัพย์ได้รับการจัดการภายใต้แนวทางความปลอดภัยควอนตัมของ HK-WorldBank และมีค่าธรรมเนียม 10%</span>
+                </div>
+            </div>
+            <div class="lang-row">
+                <div class="lang-label">[ESP]</div>
+                <div class="lang-content">
+                    <span class="major">Aviso de Tarifa de Custodia del 10%</span>
+                    <span class="minor">Los activos se gestionan bajo el protocolo de seguridad de HK-WorldBank. Se aplica una tarifa del 10%.</span>
+                </div>
+            </div>
+            <div class="lang-row">
+                <div class="lang-label">[FRA]</div>
+                <div class="lang-content">
+                    <span class="major">Avis de frais de garde de 10 %</span>
+                    <span class="minor">Les actifs sont gérés selon les directives de sécurité HK-WorldBank. Des frais de 10 % s'appliquent.</span>
+                </div>
+            </div>
+            <div class="lang-row">
+                <div class="lang-label">[DEU]</div>
+                <div class="lang-content">
+                    <span class="major">Hinweis zur Verwahrungsgebühr von 10%</span>
+                    <span class="minor">Vermögenswerte werden gemäß den HK-WorldBank-Sicherheitsrichtlinien verwaltet. 10% Gebühr.</span>
+                </div>
+            </div>
+            <div class="lang-row">
+                <div class="lang-label">[RUS]</div>
+                <div class="lang-content">
+                    <span class="major">Уведомление о сборе за хранение 10%</span>
+                    <span class="minor">Активы управляются в соответствии с протоколом безопасности HK-WorldBank. Комиссия 10%.</span>
+                </div>
+            </div>
+            <div class="lang-row">
+                <div class="lang-label">[PRT]</div>
+                <div class="lang-content">
+                    <span class="major">Aviso de Taxa de Custódia de 10%</span>
+                    <span class="minor">Os ativos são geridos sob as diretrizes de segurança da HK-WorldBank. Taxa de 10%.</span>
+                </div>
+            </div>
+            <div class="lang-row">
+                <div class="lang-label">[ITA]</div>
+                <div class="lang-content">
+                    <span class="major">Avviso di Commissione di Custodia 10%</span>
+                    <span class="minor">Gli asset sono gestiti secondo i protocolli di sicurezza HK-WorldBank. Si applica il 10%.</span>
+                </div>
+            </div>
+            <div class="lang-row">
+                <div class="lang-label">[TUR]</div>
+                <div class="lang-content">
+                    <span class="major">%10 Saklama Ücreti Bildirimi</span>
+                    <span class="minor">Varlıklar HK-WorldBank güvenlik yönergeleri kapsamında yönetilir. %10 ücret uygulanır.</span>
+                </div>
+            </div>
+            <div class="lang-row">
+                <div class="lang-label">[ARA]</div>
+                <div class="lang-content">
+                    <span class="major">إشعار رسوم الحفظ بنسبة 10%</span>
+                    <span class="minor">تتم إدارة الأصول بموجب إرشادات الأمان في HK-WorldBank، وتطبق رسوم بنسبة 10%.</span>
+                </div>
+            </div>
+            <div class="lang-row">
+                <div class="lang-label">[HIN]</div>
+                <div class="lang-content">
+                    <span class="major">10% अभिरक्षा शुल्क की सूचना</span>
+                    <span class="minor">परिसंपत्तियां HK-WorldBank के सुरक्षा प्रोटोकॉल के तहत प्रबंधित हैं। 10% शुल्क लागू है।</span>
+                </div>
+            </div>
+            <div class="lang-row">
+                <div class="lang-label">[PHL]</div>
+                <div class="lang-content">
+                    <span class="major">Paunawa sa 10% Bayad sa Pag-iingat</span>
+                    <span class="minor">Ang mga asset ay pinamamahalaan sa ilalim ng HK-WorldBank security guidelines. 10% bayad.</span>
+                </div>
+            </div>
+            <div class="lang-row">
+                <div class="lang-label">[IDN]</div>
+                <div class="lang-content">
+                    <span class="major">Pemberitahuan Biaya Penitipan 10%</span>
+                    <span class="minor">Aset dikelola di bawah pedoman keamanan HK-WorldBank. Biaya 10% berlaku.</span>
+                </div>
+            </div>
+            <div class="lang-row">
+                <div class="lang-label">[MYS]</div>
+                <div class="lang-content">
+                    <span class="major">Notis Yuran Simpanan Selamat 10%</span>
+                    <span class="minor">Aset diuruskan di bawah garis panduan keselamatan HK-WorldBank. Yuran 10% dikenakan.</span>
+                </div>
+            </div>
+            <div class="lang-row">
+                <div class="lang-label">[NLD]</div>
+                <div class="lang-content">
+                    <span class="major">Kennisgeving van 10% bewaarkosten</span>
+                    <span class="minor">Activa worden beheerd volgens de HK-WorldBank-beveiligingsrichtlijnen. 10% kosten.</span>
+                </div>
+            </div>
+            <div class="lang-row">
+                <div class="lang-label">[POL]</div>
+                <div class="lang-content">
+                    <span class="major">Ogłoszenie o 10% opłacie za powiernictwo</span>
+                    <span class="minor">Aktywa są zarządzane zgodnie z wytycznymi HK-WorldBank. Obowiązuje opłata 10%.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="security-footer">
+        <strong class="shield-icon">[ HK-QUANTUM SHIELD ACTIVE ]</strong>
+        <div class="security-policy">
+            본 시스템은 <strong>로봇, 인공태양, 퀀텀바이오</strong> 3대 산업의 독자적 기술 보호와<br>
+            글로벌 금융 자산의 안전한 관리를 위해 설계되었습니다.<br>
+            모든 정보는 HK Group의 <strong>상호 밀접한 보안 및 기밀 유지 관계</strong> 하에 엄격히 통제됩니다.
+        </div>
+        <div class="auth-warning">Unauthorized Access Prohibited - Level 1 Security</div>
+        <div class="copyright">© 2026 HK-WorldBank. ALL RIGHTS RESERVED.</div>
+    </div>
 </div>
-
-<div class="container" id="content"></div>
-
-<script>
-
-const translations = {
-
-en: `
-<h1>HK UMB</h1>
-<p><strong>Redefining Urban Mobility Beyond Roads.</strong></p>
-
-<h2>Company Overview</h2>
-<p>HK UMB is a next-generation Urban Air Mobility (UAM) company developing electric vertical takeoff and landing (eVTOL) drone taxi systems for smart cities worldwide. We integrate aerospace engineering, AI navigation, and sustainable propulsion technologies.</p>
-
-<h2>Core Capabilities</h2>
-<p>• eVTOL Aircraft Design & Manufacturing<br>
-• Autonomous Flight Control Systems<br>
-• Smart City Vertiport Infrastructure<br>
-• AI-Based Traffic & Airspace Management<br>
-• Sustainable Electric Propulsion</p>
-
-<h2>Strategic Vision 2035</h2>
-<p>To build a global aerial mobility network connecting cities through safe, autonomous, zero-emission flight corridors.</p>
-
-<p><strong>Investment Highlights</strong><br>
-High-growth UAM market. Scalable urban deployment. Government & smart city partnerships.</p>
-
-<div class="footer">Contact: info@hkumb.com<br>© 2026 HK UMB</div>
-`,
-
-ko: `
-<h1>HK UMB</h1>
-<p><strong>도로를 넘어, 하늘로 이동합니다.</strong></p>
-
-<h2>회사 개요</h2>
-<p>HK UMB는 전기 수직이착륙(eVTOL) 드론택시를 개발하는 차세대 도심항공모빌리티(UAM) 기업입니다. 항공공학, AI 자율비행, 친환경 추진 기술을 통합합니다.</p>
-
-<h2>핵심 역량</h2>
-<p>• eVTOL 항공기 설계 및 제조<br>
-• 자율 비행 제어 시스템<br>
-• 스마트시티 버티포트 인프라<br>
-• AI 기반 공역 관리 시스템<br>
-• 친환경 전기 추진 기술</p>
-
-<h2>비전 2035</h2>
-<p>안전하고 자율적인 무공해 비행 네트워크로 글로벌 도시를 연결하는 항공 모빌리티 생태계를 구축합니다.</p>
-
-<p><strong>투자 포인트</strong><br>
-고성장 UAM 시장. 확장 가능한 도시 인프라 모델. 정부 및 스마트시티 협력 프로젝트.</p>
-
-<div class="footer">문의: info@hkumb.com<br>© 2026 HK UMB</div>
-`,
-
-zh: `
-<h1>HK UMB</h1>
-<p><strong>突破道路限制，开启空中出行新时代。</strong></p>
-
-<h2>公司概述</h2>
-<p>HK UMB 是一家开发电动垂直起降(eVTOL)空中出租车系统的城市空中交通企业，融合航空工程、AI导航与可持续动力技术。</p>
-
-<h2>核心能力</h2>
-<p>• eVTOL 飞行器设计与制造<br>
-• 自主飞行控制系统<br>
-• 智慧城市垂直起降枢纽建设<br>
-• AI 空域管理系统<br>
-• 可持续电动推进技术</p>
-
-<h2>2035战略愿景</h2>
-<p>构建全球城市间零排放空中交通网络，实现安全自主飞行。</p>
-
-<p><strong>投资亮点</strong><br>
-高速增长的UAM市场，城市可扩展部署模式，政府与智慧城市合作。</p>
-
-<div class="footer">联系: info@hkumb.com<br>© 2026 HK UMB</div>
-`,
-
-ar: `
-<h1>HK UMB</h1>
-<p><strong>نحو تنقل حضري يتجاوز الطرق.</strong></p>
-
-<h2>نبذة عن الشركة</h2>
-<p>HK UMB شركة متخصصة في تطوير مركبات الإقلاع والهبوط العمودي الكهربائية (eVTOL) كسيارات أجرة جوية للمدن الذكية، مع دمج تقنيات الطيران والذكاء الاصطناعي والطاقة النظيفة.</p>
-
-<h2>القدرات الأساسية</h2>
-<p>• تصميم وتصنيع مركبات eVTOL<br>
-• أنظمة طيران ذاتي التحكم<br>
-• بنية تحتية لمنصات الإقلاع العمودية<br>
-• إدارة المجال الجوي بالذكاء الاصطناعي<br>
-• تقنيات دفع كهربائي مستدام</p>
-
-<h2>رؤية 2035</h2>
-<p>إنشاء شبكة تنقل جوي عالمية آمنة وخالية من الانبعاثات تربط المدن عبر ممرات جوية ذكية.</p>
-
-<p><strong>فرصة استثمارية</strong><br>
-سوق UAM سريع النمو، نموذج توسع حضري، شراكات حكومية ومدن ذكية.</p>
-
-<div class="footer">البريد: info@hkumb.com<br>© 2026 HK UMB</div>
-`
-};
-
-function setLang(lang){
-document.getElementById("content").innerHTML = translations[lang];
-if(lang === "ar"){
-document.body.dir = "rtl";
-}else{
-document.body.dir = "ltr";
-}
-}
-
-function autoDetect(){
-let userLang = navigator.language.substring(0,2);
-if(translations[userLang]){
-setLang(userLang);
-}else{
-setLang("en");
-}
-}
-
-autoDetect();
-
-</script>
 
 </body>
 </html>
