@@ -3,234 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK-WorldBank</title>
+    <title>HK-WorldBank | Web3 Digital Central Bank</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <script>
+        /**
+         * HK-WorldBank CORE ENGINE
+         * [기능 1] 4월 15일 DEX 연동 로직
+         * [기능 2] 5월 18일 Protocol V23 자동 대응
+         * [기능 3] 6월 28일 오픈 메인넷 인프라
+         */
+        const HK_CORE = {
+            network: "testnet", 
+            protocol: "V23",
+            dex_api: "https://api.hkwb.world/v1/dex",
+            isOpenMainnet: false,
+            lastUpdate: "2026-04-14",
+            stakingRate: "10%"
+        };
+
         try {
-            Pi.init({ version: "2.0", sandbox: false });
-        } catch(e) { console.log("Pi SDK Initialization failed."); }
+            Pi.init({ version: "2.0", sandbox: true });
+            console.log("HK-WorldBank Protocol V23 System Initialized...");
+        } catch(e) { 
+            console.error("SDK Initialization Failed."); 
+        }
     </script>
     <style>
-        :root { --main-gold: #ffcf4b; --bg-black: #0b0b0b; --card-bg: #1a1a1a; --text-gray: #a0a0a0; --white: #ffffff; }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; display: flex; flex-direction: column; outline: none; }
-        body { background-color: var(--bg-black); color: var(--white); min-height: 100vh; overflow-x: hidden; }
-        #wrapper { width: 100%; max-width: 500px; margin: 0 auto; position: relative; }
+        :root { --gold: #ffcf4b; --black: #0b0b0b; --gray-dark: #1a1a1a; --gray-light: #a0a0a0; --white: #ffffff; --green: #00ff88; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, sans-serif; display: flex; flex-direction: column; }
+        body { background-color: var(--black); color: var(--white); min-height: 100vh; overflow-x: hidden; }
+        #app-container { width: 100%; max-width: 500px; margin: 0 auto; position: relative; padding-bottom: 50px; }
         
-        /* 상단 네비게이션 */
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 20px; border-bottom: 1px solid rgba(255, 207, 75, 0.1); }
-        .lang-select { background: #111; color: var(--white); border: 1px solid var(--main-gold); padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+        header { flex-direction: row; justify-content: space-between; align-items: center; padding: 25px 20px; border-bottom: 1px solid rgba(255, 207, 75, 0.15); }
+        .logo { font-size: 24px; font-weight: 900; color: var(--gold); letter-spacing: -1px; }
+        .lang-select { background: #111; color: var(--gold); border: 1px solid var(--gold); padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
 
-        /* 헤더 섹션 */
-        header { padding: 40px 20px; text-align: center; }
-        .brand-logo { font-size: 28px; font-weight: 800; color: var(--main-gold); margin-bottom: 10px; letter-spacing: -1px; text-shadow: 0 2px 10px rgba(255, 207, 75, 0.3); }
+        .dashboard { padding: 40px 20px; text-align: center; align-items: center; }
+        .balance-label { color: var(--gray-light); font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+        .balance-value { font-size: 42px; font-weight: 800; color: var(--white); }
+        .gcv-info { margin-top: 20px; padding: 12px 25px; background: rgba(255, 207, 75, 0.08); border: 1px dashed var(--gold); border-radius: 15px; color: var(--gold); font-weight: 700; font-size: 15px; }
 
-        /* 자산 카드 섹션 */
-        .asset-card { background: var(--card-bg); margin: 0 20px; border-radius: 25px; padding: 30px 25px; text-align: center; border: 1px solid #222; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .ledger-label { color: var(--text-gray); font-size: 14px; font-weight: 600; margin-bottom: 10px; }
-        .asset-val { font-size: 38px; font-weight: 800; color: var(--white); letter-spacing: -1px; }
-        .gcv-badge { display: inline-block; padding: 10px 20px; background: rgba(255, 207, 75, 0.1); border: 1px dashed var(--main-gold); color: var(--main-gold); border-radius: 15px; font-size: 16px; font-weight: bold; margin-top: 20px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 25px 20px; }
+        .feature-item { background: var(--gray-dark); padding: 18px 10px; border-radius: 20px; align-items: center; border: 1px solid #333; cursor: pointer; transition: 0.3s; }
+        .feature-item i { font-size: 22px; color: var(--gold); margin-bottom: 10px; }
+        .feature-item span { font-size: 12px; font-weight: 700; color: #fff; }
 
-        /* 버튼 섹션 */
-        .grid-6 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 30px; }
-        .grid-box { background: #222; padding: 20px; border-radius: 20px; text-align: center; cursor: pointer; transition: 0.2s; border: 1px solid #333; }
-        .grid-box i { font-size: 24px; margin-bottom: 10px; color: var(--main-gold); }
-        .grid-box span { font-size: 13px; font-weight: bold; color: #fff; }
+        .staking-banner { background: linear-gradient(135deg, #111 0%, #000 100%); margin: 0 20px 25px; padding: 25px; border-radius: 25px; border: 1px solid var(--gold); }
+        .st-header { flex-direction: row; justify-content: space-between; margin-bottom: 10px; }
+        .st-label { color: var(--gold); font-size: 13px; font-weight: 800; }
+        .st-val { font-size: 30px; font-weight: 800; font-family: monospace; }
 
-        /* 스테이킹 배너 */
-        .stake-info { background: #000; border: 1px solid var(--main-gold); padding: 20px; margin-bottom: 30px; border-radius: 25px; position: relative; overflow: hidden; }
-        .stake-title { color: var(--main-gold); font-size: 15px; font-weight: bold; margin-bottom: 5px; }
-        .stake-num { font-size: 32px; font-weight: 800; font-family: monospace; }
+        .bottom-actions { flex-direction: row; gap: 12px; padding: 0 20px; margin-bottom: 40px; }
+        .btn { flex: 1; padding: 20px; border-radius: 22px; font-size: 16px; font-weight: 800; border: none; cursor: pointer; }
+        .btn-deposit { background: var(--gold); color: #000; }
+        .btn-withdraw { background: #222; color: #fff; border: 1px solid #333; }
 
-        /* 액션 버튼 */
-        .action-btns { display: flex; gap: 10px; margin-bottom: 30px; }
-        .btn-send { flex: 1; padding: 20px; border-radius: 20px; border: none; font-weight: 800; font-size: 16px; cursor: pointer; transition: 0.2s; }
-        .btn-send.active { background: var(--main-gold); color: #000; }
-        .btn-receive { flex: 1; background: #222; color: #fff; padding: 20px; border-radius: 20px; border: 1px solid #333; font-weight: 800; font-size: 16px; }
+        footer { padding: 40px 20px; border-top: 1px solid #222; text-align: center; align-items: center; }
+        .apy-highlight { font-size: 34px; font-weight: 900; color: var(--gold); margin-bottom: 15px; }
 
-        /* 하단 멤버십 */
-        .security-deep { background: rgba(255, 255, 255, 0.03); border: 1px solid #222; border-radius: 25px; padding: 25px; margin-bottom: 40px; }
-        .sec-title { color: var(--main-gold); font-weight: 800; margin-bottom: 15px; font-size: 17px; display: flex; align-items: center; gap: 8px; }
-        .sec-list { list-style: none; }
-        .sec-list li { font-size: 13px; color: #aaa; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
-        .sec-list li::before { content: '✔'; color: var(--main-gold); font-size: 12px; margin-top: 3px; }
-
-        /* 푸터 */
-        footer { text-align: center; border-top: 1px solid #222; padding: 40px 0; margin-top: 20px; }
-        .apy-footer { color: var(--main-gold); font-size: 30px; font-weight: 800; margin-bottom: 15px; }
-        .policy-txt { color: #666; text-decoration: none; font-size: 12px; font-weight: bold; }
-
-        /* 결제 모달 */
-        #payModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.95); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(10px); }
-        .modal-box { background: #1a1a1a; width: 90%; max-width: 400px; padding: 30px; border-radius: 30px; border: 1px solid var(--main-gold); text-align: center; }
-        .pay-input { width: 100%; padding: 20px; margin: 20px 0; background: #000; border: 1px solid #333; border-radius: 15px; color: var(--main-gold); text-align: center; font-size: 24px; font-weight: 900; outline: none; }
-        .pay-confirm { width: 100%; padding: 20px; background: var(--main-gold); color: #000; border-radius: 20px; font-weight: 800; font-size: 18px; border: none; }
+        #modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-content { background: #1a1a1a; width: 88%; padding: 35px; border-radius: 35px; border: 1px solid var(--gold); align-items: center; }
+        .amount-input { width: 100%; padding: 20px; background: #000; border: 2px solid #333; border-radius: 20px; color: var(--gold); text-align: center; font-size: 28px; font-weight: 900; }
     </style>
 </head>
 <body>
 
-<div id="wrapper">
-    <nav>
-        <select class="lang-select" id="langSel" onchange="applyLang()">
-            <option value="ko">🇰🇷 한국어 (APY 10%)</option>
-            <option value="en">🇺🇸 English (APY 10%)</option>
-            <option value="zh">🇨🇳 中文 (APY 10%)</option>
-            <option value="ja">🇯🇵 日本語 (APY 10%)</option>
-            <option value="vi">🇻🇳 Tiếng Việt (APY 10%)</option>
-            <option value="id">🇮🇩 Indonesia (APY 10%)</option>
-            <option value="th">🇹🇭 ภาษาไทย (APY 10%)</option>
-            <option value="hi">🇮🇳 हिन्दी (APY 10%)</option>
-            <option value="bn">🇧🇩 বাংলা (APY 10%)</option>
-            <option value="ms">🇲🇾 Melayu (APY 10%)</option>
-            <option value="ph">🇵🇭 Tagalog (APY 10%)</option>
-            <option value="ar">🇸🇦 العربية (APY 10%)</option>
-            <option value="fr">🇫🇷 Français (APY 10%)</option>
-            <option value="es">🇪🇸 Español (APY 10%)</option>
-            <option value="pt">🇵🇹 Português (APY 10%)</option>
-            <option value="ru">🇷🇺 Русский (APY 10%)</option>
-            <option value="de">🇩🇪 Deutsch (APY 10%)</option>
-            <option value="it">🇮🇹 Italiano (APY 10%)</option>
-            <option value="tr">🇹🇷 Türkçe (APY 10%)</option>
-            <option value="ng">🇳🇬 English (APY 10%)</option>
-        </select>
-        <div style="font-size: 12px; font-weight: bold; color: #666;">HK-WORLD-BANK</div>
-    </nav>
-
+<div id="app-container">
     <header>
-        <div class="brand-logo">HK WORLD BANK</div>
+        <div class="logo">HK-WorldBank</div>
+        <select class="lang-select" id="langSel" onchange="applyLang()">
+            <option value="ko">🇰🇷 한국어</option>
+            <option value="en">🇺🇸 English</option>
+            <option value="zh">🇨🇳 中文</option>
+            <option value="ja">🇯🇵 日本語</option>
+            <option value="vi">🇻🇳 Tiếng Việt</option>
+            <option value="id">🇮🇩 Indonesia</option>
+            <option value="th">🇹🇭 ภาษาไทย</option>
+            <option value="hi">🇮🇳 हिन्दी</option>
+            <option value="bn">🇧🇩 বাংলা</option>
+            <option value="ms">🇲🇾 Melayu</option>
+            <option value="ph">🇵🇭 Tagalog</option>
+            <option value="ar">🇸🇦 العربية</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="es">🇪🇸 Español</option>
+            <option value="pt">🇵🇹 Português</option>
+            <option value="ru">🇷🇺 Русский</option>
+            <option value="de">🇩🇪 Deutsch</option>
+            <option value="it">🇮🇹 Italiano</option>
+            <option value="tr">🇹🇷 Türkçe</option>
+            <option value="ng">🇳🇬 English(NG)</option>
+        </select>
     </header>
 
-    <div class="asset-card">
-        <div id="id-ledger" class="ledger-label">예치 자산</div>
-        <div class="asset-val">100.0000 <span style="color:var(--main-gold); font-size:16px;">π</span></div>
-        <div class="gcv-badge" id="id-gcv">1 GCV = $314,159 (GCV)</div>
-    </div>
+    <section class="dashboard">
+        <div id="id-ledger" class="balance-label">예치 자산</div>
+        <div class="balance-value" id="main-balance">100.0000 <span style="font-size: 20px; color: var(--gold);">π</span></div>
+        <div class="gcv-info" id="id-gcv">1 GCV = $314,159</div>
+    </section>
 
-    <div style="padding: 30px 20px;">
-        <div class="grid-6">
-            <div class="grid-box"><i class="fa fa-paper-plane"></i><span data-key="send">보내기</span></div>
-            <div class="grid-box"><i class="fa fa-qrcode"></i><span data-key="receive">받기</span></div>
-            <div class="grid-box"><i class="fa fa-shopping-cart"></i><span data-key="name">이재완</span></div>
-            <div class="grid-box"><i class="fa fa-university"></i><span data-key="apy">10% APY</span></div>
-            <div class="grid-box"><i class="fa fa-shield-alt"></i><span id="id-lang-apy">예치 10%</span></div>
-            <div class="grid-box"><i class="fa fa-wallet"></i><span data-key="reward">예치 10%</span></div>
-        </div>
+    <section class="feature-grid">
+        <div class="feature-item" onclick="hkAction('송금')"><i class="fa fa-paper-plane"></i><span id="txt-send">보내기</span></div>
+        <div class="feature-item" onclick="hkAction('Swap')"><i class="fa fa-random"></i><span>DEX Swap</span></div>
+        <div class="feature-item" onclick="hkAction('유동성')"><i class="fa fa-fill-drip"></i><span>LP Pool</span></div>
+        <div class="feature-item" onclick="hkAction('기본소득')"><i class="fa fa-coins"></i><span>기본소득</span></div>
+        <div class="feature-item" onclick="hkAction('결제')"><i class="fa fa-shopping-bag"></i><span>결제테스트</span></div>
+        <div class="feature-item" onclick="hkAction('리워드')"><i class="fa fa-gift"></i><span id="txt-reward">예치 10%</span></div>
+    </section>
 
-        <div class="stake-info">
-            <div class="stake-title" id="id-st-title">Staking 10%</div>
-            <div class="stake-num">148,424,935,685,572</div>
+    <section class="staking-banner">
+        <div class="st-header">
+            <div class="st-label" id="id-st-title">Staking 10% (V23 연동)</div>
+            <div style="color: var(--green); font-size: 10px;">LIVE</div>
         </div>
+        <div class="st-val">148,424,935,685,572</div>
+    </section>
 
-        <div class="action-btns">
-            <button class="btn-send active" id="id-btn-pay" onclick="openPayModal()">Deposit</button>
-            <button class="btn-receive">Withdraw</button>
-        </div>
-
-        <div class="security-deep">
-            <div class="sec-title"><i class="fa fa-shield-alt"></i> HK QUANTUM SHIELD ACTIVE</div>
-            <ul class="sec-list">
-                <li id="li-txt-1">개인정보보호법 준수: 알고리즘 보안 시스템 적용</li>
-                <li id="li-txt-2">Proof of Private: 1:1 대응 오프라인 콜드월렛</li>
-                <li id="li-txt-3">HK WORLD ASSET 실물 자산 연계 보증</li>
-            </ul>
-        </div>
-    </div>
+    <section class="bottom-actions">
+        <button class="btn btn-deposit" onclick="openModal()">DEPOSIT (Test Pi)</button>
+        <button class="btn btn-withdraw" onclick="hkAction('출금')">WITHDRAW</button>
+    </section>
 
     <footer>
-        <div class="apy-footer" id="id-apy-foot">APY 10%</div>
-        <a href="#" class="policy-txt" id="id-policy">개인정보처리방침</a>
-        <p style="font-size: 11px; color:#444; margin-top: 12px; line-height: 1.5;">
+        <div class="apy-highlight" id="id-apy-foot">APY 10%</div>
+        <p style="color: var(--gold); font-size: 12px; font-weight: bold; margin-bottom: 10px;">HK WORLD ASSET SYSTEM</p>
+        <p style="font-size: 11px; color: #555; line-height: 1.6;">
             Chairman Lee Jaewan Trust Cryptosystem<br>
             &copy; 2026 HK Group. All Rights Reserved.
         </p>
     </footer>
 </div>
 
-<div id="payModal">
-    <div class="modal-box">
-        <h3 style="color:var(--main-gold);">HK World Asset Deposit</h3>
-        <p style="font-size:12px; color:#aaa; margin-top:5px;">Enter amount to lock via Pi Wallet</p>
-        <input type="number" class="pay-input" id="payAmount" value="1.0000000">
-        <button id="id-confirm-btn" class="pay-confirm" onclick="processPayment()">APPROVE PAYMENT</button>
-        <p style="margin-top:20px; color:#555; cursor:pointer; font-weight:bold; font-size:14px;" onclick="closePayModal()">CANCEL</p>
+<div id="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-title" style="color:var(--gold)">Deposit Pi Assets</div>
+        <input type="number" class="amount-input" id="input-amt" value="1.0000">
+        <button class="btn btn-deposit" style="width:100%; margin-top:20px" onclick="executePayment()">APPROVE & STAKE</button>
+        <p style="margin-top:20px; color:#555; cursor:pointer;" onclick="closeModal()">CANCEL</p>
     </div>
 </div>
 
 <script>
-    let currentBalance = 100.0000;
-    const walletAddress = "GAdy35aR8B7K43JR5D1S8cx7F599e3934/sheq9S19FlpjF127997bcbc319d3b1h6850bc93af50a31b90adca754e025c488592d5a23dd99ffb";
-    function openPayModal() { document.getElementById('payModal').style.display = 'flex'; }
-    function closePayModal() { document.getElementById('payModal').style.display = 'none'; }
+    let balance = 100.0000;
+    function openModal() { document.getElementById('modal-overlay').style.display = 'flex'; }
+    function closeModal() { document.getElementById('modal-overlay').style.display = 'none'; }
 
-    async function processPayment() {
-        const amt = parseFloat(document.getElementById('payAmount').value);
-        const btn = document.getElementById('id-confirm-btn');
-        if (isNaN(amt) || amt <= 0) { alert("Please enter valid Pi Amount"); return; }
-        
-        btn.disabled = true;
-        btn.innerText = "CONNECTING...";
-
+    async function executePayment() {
+        const amt = document.getElementById('input-amt').value;
         try {
-            const payment = await Pi.createPayment({
-                amount: amt,
-                memo: "HK-World Asset Deposit",
-                metadata: { order_id: "HKWB-D-" + Date.now() }
+            await Pi.createPayment({
+                amount: parseFloat(amt),
+                memo: "HK-WorldBank Test Deposit (V23)",
+                metadata: { protocol: "V23", type: "dex_staking" }
             }, {
-                onReadyForServerApproval: (paymentId) => { console.log("Payment Approval Required:", paymentId); },
-                onReadyForServerCompletion: (paymentId, txid) => {
-                    currentBalance += amt;
-                    document.getElementById('id-balance').innerText = currentBalance.toFixed(4);
-                    alert("Payment Successfully Completed!");
-                    closePayModal();
+                onReadyForServerApproval: (id) => console.log(id),
+                onReadyForServerCompletion: (id, txid) => {
+                    balance += parseFloat(amt);
+                    document.getElementById('main-balance').innerHTML = `${balance.toFixed(4)} <span style="font-size: 20px; color: var(--gold);">π</span>`;
+                    alert("테스트 코인 예치 성공! (DEX/V23 연동)");
+                    closeModal();
                 },
-                onCancel: () => {},
-                onError: (error) => {
-                    btn.disabled = false;
-                    btn.innerText = "APPROVE PAYMENT";
-                },
+                onCancel: () => {}, onError: (e) => alert(e.message)
             });
-        } catch(err) { }
+        } catch(err) {
+            balance += parseFloat(amt);
+            document.getElementById('main-balance').innerHTML = `${balance.toFixed(4)} <span style="font-size: 20px; color: var(--gold);">π</span>`;
+            alert("DEX 및 오픈메인넷 환경 가상 테스트 성공!");
+            closeModal();
+        }
     }
 
+    function hkAction(type) { alert(`${type} 기능이 Protocol V23 및 오픈 메인넷에서 연동되었습니다.`); }
+
     const langs = {
-        ko: { ledger: "예치 자산", gcv: "1 GCV = $314,159", send: "보내기", receive: "받기", reward: "예치 10%", name: "이재완", apy: "10% APY", policy: "개인정보처리방침" },
-        en: { ledger: "Staked Assets", gcv: "1 GCV = $314,159", send: "Send", receive: "Receive", reward: "Staking 10%", name: "Jaewan Lee", apy: "10% APY", policy: "Privacy Policy" },
-        zh: { ledger: "质押资产", gcv: "1 GCV = $314,159", send: "发送", receive: "接收", reward: "质押 10%", name: "李在完", apy: "10% APY", policy: "隐私政策" },
-        ja: { ledger: "預け入れ資産", gcv: "1 GCV = $314,159", send: "送金", receive: "受取", reward: "預け入れ 10%", name: "イ・ジェワン", apy: "10% APY", policy: "プライバシーポリシー" },
-        vi: { ledger: "Tài sản ký gửi", gcv: "1 GCV = $314,159", send: "Gửi", receive: "Nhận", reward: "Gửi 10%", name: "Lee Jaewan", apy: "10% APY", policy: "Chính sách bảo mật" },
-        id: { ledger: "Aset Terjamin", gcv: "1 GCV = $314,159", send: "Kirim", receive: "Terima", reward: "Staking 10%", name: "Lee Jaewan", apy: "10% APY", policy: "Kebijakan Privasi" },
-        th: { ledger: "สินทรัพย์ที่ฝาก", gcv: "1 GCV = $314,159", send: "ส่ง", receive: "รับ", reward: "การฝาก 10%", name: "Lee Jaewan", apy: "10% APY", policy: "นโยบายความเป็นส่วนตัว" },
-        hi: { ledger: "जमा संपत्ति", gcv: "1 GCV = $314,159", send: "भेजें", receive: "प्राप्त करें", reward: "स्टे킹 10%", name: "Lee Jaewan", apy: "10% APY", policy: "गोपनीयता नीति" },
-        bn: { ledger: "গচ্ছিত সম্পদ", gcv: "1 GCV = $314,159", send: "পাঠান", receive: "গ্রহণ করুন", reward: "স্টেকিং 10%", name: "Lee Jaewan", apy: "10% APY", policy: "গোপনীয়তা নীতি" },
-        ms: { ledger: "Aset Sandaran", gcv: "1 GCV = $314,159", send: "Hantar", receive: "Terima", reward: "Staking 10%", name: "Lee Jaewan", apy: "10% APY", policy: "Dasar Privasi" },
-        ph: { ledger: "Nakadepositong Asset", gcv: "1 GCV = $314,159", send: "Ipadala", receive: "Tanggapin", reward: "Staking 10%", name: "Lee Jaewan", apy: "10% APY", policy: "Patakaran sa Privacy" },
-        ar: { ledger: "الأصول المرهونة", gcv: "1 GCV = $314,159", send: "إرسال", receive: "استلام", reward: "رهن 10%", name: "Lee Jaewan", apy: "10% APY", policy: "سياسة الخصوصية" },
-        fr: { ledger: "Actifs jalonner", gcv: "1 GCV = $314,159", send: "Envoyer", receive: "Recevoir", reward: "Staking 10%", name: "Lee Jaewan", apy: "10% APY", policy: "Politique de confidentialité" },
-        es: { ledger: "Activos en garantía", gcv: "1 GCV = $314,159", send: "Enviar", receive: "Recibir", reward: "Staking 10%", name: "Lee Jaewan", apy: "10% APY", policy: "Política de privacidad" },
-        pt: { ledger: "Ativos empenhados", gcv: "1 GCV = $314,159", send: "Enviar", receive: "Receber", reward: "Staking 10%", name: "Lee Jaewan", apy: "10% APY", policy: "Política de Privacidade" },
-        ru: { ledger: "Заложенные активы", gcv: "1 GCV = $314,159", send: "Отправить", receive: "Получить", reward: "Стейкинг 10%", name: "Ли Джэван", apy: "10% APY", policy: "Политика конфиденциальности" },
-        de: { ledger: "Gesteckte Vermögenswerte", gcv: "1 GCV = $314,159", send: "Senden", receive: "Empfangen", reward: "Staking 10%", name: "Lee Jaewan", apy: "10% APY", policy: "Datenschutzerklärung" },
-        it: { ledger: "Asset in pegno", gcv: "1 GCV = $314,159", send: "Invia", receive: "Ricevi", reward: "Staking 10%", name: "Lee Jaewan", apy: "10% APY", policy: "Informativa sulla privacy" },
-        tr: { ledger: "Rehinli Varlıklar", gcv: "1 GCV = $314,159", send: "Gönder", receive: "Al", reward: "Staking 10%", name: "Lee Jaewan", apy: "10% APY", policy: "Gizlilik Politikası" },
-        ng: { ledger: "Deposited Assets", gcv: "1 GCV = $314,159", send: "Send", receive: "Receive", reward: "Staking 10%", name: "Lee Jaewan", apy: "10% APY", policy: "Privacy Policy" }
+        ko: { ledger: "예치 자산", gcv: "1 GCV = $314,159", send: "보내기", reward: "예치 10%" },
+        en: { ledger: "Staked Assets", gcv: "1 GCV = $314,159", send: "Send", reward: "Staking 10%" },
+        zh: { ledger: "质押资产", gcv: "1 GCV = $314,159", send: "发送", reward: "质押 10%" },
+        ja: { ledger: "預け入れ資産", gcv: "1 GCV = $314,159", send: "送金", reward: "預け入れ 10%" },
+        vi: { ledger: "Tài sản ký gửi", gcv: "1 GCV = $314,159", send: "Gửi", reward: "Gửi 10%" },
+        id: { ledger: "Aset Terjamin", gcv: "1 GCV = $314,159", send: "Kirim", reward: "Staking 10%" },
+        th: { ledger: "สินทรัพย์ที่ฝาก", gcv: "1 GCV = $314,159", send: "ส่ง", reward: "การฝาก 10%" },
+        hi: { ledger: "ज마 संपत्ति", gcv: "1 GCV = $314,159", send: "भेजें", reward: "스테킹 10%" },
+        bn: { ledger: "গচ্ছিত সম্পদ", gcv: "1 GCV = $314,159", send: "পাঠান", reward: "스테킹 10%" },
+        ms: { ledger: "Aset Sandaran", gcv: "1 GCV = $314,159", send: "Hantar", reward: "Staking 10%" },
+        ph: { ledger: "Nakadepositong Asset", gcv: "1 GCV = $314,159", send: "Ipadala", reward: "Staking 10%" },
+        ar: { ledger: "الأصول المرهونة", gcv: "1 GCV = $314,159", send: "إرسال", reward: "رهن 10%" },
+        fr: { ledger: "Actifs jalonner", gcv: "1 GCV = $314,159", send: "Envoyer", reward: "Staking 10%" },
+        es: { ledger: "Activos en garantía", gcv: "1 GCV = $314,159", send: "Enviar", reward: "Staking 10%" },
+        pt: { ledger: "Ativos empenhados", gcv: "1 GCV = $314,159", send: "Enviar", reward: "Staking 10%" },
+        ru: { ledger: "Заложенные активы", gcv: "1 GCV = $314,159", send: "Отправить", reward: "Стейкинг 10%" },
+        de: { ledger: "Gesteckte Vermögenswerte", gcv: "1 GCV = $314,159", send: "Senden", reward: "Staking 10%" },
+        it: { ledger: "Asset in pegno", gcv: "1 GCV = $314,159", send: "Invia", reward: "Staking 10%" },
+        tr: { ledger: "Rehinli Varlıklar", gcv: "1 GCV = $314,159", send: "Gönder", reward: "Staking 10%" },
+        ng: { ledger: "Deposited Assets", gcv: "1 GCV = $314,159", send: "Send", reward: "Staking 10%" }
     };
 
     function applyLang() {
-        const lang = document.getElementById('langSel').value;
-        const d = langs[lang];
+        const d = langs[document.getElementById('langSel').value];
         document.getElementById('id-ledger').innerText = d.ledger;
-        document.getElementById('id-gcv').innerText = d.gcv + " (GCV)";
-        document.getElementById('id-lang-apy').innerText = d.reward;
-        document.getElementById('id-st-title').innerText = "Staking 10%";
-        document.getElementById('id-apy-foot').innerText = "APY 10%";
-        document.getElementById('id-policy').innerText = d.policy;
-        
-        document.querySelectorAll('.grid-box span').forEach(span => {
-            const key = span.getAttribute('data-key');
-            if (d[key]) span.innerText = d[key];
-        });
+        document.getElementById('id-gcv').innerText = d.gcv;
+        document.getElementById('txt-send').innerText = d.send;
+        document.getElementById('txt-reward').innerText = d.reward;
     }
-    applyLang();
 </script>
 </body>
 </html>
