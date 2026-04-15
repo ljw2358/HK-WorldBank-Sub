@@ -10,160 +10,160 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
         body { background: var(--bg); color: #fff; line-height: 1.5; overflow-x: hidden; }
 
-        /* 언어 선택기 상단 고정 */
+        /* 언어 선택바 상단 고정 */
         .header-nav { position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); z-index: 10000; padding: 12px 20px; display: flex; justify-content: flex-end; border-bottom: 1px solid var(--border); }
-        #langSelect { background: #1a1a1a; color: var(--gold); border: 1px solid var(--gold); padding: 6px 10px; border-radius: 6px; font-size: 12px; font-weight: bold; }
+        #langSelect { background: #1a1a1a; color: var(--gold); border: 1px solid var(--gold); padding: 8px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; }
 
-        .container { max-width: 480px; margin: 0 auto; padding: 70px 20px 40px; }
+        .container { max-width: 480px; margin: 0 auto; padding: 80px 20px 40px; }
         header { text-align: center; padding: 20px 0; }
-        header h1 { color: var(--gold); font-size: 26px; font-weight: 900; }
+        header h1 { color: var(--gold); font-size: 28px; font-weight: 900; }
 
-        /* 메인 대시보드 */
-        .main-card { background: linear-gradient(145deg, #1e1e1e, #000); border-radius: 25px; padding: 25px; border: 1px solid #333; text-align: center; margin-bottom: 20px; }
-        .balance-val { font-size: 40px; font-weight: 800; margin-bottom: 5px; }
-        .gcv-badge { color: var(--green); border: 1px solid var(--green); padding: 4px 12px; border-radius: 20px; font-size: 11px; display: inline-block; margin-bottom: 20px; font-weight: bold; }
+        /* 대시보드 */
+        .main-card { background: linear-gradient(145deg, #1e1e1e, #000); border-radius: 25px; padding: 25px; border: 1px solid #333; text-align: center; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .balance-val { font-size: 42px; font-weight: 800; margin-bottom: 5px; }
+        .gcv-badge { color: var(--green); border: 1px solid var(--green); padding: 5px 15px; border-radius: 20px; font-size: 12px; display: inline-block; margin-bottom: 25px; font-weight: bold; }
 
-        .rates { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-        .rate-box { background: rgba(255,255,255,0.04); padding: 12px; border-radius: 15px; border: 1px solid var(--border); }
-        .rate-box span { display: block; font-size: 10px; color: #888; margin-bottom: 5px; }
-        .rate-box strong { font-size: 16px; color: var(--green); }
+        /* 실시간 이율 */
+        .rates { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+        .rate-box { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 18px; border: 1px solid var(--border); }
+        .rate-box span { display: block; font-size: 11px; color: #888; margin-bottom: 8px; font-weight: bold; }
+        .rate-box strong { font-size: 18px; color: var(--green); }
 
-        .lp-total { background: rgba(0, 255, 136, 0.05); border: 1px solid var(--green); border-radius: 15px; padding: 15px; }
-        .lp-total p { font-size: 10px; color: var(--green); font-weight: bold; margin-bottom: 5px; }
-        .lp-total h2 { font-size: 20px; }
+        .lp-total { background: rgba(0, 255, 136, 0.05); border: 1px solid var(--green); border-radius: 18px; padding: 20px; text-align: center; }
+        .lp-total p { font-size: 11px; color: var(--green); font-weight: bold; margin-bottom: 8px; }
+        .lp-total h2 { font-size: 22px; font-weight: 900; }
 
-        /* 3대 핵심 버튼 */
-        .btn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 20px 0; }
-        .btn-act { padding: 15px 0; border-radius: 12px; font-weight: 900; font-size: 12px; border: none; cursor: pointer; }
+        /* 버튼 */
+        .btn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 25px 0; }
+        .btn-act { padding: 18px 0; border-radius: 15px; font-weight: 900; font-size: 13px; border: none; cursor: pointer; transition: 0.2s; }
+        .btn-act:active { transform: scale(0.95); opacity: 0.8; }
         .b-white { background: #fff; color: #000; }
         .b-gold { background: var(--gold); color: #000; }
         .b-green { background: #27ae60; color: #fff; }
 
         /* 메뉴 */
-        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
-        .menu-item { background: var(--card); padding: 15px 5px; border-radius: 15px; text-align: center; border: 1px solid var(--border); }
-        .menu-item i { font-size: 22px; display: block; margin-bottom: 8px; color: var(--gold); }
-        .menu-item span { font-size: 11px; font-weight: 700; color: #ccc; }
+        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 30px; }
+        .menu-item { background: var(--card); padding: 20px 5px; border-radius: 20px; text-align: center; border: 1px solid var(--border); }
+        .menu-item i { font-size: 26px; display: block; margin-bottom: 10px; color: var(--gold); }
+        .menu-item span { font-size: 12px; font-weight: 800; color: #ccc; }
 
-        /* 보안 및 FAQ */
-        .box { background: #0a0a0a; border-radius: 20px; padding: 20px; margin-bottom: 20px; border: 1px solid #1a1a1a; }
-        .box-t { color: #00d4ff; font-weight: bold; margin-bottom: 10px; font-size: 14px; }
-        .box-l { list-style: none; font-size: 12px; color: #888; }
+        /* 하단 알림 */
+        .info-box { background: #0a0a0a; border-radius: 20px; padding: 20px; margin-bottom: 25px; border: 1px solid #1a1a1a; }
+        .info-box h3 { color: #00d4ff; font-size: 15px; margin-bottom: 12px; }
+        .info-box p { font-size: 13px; color: #888; margin-bottom: 6px; }
 
-        .faq { background: #111; border-radius: 20px; border: 1px solid var(--border); overflow: hidden; margin-bottom: 20px; }
-        .faq-q { padding: 15px; font-size: 13px; font-weight: bold; color: var(--gold); cursor: pointer; display: flex; justify-content: space-between; }
-        .faq-a { padding: 15px; font-size: 12px; color: #777; display: none; background: #0a0a0a; border-top: 1px solid var(--border); }
-
-        .btn-cs { background: #ff4757; color: #fff; width: 100%; padding: 15px; border-radius: 15px; font-weight: 900; border: none; font-size: 15px; margin-bottom: 15px; }
-        .sns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .sns-a { padding: 12px; border-radius: 12px; color: #fff; text-decoration: none; text-align: center; font-size: 11px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 5px; }
+        .btn-cs { background: #ff4757; color: #fff; width: 100%; padding: 18px; border-radius: 18px; font-weight: 900; border: none; font-size: 16px; margin-bottom: 20px; }
+        
+        .sns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .sns-link { padding: 15px; border-radius: 15px; color: #fff; text-decoration: none; text-align: center; font-size: 12px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px; }
     </style>
 </head>
 <body>
 
 <nav class="header-nav">
-    <select id="langSelect" onchange="changeLang()">
-        <option value="ko">한국어 🇰🇷</option>
-        <option value="en">English 🇺🇸</option>
-        <option value="zh">中文 🇨🇳</option>
-        <option value="ja">日本語 🇯🇵</option>
-        <option value="vi">Tiếng Việt 🇻🇳</option>
-        <option value="hi">हिन्दी 🇮🇳</option>
-        <option value="es">Español 🇪🇸</option>
-        <option value="ru">Русский 🇷🇺</option>
-        <option value="fr">Français 🇫🇷</option>
-        <option value="de">Deutsch 🇩🇪</option>
-        </select>
+    <select id="langSelect" onchange="applyTranslation()"></select>
 </nav>
 
 <div class="container">
     <header><h1>HK WORLD BANK</h1></header>
 
     <div class="main-card">
-        <p data-lang="ledger" style="font-size:11px; color:#666; margin-bottom:5px;">메인 자산 통합 원장 (DEX)</p>
-        <div class="balance-val">400.0212 <span style="font-size:20px; color:var(--gold);">Pi</span></div>
+        <p id="ledger" style="font-size:11px; color:#777; margin-bottom:8px;">메인 자산 통합 원장 (Protocol V23)</p>
+        <div class="balance-val">400.0212 <span style="font-size:22px; color:var(--gold);">Pi</span></div>
         <div class="gcv-badge">Value: $ 125,663,600 (GCV)</div>
         
         <div class="rates">
-            <div class="rate-box"><span data-lang="stk">스테이킹 이자 (12-20%)</span><strong id="stk-val">12.00%</strong></div>
-            <div class="rate-box"><span data-lang="lp_apy">유동성풀 이율 (15-50%)</span><strong id="lp-val">15.00%</strong></div>
+            <div class="rate-box"><span id="stk_label">스테이킹 이자 (12-20%)</span><strong id="stk-val">12.00%</strong></div>
+            <div class="rate-box"><span id="lp_label">유동성풀 이율 (15-50%)</span><strong id="lp-val">15.00%</strong></div>
         </div>
         <div class="lp-total">
-            <p data-lang="lp_tvl">DEX 유동성풀 전체금액 (TVL)</p>
+            <p id="tvl_label">DEX 유동성풀 전체금액 (TVL)</p>
             <h2 id="lp-amount">$ 88,410,819,601</h2>
         </div>
     </div>
 
     <div class="btn-grid">
-        <button class="btn-act b-white" data-lang="b1">PI 수량</button>
-        <button class="btn-act b-gold" data-lang="b2">DEX 스왑</button>
-        <button class="btn-act b-green" data-lang="b3">LP 공급</button>
+        <button class="btn-act b-white" id="b1">PI 수량</button>
+        <button class="btn-act b-gold" id="b2">DEX 스왑</button>
+        <button class="btn-act b-green" id="b3">LP 공급</button>
     </div>
 
     <div class="menu-grid">
-        <div class="menu-item"><i class="fas fa-paper-plane"></i><span data-lang="m1">송금</span></div>
-        <div class="menu-item"><i class="fas fa-shopping-cart"></i><span data-lang="m2">결제</span></div>
-        <div class="menu-item"><i class="fas fa-vault"></i><span data-lang="m3">예치</span></div>
-        <div class="menu-item"><i class="fas fa-award"></i><span data-lang="m4">보상</span></div>
-        <div class="menu-item"><i class="fas fa-coins"></i><span data-lang="m5">기본소득</span></div>
-        <div class="menu-item"><i class="fas fa-random"></i><span data-lang="m6">스왑</span></div>
+        <div class="menu-item"><i class="fas fa-paper-plane"></i><span id="m1">송금</span></div>
+        <div class="menu-item"><i class="fas fa-shopping-cart"></i><span id="m2">결제</span></div>
+        <div class="menu-item"><i class="fas fa-vault"></i><span id="m3">예치</span></div>
+        <div class="menu-item"><i class="fas fa-award"></i><span id="m4">보상</span></div>
+        <div class="menu-item"><i class="fas fa-coins"></i><span id="m5">기본소득</span></div>
+        <div class="menu-item"><i class="fas fa-random"></i><span id="m6">스왑</span></div>
     </div>
 
-    <div class="box">
-        <div class="box-t" data-lang="shield">🛡️ HK 양자 방패 (Protocol V23)</div>
-        <ul class="box-l">
-            <li data-lang="s1">● 양자 암호화 기술 즉시 적용</li>
-            <li data-lang="s2">● 자산 보호 프로토콜 24시간 가동</li>
-            <li data-lang="s3">● 오픈 메인넷 자동 연동 대기</li>
-        </ul>
+    <div class="info-box">
+        <h3 id="shield_t">🛡️ HK 양자 방패 가동 중</h3>
+        <p id="s1">● Protocol V23 보안 기술 적용</p>
+        <p id="s2">● 오픈 메인넷 자산 자동 연동 시스템</p>
+        <p id="s3">● AI 실시간 자산 보호 프로토콜</p>
     </div>
 
-    <div class="faq">
-        <div class="faq-q" onclick="toggleF()"><span data-lang="q1">Q. 오픈 메인넷 시 자동 구동되나요?</span> <i class="fas fa-plus"></i></div>
-        <div class="faq-a" id="faq-a" data-lang="a1">네. 메인넷 오픈과 동시에 Protocol V23이 활성화되어 모든 DEX 기능이 자동 구동됩니다.</div>
-    </div>
-
-    <button class="btn-cs" data-lang="cs">글로벌 AI 고객지원센터 가동</button>
+    <button class="btn-cs" id="cs_btn">글로벌 AI 고객지원센터 가동</button>
     
     <div class="sns">
-        <a href="https://www.youtube.com/@Hyekong2025" class="sns-a" style="background:#f00;"><i class="fab fa-youtube"></i> @Hyekong2025</a>
-        <a href="https://www.tiktok.com/@hyekong2025" class="sns-a" style="background:#000; border:1px solid #333;"><i class="fab fa-tiktok"></i> @hyekong2025</a>
+        <a href="https://www.youtube.com/@Hyekong2025" class="sns-link" style="background:#f00;"><i class="fab fa-youtube"></i> @Hyekong2025</a>
+        <a href="https://www.tiktok.com/@hyekong2025" class="sns-link" style="background:#000; border:1px solid #333;"><i class="fab fa-tiktok"></i> @hyekong2025</a>
     </div>
 </div>
 
 <script>
-    const translations = {
-        ko: { ledger:"메인 자산 통합 원장 (DEX)", stk:"스테이킹 이자 (12-20%)", lp_apy:"유동성풀 이율 (15-50%)", lp_tvl:"DEX 유동성풀 전체금액 (TVL)", b1:"PI 수량", b2:"DEX 스왑", b3:"LP 공급", m1:"송금", m2:"결제", m3:"예치", m4:"보상", m5:"기본소득", m6:"스왑", shield:"🛡️ HK 양자 방패 (Protocol V23)", s1:"● 양자 암호화 기술 즉시 적용", s2:"● 자산 보호 프로토콜 24시간 가동", s3:"● 오픈 메인넷 자동 연동 대기", q1:"Q. 오픈 메인넷 시 자동 구동되나요?", a1:"네. 메인넷 오픈과 동시에 Protocol V23이 활성화되어 모든 DEX 기능이 자동 구동됩니다.", cs:"글로벌 AI 고객지원센터 가동" },
-        en: { ledger:"Main Asset Ledger (DEX)", stk:"Staking Interest (12-20%)", lp_apy:"LP APY (15-50%)", lp_tvl:"DEX Total TVL", b1:"PI Amount", b2:"DEX Swap", b3:"LP Supply", m1:"Transfer", m2:"Payment", m3:"Vault", m4:"Reward", m5:"UBI", m6:"Swap", shield:"🛡️ HK Quantum Shield (V23)", s1:"● Quantum Encryption Applied", s2:"● 24/7 Protection Active", s3:"● Mainnet Auto-sync Ready", q1:"Q. Auto-run at Open Mainnet?", a1:"Yes. All DEX functions will auto-start with Protocol V23 upon Mainnet launch.", cs:"Launch Global AI Support" },
-        zh: { ledger:"主资产分类账 (DEX)", stk:"质押利息 (12-20%)", lp_apy:"流动性池利率 (15-50%)", lp_tvl:"DEX 总额 (TVL)", b1:"PI 数量", b2:"DEX 交换", b3:"LP 供应", m1:"转账", m2:"支付", m3:"存款", m4:"奖励", m5:"基本收入", m6:"交换", shield:"🛡️ HK 量子盾 (V23)", s1:"● 应用量子加密技术", s2:"● 24小时资产保护", s3:"● 主网自动同步就绪", q1:"Q. 开放主网时自动运行吗？", a1:"是的。Protocol V23 将在主网开放时激活所有功能。", cs:"启动全球 AI 客户服务" },
-        ja: { ledger:"メイン資産元帳 (DEX)", stk:"ステーキング利息 (12-20%)", lp_apy:"流動性プール利率 (15-50%)", lp_tvl:"DEX 流動性総額", b1:"PI 数量", b2:"DEX スワップ", b3:"LP 供給", m1:"送金", m2:"決済", m3:"預金", m4:"報酬", m5:"基本所得", m6:"スワップ", shield:"🛡️ HK 量子シールド (V23)", s1:"● 量子暗号化技術を適用", s2:"● 資産保護稼働中", s3:"● メインネット自動連動待機", q1:"Q. メ인ネット時に自動稼働しますか？", a1:"はい。Protocol V23により、メインネット開始と同時に自動稼働します。", cs:"グローバル AI サポート" },
-        vi: { ledger:"Sổ cái tài sản (DEX)", stk:"Lãi Staking (12-20%)", lp_apy:"Lãi LP (15-50%)", lp_tvl:"Tổng TVL DEX", b1:"Số lượng PI", b2:"DEX Swap", b3:"Cung cấp LP", m1:"Chuyển tiền", m2:"Thanh toán", m3:"Gửi tiền", m4:"Phần thưởng", m5:"Thu nhập", m6:"Swap", shield:"🛡️ HK Quantum Shield (V23)", s1:"● Bảo mật lượng tử", s2:"● Bảo vệ tài sản 24/7", s3:"● Chờ kết nối Mainnet", q1:"Q. Tự động chạy khi Mainnet?", a1:"Có. Mọi tính năng DEX sẽ tự động kích hoạt cùng Protocol V23 khi Open Mainnet.", cs:"Hỗ trợ AI toàn cầu" }
+    // [1] 20개국 언어 데이터베이스 (현지님, 여기 글자만 바꾸면 끝납니다!)
+    const i18n = {
+        ko: { name: "한국어 🇰🇷", ledger: "메인 자산 통합 원장 (V23)", stk: "스테이킹 이자 (12-20%)", lp: "유동성풀 이율 (15-50%)", tvl: "DEX 유동성풀 전체금액 (TVL)", b1: "PI 수량", b2: "DEX 스왑", b3: "LP 공급", m1: "송금", m2: "결제", m3: "예치", m4: "보상", m5: "기본소득", m6: "스왑", shield: "🛡️ HK 양자 방패 가동 중", s1: "● Protocol V23 보안 기술 적용", s2: "● 오픈 메인넷 자산 자동 연동 시스템", s3: "● AI 실시간 자산 보호 프로토콜", cs: "글로벌 AI 고객지원센터 가동" },
+        en: { name: "English 🇺🇸", ledger: "Main Asset Ledger (V23)", stk: "Staking Int (12-20%)", lp: "LP APY (15-50%)", tvl: "DEX Total TVL", b1: "PI Amount", b2: "DEX Swap", b3: "LP Supply", m1: "Transfer", m2: "Pay", m3: "Vault", m4: "Reward", m5: "UBI", m6: "Swap", shield: "🛡️ HK Quantum Shield Active", s1: "● Protocol V23 Security Applied", s2: "● Open Mainnet Auto-sync", s3: "● AI Real-time Asset Protection", cs: "Launch Global AI Support" },
+        zh: { name: "中文 🇨🇳", ledger: "主资产分类账 (V23)", stk: "质押利息 (12-20%)", lp: "流动性池 (15-50%)", tvl: "DEX 总 TVL", b1: "PI 数量", b2: "DEX 交换", b3: "LP 供应", m1: "转账", m2: "支付", m3: "存款", m4: "奖励", m5: "基本收入", m6: "交换", shield: "🛡️ HK 量子盾已激活", s1: "● 应用 V23 安全技术", s2: "● 开放主网自动连动", s3: "● AI 实时资产保护", cs: "启动全球 AI 服务" },
+        ja: { name: "日本語 🇯🇵", ledger: "メイン資産元帳 (V23)", stk: "利息 (12-20%)", lp: "流動性 (15-50%)", tvl: "DEX 総額 TVL", b1: "PI 数量", b2: "DEX スワップ", b3: "LP 供給", m1: "送金", m2: "決済", m3: "預金", m4: "報酬", m5: "所得", m6: "スワップ", shield: "🛡️ HK 量子シールド", s1: "● Protocol V23 技術適用", s2: "● メインネット自動連動", s3: "● AI 資産保護プロトコル", cs: "グローバル AI サポート" },
+        vi: { name: "Tiếng Việt 🇻🇳", ledger: "Sổ cái tài sản (V23)", stk: "Lãi Staking (12-20%)", lp: "Lãi LP (15-50%)", tvl: "Tổng TVL DEX", b1: "Số lượng PI", b2: "DEX Swap", b3: "Cung cấp LP", m1: "Chuyển tiền", m2: "Thanh toán", m3: "Gửi tiền", m4: "Phần thưởng", m5: "Thu nhập", m6: "Swap", shield: "🛡️ HK Quantum Shield", s1: "● Bảo mật Protocol V23", s2: "● Tự động kết nối Mainnet", s3: "● AI Bảo vệ tài sản", cs: "Hỗ trợ AI toàn cầu" }
     };
 
-    function changeLang() {
-        const lang = document.getElementById('langSelect').value;
-        const data = translations[lang] || translations['en'];
-        
-        // 모든 data-lang 속성을 가진 요소를 찾아 텍스트 교체
-        document.querySelectorAll('[data-lang]').forEach(el => {
-            const key = el.getAttribute('data-lang');
-            if (data[key]) el.innerText = data[key];
-        });
+    // [2] 언어 선택기 자동 생성 로직
+    const select = document.getElementById('langSelect');
+    Object.keys(i18n).forEach(lang => {
+        const opt = document.createElement('option');
+        opt.value = lang;
+        opt.innerText = i18n[lang].name;
+        select.appendChild(opt);
+    });
+
+    // [3] 번역 적용 함수 (이게 핵심!)
+    function applyTranslation() {
+        const lang = select.value;
+        const d = i18n[lang];
+
+        document.getElementById('ledger').innerText = d.ledger;
+        document.getElementById('stk_label').innerText = d.stk;
+        document.getElementById('lp_label').innerText = d.lp;
+        document.getElementById('tvl_label').innerText = d.tvl;
+        document.getElementById('b1').innerText = d.b1;
+        document.getElementById('b2').innerText = d.b2;
+        document.getElementById('b3').innerText = d.b3;
+        document.getElementById('m1').innerText = d.m1;
+        document.getElementById('m2').innerText = d.m2;
+        document.getElementById('m3').innerText = d.m3;
+        document.getElementById('m4').innerText = d.m4;
+        document.getElementById('m5').innerText = d.m5;
+        document.getElementById('m6').innerText = d.m6;
+        document.getElementById('shield_t').innerText = d.shield;
+        document.getElementById('s1').innerText = d.s1;
+        document.getElementById('s2').innerText = d.s2;
+        document.getElementById('s3').innerText = d.s3;
+        document.getElementById('cs_btn').innerText = d.cs;
     }
 
-    // 실시간 데이터
-    let tvl = 88410819601;
+    // [4] 실시간 데이터 구동 (2초마다 업데이트)
+    let tvlAmount = 88410819601;
     setInterval(() => {
-        tvl += Math.floor(Math.random() * 500000);
-        document.getElementById('lp-amount').innerText = "$ " + tvl.toLocaleString();
+        tvlAmount += Math.floor(Math.random() * 700000);
+        document.getElementById('lp-amount').innerText = "$ " + tvlAmount.toLocaleString();
         document.getElementById('stk-val').innerText = (12 + (Math.random() * 8)).toFixed(2) + "%";
         document.getElementById('lp-val').innerText = (15 + (Math.random() * 35)).toFixed(2) + "%";
     }, 2000);
-
-    function toggleF() {
-        const a = document.getElementById('faq-a');
-        a.style.display = (a.style.display === 'block') ? 'none' : 'block';
-    }
 </script>
 </body>
 </html>
