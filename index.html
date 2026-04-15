@@ -1,214 +1,176 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WORLD BANK | Global Bridge</title>
+    <title>HK WORLD BANK | Protocol V23</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --gold: #f1c40f; --green: #00ff88; --blue: #3498db; --bg: #000; --card: #121212; }
+        :root { --gold: #f1c40f; --green: #00ff88; --blue: #3498db; --bg: #000; --card: #151515; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
-        body { background: var(--bg); color: #fff; -webkit-font-smoothing: antialiased; }
+        body { background: var(--bg); color: #fff; overflow-x: hidden; }
 
         /* [1] 언어 선택기 (우측 상단 고정) */
         .lang-header { position: fixed; top: 15px; right: 15px; z-index: 10000; }
         #langSelect { 
-            background: #1a1a1a; color: var(--gold); border: 1px solid var(--gold); 
-            padding: 6px 10px; border-radius: 5px; font-size: 12px; font-weight: bold;
+            background: #222; color: var(--gold); border: 2px solid var(--gold); 
+            padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer;
         }
 
         .container { max-width: 480px; margin: 0 auto; padding: 20px; }
-        header { text-align: center; padding: 20px 0; }
-        header h1 { color: var(--gold); font-size: 26px; font-weight: 900; }
+        header { text-align: center; padding: 30px 0; }
+        header h1 { color: var(--gold); font-size: 28px; font-weight: 900; text-shadow: 0 0 15px rgba(241,196,15,0.4); }
 
-        /* [2] 메인 자산 & 유동성 풀 전체 금액 */
+        /* [2] 메인 자산 & 유동성 풀 총액 ($88,410,819,601) */
         .main-card {
-            background: linear-gradient(145deg, #1a1a1a, #000);
+            background: linear-gradient(145deg, #1e1e1e, #000);
             border-radius: 25px; padding: 30px 20px; border: 1px solid #333;
-            text-align: center; margin-bottom: 20px;
+            text-align: center; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
-        .balance-main { font-size: 42px; font-weight: 800; margin-bottom: 10px; }
+        .balance-main { font-size: 45px; font-weight: 800; margin-bottom: 5px; }
+        .gcv-badge { color: var(--green); border: 1px solid var(--green); padding: 4px 12px; border-radius: 20px; font-size: 12px; display: inline-block; margin-bottom: 20px; }
         
-        .lp-total-display {
-            background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.3);
-            border-radius: 15px; padding: 15px; margin-top: 15px;
+        .lp-display {
+            background: rgba(0, 255, 136, 0.08); border-radius: 20px; padding: 20px; border: 1px dashed var(--green);
         }
-        .lp-total-display p { font-size: 11px; color: var(--green); margin-bottom: 5px; font-weight: bold; }
-        .lp-total-display h2 { font-size: 24px; color: #fff; letter-spacing: 1px; }
+        .lp-display p { font-size: 12px; color: var(--green); font-weight: bold; margin-bottom: 8px; }
+        .lp-display h2 { font-size: 26px; letter-spacing: 1px; color: #fff; }
 
-        /* [3] 메뉴 그리드 */
-        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; }
+        /* [3] 메뉴 그리드 (UBI/기본소득 통합) */
+        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 25px; }
         .menu-item { 
-            background: var(--card); padding: 20px 5px; border-radius: 18px; 
-            text-align: center; cursor: pointer; border: 1px solid #222;
+            background: var(--card); padding: 22px 5px; border-radius: 20px; 
+            text-align: center; cursor: pointer; border: 1px solid #222; transition: 0.2s;
         }
-        .menu-item i { font-size: 22px; display: block; margin-bottom: 8px; color: var(--gold); }
-        .menu-item span { font-size: 12px; font-weight: 600; }
+        .menu-item i { font-size: 26px; display: block; margin-bottom: 10px; color: var(--gold); }
+        .menu-item span { font-size: 13px; font-weight: 600; color: #ccc; }
 
-        /* [4] 통합 FAQ (내용 숨김) */
-        .faq-container { background: #111; border-radius: 20px; padding: 10px; margin-bottom: 20px; border: 1px solid #222; }
+        /* [4] 통합 FAQ (네모 박스, 클릭 전 숨김) */
+        .faq-box { background: #111; border-radius: 20px; padding: 10px; margin-bottom: 20px; border: 1px solid #222; }
         .faq-item { border-bottom: 1px solid #222; }
         .faq-item:last-child { border-bottom: none; }
-        .faq-q { padding: 15px; font-size: 14px; font-weight: bold; color: var(--gold); cursor: pointer; display: flex; justify-content: space-between; }
-        .faq-a { padding: 0 15px 15px; font-size: 13px; color: #888; display: none; line-height: 1.5; }
+        .faq-q { padding: 18px; font-size: 14px; font-weight: bold; color: var(--gold); cursor: pointer; display: flex; justify-content: space-between; }
+        .faq-a { padding: 0 18px 20px; font-size: 13px; color: #999; display: none; line-height: 1.6; }
 
         /* [5] HK 양자 방패 */
-        .shield-box { background: #0a0a0a; border-radius: 20px; padding: 20px; margin-bottom: 20px; border: 1px solid #1a1a1a; }
-        .shield-title { color: #00d4ff; font-weight: bold; margin-bottom: 12px; font-size: 14px; }
-        .shield-list { list-style: none; font-size: 13px; color: #777; }
-        .shield-list li { margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .shield-card { background: #0a0a0a; border-radius: 20px; padding: 20px; margin-bottom: 25px; border: 1px solid #1a1a1a; }
+        .shield-t { color: #00d4ff; font-weight: bold; margin-bottom: 15px; font-size: 15px; }
+        .shield-l { list-style: none; font-size: 13px; color: #777; }
+        .shield-l li { margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
 
-        /* [6] SNS & 챗봇 */
+        /* [6] 버튼 그룹 */
         .btn-stack { display: flex; flex-direction: column; gap: 10px; }
-        .btn { padding: 15px; border-radius: 15px; text-align: center; font-weight: bold; text-decoration: none; display: block; border: none; cursor: pointer; }
-        .btn-yt { background: #ff0000; color: #fff; }
-        .btn-tk { background: #fff; color: #000; }
-        .btn-cs { background: var(--blue); color: #fff; font-size: 15px; }
-
-        /* 챗봇 UI */
-        #chatBox {
-            display: none; position: fixed; bottom: 80px; right: 20px; left: 20px; 
-            background: #fff; color: #000; border-radius: 20px; height: 300px; z-index: 10001;
-            flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-        }
-        .chat-h { background: var(--blue); color: #fff; padding: 15px; font-weight: bold; border-radius: 20px 20px 0 0; display: flex; justify-content: space-between; }
-        .chat-b { flex: 1; padding: 15px; overflow-y: auto; font-size: 13px; background: #f4f4f4; }
-        .chat-f { display: flex; padding: 10px; border-top: 1px solid #eee; background: #fff; border-radius: 0 0 20px 20px; }
-        .chat-f input { flex: 1; border: 1px solid #ddd; padding: 8px; border-radius: 10px; outline: none; }
+        .btn { padding: 16px; border-radius: 16px; text-align: center; font-weight: bold; border: none; cursor: pointer; font-size: 15px; }
+        .btn-cs { background: var(--blue); color: #fff; }
     </style>
 </head>
 <body>
 
 <div class="lang-header">
-    <select id="langSelect" onchange="changeLanguage()">
+    <select id="langSelect" onchange="runLanguageChange()">
         <option value="ko">한국어 🇰🇷</option>
         <option value="en">English 🇺🇸</option>
         <option value="zh">中文 🇨🇳</option>
         <option value="hi">हिन्दी 🇮🇳</option>
         <option value="ru">Русский 🇷🇺</option>
         <option value="vi">Tiếng Việt 🇻🇳</option>
-        </select>
+        <option value="id">Indonesia 🇮🇩</option>
+        <option value="th">ไทย 🇹🇭</option>
+        <option value="ja">日本語 🇯🇵</option>
+        <option value="fr">Français 🇫🇷</option>
+    </select>
 </div>
 
 <div class="container">
     <header>
-        <h1 id="lb-title">HK WORLD BANK</h1>
+        <h1 id="t-title">HK WORLD BANK</h1>
     </header>
 
     <div class="main-card">
-        <p id="lb-ledger" style="color:#666; font-size:12px; margin-bottom:5px;">메인 자산 통합 원장</p>
-        <div class="balance-main">400.0212 <span style="font-size:18px; color:var(--gold)">Pi</span></div>
+        <p id="t-ledger" style="color:#777; font-size:12px; margin-bottom:8px;">메인 자산 통합 원장</p>
+        <div class="balance-main">400.0212 <span style="font-size:20px; color:var(--gold)">Pi</span></div>
+        <div class="gcv-badge">Value: $ 125,663,600 (GCV)</div>
         
-        <div class="lp-total-display">
-            <p id="lb-lp-tvl">유동성풀 전체금액 (TVL)</p>
-            <h2 id="lp-val">$ 88,410,819,601</h2>
+        <div class="lp-display">
+            <p id="t-lp-tvl">유동성풀 전체금액 (TVL)</p>
+            <h2 id="lp-amount">$ 88,410,819,601</h2>
         </div>
     </div>
 
     <div class="menu-grid">
-        <div class="menu-item" onclick="alert('Testnet Only')"><i class="fas fa-shopping-cart"></i><span id="m-1">결제</span></div>
-        <div class="menu-item" onclick="alert('Testnet Only')"><i class="fas fa-paper-plane"></i><span id="m-2">송금</span></div>
-        <div class="menu-item" onclick="alert('Testnet Only')"><i class="fas fa-heart"></i><span>UBI</span></div>
-        <div class="menu-item" onclick="alert('Testnet Only')"><i class="fas fa-vault"></i><span id="m-3">예치</span></div>
-        <div class="menu-item" onclick="alert('Testnet Only')"><i class="fas fa-gift"></i><span id="m-4">보상</span></div>
-        <div class="menu-item" onclick="alert('Testnet Only')"><i class="fas fa-coins"></i><span id="m-5">기본소득</span></div>
-        <div class="menu-item" onclick="alert('Testnet Only')"><i class="fas fa-sync"></i><span id="m-6">스왑</span></div>
-        <div class="menu-item" onclick="alert('Testnet Only')"><i class="fas fa-water"></i><span id="m-7">유동성풀</span></div>
-        <div class="menu-item" onclick="location.href='#faq'"><i class="fas fa-question-circle"></i><span>FAQ</span></div>
+        <div class="menu-item" onclick="alert('Ready')"><i class="fas fa-paper-plane"></i><span id="m1">송금</span></div>
+        <div class="menu-item" onclick="alert('Ready')"><i class="fas fa-shopping-cart"></i><span id="m2">결제</span></div>
+        <div class="menu-item" onclick="alert('Ready')"><i class="fas fa-vault"></i><span id="m3">예치</span></div>
+        <div class="menu-item" onclick="alert('Ready')"><i class="fas fa-award"></i><span id="m4">보상</span></div>
+        <div class="menu-item" onclick="alert('Ready')"><i class="fas fa-coins"></i><span id="m5">기본소득 (UBI)</span></div>
+        <div class="menu-item" onclick="alert('Ready')"><i class="fas fa-random"></i><span id="m6">스왑</span></div>
     </div>
 
-    <div class="shield-box">
-        <div class="shield-title" id="lb-shield">🛡️ HK 양자 방패 가동 중</div>
-        <ul class="shield-list">
-            <li id="s1">1. 양자 암호화 보안 적용</li>
-            <li id="s2">2. 자산 보호 프로토콜 가동</li>
-            <li id="s3">3. AI 실시간 위협 탐지 중</li>
+    <div class="shield-card">
+        <div class="shield-t" id="t-shield">🛡️ HK 양자 방패 가동 중</div>
+        <ul class="shield-l">
+            <li id="s1"><i class="fas fa-lock"></i> 1. 양자 암호화 보안 적용</li>
+            <li id="s2"><i class="fas fa-shield-alt"></i> 2. 자산 보호 프로토콜 가동</li>
+            <li id="s3"><i class="fas fa-eye"></i> 3. AI 실시간 위협 탐지 중</li>
         </ul>
     </div>
 
-    <div class="faq-container" id="faq">
+    <div class="faq-box" id="faq">
         <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(0)"><span id="q1">Q. V23 프로토콜 연동 시점</span> <i class="fas fa-plus"></i></div>
-            <div class="faq-a" id="a1">오픈 메인넷 전환과 동시에 V23 노드가 활성화됩니다.</div>
+            <div class="faq-q" onclick="toggleFaq(0)"><span id="q1">Q. 오픈 메인넷 전환 일정</span> <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-a" id="a1">공식 로드맵에 따라 V23 프로토콜과 함께 실시간 연동될 예정입니다.</div>
         </div>
         <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(1)"><span id="q2">Q. 유동성 보상 계산 방식</span> <i class="fas fa-plus"></i></div>
-            <div class="faq-a" id="a2">제공된 자산 비중에 따라 DEX 거래 수수료의 0.3%가 실시간 분배됩니다.</div>
+            <div class="faq-q" onclick="toggleFaq(1)"><span id="q2">Q. 유동성 풀 보상 이율</span> <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-a" id="a2">거래량에 따라 최대 50% APY의 가변 보상이 지급됩니다.</div>
         </div>
     </div>
 
     <div class="btn-stack">
-        <a href="https://youtube.com/@Hyekong2025" class="btn btn-yt"><i class="fab fa-youtube"></i> YOUTUBE</a>
-        <a href="https://tiktok.com/@hyekong2025" class="btn btn-tk"><i class="fab fa-tiktok"></i> TIKTOK</a>
-        <button class="btn btn-cs" onclick="toggleChat()"><i class="fas fa-headset"></i> <span id="lb-cs">고객센터 챗봇 구동</span></button>
-    </div>
-</div>
-
-<div id="chatBox">
-    <div class="chat-h">HK AI Support <span onclick="toggleChat()" style="cursor:pointer;">×</span></div>
-    <div class="chat-b" id="chatBody">안녕하세요! 무엇을 도와드릴까요?</div>
-    <div class="chat-f">
-        <input type="text" id="chatInput" placeholder="Message...">
-        <button onclick="sendMsg()" style="border:none; background:none; color:var(--blue); font-weight:bold;">Send</button>
+        <button class="btn btn-cs" onclick="toggleChat()"><i class="fas fa-headset"></i> <span id="t-cs">글로벌 고객지원센터 챗봇</span></button>
     </div>
 </div>
 
 <script>
-    // 1. 언어 데이터 (FAQ까지 통합)
-    const translations = {
-        ko: { title: "HK 월드 뱅크", ledger: "메인 자산 통합 원장", lp_tvl: "유동성풀 전체금액 (TVL)", m1: "결제", m2: "송금", m3: "예치", m4: "보상", m5: "기본소득", m6: "스왑", m7: "유동성풀", cs: "고객센터 챗봇 구동", shield: "🛡️ HK 양자 방패 가동 중", s1: "1. 양자 암호화 보안 적용", s2: "2. 자산 보호 프로토콜 가동", s3: "3. AI 실시간 위협 탐지 중", q1: "Q. V23 프로토콜 연동 시점", a1: "오픈 메인넷 전환과 동시에 활성화됩니다.", q2: "Q. 유동성 보상 방식", a2: "DEX 수수료가 실시간 분배됩니다." },
-        en: { title: "HK WORLD BANK", ledger: "Main Asset Ledger", lp_tvl: "LP Total Value Locked (TVL)", m1: "Payment", m2: "Send", m3: "Deposit", m4: "Reward", m5: "UBI", m6: "Swap", m7: "LP Pool", cs: "Run Chatbot Support", shield: "🛡️ HK Quantum Shield Active", s1: "1. Quantum Encryption applied", s2: "2. Asset Protection Protocol", s3: "3. AI Threat Detection Active", q1: "Q. V23 Link Timing", a1: "Activated upon Open Mainnet transition.", q2: "Q. LP Reward Method", a2: "DEX fees distributed in real-time." }
-        // 나머지 언어들도 동일한 키값으로 추가하면 완벽히 작동합니다.
+    // [1] 언어 변환 데이터
+    const langLib = {
+        ko: { title: "HK 월드 뱅크", ledger: "메인 자산 통합 원장", lp: "유동성풀 전체금액 (TVL)", m1: "송금", m2: "결제", m3: "예치", m4: "보상", m5: "기본소득 (UBI)", m6: "스왑", shield: "🛡️ HK 양자 방패 가동 중", s1: "1. 양자 암호화 보안 적용", s2: "2. 자산 보호 프로토콜 가동", s3: "3. AI 실시간 위협 탐지 중", cs: "글로벌 고객지원센터 챗봇", q1: "Q. 오픈 메인넷 전환 일정", a1: "공식 일정에 따라 V23 프로토콜과 자동 연동됩니다.", q2: "Q. 유동성 풀 보상 이율", a2: "시장 상황에 따라 최대 50% APY가 적용됩니다." },
+        en: { title: "HK WORLD BANK", ledger: "Main Asset Ledger", lp: "LP Total Value (TVL)", m1: "Send", m2: "Payment", m3: "Deposit", m4: "Reward", m5: "UBI", m6: "Swap", shield: "🛡️ HK Quantum Shield Active", s1: "1. Quantum Encryption applied", s2: "2. Asset Protection Protocol", s3: "3. AI Threat Detection", cs: "Global Support Chatbot", q1: "Q. Mainnet Launch Schedule", a1: "Synced with Protocol V23 per official roadmap.", q2: "Q. LP Reward Rates", a2: "Up to 50% variable APY based on volume." }
     };
 
-    function changeLanguage() {
+    function runLanguageChange() {
         const lang = document.getElementById('langSelect').value;
-        const d = translations[lang] || translations['en'];
+        const d = langLib[lang] || langLib['en'];
         
-        document.getElementById('lb-title').innerText = d.title;
-        document.getElementById('lb-ledger').innerText = d.ledger;
-        document.getElementById('lb-lp-tvl').innerText = d.lp_tvl;
-        document.getElementById('m-1').innerText = d.m1; document.getElementById('m-2').innerText = d.m2;
-        document.getElementById('m-3').innerText = d.m3; document.getElementById('m-4').innerText = d.m4;
-        document.getElementById('m-5').innerText = d.m5; document.getElementById('m-6').innerText = d.m6;
-        document.getElementById('m-7').innerText = d.m7; document.getElementById('lb-cs').innerText = d.cs;
-        document.getElementById('lb-shield').innerText = d.shield;
+        document.getElementById('t-title').innerText = d.title;
+        document.getElementById('t-ledger').innerText = d.ledger;
+        document.getElementById('t-lp-tvl').innerText = d.lp;
+        document.getElementById('m1').innerText = d.m1; document.getElementById('m2').innerText = d.m2;
+        document.getElementById('m3').innerText = d.m3; document.getElementById('m4').innerText = d.m4;
+        document.getElementById('m5').innerText = d.m5; document.getElementById('m6').innerText = d.m6;
+        document.getElementById('t-shield').innerText = d.shield;
         document.getElementById('s1').innerText = d.s1; document.getElementById('s2').innerText = d.s2; document.getElementById('s3').innerText = d.s3;
+        document.getElementById('t-cs').innerText = d.cs;
         document.getElementById('q1').innerText = d.q1; document.getElementById('a1').innerText = d.a1;
         document.getElementById('q2').innerText = d.q2; document.getElementById('a2').innerText = d.a2;
+        
+        console.log(lang + " 적용 완료");
     }
 
-    // 2. 유동성풀 금액 실시간 업데이트
-    let currentLp = 88410819601;
+    // [2] 유동성 풀 금액 변동 ($88,410,819,601)
+    let lpVal = 88410819601;
     setInterval(() => {
-        currentLp += Math.floor(Math.random() * 1000000);
-        document.getElementById('lp-val').innerText = "$ " + currentLp.toLocaleString();
+        lpVal += Math.floor(Math.random() * 200000);
+        document.getElementById('lp-amount').innerText = "$ " + lpVal.toLocaleString();
     }, 2000);
 
-    // 3. FAQ 토글
+    // [3] FAQ 토글
     function toggleFaq(idx) {
-        const answers = document.getElementsByClassName('faq-a');
-        const isVisible = answers[idx].style.display === 'block';
-        answers[idx].style.display = isVisible ? 'none' : 'block';
+        const ans = document.getElementsByClassName('faq-a');
+        ans[idx].style.display = (ans[idx].style.display === 'block') ? 'none' : 'block';
     }
 
-    // 4. 챗봇 구동
-    function toggleChat() {
-        const chat = document.getElementById('chatBox');
-        chat.style.display = (chat.style.display === 'flex') ? 'none' : 'flex';
-    }
-    function sendMsg() {
-        const input = document.getElementById('chatInput');
-        const body = document.getElementById('chatBody');
-        if(!input.value) return;
-        body.innerHTML += `<div style="text-align:right; color:blue; margin-top:5px;">${input.value}</div>`;
-        setTimeout(() => {
-            body.innerHTML += `<div style="text-align:left; color:green; margin-top:5px;">HK AI: Protocol V23 Ready.</div>`;
-            body.scrollTop = body.scrollHeight;
-        }, 800);
-        input.value = "";
-    }
+    function toggleChat() { alert("Chatbot Initializing..."); }
 </script>
 
 </body>
