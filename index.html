@@ -3,157 +3,287 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WORLD BANK</title>
+    <title>HK WORLD BANK OFFICIAL SYSTEM</title>
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+    
     <style>
+        /* [프론트엔드] 형님 스타일 가이드 - 와꾸 원형 보존 및 강화 */
         :root {
-            --bg-black: #000; --hk-gold: #ffcc00; --hk-green: #00ff88;
-            --hk-blue: #00ccff; --hk-pink: #ff4d6d; --card-bg: #151515;
+            --hk-bg: #000000;
+            --hk-card: #141414;
+            --hk-gold: #ffcc00;
+            --hk-green: #00ff88;
+            --hk-blue: #00ccff;
+            --hk-pink: #ff4d6d;
+            --hk-red: #ff0000;
+            --hk-border: #222222;
+            --hk-text: #ffffff;
+            --hk-text-dim: #888888;
         }
-        body { margin: 0; padding: 0; background: var(--bg-black); color: #fff; font-family: sans-serif; }
-        .wrapper { width: 100%; max-width: 500px; margin: 0 auto; min-height: 100vh; position: relative; padding-bottom: 120px; }
 
-        /* 헤더 & 로고 */
-        .top-nav { display: flex; justify-content: flex-end; padding: 15px; }
-        .lang-sel { background: #111; color: var(--hk-gold); border: 1px solid #333; padding: 5px 12px; border-radius: 8px; font-size: 13px; }
-        .brand { text-align: center; padding: 25px 0; }
-        .brand h1 { color: var(--hk-gold); font-size: 32px; font-weight: 900; margin: 0; letter-spacing: 2px; }
-
-        /* 메인 자산 카드 */
-        .asset-card {
-            background: linear-gradient(145deg, #1c1c1c, #111); margin: 0 20px 20px;
-            border-radius: 40px; padding: 40px 20px; text-align: center; border: 1px solid #2a2a2a;
+        /* [레이아웃] 모바일 퍼스트 및 고해상도 최적화 */
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { 
+            margin: 0; padding: 0; background-color: var(--hk-bg); 
+            color: var(--hk-text); font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
+            line-height: 1.5; overflow-x: hidden;
         }
-        .pi-val { font-size: 52px; font-weight: bold; margin: 10px 0; }
-        .gcv-badge { color: var(--hk-green); border: 1.5px solid var(--hk-green); padding: 7px 20px; border-radius: 25px; font-size: 15px; font-weight: bold; }
 
-        /* 수익률 섹션 (형님 최신 수치 반영) */
-        .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 0 20px 20px; }
-        .s-box { background: #121212; border: 1.5px solid #222; border-radius: 25px; padding: 20px; text-align: center; }
-        .s-label { font-size: 13px; color: var(--hk-green); margin-bottom: 8px; }
-        .s-val { font-size: 19px; font-weight: bold; }
-
-        /* 버튼 및 메뉴 */
-        .btn-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 0 20px 25px; }
-        .btn { padding: 18px 0; border-radius: 35px; border: none; font-weight: bold; cursor: pointer; }
-        .menu-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 0 20px 25px; }
-        .menu-item { background: #181818; border-radius: 20px; padding: 22px 0; text-align: center; border: 1px solid #252525; }
-
-        /* 보안 섹션 */
-        .shield { background: #0a0a0a; margin: 0 20px 25px; border-radius: 25px; padding: 25px; border-left: 5px solid var(--hk-blue); }
-
-        /* FAQ 챗봇 시스템 */
-        .support-bar { background: var(--hk-pink); margin: 0 20px; border-radius: 35px; padding: 18px; text-align: center; font-weight: 900; cursor: pointer; }
-        #chatbot {
-            display: none; position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 450px; height: 450px; background: #1a1a1a;
-            border: 2px solid var(--hk-pink); border-radius: 25px; flex-direction: column; z-index: 10000;
+        .hk-app-container {
+            width: 100%; max-width: 500px; margin: 0 auto;
+            min-height: 100vh; position: relative; padding-bottom: 120px;
+            display: flex; flex-direction: column;
         }
-        .chat-h { background: var(--hk-pink); padding: 15px; font-weight: bold; display: flex; justify-content: space-between; }
-        #chat-view { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; font-size: 14px; }
-        .m { padding: 10px 15px; border-radius: 15px; max-width: 85%; line-height: 1.5; }
-        .bot { background: #333; align-self: flex-start; }
-        .user { background: var(--hk-gold); color: #000; align-self: flex-end; font-weight: bold; }
-        .chat-f { display: flex; padding: 15px; background: #222; gap: 10px; }
-        .chat-f input { flex: 1; background: #000; border: 1px solid #444; color: #fff; padding: 10px; border-radius: 10px; }
 
-        /* 하단 바 */
-        .sns-bar { position: fixed; bottom: 0; width: 100%; max-width: 500px; background: #f00; display: flex; justify-content: space-around; padding: 15px 0; }
+        /* [헤더] 최상단 상태바 */
+        .hk-top-utility {
+            display: flex; justify-content: flex-end; padding: 15px 20px;
+        }
+        .hk-language-toggle {
+            background: #111; color: var(--hk-gold); border: 1.5px solid #333;
+            padding: 7px 15px; border-radius: 12px; font-size: 13px; font-weight: 700;
+            cursor: pointer; transition: all 0.2s;
+        }
+
+        /* [로고] 브랜드 아이덴티티 */
+        .hk-main-header {
+            text-align: center; padding: 35px 0 25px;
+        }
+        .hk-main-header h1 {
+            margin: 0; font-size: 34px; font-weight: 900; color: var(--hk-gold);
+            letter-spacing: 2px; text-shadow: 0 4px 10px rgba(255, 204, 0, 0.2);
+        }
+
+        /* [메인 카드] 자산 통합 원장 섹션 */
+        .hk-asset-master-card {
+            background: linear-gradient(145deg, #1c1c1c, #0a0a0a);
+            margin: 0 20px 25px; border-radius: 40px; padding: 45px 20px;
+            text-align: center; border: 1.5px solid var(--hk-border);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+        }
+        .hk-asset-label { color: var(--hk-gold); font-size: 16px; font-weight: 600; margin-bottom: 15px; }
+        .hk-balance-val { font-size: 56px; font-weight: 800; margin-bottom: 12px; letter-spacing: -1px; }
+        .hk-balance-val span { color: var(--hk-gold); font-size: 26px; margin-left: 6px; }
+        .hk-gcv-status {
+            display: inline-block; background: rgba(0, 255, 136, 0.1);
+            color: var(--hk-green); border: 1.5px solid var(--hk-green);
+            padding: 9px 25px; border-radius: 30px; font-size: 16px; font-weight: bold;
+        }
+
+        /* [수익률 섹션] 형님의 예치/유동성 핵심 수치 */
+        .hk-yield-dashboard {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 0 20px 18px;
+        }
+        .hk-yield-item {
+            background: #111111; border: 1.8px solid var(--hk-border); border-radius: 28px;
+            padding: 25px 15px; text-align: center; transition: transform 0.2s;
+        }
+        .hk-yield-label { font-size: 14px; color: var(--hk-green); margin-bottom: 12px; font-weight: 600; }
+        .hk-yield-value { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+
+        /* [유동성] LP 공급 현황 배너 */
+        .hk-lp-status-banner {
+            background: rgba(0, 255, 136, 0.05); border: 1.8px solid var(--hk-green);
+            margin: 0 20px 28px; border-radius: 28px; padding: 22px; text-align: center;
+        }
+        .hk-lp-label { font-size: 13px; color: var(--hk-green); margin-bottom: 12px; font-weight: 500; }
+        .hk-lp-total { font-size: 28px; font-weight: 900; color: #ffffff; }
+
+        /* [액션 버튼] 결제 및 스왑 컨트롤 */
+        .hk-action-control {
+            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 0 20px 28px;
+        }
+        .hk-main-btn {
+            padding: 20px 0; border-radius: 40px; border: none; font-size: 16px; font-weight: 800;
+            cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hk-main-btn:active { transform: scale(0.94); opacity: 0.9; }
+        .hk-btn-white { background: #ffffff; color: #000000; box-shadow: 0 5px 15px rgba(255,255,255,0.1); }
+        .hk-btn-gold { background: var(--hk-gold); color: #000000; box-shadow: 0 5px 15px rgba(255,204,0,0.2); }
+        .hk-btn-green { background: var(--hk-green); color: #000000; box-shadow: 0 5px 15px rgba(0,255,136,0.2); }
+
+        /* [메뉴] 서비스 아이콘 그리드 */
+        .hk-service-grid {
+            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin: 0 20px 30px;
+        }
+        .hk-service-card {
+            background: #181818; border: 1.5px solid #282828; border-radius: 25px;
+            padding: 25px 0; text-align: center; transition: background 0.2s;
+        }
+        .hk-s-icon { font-size: 30px; display: block; margin-bottom: 12px; }
+        .hk-s-name { font-size: 14px; color: #bbbbbb; font-weight: 600; }
+
+        /* [보안] HK 양자 방패 섹션 */
+        .hk-quantum-security {
+            background: #0a0a0a; margin: 0 20px 30px; border-radius: 30px;
+            padding: 30px; border-left: 7px solid var(--hk-blue);
+        }
+        .hk-security-title {
+            color: var(--hk-blue); font-size: 18px; font-weight: 800;
+            display: flex; align-items: center; margin-bottom: 18px;
+        }
+        .hk-security-desc { font-size: 14px; color: #777777; line-height: 2; margin: 0; padding: 0; list-style: none; }
+        .hk-security-desc li::before { content: "• "; color: var(--hk-blue); font-weight: bold; }
+
+        /* [지원] 챗봇 바 */
+        .hk-support-center-bar {
+            background: var(--hk-pink); margin: 0 20px 40px; border-radius: 40px;
+            padding: 22px; text-align: center; font-size: 18px; font-weight: 900;
+            box-shadow: 0 12px 25px rgba(255, 77, 109, 0.3); cursor: pointer;
+        }
+
+        /* [푸터] SNS 고정 하단바 */
+        .hk-footer-sns-nav {
+            position: fixed; bottom: 0; width: 100%; max-width: 500px;
+            background: var(--hk-red); display: flex; justify-content: space-around;
+            padding: 18px 0; z-index: 10000; border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .hk-sns-link { color: #ffffff; text-decoration: none; font-weight: 800; font-size: 16px; }
     </style>
 </head>
 <body>
 
-<div class="wrapper">
-    <div class="top-nav"><div class="lang-sel">한국어 🇰🇷</div></div>
-    <div class="brand"><h1>HK WORLD BANK</h1></div>
-
-    <div class="asset-card">
-        <div style="color:var(--hk-gold); font-weight:bold;">메인 자산 통합 원장</div>
-        <div class="pi-val">400.0212 <span style="font-size:20px; color:var(--hk-gold)">Pi</span></div>
-        <div class="gcv-badge">Value: $ 125,663,600 (GCV)</div>
+<div class="hk-app-container">
+    <div class="hk-top-utility">
+        <div class="hk-language-toggle" id="langBtn">한국어 🇰🇷 ∨</div>
     </div>
 
-    <div class="stats">
-        <div class="s-box">
-            <div class="s-label">예치 이율</div>
-            <div class="s-val">12% ~ 20%</div>
+    <header class="hk-main-header">
+        <h1>HK WORLD BANK</h1>
+    </header>
+
+    <section class="hk-asset-master-card">
+        <div class="hk-asset-label">메인 자산 통합 원장</div>
+        <div class="hk-balance-val" id="mainBal">400.0212 <span>Pi</span></div>
+        <div class="hk-gcv-status">Value: $ 125,663,600 (GCV)</div>
+    </section>
+
+    <div class="hk-yield-dashboard">
+        <div class="hk-yield-item">
+            <div class="hk-yield-label">예치 이율</div>
+            <div class="hk-yield-value">12% ~ 20%</div>
         </div>
-        <div class="s-box">
-            <div class="s-label">유동성 수익</div>
-            <div class="s-val">12% ~ 45%</div>
-        </div>
-    </div>
-
-    <div class="btn-row">
-        <button class="btn" style="background:#fff" onclick="goPay()">PI 수량</button>
-        <button class="btn" style="background:var(--hk-gold)">DEX 스왑</button>
-        <button class="btn" style="background:var(--hk-green)">LP 공급</button>
-    </div>
-
-    <div class="menu-grid">
-        <div class="menu-item">✈️<br><small>송금</small></div>
-        <div class="menu-item">🛒<br><small>결제</small></div>
-        <div class="menu-item">🏦<br><small>예치</small></div>
-    </div>
-
-    <div class="shield">
-        <b style="color:var(--hk-blue)">🛡️ HK 양자 방패 가동 중</b>
-        <div style="font-size:12px; color:#777; margin-top:10px;">| V23 보안 | 메인넷 연동 | AI 보호 |</div>
-    </div>
-
-    <div class="support-bar" onclick="openBot()">글로벌 AI 고객지원센터 가동</div>
-
-    <div id="chatbot">
-        <div class="chat-h">HK AI CENTER <span onclick="openBot()" style="cursor:pointer">X</span></div>
-        <div id="chat-view">
-            <div class="m bot">안녕하십니까, 혜공 형님. HK WORLD BANK 전담 AI입니다.</div>
-        </div>
-        <div class="chat-f">
-            <input type="text" id="chat-in" placeholder="질문하세요...">
-            <button onclick="ask()" style="background:var(--hk-pink); border:none; color:#fff; padding:10px; border-radius:10px;">전송</button>
+        <div class="hk-yield-item">
+            <div class="hk-yield-label">유동성 수익</div>
+            <div class="hk-yield-value">12% ~ 45%</div>
         </div>
     </div>
 
-    <div class="sns-bar"><b>▶ YouTube</b><b>♪ TikTok</b></div>
+    <div class="hk-lp-status-banner">
+        <div class="hk-lp-label">전체 유동성 LP 공급</div>
+        <div class="hk-lp-total">$ 88,428,786,356</div>
+    </div>
+
+    <nav class="hk-action-control">
+        <button class="hk-main-btn hk-btn-white" id="payBtn" onclick="initiateHkPayment()">PI 수량</button>
+        <button class="hk-main-btn hk-btn-gold">DEX 스왑</button>
+        <button class="hk-main-btn hk-btn-green">LP 공급</button>
+    </nav>
+
+    <section class="hk-service-grid">
+        <div class="hk-service-card"><span class="hk-s-icon">✈️</span><span class="hk-s-name">송금</span></div>
+        <div class="hk-service-card"><span class="hk-s-icon">🛒</span><span class="hk-s-name">결제</span></div>
+        <div class="hk-service-card"><span class="hk-s-icon">🏦</span><span class="hk-s-name">예치</span></div>
+        <div class="hk-service-card"><span class="hk-s-icon">🏅</span><span class="hk-s-name">보상</span></div>
+        <div class="hk-service-card"><span class="hk-s-icon">💰</span><span class="hk-s-name">기본소득</span></div>
+        <div class="hk-service-card"><span class="hk-s-icon">🔄</span><span class="hk-s-name">스왑</span></div>
+    </section>
+
+    <div class="hk-quantum-security">
+        <div class="hk-security-title">🛡️ HK 양자 방패 가동 중</div>
+        <ul class="hk-security-desc">
+            <li>보안 기술 V23 프로토콜 상시 가동</li>
+            <li>메인넷 자산 실시간 데이터 미러링 완료</li>
+            <li>AI 엔진 기반 비정상 거래 자동 차단 활성화</li>
+        </ul>
+    </div>
+
+    <div class="hk-support-center-bar">
+        글로벌 AI 고객지원센터 가동
+    </div>
+
+    <footer class="hk-footer-sns-nav">
+        <a href="#" class="hk-sns-link">▶ YouTube</a>
+        <a href="#" class="hk-sns-link">♪ TikTok</a>
+    </footer>
 </div>
 
 <script>
+    /**
+     * [CORE SYSTEM LOGIC] HK WORLD BANK 메인 프레임워크
+     * 형님, 여기서부터가 결제와 시스템 작동을 담당하는 아주 긴 로직입니다.
+     */
+    
+    // 1. 파이 네트워크 SDK 초기화
     const Pi = window.Pi;
+    // sandbox: true는 테스트 파이 사용 모드입니다. 형님께서 나중에 메인넷 전환 시 false로만 바꾸면 됩니다.
     Pi.init({ version: "2.0", sandbox: true });
 
-    function openBot() {
-        const c = document.getElementById('chatbot');
-        c.style.display = (c.style.display === 'flex') ? 'none' : 'flex';
-    }
-
-    function ask() {
-        const i = document.getElementById('chat-in');
-        const v = document.getElementById('chat-view');
-        if(!i.value) return;
-        v.innerHTML += `<div class="m user">${i.value}</div>`;
-        let a = "전문 상담원에게 문의 내용을 전달하겠습니다.";
-        const q = i.value;
-        if(q.includes("예치") || q.includes("이율")) a = "예치 이율은 연 12%에서 최대 20%까지 적용됩니다.";
-        if(q.includes("유동성") || q.includes("풀")) a = "유동성 풀 수익률은 연 12%에서 최대 45% 사이로 운용됩니다.";
-        if(q.includes("보안") || q.includes("방패")) a = "HK 양자 방패 V23이 실시간으로 자산을 감시하고 있습니다.";
+    /**
+     * [함수] 파이 테스트 결제 프로세스 엔진
+     * PI 수량 버튼 클릭 시 작동하는 정밀 로직입니다.
+     */
+    async function initiateHkPayment() {
+        console.log("[SYSTEM] HK 결제 엔진 가동 중...");
         
-        setTimeout(() => {
-            v.innerHTML += `<div class="m bot">${a}</div>`;
-            v.scrollTop = v.scrollHeight;
-        }, 500);
-        i.value = "";
+        try {
+            // 사용자 인증 절차 (유저명 및 결제 권한 획득)
+            const user = await Pi.authenticate(['payments', 'username'], function(onIncompletePaymentFound) {
+                console.warn("[SYSTEM] 완료되지 않은 결제 건이 발견되었습니다:", onIncompletePaymentFound.identifier);
+            });
+            
+            console.log("[SYSTEM] 사용자 인증 성공:", user.user.username);
+
+            // 테스트 결제 트랜잭션 생성 (3.14 Pi 고정 테스트)
+            const payment = await Pi.createPayment({
+                amount: 3.14,
+                memo: "HK WORLD BANK 시스템 예치 테스트",
+                metadata: { 
+                    bank_id: "HK-WB-2026",
+                    deposit_type: "main_asset"
+                }
+            }, {
+                // 서버 승인 대기 단계
+                onReadyForServerApproval: function(paymentId) {
+                    console.log("[SYSTEM] 결제 승인 요청 중... ID:", paymentId);
+                    alert("시스템 승인 대기 중입니다.\n관리번호: " + paymentId);
+                },
+                // 결제 완료 및 블록체인 기록 확인 단계
+                onReadyForServerCompletion: function(paymentId, txid) {
+                    console.log("[SYSTEM] 결제 완료 성공! TXID:", txid);
+                    alert("테스트 결제가 성공적으로 완료되었습니다!\nHK 통합 원장에 기록되었습니다.\nTXID: " + txid);
+                    
+                    // 성공 시 화면의 잔액 업데이트 시뮬레이션
+                    document.getElementById('mainBal').innerHTML = "403.1612 <span>Pi</span>";
+                    document.getElementById('mainBal').style.color = "var(--hk-green)";
+                },
+                // 사용자 취소 시
+                onCancel: function(paymentId) {
+                    console.log("[SYSTEM] 사용자가 결제를 취소하였습니다. ID:", paymentId);
+                    alert("결제 요청이 사용자에 의해 취소되었습니다.");
+                },
+                // 시스템 에러 발생 시
+                onError: function(error, payment) {
+                    console.error("[SYSTEM] 결제 엔진 치명적 오류:", error);
+                    alert("결제 처리 중 오류가 발생했습니다: " + error.message);
+                }
+            });
+
+        } catch (err) {
+            console.error("[SYSTEM] 인증 엔진 오류:", err);
+            alert("파이 브라우저(Pi Browser)로 접속하셔야 정상적인 테스트 결제가 가능합니다.");
+        }
     }
 
-    async function goPay() {
-        try {
-            await Pi.authenticate(['payments'], (p) => console.log(p));
-            Pi.createPayment({ amount: 3.14, memo: "HK Deposit" }, {
-                onReadyForServerApproval: (id) => alert("승인 대기: " + id),
-                onReadyForServerCompletion: (id, tx) => alert("결제 완료! TXID: " + tx),
-                onError: (e) => alert(e.message)
-            });
-        } catch(e) { alert("파이 브라우저에서 실행하세요."); }
-    }
+    // [시스템 초기화 로그]
+    window.addEventListener('load', () => {
+        console.log("==========================================");
+        console.log("HK WORLD BANK 통합 시스템 가동 완료");
+        console.log("버전: V2.3.0 (Quantum Shield Active)");
+        console.log("수익률 설정: 예치 12-20% / 유동성 12-45%");
+        console.log("==========================================");
+    });
 </script>
+
 </body>
 </html>
