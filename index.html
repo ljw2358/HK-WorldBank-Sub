@@ -190,31 +190,39 @@
         document.getElementById('stk-val').innerText = (14 + (Math.random() * 4)).toFixed(2) + "%";
         document.getElementById('lp-val').innerText = (20 + (Math.random() * 12)).toFixed(2) + "%";
     }, 2000);
-
-    // 1. 파이 SDK 초기화 (버전 2.0, 테스트 모드)
+    // --- 1단계: 파이 SDK 초기화 및 로그인 ---
+    
+    // 1. 초기화 (버전 2.0, 테스트 모드)
     Pi.init({ version: "2.0", sandbox: true });
 
-    // 2. 파이 로그인 및 권한 요청 함수
+    // 2. 로그인 함수 정의
     function loginWithPi() {
         Pi.authenticate(['payments', 'username', 'wallet_address'], onIncompletePaymentFound)
             .then(function(auth) {
+                // 로그인 성공 시 알림
                 alert(auth.user.username + " 형님, HK-WorldBank 접속을 환영합니다!");
-                // 로그인 성공 후 실행할 기능들을 여기에 넣으세요.
             })
             .catch(function(error) {
                 console.error("로그인 실패:", error);
             });
     }
 
-    // 미완료 결제 처리 (파이 앱 필수 사항)
+    // 미완료 결제 처리 (필수)
     function onIncompletePaymentFound(payment) {
-        console.log("처리되지 않은 결제가 발견되었습니다.");
+        console.log("미완료 결제 발견:", payment);
     };
 
-    // 3. 페이지가 로드되면 번역 적용하고 파이 로그인도 같이 시도
+    // 3. 페이지가 로드될 때 로그인 실행
+    // 기존 window.onload 부분을 아래처럼 수정하거나 합치시면 됩니다.
     window.onload = function() {
-        applyTranslation();
-        loginWithPi(); // 앱 켜지자마자 파이 로그인 창이 뜨게 합니다.
+        applyTranslation(); // 기존 번역 기능
+        loginWithPi(); // 파이 로그인 실행
+    };
+    // 221번 줄부터 아래를 지우고 이 내용으로 마무리하세요!
+    
+    window.onload = function() {
+        applyTranslation(); // 기존 번역 기능 실행
+        loginWithPi(); // 파이 로그인 실행
     };
 
 </script>
