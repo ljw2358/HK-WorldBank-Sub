@@ -193,7 +193,7 @@
     // --- 1단계: 파이 SDK 초기화 및 로그인 ---
     
     // 1. 초기화 (버전 2.0, 테스트 모드)
-    Pi.init({ version: "2.0", sandbox: true });
+    Pi.init({ version: "2.0", sandbox: false });
 
     // 2. 로그인 함수 정의
     function loginWithPi() {
@@ -220,11 +220,6 @@
     };
     // 221번 줄부터 아래를 지우고 이 내용으로 마무리하세요!
     
-    window.onload = function() {
-        applyTranslation(); // 기존 번역 기능 실행
-        loginWithPi(); // 파이 로그인 실행
-    };
-
 </script>
 </body>
 </html>
