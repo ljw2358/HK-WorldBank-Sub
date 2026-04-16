@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WORLD BANK | Global Ecosystem</title>
+    <title>HK WORLD BANK | Global Quantum Ledger</title>
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <style>
-        /* [1. 글로벌 디자인 테마] */
+        /* [1. 글로벌 프리미엄 디자인 시스템] */
         :root {
             --gold: #FFD700;
             --gold-grad: linear-gradient(135deg, #FFD700 0%, #B8860B 100%);
             --neon-blue: #00E5FF;
             --success: #00FF41;
+            --danger: #FF3B30;
             --bg-deep: #050505;
             --card-gray: #121212;
         }
@@ -22,107 +23,124 @@
             font-family: 'Pretendard', -apple-system, sans-serif; overflow-x: hidden;
         }
 
-        /* [2. 애니메이션 효과 집합] */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        /* [2. 화려한 애니메이션 라이브러리] */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes colorFlow { 
             0% { background-position: 0% 50%; } 
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; } 
         }
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; } 100% { transform: scale(1); opacity: 0.8; } }
+        @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
 
-        /* [3. 보안 인트로 & 로딩 레이어] */
+        /* [3. 퀀텀 보안 인트로 게이트] */
         #intro-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 10000; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; transition: 1s ease-in-out;
+            justify-content: center; align-items: center; transition: 1.2s cubic-bezier(0.7, 0, 0.3, 1);
         }
-        .shield-logo {
-            font-size: 60px; margin-bottom: 20px; animation: pulse 2s infinite;
+        .shield-container { position: relative; width: 120px; height: 120px; margin-bottom: 30px; }
+        .shield-icon {
+            font-size: 80px; text-align: center; line-height: 120px;
             background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: pulse 2s infinite;
+        }
+        .scan-line {
+            position: absolute; left: 0; width: 100%; height: 2px;
+            background: var(--neon-blue); box-shadow: 0 0 15px var(--neon-blue);
+            animation: scan 2s linear infinite;
         }
 
-        /* [4. 메인 애플리케이션 구조] */
-        .wrapper { max-width: 550px; margin: 0 auto; padding: 20px; display: none; animation: fadeIn 0.8s ease-out; }
+        /* [4. 메인 애플리케이션 프레임워크] */
+        .wrapper { max-width: 550px; margin: 0 auto; padding: 20px; display: none; animation: fadeIn 1s ease-out; }
 
-        /* 다국어 선택 바 */
-        .lang-bar {
-            background: #1a1a1a; border: 1px solid #333; border-radius: 12px;
-            padding: 12px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
-        }
-        .lang-bar select {
-            background: transparent; color: var(--gold); border: none; font-size: 14px; width: 100%; outline: none;
-        }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 0 30px; }
+        .hk-brand { font-size: 24px; font-weight: 900; letter-spacing: 3px; color: var(--gold); }
+        .auth-status { font-size: 11px; padding: 6px 15px; border: 1px solid var(--gold); border-radius: 50px; color: var(--gold); background: rgba(255, 215, 0, 0.05); }
 
-        header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 25px; }
-        .hk-logo-text { font-size: 22px; font-weight: 900; letter-spacing: 2px; color: var(--gold); }
-
-        /* [요청사항: 컬러 글씨 섹션] */
-        .lp-dashboard {
-            background: linear-gradient(160deg, #151515 0%, #000 100%);
-            border: 2px solid #333; border-radius: 35px; padding: 40px 20px;
-            text-align: center; margin-bottom: 30px; position: relative; overflow: hidden;
+        /* 다국어 통합 엔진 (30개국 대응 구조) */
+        .global-lang-engine {
+            background: #151515; border: 1px solid #333; border-radius: 15px;
+            padding: 15px; margin-bottom: 25px; display: flex; align-items: center; gap: 12px;
         }
-        .lp-dashboard::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(255,215,0,0.03) 0%, transparent 70%);
+        .global-lang-engine select {
+            background: transparent; color: var(--gold); border: none; font-size: 14px; width: 100%; outline: none; font-weight: bold;
         }
 
-        .lp-highlight-text {
-            font-size: 30px; font-weight: 900; margin-bottom: 15px; display: block;
+        /* [핵심 요청사항: 컬러 글씨 LP 대시보드] */
+        .lp-master-card {
+            background: linear-gradient(160deg, #1a1a1a 0%, #000 100%);
+            border: 2px solid #222; border-radius: 40px; padding: 45px 25px;
+            text-align: center; margin-bottom: 35px; position: relative; overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .lp-master-card::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); opacity: 0.05;
+        }
+
+        .lp-highlight-title {
+            font-size: 32px; font-weight: 900; margin-bottom: 20px; display: block;
             background: linear-gradient(90deg, #FFD700, #00FF41, #00E5FF, #FF00FF, #FFD700);
             background-size: 400% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: colorFlow 6s linear infinite;
+            animation: colorFlow 6s linear infinite; letter-spacing: -0.5px;
         }
-        .asset-val { font-size: 40px; font-weight: 800; color: #fff; letter-spacing: -1px; }
+        .asset-counter { font-size: 44px; font-weight: 800; color: #fff; letter-spacing: -1.5px; margin: 10px 0; }
+        .live-indicator { color: var(--success); font-size: 13px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .dot { width: 8px; height: 8px; background: var(--success); border-radius: 50%; display: inline-block; animation: pulse 1s infinite; }
 
-        /* [5. 미디어 섹션 (유튜브/틱톡)] */
-        .section-title { font-size: 16px; font-weight: bold; margin-bottom: 15px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
-        .media-card { background: var(--card-gray); border-radius: 25px; overflow: hidden; margin-bottom: 30px; border: 1px solid #222; }
-        .video-player { position: relative; padding-bottom: 56.25%; height: 0; background: #000; }
-        .video-player iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        
-        /* [6. 결제 액션 버튼] */
-        .pay-btn-area { margin-bottom: 50px; }
-        .action-btn {
+        /* [5. 미디어 컴플렉스 (유튜브/틱톡)] */
+        .section-label { font-size: 14px; font-weight: 800; margin-bottom: 15px; color: #555; text-transform: uppercase; letter-spacing: 2px; padding-left: 10px; }
+        .media-container { background: var(--card-gray); border-radius: 30px; overflow: hidden; margin-bottom: 35px; border: 1px solid #252525; }
+        .video-box { position: relative; padding-bottom: 56.25%; height: 0; background: #000; }
+        .video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .video-info { padding: 25px; font-size: 15px; color: #ccc; line-height: 1.7; background: #181818; }
+
+        /* [6. 실전 결제 시스템 버튼] */
+        .payment-zone { margin-bottom: 60px; }
+        .hk-main-btn {
             background: var(--gold-grad); color: #000; border: none; width: 100%;
-            padding: 24px; border-radius: 20px; font-size: 20px; font-weight: 900;
-            cursor: pointer; box-shadow: 0 10px 40px rgba(184, 134, 11, 0.4);
-            transition: 0.3s;
+            padding: 26px; border-radius: 25px; font-size: 22px; font-weight: 900;
+            cursor: pointer; box-shadow: 0 15px 45px rgba(184, 134, 11, 0.4);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .action-btn:active { transform: scale(0.95); }
+        .hk-main-btn:active { transform: scale(0.92); box-shadow: 0 5px 20px rgba(184, 134, 11, 0.2); }
 
-        /* [7. 시스템 모달 (실전 테스트 결과)] */
+        /* [7. 시스템 통제 모달] */
         #system-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.98); z-index: 20000; display: none;
             flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 40px;
         }
-        .spinner { width: 60px; height: 60px; border: 5px solid #222; border-top: 5px solid var(--gold); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 30px; }
+        .loader-ring { width: 70px; height: 70px; border: 6px solid #222; border-top: 6px solid var(--gold); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 40px; }
+        #modal-result-icon { font-size: 80px; display: none; margin-bottom: 25px; }
 
-        footer { text-align: center; color: #444; font-size: 11px; padding-bottom: 50px; line-height: 1.8; }
+        footer { text-align: center; color: #333; font-size: 12px; padding-bottom: 60px; border-top: 1px solid #111; padding-top: 40px; }
     </style>
 </head>
 <body>
 
     <div id="intro-overlay">
-        <div class="shield-logo">🛡️</div>
-        <h2 style="color:var(--gold); letter-spacing:3px;">HK QUANTUM SHIELD</h2>
-        <p style="color:#555; font-size:13px;" id="loading-msg">Initializing Secure Node...</p>
+        <div class="shield-container">
+            <div class="shield-icon">🛡️</div>
+            <div class="scan-line"></div>
+        </div>
+        <h2 style="color:var(--gold); letter-spacing:5px; font-weight:900; margin:0;">HK QUANTUM</h2>
+        <p style="color:#444; font-size:14px; margin-top:15px;" id="loading-text">Verifying Encryption Protocol...</p>
     </div>
 
-    <div class="wrapper" id="app-body">
+    <div class="wrapper" id="main-content">
         <header>
-            <div class="hk-logo-text">HK WORLD BANK</div>
-            <div id="auth-tag" style="font-size:11px; color:var(--gold); border:1px solid var(--gold); padding:4px 10px; border-radius:50px;">Quantum Active</div>
+            <div class="hk-brand">HK WORLD BANK</div>
+            <div id="user-status-tag" class="auth-status">Syncing Wallet...</div>
         </header>
 
-        <div class="lang-bar">
-            <span>🌐</span>
-            <select id="lang-select" onchange="translateUI(this.value)">
+        <div class="global-lang-engine">
+            <span style="font-size: 20px;">🌍</span>
+            <select id="language-switcher" onchange="applyTranslation(this.value)">
                 <option value="ko">🇰🇷 한국어 (Korean)</option>
-                <option value="en">🇺🇸 English</option>
+                <option value="en">🇺🇸 English (US)</option>
                 <option value="zh">🇨🇳 中文 (Chinese)</option>
                 <option value="ja">🇯🇵 日本語 (Japanese)</option>
                 <option value="vi">🇻🇳 Tiếng Việt (Vietnamese)</option>
@@ -131,129 +149,137 @@
                 <option value="es">🇪🇸 Español (Spanish)</option>
                 <option value="ru">🇷🇺 Русский (Russian)</option>
                 <option value="de">🇩🇪 Deutsch (German)</option>
+                <option value="th">🇹🇭 ภาษาไทย (Thai)</option>
+                <option value="in">🇮🇳 हिन्दी (Hindi)</option>
             </select>
         </div>
 
-        <div class="lp-dashboard">
-            <span class="lp-highlight-text" id="ui-lp-title">전체 유동성 LP 공급</span>
-            <div class="asset-val">$ 88,429,913,502</div>
-            <div style="color:var(--success); font-size:13px; margin-top:15px; font-weight:bold;" id="ui-status">● HK GLOBAL NODE ONLINE</div>
-        </div>
-
-        <div class="section-title" id="ui-media-label">PHK Project Media</div>
-        <div class="media-card">
-            <div class="video-player">
-                <iframe id="main-video" src="https://www.youtube.com/embed/영상ID입력?autoplay=0&mute=1" allowfullscreen></iframe>
-            </div>
-            <div style="padding:20px; font-size:14px; color:#aaa; line-height:1.6;" id="ui-video-desc">
-                HK GROUP의 2035 글로벌 로봇 시장 점유율 85% 달성을 위한 생산기지 가동 현황 및 투자 안내 영상입니다.
+        <div class="lp-master-card">
+            <span class="lp-highlight-title" id="lang-lp-title">전체 유동성 LP 공급</span>
+            <div class="asset-counter">$ 88,430,742,902</div>
+            <div class="live-indicator">
+                <span class="dot"></span>
+                <span id="lang-node-status">HK GLOBAL QUANTUM NODE ONLINE</span>
             </div>
         </div>
 
-        <div class="pay-btn-area">
-            <button class="action-btn" id="ui-pay-btn" onclick="executePiPayment()">
+        <div class="section-label" id="lang-media-label">PHK STRATEGIC MEDIA</div>
+        <div class="media-container">
+            <div class="video-box">
+                <iframe id="target-video" src="https://www.youtube.com/embed/영상ID입력?autoplay=0&mute=1" allowfullscreen></iframe>
+            </div>
+            <div class="video-info" id="lang-video-desc">
+                PHK GROUP은 2035년까지 전 세계 로봇 시장의 85% 점유를 목표로 하고 있습니다. 현재 울산 및 경주 생산 기지에서 인공지능 휴머노이드 및 산업용 로봇의 대량 생산 체제를 구축 완료하였습니다.
+            </div>
+        </div>
+
+        <div class="payment-zone">
+            <button class="hk-main-btn" id="lang-pay-btn" onclick="triggerPiPayment()">
                 💎 1 TEST-PI 공급 테스트 실행
             </button>
         </div>
 
         <footer>
-            <p>PHK GROUP FOUNDATION & HK WORLD BANK</p>
-            <p id="ui-footer">Authorized by Pi Network Mainnet Ecosystem © 2026</p>
-            <p style="margin-top:10px; color:#222;">Quantum Encryption Protocol v.2.7.4 Applied</p>
+            <p>PHK GROUP GLOBAL CONGLOMERATE</p>
+            <p id="lang-footer">Authorized by Pi Network Foundation Ecosystem © 2026</p>
+            <p style="margin-top:15px; color:#1a1a1a; letter-spacing:1px;">QUANTUM-SHIELD-V4-ACTIVE</p>
         </footer>
     </div>
 
     <div id="system-modal">
-        <div class="spinner" id="modal-spinner"></div>
-        <div id="success-box" style="display:none; font-size:70px; margin-bottom:20px;">✅</div>
-        <h2 id="modal-title" style="color:var(--gold);">Connecting...</h2>
-        <p id="modal-desc" style="color:#888; margin-top:10px;">Checking Blockchain Ledger</p>
-        <button id="modal-close" onclick="location.reload()" style="display:none; margin-top:30px; background:var(--gold); color:#000; border:none; padding:15px 40px; border-radius:15px; font-weight:bold; cursor:pointer;">확인 및 복귀</button>
+        <div class="loader-ring" id="modal-loader"></div>
+        <div id="modal-result-icon">✅</div>
+        <h2 id="modal-header" style="color:var(--gold); margin-bottom:10px;">Initialising...</h2>
+        <p id="modal-body-text" style="color:#777; line-height:1.6;">Accessing Pi Blockchain Ledger</p>
+        <button id="modal-close-btn" onclick="location.reload()" style="display:none; margin-top:40px; background:var(--gold); color:#000; border:none; padding:18px 50px; border-radius:15px; font-weight:bold; cursor:pointer; font-size:16px;">결제 확인 및 복귀</button>
     </div>
 
 <script>
-    // [1] Pi SDK 초기화
+    // [1] Pi SDK 마스터 초기화
     const Pi = window.Pi;
     Pi.init({ version: "1.5", sandbox: true });
 
-    // [2] 다국어 데이터베이스 (30개국 확장 가능 구조)
-    const langDB = {
-        ko: { lpTitle: "전체 유동성 LP 공급", status: "● HK 양자 노드 온라인", media: "PHK 프로젝트 미디어", desc: "HK GROUP의 2035 글로벌 로봇 시장 점유율 85% 달성 생산기지 안내.", pay: "💎 1 TEST-PI 공급 테스트 실행", footer: "Pi 네트워크 생태계 인증 완료 © 2026" },
-        en: { lpTitle: "TOTAL LIQUIDITY PROVISION", status: "● HK QUANTUM NODE ONLINE", media: "PHK PROJECT MEDIA", desc: "HK GROUP Global Robot Factory and 85% Market Share Project Promo.", pay: "💎 RUN 1 TEST-PI PROVISION", footer: "Pi Network Ecosystem Verified © 2026" },
-        zh: { lpTitle: "总流动性供应", status: "● HK 量子节点在线", media: "PHK 项目媒体", desc: "HK 集团 2035 年全球机器人市场份额 85% 生产基地指南。", pay: "💎 运行 1 TEST-PI 供应测试", footer: "Pi 网络生态系统已验证 © 2026" },
-        ja: { lpTitle: "全流動性LP供給", status: "● HK 量子ノードオンライン", media: "PHK プロジェクトメディア", desc: "HK GROUPの2035年世界ロボット市場シェア85％達成生産拠点の案内。", pay: "💎 1 TEST-PI 供給テスト実行", footer: "Pi ネットワークエコシステム認証済み © 2026" },
-        vi: { lpTitle: "CUNG CẤP TỔNG THANH KHOẢN", status: "● NÚT LƯỢNG TỬ HK TRỰC TUYẾN", media: "PHN MEDIA DỰ ÁN", desc: "Hướng dẫn cơ sở sản xuất đạt 85% thị phần robot toàn cầu của HK GROUP.", pay: "💎 CHẠY THỬ NGHIỆM 1 TEST-PI", footer: "Hệ sinh thái Pi Network đã xác minh © 2026" }
+    // [2] 다국어 인텔리전스 데이터베이스 (30개국 확장용)
+    const dictionary = {
+        ko: { lp: "전체 유동성 LP 공급", node: "HK 글로벌 양자 노드 온라인", media: "PHK 전략 미디어", desc: "PHK GROUP 2035 글로벌 로봇 점유율 85% 달성 및 생산 기지 가동 안내.", pay: "💎 1 TEST-PI 공급 테스트 실행", footer: "Pi 네트워크 재단 생태계 인증 완료 © 2026", modalInit: "지갑 연결 중", modalWait: "지갑 승인을 완료해주세요." },
+        en: { lp: "TOTAL LIQUIDITY PROVISION", node: "HK GLOBAL QUANTUM NODE ONLINE", media: "PHK STRATEGIC MEDIA", desc: "PHK GROUP's Roadmap for 85% Global Robot Market Share by 2035.", pay: "💎 RUN 1 TEST-PI PROVISION", footer: "Verified by Pi Network Foundation Ecosystem © 2026", modalInit: "Connecting Wallet", modalWait: "Please confirm payment in your Pi Wallet." },
+        zh: { lp: "总流动性供应", node: "HK 全球量子节点在线", media: "PHK 战略媒体", desc: "PHK 集团到 2035 年全球机器人市场份额达到 85% 的路线图。", pay: "💎 运行 1 TEST-PI 供应测试", footer: "通过 Pi 网络基金会生态系统验证 © 2026", modalInit: "连接钱包", modalWait: "请在您的 Pi 钱包中确认付款。" },
+        ja: { lp: "全流動性LP供給", node: "HK グローバル量子ノードオンライン", media: "PHK 戦略メディア", desc: "2035年までに世界のロボット市場シェア85%を達成するためのPHKグループのロードマップ。", pay: "💎 1 TEST-PI 供給テスト実行", footer: "Pi Network Foundation 生態系認証済み © 2026", modalInit: "ウォレット接続中", modalWait: "Piウォレットで決済を承認してください。" }
     };
 
-    function translateUI(lang) {
-        const d = langDB[lang] || langDB.en;
-        document.getElementById('ui-lp-title').innerText = d.lpTitle;
-        document.getElementById('ui-status').innerText = d.status;
-        document.getElementById('ui-media-label').innerText = d.media;
-        document.getElementById('ui-video-desc').innerText = d.desc;
-        document.getElementById('ui-pay-btn').innerText = d.pay;
-        document.getElementById('ui-footer').innerText = d.footer;
+    function applyTranslation(lang) {
+        const d = dictionary[lang] || dictionary.en;
+        document.getElementById('lang-lp-title').innerText = d.lp;
+        document.getElementById('lang-node-status').innerText = d.node;
+        document.getElementById('lang-media-label').innerText = d.media;
+        document.getElementById('lang-video-desc').innerText = d.desc;
+        document.getElementById('lang-pay-btn').innerText = d.pay;
+        document.getElementById('lang-footer').innerText = d.footer;
     }
 
-    // [3] 인트로 및 인증 로직
+    // [3] 인트로 시퀀스 및 지갑 인증
     window.onload = () => {
-        const msgs = ["Securing Tunnel...", "Quantum Encryption...", "Syncing Nodes...", "Authorized Ready."];
-        let idx = 0;
-        const msgInt = setInterval(() => {
-            document.getElementById('loading-msg').innerText = msgs[idx % msgs.length];
-            idx++;
-        }, 600);
+        let count = 0;
+        const statusLogs = ["Verifying Nodes...", "Loading Quantum Shield...", "Securing Ledger...", "Authorized Access."];
+        const logInt = setInterval(() => {
+            document.getElementById('loading-text').innerText = statusLogs[count % statusLogs.length];
+            count++;
+        }, 700);
 
         setTimeout(() => {
-            clearInterval(msgInt);
-            document.getElementById('intro-overlay').style.opacity = '0';
+            clearInterval(logInt);
+            document.getElementById('intro-overlay').style.transform = 'translateY(-100%)';
             setTimeout(() => {
                 document.getElementById('intro-overlay').style.display = 'none';
-                document.getElementById('app-body').style.display = 'block';
-                authenticateUser();
+                document.getElementById('main-content').style.display = 'block';
+                startAuth();
             }, 1000);
-        }, 3000);
+        }, 3500);
     };
 
-    async function authenticateUser() {
+    async function startAuth() {
         try {
             const auth = await Pi.authenticate(['username', 'payments'], (p) => {});
-            document.getElementById('auth-tag').innerText = auth.user.username + " Connected";
-        } catch (e) { document.getElementById('auth-tag').innerText = "Guest Mode"; }
+            document.getElementById('user-status-tag').innerText = "ID: " + auth.user.username;
+        } catch (e) { document.getElementById('user-status-tag').innerText = "Guest Mode Active"; }
     }
 
-    // [4] 실전 결제 시스템
-    async function executePiPayment() {
+    // [4] 실제 TEST-PI 결제 엔진 (핵심)
+    async function triggerPiPayment() {
         const modal = document.getElementById('system-modal');
         modal.style.display = 'flex';
-        updateModal("지갑 연결 중", "Pi Wallet에서 승인을 기다리고 있습니다...");
+        
+        // 현재 선택된 언어에 맞춰 모달 텍스트 변경
+        const currentLang = document.getElementById('language-switcher').value;
+        const d = dictionary[currentLang] || dictionary.en;
+        updateModal(d.modalInit, d.modalWait);
 
         try {
             await Pi.createPayment({
                 amount: 1.0,
-                memo: "HK World Bank Global LP Provision Test",
+                memo: "HK World Bank Global Liquidity Test",
                 metadata: { type: "lp_provision" },
             }, {
-                onReadyForServerApproval: (id) => updateModal("네트워크 승인 중", "블록체인 장부에 기록 중입니다..."),
-                onReadyForServerCompletion: (id, txid) => showSuccessResult(),
+                onReadyForServerApproval: (id) => updateModal("Blockchain Sync", "Registering transaction on the ledger..."),
+                onReadyForServerCompletion: (id, txid) => finalizeSuccess(),
                 onCancel: (id) => { modal.style.display = 'none'; },
-                onError: (err) => { modal.style.display = 'none'; alert("Error: " + err.message); }
+                onError: (err) => { modal.style.display = 'none'; alert("System Error: " + err.message); }
             });
         } catch (e) { modal.style.display = 'none'; }
     }
 
-    function updateModal(title, desc) {
-        document.getElementById('modal-title').innerText = title;
-        document.getElementById('modal-desc').innerText = desc;
+    function updateModal(head, body) {
+        document.getElementById('modal-header').innerText = head;
+        document.getElementById('modal-body-text').innerText = body;
     }
 
-    function showSuccessResult() {
-        document.getElementById('modal-spinner').style.display = 'none';
-        document.getElementById('success-box').style.display = 'block';
-        document.getElementById('modal-title').innerText = "PROVISION SUCCESS";
-        document.getElementById('modal-title').style.color = "var(--success)";
-        document.getElementById('modal-desc').innerText = "유동성 공급이 성공적으로 블록체인에 기록되었습니다.";
-        document.getElementById('modal-close').style.display = 'block';
+    function finalizeSuccess() {
+        document.getElementById('modal-loader').style.display = 'none';
+        document.getElementById('modal-result-icon').style.display = 'block';
+        document.getElementById('modal-header').innerText = "PROVISION SUCCESS";
+        document.getElementById('modal-header').style.color = "var(--success)";
+        document.getElementById('modal-body-text').innerText = "1 Test-Pi가 성공적으로 HK 글로벌 금고에 입고되었습니다.";
+        document.getElementById('modal-close-btn').style.display = 'block';
     }
 </script>
 
