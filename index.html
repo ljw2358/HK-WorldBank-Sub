@@ -246,6 +246,43 @@
         setTimeout(applyTranslation, 50); 
         window.onload = applyTranslation;
     }
+</script> 글로벌 언어... <script> // 1. 파이 네트워크 초기화
+    // 1. 파이 네트워크 초기화 (테스트 파이 설정 완료)
+    const Pi = window.Pi;
+    Pi.init({ version: "2.0", sandbox: true }); // <--- 여기가 바로 샌드박스입니다!
+
+    // 2. 버튼 클릭 시 작동할 결제 함수
+    async function initHKBank() {
+        const buttons = document.querySelectorAll('.btn-act, .menu-item');
+        
+        buttons.forEach(btn => {
+            btn.onclick = async () => {
+                // 버튼 이름을 가져옵니다 (PI 수량, 송금 등)
+                const btnName = btn.innerText || (btn.querySelector('span') ? btn.querySelector('span').innerText : "기능");
+                
+                try {
+                    // 테스트 결제창 띄우기
+                    const payment = await Pi.createPayment({
+                        amount: 0.1, 
+                        memo: "HK WORLD BANK 테스트: " + btnName,
+                        metadata: { internal_id: "HK-" + Date.now() }
+                    }, {
+                        onReadyForServerApproval: (paymentId) => { console.log("승인 대기"); },
+                        onReadyForServerCompletion: (paymentId, txid) => { alert(btnName + " 테스트 완료!"); },
+                        onCancel: (paymentId) => { console.log("취소됨"); },
+                        onError: (error, payment) => { console.error("에러", error); }
+                    });
+                } catch (err) {
+                    alert("파이 브라우저에서 실행해 주세요!");
+                }
+            };
+        });
+    }
+
+    // 3. 페이지 로드 시 엔진 가동
+    window.onload = () => {
+        initHKBank();
+    };
 </script>
 </body>
 </html>
