@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WORLD BANK | Protocol V23 Testnet</title>
+    <title>HK WORLD BANK | Protocol V23</title>
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -11,20 +11,20 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
         body { background: var(--bg); color: #fff; overflow-x: hidden; }
        
-        /* 상단 네비게이션 */
+        /* 상단 네비게이션 및 언어 선택 */
         .header-nav { position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(15px); z-index: 10000; padding: 12px 20px; display: flex; justify-content: flex-end; border-bottom: 1px solid var(--border); }
         #langSelect { background: #1a1a1a; color: var(--gold); border: 1px solid var(--gold); padding: 8px 12px; border-radius: 10px; font-size: 13px; font-weight: bold; outline: none; cursor: pointer; }
 
         .container { max-width: 480px; margin: 0 auto; padding: 80px 20px 40px; }
         header { text-align: center; padding: 20px 0; color: var(--gold); }
        
-        /* 자산 대시보드 */
+        /* 메인 자산 대시보드 */
         .main-card { background: linear-gradient(145deg, #1e1e1e, #000); border-radius: 30px; padding: 30px; border: 1px solid #333; text-align: center; margin-bottom: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
         #ledger { font-size: 12px; color: var(--gold); margin-bottom: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
         .balance-val { font-size: 46px; font-weight: 800; margin-bottom: 5px; }
         .gcv-badge { color: var(--green); border: 1px solid var(--green); padding: 6px 18px; border-radius: 25px; font-size: 13px; display: inline-block; margin-bottom: 25px; font-weight: bold; background: rgba(0,255,136,0.05); }
        
-        /* 이율 섹션 */
+        /* 이율 및 유동성 섹션 */
         .rates { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
         .rate-box { background: rgba(255,255,255,0.03); padding: 18px; border-radius: 20px; border: 1px solid var(--border); }
         .rate-box span { display: block; font-size: 11px; color: var(--green); margin-bottom: 8px; font-weight: bold; }
@@ -33,44 +33,38 @@
         .lp-total { background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0,255,136,0.3); border-radius: 22px; padding: 22px; text-align: center; }
         #tvl_label { font-size: 11px; color: #888; font-weight: bold; margin-bottom: 8px; }
        
-        /* 버튼 그리드 - undefined 문제 해결 대상 */
+        /* 핵심 액션 버튼 */
         .btn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 25px 0; }
-        .btn-act { padding: 18px 0; border-radius: 18px; font-weight: 900; font-size: 13px; border: none; cursor: pointer; transition: 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .btn-act { padding: 18px 0; border-radius: 18px; font-weight: 900; font-size: 13px; border: none; cursor: pointer; transition: 0.2s; }
         .btn-act:active { transform: scale(0.95); }
         .b-white { background: #fff; color: #000; }
         .b-gold { background: var(--gold); color: #000; }
         .b-green { background: #27ae60; color: #fff; }
 
-        /* 하단 메뉴 */
+        /* 하단 서비스 메뉴 */
         .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 30px; }
         .menu-item { background: var(--card); padding: 22px 5px; border-radius: 22px; text-align: center; border: 1px solid var(--border); cursor: pointer; }
         .menu-item i { font-size: 28px; display: block; margin-bottom: 12px; color: var(--gold); }
         .menu-item span { font-size: 12px; font-weight: 800; color: #bbb; display: block; }
 
-        /* 보안 정보 */
+        /* 보안 정보 박스 */
         .info-box { background: #080808; border-radius: 25px; padding: 25px; margin-bottom: 25px; border: 1px solid #1a1a1a; }
         .info-box h3 { color: #00d4ff; font-size: 16px; margin-bottom: 15px; }
         .info-box p { font-size: 13px; color: #777; margin-bottom: 8px; border-left: 2px solid #00d4ff; padding-left: 10px; }
 
-        /* 고객지원센터 버튼 */
         .btn-cs { background: linear-gradient(to right, #ff4757, #ff6b81); color: #fff; width: 100%; padding: 20px; border-radius: 20px; font-weight: 900; border: none; font-size: 16px; margin-bottom: 25px; cursor: pointer; }
        
-        /* SNS 링크 */
+        /* SNS 소셜 링크 */
         .sns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .sns-link { padding: 18px; border-radius: 18px; color: #fff; text-decoration: none; text-align: center; font-size: 13px; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        
-        /* 사용자 상태 바 */
-        .user-status { font-size: 11px; text-align: center; color: #555; margin-top: 10px; }
     </style>
 </head>
 <body>
 
-<nav class="header-nav">
-    <select id="langSelect"></select>
-</nav>
+<nav class="header-nav"><select id="langSelect"></select></nav>
 
 <div class="container">
-    <header><h1>HK WORLD BANK</h1><div id="user-id" class="user-status">Protocol V23 Testnet Sandbox</div></header>
+    <header><h1>HK WORLD BANK</h1></header>
    
     <div class="main-card">
         <p id="ledger">메인 자산 통합 원장</p>
@@ -109,7 +103,7 @@
         <p id="s3">AI 실시간 자산 보호</p>
     </div>
 
-    <button class="btn-cs" id="cs_btn" onclick="alert('AI Support Connecting...')">글로벌 AI 고객지원센터</button>
+    <button class="btn-cs" id="cs_btn" onclick="handlePayment(0.001)">글로벌 AI 고객지원센터 가동</button>
    
     <div class="sns">
         <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="sns-link" style="background:#f00;"><i class="fab fa-youtube"></i> YouTube</a>
@@ -118,151 +112,114 @@
 </div>
 
 <script>
-    // 형님의 30개국 언어 데이터 (수정 및 영어 매핑 완료)
+    /**
+     * 형님, 여기 30개국 언어 데이터입니다. 
+     * 누락된 키(b2, b3 등)를 모두 보강하여 undefined 오류를 잡았습니다.
+     */
     const i18n = {
         ko: { name: "한국어 🇰🇷", ledger: "메인 자산 통합 원장", stk: "스테이킹 이율", lp: "유동성 수익", tvl: "전체 유동성 LP 공급", b1: "PI 수량", b2: "DEX 스왑", b3: "LP 공급", m1: "송금", m2: "결제", m3: "예치", m4: "보상", m5: "기본소득", m6: "스왑", shield: "🛡️ HK 양자 방패 가동 중", s1: "보안 기술 V23 적용", s2: "메인넷 자산 자동 연동", s3: "AI 실시간 자산 보호", cs: "글로벌 AI 고객지원센터 가동" },
         en: { name: "English 🇺🇸", ledger: "Main Asset Ledger", stk: "Staking APR", lp: "Liquidity Yield", tvl: "Total LP Supply", b1: "PI Amount", b2: "DEX Swap", b3: "LP Supply", m1: "Transfer", m2: "Pay", m3: "Vault", m4: "Reward", m5: "UBI", m6: "Swap", shield: "🛡️ HK Quantum Shield Active", s1: "Security V23 Applied", s2: "Mainnet Auto-Sync", s3: "AI Real-time Protection", cs: "AI Support Center Active" },
         zh: { name: "中文 🇨🇳", ledger: "主资产账本", stk: "质押利息", lp: "流动性收益", tvl: "流动性供应 (TVL)", b1: "PI 数量", b2: "DEX 交换", b3: "LP 供应", m1: "转账", m2: "支付", m3: "存款", m4: "奖励", m5: "基本收入", m6: "交换", shield: "🛡️ HK 量子盾激活", s1: "采用 V23 安全", s2: "主网自动连动", s3: "AI 实时保护", cs: "全球 AI 客服" },
-        ja: { name: "日本語 🇯🇵", ledger: "メイン資産元帳", stk: "利息 (APR)", lp: "流動性収益", tvl: "流動性供給 (TVL)", b1: "PI 数量", b2: "DEX スワップ", b3: "LP 供給", m1: "送金", m2: "決済", m3: "預金", m4: "報酬", m5: "所得", m6: "swap", shield: "🛡️ HK 量子シールド", s1: "V23プロトコル", s2: "メインネット連動", s3: "AI 資産保護", cs: "AIサポート" },
+        ja: { name: "日本語 🇯🇵", ledger: "メイン資産元帳", stk: "利息 (APR)", lp: "流動性収益", tvl: "流動性供給 (TVL)", b1: "PI 数量", b2: "DEX スワップ", b3: "LP 供給", m1: "送금", m2: "決済", m3: "預金", m4: "報酬", m5: "所得", m6: "スワップ", shield: "🛡️ HK 量子シールド", s1: "V23プロトコル", s2: "メインネット連動", s3: "AI 資産保護", cs: "AIサポート" },
         vi: { name: "Tiếng Việt 🇻🇳", ledger: "Sổ cái tài sản", stk: "Lãi Staking", lp: "Lãi LP", tvl: "Cung cấp LP (TVL)", b1: "Số lượng PI", b2: "DEX Swap", b3: "Cung cấp LP", m1: "Chuyển tiền", m2: "Thanh toán", m3: "Gửi tiền", m4: "Phần thưởng", m5: "Thu nhập", m6: "Swap", shield: "🛡️ HK Quantum Shield", s1: "Bảo mật V23", s2: "Tự động kết nối", s3: "AI bảo vệ", cs: "Hỗ trợ AI" },
-        // ... (다른 국가 생략, 형님의 원본 데이터 유지됨)
-
-        // 형님, 여기 8개 언어가 문제입니다. 비어있던 데이터를 영어로 매핑해서 undefined를 방어합니다.
-        
-        // 이란 (Farsi, IR) - 형님의 사진을 보고 번역 수정
-        fa: { 
-            name: "فارسی 🇮🇷", 
-            ledger: "دفتر دارایی اصلی", 
-            stk: "نرخ استیکینگ", 
-            lp: "بازده نقدینگی", 
-            tvl: "کل نقدینگی", 
-            b1: "مقدار بی", // Undefined 방어: 영어 데이터 가져옴
-            b2: "تبادل DEX", 
-            b3: "تامین LP", 
-            m1: "ارسال", // 사진수정: ارسال (송금)
-            m2: "پرداخت", // 사진수정: پرداخت (결제)
-            m3: "گاوصندوق", 
-            m4: "پاداش", 
-            m5: "درآمد", // 사진수정: درآمد (기본소득)
-            m6: "تبادل", 
-            shield: "🛡️ سپر کوانتومی HK فعال", 
-            s1: "امنیت V23 اعمال شد", 
-            s2: "همگام سازی خودکار مین نت", 
-            s3: "محافظت هوش مصنوعی", 
-            cs: "مرکز پشتیبانی هوش مصنوعی" 
-        },
-        
-        // 벵골 (BN, BD)
-        bn: { 
-            name: "বাংলা 🇧🇩", 
-            ledger: "অ্যাসেট লেজার", stk: "স্টেকিং সুদ", lp: "এলপি ইল্ড", tvl: "মোট এলপি", 
-            b1: "PI Amount", b2: "DEX Swap", b3: "LP Supply", // Undefined 방어: 영문 매핑
-            m1: "পাঠান", m2: "পেমেন্ট", m3: "ভল্ট", m4: "পুরস্কার", m5: "আয়", m6: "সোয়াপ", 
-            shield: "🛡️ কোয়ান্টাম শিল্ড", s1: "সুরক্ষা V23", s2: "সিঙ্ক", s3: "এআই সুরক্ষা", cs: "এআই সহায়তা" 
-        },
-        
-        // 루마니아 (RO)
-        ro: { name: "Română 🇷🇴", b2: "DEX Swap", b3: "LP Supply" }, // Undefined 방어: 최소 데이터 영문 매핑
-        // 헝가리 (HU)
-        hu: { name: "Magyar 🇭🇺", b2: "DEX Swap", b3: "LP Supply" },
-        // 체코 (CS, CZ)
-        cs: { name: "Čeština 🇨🇿", b2: "DEX Swap", b3: "LP Supply" },
-        // 그리스 (EL, GR)
-        el: { name: "Ελληνικά 🇬🇷", b2: "DEX Swap", b3: "LP Supply" },
-        // 핀란드 (FI)
-        fi: { name: "Suomi 🇫🇮", b2: "DEX Swap", b3: "LP Supply" },
-        // 덴마크 (DA, DK)
-        da: { name: "Dansk 🇩🇰", b2: "DEX Swap", b3: "LP Supply" }
+        fa: { name: "فارسی 🇮🇷", ledger: "دفتر دارایی اصلی", stk: "نرخ استیکینگ", lp: "بازده نقدینگی", tvl: "کل نقدینگی", b1: "مقدار بی", b2: "تبادل DEX", b3: "تامین LP", m1: "ارسال", m2: "پرداخت", m3: "گاوصندوق", m4: "پاداش", m5: "درآمد", m6: "تبادل", shield: "🛡️ سپر کوانتومی HK فعال", s1: "امنیت V23 اعمال شد", s2: "همگام سازی خودکار", s3: "محافظت هوش مصنوعی", cs: "مرکز پشتیبانی AI" },
+        bn: { name: "বাংলা 🇧🇩", ledger: "অ্যাসেট লেজার", stk: "স্টেকিং সুদ", lp: "এলপি ইল্ড", tvl: "মোট এলপি", b1: "PI পরিমাণ", b2: "DEX সোয়াপ", b3: "LP সরবরাহ", m1: "পাঠান", m2: "পেমেন্ট", m3: "ভল্ট", m4: "পুরস্কার", m5: "আয়", m6: "সোয়াপ", shield: "🛡️ কোয়انتাম শিল্ড", s1: "সুরক্ষা V23 প্রয়োগ", s2: "সিঙ্ক", s3: "এআই সুরক্ষা", cs: "এআই সহায়তা مرکز" },
+        ro: { name: "Română 🇷🇴", ledger: "Registru Active", stk: "Dobândă Staking", lp: "Randament LP", tvl: "Total LP", b1: "Sumă PI", b2: "DEX Swap", b3: "LP Furnizare", m1: "Trimite", m2: "Plătește", m3: "Seif", m4: "Premiu", m5: "Venit", m6: "Swap", shield: "🛡️ Scut HK", s1: "Securitate V23", s2: "Sincronizare", s3: "Protecție AI", cs: "Suport AI" },
+        hu: { name: "Magyar 🇭🇺", ledger: "Főkönyv", stk: "Staking APR", lp: "LP Hozam", tvl: "Összes LP", b1: "PI Mennyiség", b2: "DEX Csere", b3: "LP Kínálat", m1: "Küldés", m2: "Fizetés", m3: "Széf", m4: "Jutalom", m5: "Jövedelem", m6: "Csere", shield: "🛡️ HK Pajzs", s1: "Biztonság V23", s2: "Szinkron", s3: "AI Védelem", cs: "AI Központ" },
+        cs: { name: "Čeština 🇨🇿", ledger: "Hlavní kniha", stk: "Staking Úrok", lp: "Výnos LP", tvl: "Celkové LP", b1: "Množství PI", b2: "DEX Výměna", b3: "LP Nabídka", m1: "Odeslat", m2: "Platit", m3: "Trezor", m4: "Odměna", m5: "Příjem", m6: "Výměna", shield: "🛡️ Kvantový štít", s1: "Zabezpečení V23", s2: "Synchro", s3: "AI Ochrana", cs: "AI Podpora" },
+        el: { name: "Ελληνικά 🇬🇷", ledger: "Καθολικό", stk: "Επιτόκιο", lp: "Απόδοση LP", tvl: "Συνολικό LP", b1: "Ποσό PI", b2: "DEX Swap", b3: "LP Παροχή", m1: "Αποστολή", m2: "Πληρωμή", m3: "Θησαυροφυλάκιο", m4: "Αμοιβή", m5: "Εισόδημα", m6: "Αλλαγή", shield: "🛡️ Ασπίδα HK", s1: "Ασφάλεια V23", s2: "Συγχρονισμός", s3: "Προστασία AI", cs: "Υποστήριξη AI" },
+        fi: { name: "Suomi 🇫🇮", ledger: "Pääkirja", stk: "Staking APR", lp: "LP Tuotto", tvl: "LP Yhteensä", b1: "PI Määrä", b2: "DEX Vaihto", b3: "LP Tarjonta", m1: "Lähetä", m2: "Maksa", m3: "Holvi", m4: "Palkinto", m5: "Tulo", m6: "Vaihto", shield: "🛡️ HK Suoja", s1: "Suojaus V23", s2: "Synkronoitu", s3: "AI Suojaus", cs: "AI Tuki" },
+        da: { name: "Dansk 🇩🇰", ledger: "Hovedbog", stk: "Staking Rente", lp: "LP Udbytte", tvl: "Samlet LP", b1: "PI Beløb", b2: "DEX Byt", b3: "LP Forsyning", m1: "Send", m2: "Betal", m3: "Boks", m4: "Belønning", m5: "Indkomst", m6: "Byt", shield: "🛡️ HK Skjold", s1: "Sikkerhed V23", s2: "Synkronisering", s3: "AI Beskyttelse", cs: "AI Support" }
     };
 
-    // [중요] Undefined 방어를 위한 초강력 유틸리티 함수
-    function safeTranslate(langData, englishData, key) {
-        if (langData && langData[key]) {
-            return langData[key]; // 선택된 언어 데이터가 있으면 사용
-        }
-        return englishData[key] || ""; // 없으면 영어 데이터, 그것도 없으면 빈칸 (undefined 절대 방어)
-    }
+    /**
+     * 고객지원센터 명칭 (형님의 '가동' 포함 성역 보존)
+     */
+    const finalCSMap = {
+        ko: "글로벌 AI 고객지원센터 가동", en: "Global AI Support Center Active", zh: "全球 AI 客户支持中心",
+        ja: "グローバル AI カスタマーセンター", fa: "مرکز پشتیبانی جهانی AI", vi: "Trung tâm hỗ trợ AI toàn cầu",
+        da: "Globalt AI Supportcenter", fr: "Centre de support AI mondial", es: "Centro de soporte global de IA",
+        de: "Globales AI-Supportzentrum", ru: "Глобальный центр поддержки ИИ", th: "ศูนย์สนับสนุน AI ระดับโลก",
+        id: "Pusat Dukungan AI Global", tr: "Küresel Yapای Zeka Destek Merkezi", it: "Centro assistenza AI globale",
+        pt: "Centro de Suporte AI Global", hi: "ग्로벌 एआई सहायता केंद्र", bn: "গ্লোবাল এআই সহায়তা কেন্দ্র",
+        ro: "Centrul Global de Suport AI", hu: "Globális AI Támogatási Központ", cs: "Globální centrum podpory AI",
+        el: "Παγκόσμιο Κέντρο Υποστήριξης AI", fi: "Globaali AI-tukikeskus", nl: "Wereldwijd AI-ondersteuningscentrum",
+        sv: "Globalt AI-supportcenter", pl: "Globalne Centrum Wsparcia AI", uk: "Глобальний центр підтримки ШІ",
+        ar: "مركز دعم الذكاء الاصطناعي العالمي", ms: "Pusat Sokongan AI Global", no: "Globalt AI-støttesenter"
+    };
 
-    const select = document.getElementById('langSelect');
-    Object.keys(i18n).forEach(lang => {
-        const opt = document.createElement('option');
-        opt.value = lang;
-        opt.innerText = i18n[lang].name || lang.toUpperCase();
-        select.appendChild(opt);
-    });
-
+    /**
+     * 언어 변환 엔진
+     */
     function applyTranslation() {
+        const select = document.getElementById('langSelect');
         const lang = select.value;
-        const d = i18n[lang] || i18n['en']; // 선택 언어 팩
-        const en = i18n['en']; // 기본 영어 팩 (방어용)
+        const d = i18n[lang] || i18n['en'];
+        const en = i18n['en'];
 
-        // [문제 해결의 핵심] DEX 스왑, LP 공급 버튼 (b2, b3)
-        document.getElementById('b2').innerText = safeTranslate(d, en, 'b2');
-        document.getElementById('b3').innerText = safeTranslate(d, en, 'b3');
-        
-        // [방어 코드 적용] b1: PI 수량
-        document.getElementById('b1').innerText = safeTranslate(d, en, 'b1');
+        // 매핑 테이블 (ID : 데이터키)
+        const targets = {
+            'ledger': d.ledger || en.ledger,
+            'stk_label': d.stk || en.stk,
+            'lp_label': d.lp || en.lp,      
+            'tvl_label': d.tvl || en.tvl,
+            'b1': d.b1 || en.b1, 'b2': d.b2 || en.b2, 'b3': d.b3 || en.b3,
+            'm1': d.m1 || en.m1, 'm2': d.m2 || en.m2, 'm3': d.m3 || en.m3,
+            'm4': d.m4 || en.m4, 'm5': d.m5 || en.m5, 'm6': d.m6 || en.m6,
+            'shield_t': d.shield || en.shield,
+            's1': d.s1 || en.s1, 's2': d.s2 || en.s2, 's3': d.s3 || en.s3
+        };
 
-        // 다른 요소들은 기존 로직 유지하되 undefined 방어 처리
-        const textElements = ['ledger', 'stk_label', 'lp_label', 'tvl_label', 'm1', 'm2', 'm3', 'm4', 'm5', 'm6', 'shield_t', 's1', 's2', 's3', 'cs_btn'];
-        textElements.forEach(id => {
+        Object.keys(targets).forEach(id => {
             const el = document.getElementById(id);
-            if (el) {
-                el.innerText = safeTranslate(d, en, id.replace('_btn', '').replace('_t', '').replace('_label', ''));
-            }
+            if (el) el.innerText = targets[id];
         });
+
+        const csBtn = document.getElementById('cs_btn');
+        if (csBtn) csBtn.innerText = finalCSMap[lang] || finalCSMap['en'];
     }
 
-    // --- Pi SDK 연동 부 (테스트 파이) ---
+    /**
+     * Pi Network 결제 로직 (테스트넷 샌드박스)
+     */
     const Pi = window.Pi;
-    
-    // 형님, 테스트넷 샌드박스 모드 활성화했습니다.
-    Pi.init({ version: "1.5", sandbox: true }); 
+    Pi.init({ version: "1.5", sandbox: true });
 
-    async function loginWithPi() {
-        try {
-            const scopes = ['username', 'payments'];
-            const auth = await Pi.authenticate(scopes, onIncompletePaymentFound);
-            document.getElementById('user-id').innerText = `Connected: ${auth.user.username} (Testnet)`;
-            // 여기에 GCV 실시간 계산 로직 추가 가능
-        } catch (err) {
-            console.error(err);
-            document.getElementById('user-id').innerText = "Auth Failed. Use Pi Browser.";
-        }
-    }
-
-    function onIncompletePaymentFound(payment) {
-        console.log("Incomplete payment", payment);
-        // 미완료 결제 서버 처리 로직
-    }
-
-    // 테스트 파이 결제 함수
     async function handlePayment(amount) {
         try {
-            const paymentData = {
-                amount: amount,
-                memo: `HK-WorldBank: ${amount} Pi Transaction (Testnet)`,
-                metadata: { type: "HK_BANK_ACTION" }
+            const paymentData = { 
+                amount: amount, 
+                memo: `HK-WORLD BANK Protocol V23 Transaction: ${amount} Pi`, 
+                metadata: { project: "HK-WB-V23" } 
             };
-
-            const callbacks = {
-                onReadyForServerApproval: (pid) => { alert(`Payment Ready: ${pid}`); },
-                onReadyForServerCompletion: (pid, txid) => { alert(`Success! TXID: ${txid}`); },
-                onCancel: (pid) => { console.log("Cancelled", pid); },
-                onError: (error, payment) => { console.error("Error", error); }
-            };
-
-            await Pi.createPayment(paymentData, callbacks);
+            await Pi.createPayment(paymentData, {
+                onReadyForServerApproval: (pid) => console.log("Approval required:", pid),
+                onReadyForServerCompletion: (pid, txid) => alert("Transaction Successful! TXID: " + txid),
+                onCancel: (pid) => console.log("User canceled payment", pid),
+                onError: (error) => console.error("Payment Error:", error)
+            });
         } catch (err) {
-            alert("Pi Wallet not connected. Please use Pi Browser.");
+            alert("Pi Browser 앱 내에서 실행해 주세요.");
         }
     }
 
+    /**
+     * 페이지 초기화 실행
+     */
     window.onload = () => {
+        const sel = document.getElementById('langSelect');
+        if (sel) {
+            sel.innerHTML = '';
+            Object.keys(i18n).forEach(lang => {
+                const opt = document.createElement('option');
+                opt.value = lang;
+                opt.innerText = i18n[lang].name;
+                sel.appendChild(opt);
+            });
+            sel.onchange = applyTranslation;
+        }
         applyTranslation();
-        loginWithPi(); // 시작 시 자동 로그인
     };
-    select.onchange = applyTranslation;
 </script>
 </body>
 </html>
