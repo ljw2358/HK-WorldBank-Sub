@@ -7,13 +7,49 @@
     .menu-item i { color: #FFD700; font-size: 30px; } /* 아이콘만 노란색! */
     .btn-act.b-gold { background-color: #FFD700; color: black; } /* 노란 버튼 */
 </style>
+/* 삐니가 만든 HK-WorldBank 황금 디자인 */
+body { background-color: #121212; color: white; padding: 15px; }
+.container { max-width: 480px; margin: 0 auto; }
 
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WORLD BANK | Protocol V23</title>
-    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+/* 하단 메뉴 그리드 (여기가 핵심!) */
+.menu-grid { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); /* 3칸으로 정렬 */
+    gap: 15px; 
+    margin-top: 20px; 
+}
+
+.menu-item { 
+    background-color: #1e1e1e; 
+    border-radius: 15px; 
+    padding: 15px 5px; 
+    text-align: center; 
+    border: 1px solid rgba(255, 215, 0, 0.1); 
+}
+
+/* 아이콘을 노란색으로! */
+.menu-item i { 
+    color: #FFD700 !important; 
+    font-size: 28px !important; 
+    display: block; 
+    margin-bottom: 8px; 
+}
+
+.menu-item span { color: #e0e0e0; font-size: 13px; }
+
+/* 하단 긴 버튼 */
+.btn-cs { 
+    width: 100%; 
+    background-color: #1e1e1e; 
+    color: #FFD700; 
+    border: 2px solid #FFD700; 
+    padding: 15px; 
+    border-radius: 12px; 
+    margin-top: 25px; 
+    font-weight: bold; 
+}
+
+   
     <style>
    .menu-item i { color: #FFD700 !important; font-size: 30px !important; } /* 아이콘 노란색 */
 .menu-item span { color: #e0e0e0 !important; } /* 글자 연하게 */
