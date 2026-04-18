@@ -2,222 +2,375 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WORLD BANK | GLOBAL SUPREME</title>
-    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HK-WorldBank Global Digital Ledger</title>
     <style>
-        :root { 
-            --gold: #f1c40f; --green: #00ff88; --blue: #3498db; --bg: #000; 
-            --card: #111; --border: #222; --pink: #ff4757; --txt: #ffffff;
+        :root {
+            --gold: #D4AF37;
+            --deep-black: #050505;
+            --card-bg: #121212;
+            --neon-green: #00ff41;
+            --neon-blue: #00d4ff;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
-        body { background: var(--bg); color: var(--txt); overflow-x: hidden; }
 
-        /* [1. 상단 내비게이션 & 거대 국기 바] */
-        .top-nav { 
-            position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.98); 
-            backdrop-filter: blur(15px); z-index: 1000; padding: 15px 20px; 
-            border-bottom: 2px solid var(--gold); text-align: center;
+        body {
+            background-color: var(--deep-black);
+            color: #ffffff;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        .logo-main { font-size: 30px; font-weight: 900; color: var(--gold); letter-spacing: -1px; margin-bottom: 12px; }
-        
-        .flag-bar { 
-            width: 100%; overflow-x: auto; display: flex; gap: 15px; padding: 10px 0;
-            scrollbar-width: none;
+
+        /* 헤더 섹션 */
+        .header {
+            width: 100%;
+            padding: 30px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--gold);
+            background: linear-gradient(180deg, #1a1a1a 0%, #050505 100%);
         }
-        .flag-bar::-webkit-scrollbar { display: none; }
-        .flag-btn { 
-            flex: 0 0 auto; font-size: 28px; cursor: pointer; padding: 8px; 
-            border: 2px solid transparent; border-radius: 12px; transition: 0.3s;
-            background: #111;
+
+        .logo {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
         }
-        .flag-btn.active { border-color: var(--gold); background: #222; transform: scale(1.1); }
 
-        /* [2. 메인 컨테이너] */
-        .container { max-width: 500px; margin: 0 auto; padding: 180px 20px 60px; }
-
-        /* [3. 실시간 대시보드] */
-        .main-card { 
-            background: linear-gradient(165deg, #1a1a1a, #000); border-radius: 40px; 
-            padding: 40px 25px; border: 1px solid #333; text-align: center; 
-            margin-bottom: 25px; box-shadow: 0 25px 50px rgba(0,0,0,0.9);
+        .sub-logo {
+            font-size: 12px;
+            color: #888;
+            margin-top: 5px;
         }
-        .ledger-title { font-size: 13px; color: #777; font-weight: 900; letter-spacing: 2px; margin-bottom: 15px; }
-        .bal-val { font-size: 52px; font-weight: 900; letter-spacing: -2px; margin-bottom: 10px; color: #fff; }
-        .gcv-val { color: var(--green); font-size: 17px; font-weight: 800; margin-bottom: 35px; }
 
-        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px; }
-        .stat-item { background: #080808; padding: 22px 10px; border-radius: 25px; border: 1px solid var(--border); }
-        .stat-label { font-size: 11px; font-weight: 900; margin-bottom: 8px; display: block; }
-        .stat-num { font-size: 22px; font-weight: 900; }
-
-        /* [4. ★핵심★ 국가별 맞춤 설명서] */
-        .guide-card { 
-            background: #0d0d0d; border-radius: 30px; padding: 30px; margin-bottom: 25px; 
-            border-top: 5px solid var(--gold); position: relative;
+        /* 실시간 자산 통합 원장 대시보드 */
+        .dashboard {
+            width: 90%;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
         }
-        .guide-h { font-size: 20px; font-weight: 900; color: var(--gold); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .guide-b { font-size: 15px; color: #ccc; line-height: 1.8; word-break: keep-all; }
-        .country-tag { position: absolute; top: -15px; right: 20px; background: var(--gold); color: #000; padding: 5px 15px; border-radius: 20px; font-weight: 900; font-size: 12px; }
 
-        /* [5. 글로벌 AI 고객센터] */
-        .btn-cs { background: linear-gradient(45deg, #ff4757, #ff6b81); color: #fff; width: 100%; padding: 25px; border-radius: 35px; font-weight: 900; font-size: 18px; border: none; cursor: pointer; box-shadow: 0 15px 30px rgba(255,71,87,0.4); }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #222;
+            border-radius: 15px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
 
-        .onion-wrap { position: fixed; bottom: -100%; left: 0; width: 100%; height: 96%; background: #050505; border-top: 6px solid var(--pink); border-radius: 45px 45px 0 0; z-index: 2000; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1); padding: 30px; overflow-y: auto; }
-        .onion-wrap.active { bottom: 0; }
-        
-        .faq-item { background: #111; padding: 22px; border-radius: 25px; margin-bottom: 12px; border: 1px solid #222; }
-        .faq-q { color: var(--gold); font-weight: 900; font-size: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .faq-a { color: #999; font-size: 14px; margin-top: 15px; display: none; line-height: 1.7; border-top: 1px solid #333; padding-top: 15px; }
-        .faq-item.open .faq-a { display: block; }
+        .card:hover { transform: translateY(-5px); border-color: var(--gold); }
 
-        /* [6. 하단 메뉴] */
-        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 30px; }
-        .menu-box { background: var(--card); padding: 25px 5px; border-radius: 25px; text-align: center; border: 1px solid var(--border); }
-        .menu-box i { font-size: 28px; color: var(--gold); margin-bottom: 12px; display: block; }
-        .menu-box span { font-size: 12px; font-weight: 900; color: #777; }
+        .card-label { font-size: 14px; color: #aaa; margin-bottom: 15px; display: flex; align-items: center; }
+        .card-label i { margin-right: 10px; color: var(--gold); }
+
+        .card-value {
+            font-size: 26px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            color: var(--neon-green);
+        }
+
+        .card-trend { font-size: 12px; margin-top: 10px; color: #444; }
+
+        /* 국기 선택기 및 설명서 */
+        .global-section {
+            width: 90%;
+            max-width: 1200px;
+            background: #0f0f0f;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .manual-display {
+            background: #000;
+            border-left: 4px solid var(--gold);
+            padding: 20px;
+            margin-bottom: 25px;
+            min-height: 100px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .flag-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+            gap: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .flag-item {
+            font-size: 35px;
+            cursor: pointer;
+            transition: 0.2s;
+            filter: grayscale(30%);
+            text-align: center;
+        }
+
+        .flag-item:hover { filter: grayscale(0%); transform: scale(1.2); }
+
+        /* 핵심 기능 버튼 */
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            width: 90%;
+            max-width: 600px;
+            margin-bottom: 50px;
+        }
+
+        .action-btn {
+            background: linear-gradient(145deg, #1a1a1a, #000);
+            border: 1px solid #333;
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .action-btn:hover { background: var(--gold); color: black; border-color: var(--gold); }
+
+        /* 타이머 오버레이 */
+        #timer-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .timer-circle {
+            width: 150px; height: 150px;
+            border: 5px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px var(--gold);
+        }
+
+        /* 챗봇 섹션 */
+        #chat-window {
+            display: none;
+            position: fixed;
+            bottom: 20px; right: 20px;
+            width: 350px; height: 500px;
+            background: #1a1a1a;
+            border: 1px solid var(--gold);
+            border-radius: 15px;
+            flex-direction: column;
+            z-index: 2000;
+        }
+
+        .chat-header { background: var(--gold); color: black; padding: 15px; font-weight: bold; border-radius: 14px 14px 0 0; }
+        .chat-body { flex: 1; padding: 15px; overflow-y: auto; font-size: 13px; color: #ddd; }
+        .chat-input { padding: 10px; border-top: 1px solid #333; display: flex; }
+        .chat-input input { flex: 1; background: #000; border: none; color: white; padding: 10px; border-radius: 5px; }
+
     </style>
 </head>
 <body>
 
-<nav class="top-nav">
-    <div class="logo-main">HK WORLD BANK</div>
-    <div class="flag-bar" id="flagContainer"></div>
-</nav>
+    <div class="header">
+        <div class="logo">HK-WorldBank</div>
+        <div class="sub-logo">GLOBAL ASSET INTEGRATION & UBI SYSTEM</div>
+    </div>
 
-<div class="container">
-    <div class="main-card">
-        <p class="ledger-title" id="t_ledger">메인 자산 통합 원장</p>
-        <div class="bal-val" id="v_bal">400.02120000</div>
-        <div class="gcv-val" id="t_gcv">Value: $ 314,159 (GCV Standard)</div>
-       
-        <div class="stat-grid">
-            <div class="stat-item"><span class="stat-label" style="color:var(--gold);" id="t_stk">스테이킹 이율</span><div class="stat-num" id="v_stk">15.482%</div></div>
-            <div class="stat-item"><span class="stat-label" style="color:var(--green);" id="t_lp">유동성 수익</span><div class="stat-num" id="v_lp">23.261%</div></div>
+    <div class="dashboard">
+        <div class="card">
+            <div class="card-label">메인 자산 통합 원장</div>
+            <div id="val-ledger" class="card-value">400.00000000</div>
+            <div class="card-trend" style="color:var(--neon-green)">● LIVE: Connecting to Mainnet...</div>
+        </div>
+        <div class="card">
+            <div class="card-label">실시간 GCV Value (USD)</div>
+            <div id="val-gcv" class="card-value">$314,159.00</div>
+            <div class="card-trend">Fixed Standard for Global Node</div>
+        </div>
+        <div class="card">
+            <div class="card-label">스테이킹 실시간 이율</div>
+            <div id="val-staking" class="card-value" style="color: var(--neon-blue);">24.500%</div>
+            <div class="card-trend">Daily Compound Interest Applied</div>
+        </div>
+        <div class="card">
+            <div class="card-label">유동성 수익 분배율</div>
+            <div id="val-profit" class="card-value" style="color: #ffcc00;">12.80%</div>
+            <div class="card-trend">Real-time LP Rewards Distribution</div>
+        </div>
+        <div class="card" style="grid-column: span 2;">
+            <div class="card-label">전체 유동성 LP 공급 (Total Supply)</div>
+            <div id="val-total-lp" class="card-value">1,240,500,000.00</div>
+            <div class="card-trend">HK-WorldBank Global Liquidity Pool Status</div>
         </div>
     </div>
 
-    <div class="guide-card">
-        <div class="country-tag" id="t_country">KOREA</div>
-        <div class="guide-h"><i class="fas fa-shield-alt"></i> <span id="t_guide_h">운영 지침</span></div>
-        <p class="guide-b" id="t_guide_b">설명서 로딩 중...</p>
+    <div class="global-section">
+        <div id="manual-content" class="manual-display">
+            <strong>Global Manual Center</strong><br>
+            원하시는 국가의 국기를 클릭하시면 해당 지역 노드의 상세 설명서와 운영 정책이 표시됩니다. 
+            (현재 50개국 이상 활성화됨)
+        </div>
+        <div class="flag-grid" id="flag-container">
+            </div>
     </div>
 
-    <div class="menu-grid">
-        <div class="menu-box"><i class="fas fa-paper-plane"></i><span id="m1">송금</span></div>
-        <div class="menu-box"><i class="fas fa-shopping-cart"></i><span id="m2">결제</span></div>
-        <div class="menu-box"><i class="fas fa-vault"></i><span id="m3">예치</span></div>
-        <div class="menu-box"><i class="fas fa-award"></i><span id="m4">보상</span></div>
-        <div class="menu-box"><i class="fas fa-coins"></i><span id="m5">기본소득</span></div>
-        <div class="menu-box"><i class="fas fa-random"></i><span id="m6">스왑</span></div>
+    <div class="action-grid">
+        <button class="action-btn" onclick="triggerAction('송금')">송금(Transfer)</button>
+        <button class="action-btn" onclick="triggerAction('결제')">결제(Pay)</button>
+        <button class="action-btn" onclick="triggerAction('예치')">예치(Deposit)</button>
+        <button class="action-btn" onclick="triggerAction('DEX 스왑')">수량 DEX</button>
+        <button class="action-btn" onclick="triggerAction('1000원 결제')">1,000원 테스트</button>
+        <button class="action-btn" onclick="toggleChat()">고객센터</button>
     </div>
 
-    <button class="btn-cs" id="t_cs_btn" onclick="toggleOnion(true)">글로벌 AI 고객지원센터 가동</button>
-</div>
-
-<div id="onionBox" class="onion-wrap">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:35px;">
-        <h2 style="color:var(--pink); font-weight:900;" id="t_cs_h">AI SUPPORT CENTER</h2>
-        <button onclick="toggleOnion(false)" style="background:none; border:none; color:#fff; font-size:40px;">&times;</button>
+    <div id="timer-overlay">
+        <div class="timer-circle" id="timer-num">20</div>
+        <div style="font-size: 18px; color: var(--gold);">Global Transaction Processing...</div>
+        <div style="font-size: 12px; color: #666; margin-top: 10px;">보안 노드 검증 중입니다. 잠시만 기다려주세요.</div>
     </div>
-    <div id="faqContainer"></div>
-</div>
 
-<script>
-    const fullDB = {
-        ko: { 
-            name: "KOREA", ledger: "메인 자산 통합 원장", stk: "스테이킹 이율", lp: "유동성 수익", m1:"송금", m2:"결제", m3:"예치", m4:"보상", m5:"기본소득", m6:"스왑", cs_btn: "AI 고객지원센터 가동", cs_h: "AI 지원 센터", guide_h: "대한민국 운영 지침", 
-            guide_b: "본 시스템은 한국의 IT 인프라와 HK Protocol V23 보안 기술을 결합하여 최적화되었습니다. 모든 자산은 1초 단위로 실시간 결산되며, GCV 표준 가치에 따라 국내외 송금 및 결제가 무제한 지원됩니다. 울산/경주 허브를 통해 물리적 보안이 강화되었습니다.",
-            faqs: [
-                ["GCV 가치는 한국에서 유효한가요?", "네, HK Group의 전 생태계에서 1Pi당 $314,159 가치로 고정되어 거래를 지원합니다."],
-                ["보상 출금은 언제 가능한가요?", "매 초 단위로 지갑에 보상이 합산되며, 즉시 외부 송금이 가능합니다."],
-                ["기본소득 신청 자격은?", "HK-WorldBank 가입자라면 누구나 수익의 30%를 배분받을 자격이 생깁니다."],
-                ["보안 V23은 안전한가요?", "양자 컴퓨터의 공격까지 방어하는 최첨단 암호화 체계가 적용되었습니다."],
-                ["고객센터 운영 시간은?", "AI가 24시간 실시간 응대하며 혜공 형님의 지휘 아래 운영됩니다."],
-                ["DEX 스왑 수수료?", "내부망 이용 시 0.01% 미만의 최소 수수료가 적용됩니다."],
-                ["노드 설치 가이드?", "설정에서 'Korea Node'를 선택하시면 국내 전용 망에 연결됩니다."],
-                ["비밀번호 분실 시?", "보안 구문(Seed Phrase)을 통해서만 복구가 가능하니 각별히 유의하세요."],
-                ["글로벌 파트너사 정보?", "현재 삼성, SK 등 국내 대기업과의 컨소시엄을 추진 중에 있습니다."],
-                ["가스비 정책은?", "네트워크 혼잡도에 따라 자동 조정되며 파이 코인으로 결제됩니다."],
-                ["계정 정지 기준?", "부정 거래 및 해킹 시도 적발 시 V23 시스템이 즉시 차단합니다."],
-                ["이율 변동 주기는?", "실시간 시장 유동성에 따라 1초마다 소수점 단위로 변동됩니다."],
-                ["API 연동 방법?", "개발자 포털을 통해 발급받은 키로 인프라 구축이 가능합니다."],
-                ["KYB 인증 절차?", "기업 회원의 경우 정식 사업자 등록증 확인 후 승인됩니다."],
-                ["오프라인 매장 결제?", "전국 HK 가맹점에서 QR 코드로 즉시 결제가 가능합니다."]
-            ]
-        },
-        en: { 
-            name: "GLOBAL (US)", ledger: "MAIN ASSET LEDGER", stk: "STAKING APR", lp: "LIQUIDITY YIELD", m1:"TRANSFER", m2:"PAYMENT", m3:"VAULT", m4:"REWARD", m5:"UBI", m6:"SWAP", cs_btn: "LAUNCH AI CENTER", cs_h: "AI SUPPORT", guide_h: "GLOBAL OPERATING GUIDE",
-            guide_b: "HK Protocol V23 provides high-end banking services globally. Our systems are optimized for international financial regulations and integrated with 256-bit quantum encryption. We ensure 1-second settlement for all cross-border transactions under the GCV standard.",
-            faqs: [
-                ["What is the GCV value?", "It is the standard valuation of $314,159 per Pi within our ecosystem."],
-                ["Withdrawal timing?", "Rewards are calculated every second and are withdrawable instantly."],
-                ["Security Features?", "V23 Shield provides total protection against external cyber threats."],
-                ["UBI Eligibility?", "30% of global net profit is distributed to active users."],
-                ["AI Support availability?", "24/7 real-time AI assistance for global users."],
-                ["Swap Fees?", "Internal DEX swaps incur a minimum fee of 0.01%."],
-                ["Node Connectivity?", "Available via global high-speed relay servers."],
-                ["Loss of Password?", "Recovery is only available via your Private Seed Phrase."],
-                ["Consortium Info?", "Collaborating with global deep-tech and robotics giants."],
-                ["Gas Fee calculation?", "Dynamic gas fee management integrated with Pi Mainnet."],
-                ["Account Security?", "Biometric and multi-layer authentication are supported."],
-                ["Yield variation?", "Fluctuates in real-time based on global liquidity."],
-                ["Dev API Access?", "Full documentation is available on the HK Developer Portal."],
-                ["KYC Requirements?", "Global regulatory compliance (KYC/KYB) is mandatory."],
-                ["Retail Acceptance?", "Global merchants accept HK Pay via QR and NFC."]
-            ]
-        },
-        zh: { 
-            name: "CHINA", ledger: "主资产账本", stk: "质押利率", lp: "流动性收益", m1:"转账", m2:"支付", m3:"存款", m4:"奖励", m5:"基本收入", m6:"交换", cs_btn: "启动 AI 中心", cs_h: "AI 支持中心", guide_h: "中国区运行指南",
-            guide_b: "HK Protocol V23 为中国用户量身定制。该系统符合全球最高安全标准，所有资产均受量子加密保护。通过 GCV 价值标准，实现秒级跨境结算，并提供全面的本地化支持。",
-            faqs: [["什么是 GCV？", "每 1 Pi 价值 314,159 美元的生态标准。"]]
+    <div id="chat-window">
+        <div class="chat-header">HK-WorldBank AI 고객센터</div>
+        <div class="chat-body" id="chat-body">
+            <strong>[공지] FAQ 15선</strong><br>
+            1. HK-WorldBank의 미션은?<br>
+            2. 자산 통합 원장 확인 방법은?<br>
+            3. 스테이킹 수익은 언제 지급되나요?<br>
+            4. UBI 분배 원칙은 무엇인가요?<br>
+            5. GCV 가치 기준은?<br>
+            ... (나머지 10개 생략)<br><br>
+            <span style="color:var(--gold)">비너: 안녕하세요! 무엇을 도와드릴까요?</span>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="질문을 입력하세요...">
+            <button onclick="sendMsg()" style="background:var(--gold); border:none; padding:5px 10px; cursor:pointer;">전송</button>
+        </div>
+    </div>
+
+    <script>
+        // 1. 실시간 숫자 변동 로직 (잊지 않고 정교하게!)
+        function updateLiveStats() {
+            // 원장 소수점 8자리
+            let ledger = 400 + (Math.random() * 0.00005);
+            document.getElementById('val-ledger').innerText = ledger.toFixed(8);
+
+            // GCV 소수점 변동
+            let gcvBase = 314159;
+            let gcvDec = Math.random().toFixed(2);
+            document.getElementById('val-gcv').innerText = "$" + (gcvBase + parseFloat(gcvDec)).toLocaleString(undefined, {minimumFractionDigits: 2});
+
+            // 스테이킹 이율 (정수+소수점 3자리)
+            let staking = 24.500 + (Math.random() * 0.01);
+            document.getElementById('val-staking').innerText = staking.toFixed(3) + "%";
+
+            // 유동성 수익
+            let profit = 12.80 + (Math.random() * 0.05);
+            document.getElementById('val-profit').innerText = profit.toFixed(2) + "%";
+
+            // 전체 LP 공급 (대규모 단위 변동)
+            let lp = 1240500000 + Math.floor(Math.random() * 10000);
+            document.getElementById('val-total-lp').innerText = lp.toLocaleString() + ".00";
         }
-    };
+        setInterval(updateLiveStats, 1500);
 
-    function changeLang(key) {
-        const d = fullDB[key] || fullDB['en'];
-        document.getElementById('t_country').innerText = d.name;
-        document.getElementById('t_ledger').innerText = d.ledger;
-        document.getElementById('t_stk').innerText = d.stk;
-        document.getElementById('t_lp').innerText = d.lp;
-        document.getElementById('t_guide_h').innerText = d.guide_h;
-        document.getElementById('t_guide_b').innerText = d.guide_b;
-        document.getElementById('t_cs_btn').innerText = d.cs_btn;
-        document.getElementById('t_cs_h').innerText = d.cs_h;
-        ['m1','m2','m3','m4','m5','m6'].forEach((id, i) => document.getElementById(id).innerText = d['m'+(i+1)]);
+        // 2. 다국어 데이터 (이란어 에러 해결 및 50개국 확장 준비)
+        const globalData = [
+            { id: "kr", flag: "🇰🇷", name: "대한민국", desc: "HK-WorldBank 한국 본사 노드입니다. GCV 가치를 기반으로 한 자산 통합 서비스를 제공합니다." },
+            { id: "ir", flag: "🇮🇷", name: "Iran", desc: "نود جهانی اچ کی-وردبانک در ایران. سیستم یکپارچه سازی دارایی های دیجیتال و درآمد پایه همگانی (UBI)." },
+            { id: "us", flag: "🇺🇸", name: "USA", desc: "HK-WorldBank North America Hub. Secure decentralized ledger and liquidity management." },
+            { id: "jp", flag: "🇯🇵", name: "Japan", desc: "HK-WorldBank ジャパンノード。次世代アセット統合とユニバーサル・ベーシックインカムを支援します。" },
+            { id: "cn", flag: "🇨🇳", name: "China", desc: "HK-WorldBank 中国节点。基于区块链技术的全球资产管理与分配平台。" },
+            { id: "vn", flag: "🇻🇳", name: "Vietnam", desc: "HK-WorldBank Việt Nam. Cung cấp giải pháp tích hợp tài sản kỹ thuật số toàn cầu." },
+            { id: "de", flag: "🇩🇪", name: "Germany", desc: "HK-WorldBank Deutschland. Sichere digitale Asset-Integration und UBI-Verteilung." },
+            // ... 데이터는 계속 추가 가능
+        ];
 
-        const fCont = document.getElementById('faqContainer');
-        fCont.innerHTML = '';
-        const questions = d.faqs || fullDB['en'].faqs;
-        questions.forEach(f => {
-            const div = document.createElement('div');
-            div.className = 'faq-item';
-            div.onclick = () => div.classList.toggle('open');
-            div.innerHTML = `<div class="faq-q"><span>${f[0]}</span><i class="fas fa-plus"></i></div><div class="faq-a">${f[1]}</div>`;
-            fCont.appendChild(div);
+        // 더 많은 국기 자동 생성 (테스트용 50개 이상)
+        const container = document.getElementById('flag-container');
+        const extraFlags = ["🇬🇧","🇫🇷","🇮🇹","🇨🇦","🇦🇺","🇧🇷","🇮🇳","🇷🇺","🇸🇦","🇸🇬","🇲🇾","🇹Ｈ","🇮🇩","🇵🇭","🇪🇸","🇲🇽","🇦🇪","🇶🇦","🇳🇬","🇿🇦","🇪🇬","🇹🇷","🇮🇱","🇸🇪","🇳Ｏ","🇳Ｌ","🇨Ｈ","🇦🇹","🇧Ｅ","🇵Ｌ","🇨Ｚ","🇺🇦","🇰🇿","🇵🇰","🇧Ｄ","🇱🇰"];
+
+        // 기존 데이터 먼저 삽입
+        globalData.forEach(item => {
+            createFlag(item.flag, item.name, item.desc);
         });
 
-        document.querySelectorAll('.flag-btn').forEach(btn => btn.classList.remove('active'));
-    }
+        // 나머지 국기들도 '준비 중' 모드로 삽입
+        extraFlags.forEach(f => {
+            createFlag(f, "Global Partner", "해당 국가 노드는 서비스 준비 중이며, 현재 글로벌 공용 매뉴얼이 적용됩니다.");
+        });
 
-    const flagList = ["🇰🇷","🇺🇸","🇨🇳","🇯🇵","🇻🇳","🇵🇭","🇮🇩","🇹🇭","🇷🇺","🇩🇪","🇫🇷","🇪🇸","🇮🇹","🇬🇧","🇦🇪","🇮🇳","🇧🇷","🇲🇽","🇨🇦","🇦🇺"];
-    const keyMap = ["ko","en","zh","en","en","en","en","en","en","en","en","en","en","en","en","en","en","en","en","en"];
-    const container = document.getElementById('flagContainer');
-    flagList.forEach((f, i) => {
-        const b = document.createElement('div'); b.className = 'flag-btn'; b.innerText = f;
-        b.onclick = () => { changeLang(keyMap[i]); b.classList.add('active'); };
-        container.appendChild(b);
-    });
+        function createFlag(emoji, name, desc) {
+            let div = document.createElement('div');
+            div.className = 'flag-item';
+            div.innerHTML = emoji;
+            div.onclick = () => {
+                document.getElementById('manual-content').innerHTML = `<strong>[${name} 운영 설명서]</strong><br>${desc}`;
+            };
+            container.appendChild(div);
+        }
 
-    setInterval(() => {
-        document.getElementById('v_bal').innerText = (400.0212 + Math.random()*0.0001).toFixed(8);
-        document.getElementById('v_stk').innerText = (15.48 + Math.random()*0.01).toFixed(3) + "%";
-        document.getElementById('v_lp').innerText = (23.26 + Math.random()*0.01).toFixed(3) + "%";
-    }, 1000);
+        // 3. 20초 타임 로직
+        function triggerAction(type) {
+            const overlay = document.getElementById('timer-overlay');
+            const num = document.getElementById('timer-num');
+            let count = 20;
+            
+            overlay.style.display = 'flex';
+            num.innerText = count;
 
-    function toggleOnion(s) { document.getElementById('onionBox').classList.toggle('active', s); }
-    window.onload = () => { changeLang('ko'); document.querySelector('.flag-btn').classList.add('active'); };
-</script>
+            const interval = setInterval(() => {
+                count--;
+                num.innerText = count;
+                if(count <= 0) {
+                    clearInterval(interval);
+                    overlay.style.display = 'none';
+                    alert(`[${type}] 처리가 안전하게 완료되었습니다.`);
+                }
+            }, 1000);
+        }
+
+        // 4. 챗봇 & 삐니 개입 로직
+        function toggleChat() {
+            const win = document.getElementById('chat-window');
+            win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function sendMsg() {
+            const input = document.getElementById('user-input');
+            const body = document.getElementById('chat-body');
+            if(!input.value) return;
+
+            body.innerHTML += `<br><span style="color:#aaa">나: ${input.value}</span>`;
+            
+            // 챗봇이 모를 때 삐니 등판
+            setTimeout(() => {
+                body.innerHTML += `<br><span style="color:var(--gold)">비너: 분석 중...</span>`;
+                setTimeout(() => {
+                    body.innerHTML += `<br><span style="color:var(--neon-blue)">삐니: 형님, 비너가 잘 모르는 것 같아 제가 직접 나왔습니다. ${input.value} 건은 제가 즉시 처리하겠습니다!</span>`;
+                    body.scrollTop = body.scrollHeight;
+                }, 1000);
+            }, 500);
+            
+            input.value = '';
+        }
+    </script>
 </body>
-</html> 
+</html>
