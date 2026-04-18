@@ -115,8 +115,44 @@
         <p id="txt-s3">AI 실시간 자산 보호</p>
     </div>
 
-    <button class="btn-global-cs" id="btn-cs" onclick="piPayment('SUPPORT')">글로벌 AI 고객지원센터 가동</button>
-   
+    <button class="btn-global-cs" id="btn-cs" onclick="piPayment('SUPPORT')">글로벌 AI 고객지원센터 </button>
+   <button class="btn-global-cs" id="btn-cs" onclick="toggleSupport()" style="width: 100%; padding: 20px; background-color: #ff5f7e; color: white; border: none; border-radius: 15px; font-size: 18px; font-weight: bold; cursor: pointer;">
+    글로벌 AI 고객지원센터 
+</button>
+
+<div id="support-expansion" style="display: none; background: #1a1a1a; border: 1px solid #ffcc00; border-radius: 20px; margin: 15px 0; padding: 25px; color: #ddd; text-align: left; animation: slideDown 0.4s ease-out;">
+    
+    <div style="background: #000; padding: 18px; border-radius: 12px; font-size: 13px; line-height: 1.7; border-left: 5px solid #ffcc00; margin-bottom: 25px;">
+        <strong style="color: #ffcc00; font-size: 15px;">[공식 안내]</strong><br>
+        현재 문의량이 많아 모든 질문에 즉각적인 개별 답장을 드리기는 어렵습니다. 하지만 <strong>보내주시는 모든 내용은 HK AI 시스템과 운영팀 직원들이 실시간으로 전수 체크 및 모니터링</strong>하고 있으며, 중요 이슈나 건설적인 제안은 우선적으로 검토됩니다.
+    </div>
+
+    <div style="font-weight: bold; color: #ffcc00; margin-bottom: 10px;">자주 묻는 질문 (FAQ)</div>
+    <div style="max-height: 280px; overflow-y: auto; background: #222; border-radius: 10px; padding: 10px; margin-bottom: 20px;">
+        <div style="padding: 12px; border-bottom: 1px solid #333; font-size: 14px;">1. HK-WorldBank UBI 지급은 언제인가요?</div>
+        <div style="padding: 12px; border-bottom: 1px solid #333; font-size: 14px;">2. 파이 네트워크 지갑 연동 및 자산 보호 방법</div>
+   <div style="padding: 12px; border-bottom: 1px solid #333; font-size: 14px;">
+    1. HK-WorldBank의 UBI(기본소득) 재원은 무엇인가요?
+    <br><span style="color:#ffcc00; font-size: 12px;">(답변: HK그룹은 사회 환원을 위해 <strong>그룹 순이익의 30%</strong>를 전 세계 취약계층의 기본소득 재원으로 사용합니다.)</span>
+</div>
+<div style="padding: 12px; border-bottom: 1px solid #333; font-size: 14px;">
+    2. 파이 네트워크 지갑 연동 및 자산 보호는 안전한가요?
+    <br><span style="color:#ffcc00; font-size: 12px;">(답변: HK 양자 방패 기술이 실시간으로 자산을 보호하며 자동 연동 시스템을 제공합니다.)</span>
+</div>
+        <div style="padding: 12px; border-bottom: 1px solid #333; font-size: 14px;">3. 24시간 양자 방패 보안 기술 적용 확인</div>
+        <div style="padding: 12px; border-bottom: 1px solid #333; font-size: 14px;">4. 본인 인증(KYC) 승인 지연 시 대처법</div>
+        <div style="padding: 12px; border-bottom: 1px solid #333; font-size: 14px;">5. 글로벌 노드 운영 및 보상 체계 안내</div>
+        <div style="padding: 12px; text-align: center; color: #888; font-size: 12px;">...하단 이메일로 상세 문의 가능</div>
+    </div>
+
+    <div style="text-align: center; font-size: 14px; margin-bottom: 15px;">
+        비공개 상세 문의: <a href="mailto:support@hkwb.ai.kr" style="color:#ffcc00; text-decoration: underline;">support@hkwb.ai.kr</a>
+    </div>
+    
+    <button onclick="alert('삐니 챗봇이 가동됩니다. 30개국어 자동번역이 적용 중입니다.')" style="width: 100%; padding: 15px; background: transparent; border: 2px solid #ffcc00; color: #ffcc00; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 16px;">
+        <i class="fas fa-robot"></i> 삐니 AI 챗봇과 즉시 대화
+    </button>
+</div>
     <div class="sns-group" style="margin-top:20px;">
         <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="sns-btn" style="background:#f00;"><i class="fab fa-youtube"></i> YouTube</a>
         <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="sns-btn" style="background:#000;"><i class="fab fa-tiktok"></i> TikTok</a>
@@ -124,6 +160,14 @@
 </div>
 
 <script>
+function toggleSupport() {
+    const content = document.getElementById('support-expansion');
+    if (content.style.display === 'none' || content.style.display === '') {
+        content.style.display = 'block';
+    } else {
+        content.style.display = 'none';
+    }
+}
     // --- [섹션 1: 정직한 30개국어 다국적 데이터베이스] ---
     const i18n = {
         ko: { name: "한국어 🇰🇷", ledger: "메인 자산 통합 원장", stk: "스테이킹 이율", lp: "유동성 수익", tvl: "전체 유동성 LP 공급", b1: "PI 수량", b2: "DEX 스왑", b3: "LP 공급", m1: "송금", m2: "결제", m3: "예치", m4: "보상", m5: "기본소득", m6: "스왑", shield: "🛡️ HK 양자 방패 가동 중", s1: "보안 기술 V23 적용", s2: "메인넷 자산 자동 연동", s3: "AI 실시간 자산 보호", cs: "글로벌 AI 고객지원센터 가동" },
