@@ -3,419 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK-WorldBank | Global AI & Decentralized Finance Hub</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>HK-BANK GLOBAL CONTROL SYSTEM v20.0 - ULTIMATE EDITION</title>
     <style>
-        /* [01. 전역 시스템 변수 정의] */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&family=Fira+Code:wght@300;400;500;700&display=swap');
+
         :root {
-            --gold: #D4AF37;
-            --dark-gold: #aa8a2e;
-            --black: #050505;
-            --deep: #0a0a0a;
-            --gray: #1a1a1a;
-            --light-gray: #2a2a2a;
-            --white: #ffffff;
-            --status-green: #2ecc71;
-            --status-blue: #3498db;
-            --status-red: #e74c3c;
-            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-mono: 'Fira Code', 'Courier New', monospace;
+            --hk-gold: #FFD700;
+            --hk-dark: #000000;
+            --hk-deep: #020202;
+            --hk-gray: #0a0a0a;
+            --hk-light-gray: #1a1a1a;
+            --hk-text: #ffffff;
+            --hk-green: #00ff00;
+            --hk-dim: #444444;
+            --hk-red: #ff3333;
         }
 
-        /* [02. 베이스 리셋] */
         * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
-        html { scroll-behavior: smooth; }
-        body {
-            background-color: var(--black);
-            color: var(--white);
-            font-family: var(--font-main);
-            line-height: 1.7;
-            overflow-x: hidden;
+        body { 
+            background-color: var(--hk-dark); 
+            color: var(--hk-text); 
+            font-family: 'Inter', -apple-system, sans-serif; 
+            overflow-x: hidden; 
+            scroll-behavior: smooth;
         }
 
-        /* [03. 상단 네비게이션 시스템 - 1~100라인의 정수] */
+        /* [SYSTEM BACKGROUND ANIMATION] */
+        .bg-matrix {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), 
+                        repeating-linear-gradient(0deg, transparent, transparent 1px, #111 1px, #111 2px);
+            z-index: -1;
+        }
+
+        /* [TOP NAVIGATION BAR] */
         nav {
-            height: 100px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 6%;
-            background: rgba(0,0,0,0.95);
-            border-bottom: 2px solid var(--gray);
-            position: sticky;
-            top: 0;
-            z-index: 9999;
-            backdrop-filter: blur(20px);
+            height: 90px; padding: 0 60px; display: flex; justify-content: space-between;
+            align-items: center; border-bottom: 1px solid var(--hk-light-gray); background: rgba(0,0,0,0.98);
+            position: sticky; top: 0; z-index: 10000; backdrop-filter: blur(20px);
         }
-        .logo-area { display: flex; flex-direction: column; }
-        .logo-main { font-size: 2.2rem; font-weight: 900; color: var(--gold); letter-spacing: 5px; line-height: 1; }
-        .logo-sub { font-size: 0.75rem; color: #555; letter-spacing: 2px; margin-top: 8px; text-transform: uppercase; }
+        .logo-box { display: flex; flex-direction: column; }
+        .logo-box .title { font-size: 2.2rem; font-weight: 900; color: var(--hk-gold); letter-spacing: 5px; line-height: 1; }
+        .logo-box .sub { font-size: 0.75rem; color: var(--hk-dim); letter-spacing: 3px; text-transform: uppercase; margin-top: 5px; }
         
-        .system-monitor { display: flex; align-items: center; gap: 20px; font-family: var(--font-mono); font-size: 0.8rem; }
-        .status-pill { padding: 5px 15px; border-radius: 20px; border: 1px solid var(--status-green); color: var(--status-green); display: flex; align-items: center; gap: 8px; }
-        .blink { width: 8px; height: 8px; background: var(--status-green); border-radius: 50%; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        .sys-status { font-family: 'Fira Code', monospace; font-size: 0.85rem; display: flex; gap: 30px; }
+        .status-item { display: flex; align-items: center; gap: 8px; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--hk-green); box-shadow: 0 0 10px var(--hk-green); animation: pulse 1.5s infinite; }
 
-        /* [04. 히어로 섹션 - 비전 선언] */
+        /* [HERO 관제 센터 - 압도적 스케일] */
         .hero {
-            padding: 160px 6% 100px;
-            text-align: center;
-            background: radial-gradient(circle at center, #151515 0%, #050505 100%);
-            border-bottom: 1px solid var(--gray);
+            height: 100vh; display: flex; flex-direction: column; justify-content: center;
+            align-items: center; text-align: center; padding: 0 20px;
         }
-        .hero-badge {
-            display: inline-block; padding: 10px 30px; background: var(--gold);
-            color: var(--black); font-weight: 900; border-radius: 2px;
-            font-size: 0.8rem; letter-spacing: 4px; margin-bottom: 35px;
+        .enterprise-badge {
+            border: 1px solid var(--hk-gold); color: var(--hk-gold); padding: 12px 50px;
+            font-weight: 900; font-size: 0.9rem; letter-spacing: 8px; margin-bottom: 60px;
+            text-transform: uppercase; background: rgba(255, 215, 0, 0.05);
         }
-        .hero h1 { 
-            font-size: 5.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 35px;
-            letter-spacing: -3px; background: linear-gradient(to bottom, #fff 30%, #555 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        .hero h1 { font-size: 8rem; font-weight: 900; line-height: 0.9; margin-bottom: 50px; letter-spacing: -4px; text-transform: uppercase; }
+        .hero h1 span { color: var(--hk-gold); }
+        .hero p { font-size: 1.6rem; line-height: 1.8; color: #aaa; max-width: 1200px; margin-bottom: 80px; font-weight: 200; word-break: keep-all; }
+        .cta-btn {
+            background: var(--hk-gold); color: #000; padding: 25px 100px; font-size: 1.3rem;
+            font-weight: 900; letter-spacing: 6px; cursor: pointer; border: none; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            text-transform: uppercase;
         }
-        .hero p { font-size: 1.5rem; color: #777; max-width: 1000px; margin: 0 auto 60px; font-weight: 300; }
+        .cta-btn:hover { background: #fff; transform: translateY(-10px) scale(1.05); box-shadow: 0 0 70px rgba(255,215,0,0.5); }
 
-        /* [05. 실시간 금융 원장 모니터 - 초단위 변동] */
-        .ledger-grid {
-            padding: 80px 6%;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
-            background: var(--deep);
+        /* [실시간 글로벌 데이터 원장] */
+        .dash-container {
+            padding: 100px 60px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; background: var(--hk-deep);
+            border-top: 1px solid var(--hk-light-gray); border-bottom: 1px solid var(--hk-light-gray);
         }
-        .ledger-card {
-            background: #000; border: 1px solid var(--gray); padding: 40px 30px;
-            border-radius: 8px; position: relative; transition: 0.3s;
+        .dash-card { background: #050505; border: 1px solid #111; padding: 60px 40px; position: relative; }
+        .dash-card::before { content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--hk-gold); opacity: 0; transition: 0.3s; }
+        .dash-card:hover::before { opacity: 1; }
+        .dash-label { font-size: 0.8rem; color: var(--hk-dim); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 25px; }
+        .dash-value { font-size: 2.8rem; font-weight: 900; color: var(--hk-gold); font-family: 'Fira Code', monospace; }
+        .dash-trend { font-size: 0.9rem; color: var(--hk-green); margin-top: 10px; font-family: 'Fira Code'; }
+
+        /* [30개국 글로벌 노드 포털 - 생략 없는 완전판] */
+        .global-portal { padding: 150px 60px; background: #000; }
+        .section-title { text-align: center; margin-bottom: 120px; }
+        .section-title h2 { font-size: 5rem; font-weight: 900; letter-spacing: -2px; margin-bottom: 20px; }
+        .section-title p { color: var(--hk-gold); letter-spacing: 10px; font-size: 1.1rem; text-transform: uppercase; }
+
+        .node-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 50px; }
+        .node-box {
+            background: #030303; border: 1px solid #151515; padding: 70px 50px; position: relative;
+            transition: 0.7s cubic-bezier(0.19, 1, 0.22, 1);
         }
-        .ledger-card:hover { border-color: var(--gold); transform: translateY(-5px); }
-        .ledger-label { font-size: 0.75rem; color: #555; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
-        .ledger-value { font-size: 2.2rem; font-weight: 800; color: var(--white); font-family: var(--font-mono); }
-        .ledger-change { font-size: 0.9rem; margin-top: 10px; font-weight: bold; }
-        .up { color: var(--status-green); }
+        .node-box:hover { border-color: var(--hk-gold); transform: translateY(-20px) scale(1.02); background: #080808; }
+        .node-id { position: absolute; top: 30px; right: 40px; font-family: 'Fira Code'; font-size: 0.7rem; color: var(--hk-dim); }
+        .node-title { font-size: 2.2rem; font-weight: 900; color: var(--hk-gold); margin-bottom: 30px; letter-spacing: 1px; }
+        .node-text { color: #888; font-size: 1.2rem; line-height: 1.9; word-break: keep-all; font-weight: 300; }
+        .node-status { margin-top: 30px; display: flex; align-items: center; gap: 10px; color: var(--hk-green); font-size: 0.8rem; font-family: 'Fira Code'; }
 
-        /* [06. PI TEST-NET 금융 프로토콜 & AI 센터] */
-        .main-operations {
-            padding: 120px 6%;
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 60px;
-            background: var(--black);
+        /* [AI 통합 관제 터미널 - 삐니 전용 창] */
+        .terminal-wrap { padding: 100px 60px; background: #000; }
+        .terminal {
+            height: 800px; border: 1px solid #222; background: #020202; display: flex; flex-direction: column;
+            box-shadow: 0 100px 200px rgba(0,0,0,1);
         }
-
-        /* 금융 액션 패널 */
-        .protocol-panel {
-            background: var(--deep); border: 2px solid var(--gold);
-            border-radius: 12px; padding: 50px;
+        .t-header { 
+            background: #0a0a0a; padding: 25px 45px; display: flex; justify-content: space-between; 
+            border-bottom: 1px solid #222; align-items: center;
         }
-        .protocol-panel h2 { font-size: 2.8rem; color: var(--gold); margin-bottom: 40px; font-weight: 900; border-bottom: 2px solid var(--gray); padding-bottom: 20px; }
-        .action-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
-        .btn-action {
-            width: 100%; padding: 25px; background: transparent; border: 1px solid var(--light-gray);
-            color: #bbb; cursor: pointer; text-align: left; font-size: 1.2rem; font-weight: 800;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex; justify-content: space-between; align-items: center;
+        .t-header .t-title { font-weight: 900; color: var(--hk-gold); font-size: 1rem; letter-spacing: 3px; }
+        .t-header .t-auth { font-size: 0.7rem; color: var(--hk-dim); font-family: 'Fira Code'; }
+        
+        .t-screen {
+            flex: 1; padding: 60px; overflow-y: auto; font-family: 'Fira Code', monospace;
+            color: var(--hk-green); font-size: 1.2rem; line-height: 2; border-bottom: 1px solid #111;
         }
-        .btn-action:hover { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,0.08); transform: translateX(15px); }
-        .btn-action span { font-size: 0.7rem; color: #444; background: #111; padding: 5px 10px; border-radius: 4px; }
+        .t-screen span.cmd { color: var(--hk-gold); font-weight: 700; }
+        .t-screen span.info { color: #888; }
 
-        /* AI 지원센터 터미널 */
-        .ai-terminal {
-            background: #000; border: 1px solid var(--gray); border-radius: 12px;
-            height: 650px; display: flex; flex-direction: column; overflow: hidden;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+        .t-input-bar { padding: 40px; background: #050505; display: flex; gap: 25px; }
+        .t-input-bar input {
+            flex: 1; background: #000; border: 1px solid #333; padding: 25px 35px; color: #fff;
+            font-size: 1.3rem; font-family: 'Fira Code'; border-radius: 0;
         }
-        .terminal-top { background: #111; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--gray); }
-        .terminal-title { color: var(--gold); font-weight: 900; font-size: 0.9rem; letter-spacing: 2px; }
-        .terminal-body { flex-grow: 1; padding: 35px; overflow-y: auto; font-family: var(--font-mono); color: var(--status-green); font-size: 1rem; line-height: 1.8; }
-        .terminal-input-area { padding: 30px; background: #0a0a0a; border-top: 1px solid var(--gray); display: flex; gap: 15px; }
-        .terminal-input-area input { flex-grow: 1; background: #000; border: 1px solid #333; padding: 20px; color: white; border-radius: 6px; font-size: 1.1rem; }
-        .terminal-input-area button { padding: 0 45px; background: var(--gold); border: none; border-radius: 6px; font-weight: 900; cursor: pointer; transition: 0.3s; }
-        .terminal-input-area button:hover { background: var(--white); transform: scale(1.05); }
-
-        /* [07. 30개 국어 글로벌 포털 그리드] */
-        .global-portal { padding: 120px 6%; background: var(--deep); }
-        .section-header { text-align: center; margin-bottom: 100px; }
-        .section-header h2 { font-size: 4rem; color: var(--gold); margin-bottom: 25px; font-weight: 900; }
-        .section-header p { color: #555; font-size: 1.2rem; }
-
-        .lang-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
-        .lang-card {
-            background: var(--black); border: 1px solid #151515; padding: 60px 45px;
-            border-radius: 4px; transition: 0.5s; position: relative; overflow: hidden;
+        .t-input-bar button {
+            background: var(--hk-gold); border: none; padding: 0 80px; font-weight: 900;
+            font-size: 1.1rem; cursor: pointer; transition: 0.4s; letter-spacing: 2px;
         }
-        .lang-card:hover { border-color: var(--gold); transform: translateY(-15px); background: #08080c; }
-        .lang-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 4px; background: var(--gold); transition: 0.5s; }
-        .lang-card:hover::after { width: 100%; }
-        .lang-flag { font-size: 3rem; margin-bottom: 30px; display: block; }
-        .lang-card h3 { color: var(--gold); font-size: 1.8rem; margin-bottom: 20px; }
-        .lang-card p { color: #666; font-size: 1.05rem; line-height: 1.8; }
+        .t-input-bar button:hover { background: #fff; transform: scale(1.02); }
 
-        /* [08. 시스템 인프라 현황 테이블] */
-        .infra-monitoring { padding: 120px 6%; background: var(--black); }
-        .infra-table { width: 100%; border-collapse: collapse; margin-top: 50px; border: 1px solid var(--gray); }
-        .infra-table th { background: #0d0d0d; padding: 30px; text-align: left; color: var(--gold); font-size: 0.85rem; letter-spacing: 3px; border-bottom: 2px solid var(--gray); }
-        .infra-table td { padding: 25px; border-bottom: 1px solid #111; font-family: var(--font-mono); color: #555; font-size: 0.95rem; }
-        .status-dot { height: 12px; width: 12px; background: var(--status-green); border-radius: 50%; display: inline-block; margin-right: 12px; box-shadow: 0 0 10px var(--status-green); }
+        /* [FOOTER - CHAIRMAN BRANDING] */
+        footer { padding: 200px 60px; border-top: 1px solid #111; background: #000; text-align: center; }
+        .f-logo { font-size: 4rem; font-weight: 900; color: #151515; margin-bottom: 50px; letter-spacing: 20px; }
+        .f-motto { font-size: 2.2rem; color: #777; font-weight: 100; margin-bottom: 60px; letter-spacing: 12px; }
+        .f-info { color: #444; font-size: 1rem; line-height: 2.5; max-width: 800px; margin: 0 auto; }
+        .f-info strong { color: #666; }
 
-        /* [09. 경영 철학 섹션] */
-        .philosophy { padding: 150px 6%; background: linear-gradient(to bottom, #050505, #151515); text-align: center; }
-        .philosophy-box { max-width: 1000px; margin: 0 auto; }
-        .philosophy-box blockquote { font-size: 2.8rem; font-weight: 200; color: #ccc; font-style: italic; line-height: 1.4; margin-bottom: 50px; }
-        .philosophy-box cite { color: var(--gold); font-size: 1.4rem; font-weight: 900; letter-spacing: 5px; text-transform: uppercase; }
-
-        /* [10. 푸터 시스템] */
-        footer { padding: 120px 6% 60px; border-top: 1px solid var(--gray); background: #000; text-align: center; }
-        .footer-logo { font-size: 3rem; font-weight: 900; color: var(--gold); margin-bottom: 50px; letter-spacing: 12px; }
-        .footer-links { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: left; max-width: 1200px; margin: 0 auto 80px; }
-        .footer-col h4 { color: var(--gold); margin-bottom: 30px; font-size: 1rem; letter-spacing: 2px; }
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 15px; color: #555; font-size: 0.9rem; }
-        .copyright { padding-top: 60px; border-top: 1px solid #111; color: #333; font-size: 0.85rem; letter-spacing: 1px; }
-
-        /* 스크롤바 커스텀 */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--black); }
-        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
-
-        @media (max-width: 1400px) { .ledger-grid { grid-template-columns: 1fr 1fr; } .main-operations { grid-template-columns: 1fr; } }
+        @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #222; }
     </style>
 </head>
 <body>
 
+    <div class="bg-matrix"></div>
+
     <nav>
-        <div class="logo-area">
-            <div class="logo-main">HK-WORLDBANK</div>
-            <div class="logo-sub">Global Industrial & Financial Ecosystem</div>
+        <div class="logo-box">
+            <div class="title">HK-BANK</div>
+            <div class="sub">GLOBAL INDUSTRIAL CONGLOMERATE</div>
         </div>
-        <div class="system-monitor">
-            <div class="status-pill"><div class="blink"></div> PI TEST-NET ACTIVE</div>
-            <div style="color: #444;">CLUSTER: HAEROEUM_HUB_01</div>
+        <div class="sys-status">
+            <div class="status-item"><div class="status-dot"></div> MAIN_NODE: KR_ULSAN_ACTIVE</div>
+            <div class="status-item">30 REGIONAL_NODES: ONLINE</div>
+            <div class="status-item" style="color: var(--hk-gold)">AUTH: CHAIRMAN_HYEKONG</div>
         </div>
     </nav>
 
-    <header class="hero">
-        <div class="hero-badge">OFFICIAL ENTERPRISE PLATFORM</div>
-        <h1>The Future of <br>Humanity & AI</h1>
-        <p>HK-WorldBank는 이재완(혜공) 회장님의 지휘 아래 로보틱스, 핵융합 에너지, 그리고 전 지구적 기본소득(UBI)의 새로운 패러다임을 구축합니다. 진실과 정의가 흐르는 기술의 중심지, 해오름 자치시입니다.</p>
-        <div style="margin-top: 50px;">
-            <a href="#portal" style="padding: 22px 60px; background: var(--gold); color: black; text-decoration: none; font-weight: 900; letter-spacing: 2px; border-radius: 4px;">SYSTEM ENTER</a>
-        </div>
-    </header>
+    <main class="hero">
+        <div class="enterprise-badge">Universal Governance Platform</div>
+        <h1>HK <span>WORLD BANK</span></h1>
+        <p>
+            회장 이재완(혜공)의 철학: <strong>진실, 정직, 상식, 정의.</strong><br>
+            해오름 자치시(울산·경주·포항)를 중심으로 Figure AI 인수와 핵융합 에너지 혁명을 완수합니다.<br>
+            전 세계 30개국 노드를 통한 투명한 금융과 기본소득(UBI) 분배로 인류의 새로운 역사를 씁니다.
+        </p>
+        <button class="cta-btn" onclick="document.getElementById('portal').scrollIntoView({behavior:'smooth'})">Access Global Core</button>
+    </main>
 
-    <section class="ledger-grid">
-        <div class="ledger-card">
-            <div class="ledger-label">Total Liquidity Pool (LP)</div>
-            <div class="ledger-value" id="val-lp">1,582,490.00</div>
-            <div class="ledger-change up">▲ <span id="change-lp">12.5</span> PI (SEC)</div>
+    <section class="dash-container">
+        <div class="dash-card">
+            <div class="dash-label">Global PI Liquidity</div>
+            <div class="dash-value" id="val1">3,492,010.50</div>
+            <div class="dash-trend">▲ 1.2% Real-time Sync</div>
         </div>
-        <div class="ledger-card">
-            <div class="ledger-label">Current Staking APY</div>
-            <div class="ledger-value" id="val-apy">12.45%</div>
-            <div class="ledger-change up">▲ <span id="change-apy">0.01</span>% (VAR)</div>
+        <div class="dash-card">
+            <div class="dash-label">Figure AI Sync Rate</div>
+            <div class="dash-value">99.98%</div>
+            <div class="dash-trend" style="color:var(--hk-gold)">Ready for Full Acquisition</div>
         </div>
-        <div class="ledger-card">
-            <div class="ledger-label">UBI Global Reserve</div>
-            <div class="ledger-value" id="val-ubi">942,880,105</div>
-            <div class="ledger-change up">▲ <span id="change-ubi">450</span> USD</div>
+        <div class="dash-card">
+            <div class="dash-label">Fusion Energy Output</div>
+            <div class="dash-value" id="val2">5.82 GW</div>
+            <div class="dash-trend">Optimal Grid Status</div>
         </div>
-        <div class="ledger-card">
-            <div class="ledger-label">Fusion Core Output</div>
-            <div class="ledger-value" id="val-fusion">1.42 GW</div>
-            <div class="ledger-change up">▲ STABLE</div>
-        </div>
-    </section>
-
-    <section class="main-operations" id="ops">
-        <div class="protocol-panel">
-            <h2>Financial Protocols</h2>
-            <div class="action-grid">
-                <button class="btn-action" onclick="triggerTx('송금')">Pi 송금 (Transfer) <span>TEST-NET VERIFIED</span></button>
-                <button class="btn-action" onclick="triggerTx('결재')">Pi 결재 (Payment) <span>QR_ENABLED</span></button>
-                <button class="btn-action" onclick="triggerTx('예치')">Pi 예치 (Staking) <span>APY 12.5% FIXED</span></button>
-                <button class="btn-action" onclick="triggerTx('보상')">Pi 보상 (Rewards) <span>DAILY_SYNC</span></button>
-                <button class="btn-action" onclick="triggerTx('기본소득')">Pi 기본소득 (UBI) <span>30% PROFIT SHARE</span></button>
-                <button class="btn-action" onclick="triggerTx('스왑')">Pi 스왑 (Swap) <span>HK_TOKEN_BRIDGE</span></button>
-            </div>
-        </div>
-
-        <div class="ai-terminal">
-            <div class="terminal-top">
-                <div class="terminal-title">GLOBAL AI CUSTOMER SUPPORT CENTER v9.0</div>
-                <div style="font-size: 0.7rem; color: #444;">ENCRYPTED: AES-256</div>
-            </div>
-            <div class="terminal-body" id="ai-logs">
-                > [INIT] HK-AI Central Engine Booting...<br>
-                > [LANG] 30 Global Language Modules: ONLINE.<br>
-                > [SEC] Haeroeum Security Protocol Level 9: ACTIVE.<br>
-                > [STATUS] Monitoring Chairman Hyekong's Strategic Node...<br>
-                > [AI] 삐니 에이전트 대기 중. 형님, 시스템 명령을 입력하십시오.
-            </div>
-            <div class="terminal-input-area">
-                <input type="text" id="ai-user-input" placeholder="명령어 또는 문의 사항을 입력하세요...">
-                <button onclick="aiExecute()">COMMAND</button>
-            </div>
+        <div class="dash-card">
+            <div class="dash-label">UBI Distribution Share</div>
+            <div class="dash-value">30.0%</div>
+            <div class="dash-trend">2.4B Recipients Active</div>
         </div>
     </section>
 
     <section class="global-portal" id="portal">
-        <div class="section-header">
-            <h2>Global Portals</h2>
-            <p>전 세계 30개국 현지 지원 시스템 실시간 가동</p>
+        <div class="section-title">
+            <h2>GLOBAL NODES</h2>
+            <p>30 STRATEGIC REGIONAL HUB SYSTEMS CONNECTED</p>
         </div>
-        <div class="lang-grid">
-            <div class="lang-card"><span class="lang-flag">🇰🇷</span><h3>Korean</h3><p>대한민국: 로보틱스, 핵융합, 기본소득의 글로벌 심장부.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇺🇸</span><h3>English</h3><p>Global Standard: Pioneering Physical AI and DeFi infrastructure.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇨🇳</span><h3>Chinese</h3><p>中国：引领机器人技术与能源革命的未来。</p></div>
-            <div class="lang-card"><span class="lang-flag">🇯🇵</span><h3>Japanese</h3><p>日本：次世代ロボット工学と次世代エネルギーの拠点。</p></div>
-            <div class="lang-card"><span class="lang-flag">🇩🇪</span><h3>German</h3><p>Deutschland: Spitzenreiter in Robotik und Fusionsenergie.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇫🇷</span><h3>French</h3><p>France: L'avenir de l'intelligence artificielle physique.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇪🇸</span><h3>Spanish</h3><p>España: El futuro de la robótica y el UBI global.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇮🇹</span><h3>Italian</h3><p>Italia: Il futuro della tecnologia robotica e dell'energia.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇷🇺</span><h3>Russian</h3><p>Россия: Будущее робототехники и ядерного синтеза.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇻🇳</span><h3>Vietnamese</h3><p>Việt Nam: Tương lai của Robot và Năng lượng sạch.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇮🇳</span><h3>Hindi</h3><p>भारत: रोबोटिक्स और वैश्विक यूबीआई का भविष्य।</p></div>
-            <div class="lang-card"><span class="lang-flag">🇦🇪</span><h3>Arabic</h3><p>الإمارات: طاقة المستقبل وحلول الروبوتات العالمية.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇹Ｈ</span><h3>Thai</h3><p>อนาคตของหุ่นยนต์และพลังงานนิว킬리어ฟิวชัน</p></div>
-            <div class="lang-card"><span class="lang-flag">🇮🇩</span><h3>Indonesian</h3><p>Masa depan robotika dan energi terbarukan.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇵🇹</span><h3>Portuguese</h3><p>Brasil: O futuro da robótica e do rendimento básico.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇹🇷</span><h3>Turkish</h3><p>Türkiye: Robotik ve nükleer füzyon enerjisinin geleceği.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇵🇱</span><h3>Polish</h3><p>Polska: Przyszłość robotyki i technologii energii.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇳🇱</span><h3>Dutch</h3><p>Nederland: De toekomst van robotica en energie.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇸🇪</span><h3>Swedish</h3><p>Sverige: Framtiden för robotik och global UBI.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇬🇷</span><h3>Greek</h3><p>Ελλάδα: Το μέλλον της ρομποτικής και της ενέργειας.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇮🇱</span><h3>Hebrew</h3><p>ישראל: העתיד של רובוטיקה ואנרגיה גרעינית.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇨🇿</span><h3>Czech</h3><p>Česko: Budoucnost robotiky a jaderné fúze.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇭🇺</span><h3>Hungarian</h3><p>Magyarország: A robotika és az energia jövője.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇷🇴</span><h3>Romanian</h3><p>Viitorul roboticii și al energiei curate.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇺🇦</span><h3>Ukrainian</h3><p>Україна: Майбутнє робототехніки та енергетики.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇲🇾</span><h3>Malay</h3><p>Malaysia: Masa depan robotik dan tenaga nuklear.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇵Ｈ</span><h3>Filipino</h3><p>Pilipinas: Ang hinaharap ng robotika at UBI.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇫Ｉ</span><h3>Finnish</h3><p>Suomi: Robotiikan ja energiantuotannon tulevaisuus.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇳Ｏ</span><h3>Norwegian</h3><p>Norge: Fremtidens robotikk og globale løsninger.</p></div>
-            <div class="lang-card"><span class="lang-flag">🇩🇰</span><h3>Danish</h3><p>Danmark: Fremtidens robotteknologi og energi.</p></div>
+        <div class="node-grid">
+            <div class="node-box"><div class="node-id">HK-NODE-01</div><div class="node-title">🇰🇷 KOREA</div><p class="node-text">해오름 자치시(울산·경주·포항). 글로벌 헤드쿼터 및 AI 연구소 가동. 인류 진보의 발원지.</p><div class="node-status">● MASTER_NODE_ACTIVE</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-02</div><div class="node-title">🇺🇸 USA</div><p class="node-text">실리콘밸리 Figure AI 인수 전략 및 나스닥 상장 로직 연동. 글로벌 기술 패권의 핵심 거점.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-03</div><div class="node-title">🇨🇳 CHINA</div><p class="node-text">심천·상해 대규모 로보틱스 양산 라인 컨트롤. 전 세계 보급형 AI 로봇 제조 인프라 관리.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-04</div><div class="node-title">🇯🇵 JAPAN</div><p class="node-text">도쿄·오사카 정밀 소재 공학 및 휴머노이드 하드웨어 최적화 솔루션 협력 네트워크.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-05</div><div class="node-title">🇩🇪 GERMANY</div><p class="node-text">인더스트리 4.0 기반 자동화 엔진 및 핵융합 터빈 엔지니어링 거점.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-06</div><div class="node-title">🇫🇷 FRANCE</div><p class="node-text">유럽 연합 내 AI 규제 대응 및 HK-BANK 유로권 금융 포털 운영.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-07</div><div class="node-title">🇬🇧 UK</div><p class="node-text">런던 시티 금융 센터 연동 및 글로벌 기관 투자 자산 관리 시스템.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-08</div><div class="node-title">🇮🇳 INDIA</div><p class="node-text">뱅갈로르 AI 알고리즘 고도화 및 세계 최대 규모 소프트웨어 개발 클러스터.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-09</div><div class="node-title">🇻🇳 VIETNAM</div><p class="node-text">동남아시아 제조 벨트 중심 노드 및 차세대 스마트 팩토리 표준 확산.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-10</div><div class="node-title">🇧🇷 BRAZIL</div><p class="node-text">남미 대륙 기본소득(UBI) 배분 엔진 및 자원 순환 금융 모델 시범 운영.</p><div class="node-status">● SYNCED</div></div>
+            
+            <div class="node-box"><div class="node-id">HK-NODE-11</div><div class="node-title">🇨🇦 CANADA</div><p class="node-text">퀀텀 컴퓨팅 연구 협력 및 북미 북서부 데이터 보안 센터 관리.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-12</div><div class="node-title">🇦🇺 AUSTRALIA</div><p class="node-text">핵융합 원료(중수소) 공급망 및 오세아니아 지역 친환경 에너지 그리드.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-13</div><div class="node-title">🇷🇺 RUSSIA</div><p class="node-text">유라시아 우주 항공 물리 및 고에너지 가속기 연구 자산 관리 노드.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-14</div><div class="node-title">🇦🇪 UAE</div><p class="node-text">중동 금융 허브 및 미래 도시(NEOM 등) AI 인프라 공급 계약 관리.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-15</div><div class="node-title">🇸🇬 SINGAPORE</div><p class="node-text">아시아권 블록체인 자산화 및 디지털 금고(Safe) 서비스 센터.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-16</div><div class="node-title">🇳🇱 NETHERLANDS</div><p class="node-text">유럽 해상 물류 자동화 노드 및 하이테크 농업 지능형 팜 제어.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-17</div><div class="node-title">🇸🇪 SWEDEN</div><p class="node-text">북유럽 사회 안전망 데이터 연동 및 인간 중심 AI 복지 모델 설계.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-18</div><div class="node-title">🇵🇱 POLAND</div><p class="node-text">동유럽 IT 테크니컬 서포트 센터 및 기술 제조 클러스터 중심.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-19</div><div class="node-title">🇹🇷 TURKEY</div><p class="node-text">유라시아 연결 물류 및 지중해 경제권 AI 서비스 네트워크.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-20</div><div class="node-title">🇪🇸 SPAIN</div><p class="node-text">남유럽 재생 에너지 스마트 그리드 제어 및 관광 특화 AI 솔루션.</p><div class="node-status">● SYNCED</div></div>
+
+            <div class="node-box"><div class="node-id">HK-NODE-21</div><div class="node-title">🇮🇹 ITALY</div><p class="node-text">첨단 기계 설계 공학 및 럭셔리 라이프스타일 지능형 큐레이션 노드.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-22</div><div class="node-title">🇨Ｈ SWISS</div><p class="node-text">초고보안 자산 관리 센터 및 글로벌 규제 인증 관리 시스템.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-23</div><div class="node-title">🇹Ｈ THAILAND</div><p class="node-text">동남아시아 디지털 노마드 전용 뱅킹 및 클라우드 서비스 거점.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-24</div><div class="node-title">🇲🇾 MALAYSIA</div><p class="node-text">아시아 지역 데이터 센터 허브 및 사이버 보안 모니터링 기지.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-25</div><div class="node-title">🇳Ｏ NORWAY</div><p class="node-text">해양 에너지 자산 관리 및 북유럽 데이터 이중화 센터 운영.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-26</div><div class="node-title">🇲🇽 MEXICO</div><p class="node-text">북미·중남미 물류 브릿지 최적화 및 신흥 시장 제조 벨트 관리.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-27</div><div class="node-title">🇸Ａ SAUDI</div><p class="node-text">미래 도시 프로젝트(NEOM) 특화 AI 로봇 군집 제어 서비스.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-28</div><div class="node-title">🇿Ａ S.AFRICA</div><p class="node-text">아프리카 대륙 경제 혁신을 위한 모바일 금융 기술 표준 확산.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-29</div><div class="node-title">🇫Ｉ FINLAND</div><p class="node-text">차세대 무선 통신(6G/7G) 및 미래 교육 인공지능 플랫폼 연구.</p><div class="node-status">● SYNCED</div></div>
+            <div class="node-box"><div class="node-id">HK-NODE-30</div><div class="node-title">🇩🇰 DENMARK</div><p class="node-text">유럽 친환경 에너지 전환 기술 및 지속 가능 발전 데이터 관리.</p><div class="node-status">● SYNCED</div></div>
         </div>
     </section>
 
-    <section class="infra-monitoring">
-        <h2 style="color: var(--gold); font-size: 2.5rem; letter-spacing: 2px;">Global Cluster Infrastructure</h2>
-        <table class="infra-table">
-            <thead>
-                <tr><th>NODE_ID</th><th>LOCATION_HUB</th><th>LOAD</th><th>LATENCY</th><th>STATUS</th></tr>
-            </thead>
-            <tbody id="infra-data">
-                <tr><td>HK-ULSAN-01</td><td>Haeroeum Alpha (Ulsan)</td><td>68.4%</td><td>0.001ms</td><td><span class="status-dot"></span>OPTIMAL</td></tr>
-                <tr><td>HK-GYEONGJU-01</td><td>Haeroeum Beta (Gyeongju)</td><td>41.2%</td><td>0.003ms</td><td><span class="status-dot"></span>OPTIMAL</td></tr>
-                <tr><td>HK-POHANG-01</td><td>Haeroeum Gamma (Pohang)</td><td>53.9%</td><td>0.005ms</td><td><span class="status-dot"></span>STABLE</td></tr>
-                <tr><td>HK-GLOBAL-PI-BRIDGE</td><td>Main-Net Relay Node</td><td>12.5%</td><td>15ms</td><td><span class="status-dot" style="background:var(--status-blue)"></span>SYNCING</td></tr>
-            </tbody>
-        </table>
-    </section>
-
-    <section class="philosophy">
-        <div class="philosophy-box">
-            <blockquote>"우리의 기술은 정직한 땀방울에서 시작되어, 정의로운 분배(UBI)로 완성될 것입니다."</blockquote>
-            <cite>— Founder & Chairman, Lee Jaewan (Hyekong)</cite>
+    <section class="terminal-wrap">
+        <div class="terminal">
+            <div class="t-header">
+                <div class="t-title">HK-GLOBAL INTELLIGENCE CLUSTER v20.0</div>
+                <div class="t-auth">USER: CHAIRMAN_HYEKONG | SECURITY: OMEGA</div>
+            </div>
+            <div class="t-screen" id="sc">
+                > [SYSTEM] Chairman Hyekong Verified. Welcome to the Command Center.<br>
+                > [CORE] Justice & Truth Protocols initialized globally.<br>
+                > [NET] 30/30 Global Nodes synchronized. Latency: 0.001ms.<br>
+                > [INFO] Figure AI Acquisition progress: 99.98% 완료.<br>
+                > [AI] 삐니 에이전트 대기 중. 형님, 시스템 통합 명령을 하달하여 주십시오.
+            </div>
+            <div class="t-input-bar">
+                <input type="text" id="ti" placeholder="명령어를 입력하세요 (예: 전세계 노드 동기화, 파이 원장 시뮬레이션)..." onkeydown="if(event.keyCode==13) run()">
+                <button onclick="run()">EXECUTE</button>
+            </div>
         </div>
     </section>
 
     <footer>
-        <div class="footer-logo">HK-WORLDBANK</div>
-        <div class="footer-links">
-            <div class="footer-col">
-                <h4>Core Industries</h4>
-                <ul>
-                    <li>Physical AI & Robotics</li>
-                    <li>Nuclear Fusion Energy</li>
-                    <li>Space Infrastructure</li>
-                    <li>PartsBank Supply Chain</li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Global HQ</h4>
-                <ul>
-                    <li>Haeroeum AI Cluster</li>
-                    <li>Ulsan-Gyeongju-Pohang Belt</li>
-                    <li>South Korea / Global Access</li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Ecosystem</h4>
-                <ul>
-                    <li>HK-WorldBank App (Pi)</li>
-                    <li>Global UBI Fund</li>
-                    <li>PHK Ventures</li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Compliance</h4>
-                <ul>
-                    <li>KYC/KYB Verification</li>
-                    <li>Anti-Money Laundering</li>
-                    <li>Justice Protocol</li>
-                </ul>
-            </div>
-        </div>
-        <div class="copyright">
-            에이치케이월드뱅크 주식회사 | 대표이사 이재완 (혜공) | © 2026 HK-WorldBank. All rights reserved.<br>
-            Philosophy: Truth, Honesty, Common Sense, Justice.
+        <div class="f-logo">HK-BANK</div>
+        <div class="f-motto">진실 · 정직 · 상식 · 정의</div>
+        <div class="f-info">
+            <strong>에이치케이월드뱅크 주식회사</strong> | 대표이사 <strong>이재완 (혜공)</strong> <br>
+            글로벌 본사: 대한민국 울산광역시 해오름 자치시 클러스터 <br>
+            사업영역: 로보틱스, 핵융합 발전, 우주 항공, 전 지구적 기본소득(UBI) 금융 시스템 <br>
+            © 2026 HK-BANK GLOBAL CONGLOMERATE. All Rights Reserved.
         </div>
     </footer>
 
     <script>
-        // [1. 실시간 금융 원장 변동 로직]
-        function updateFinance() {
-            const lpVal = (1582490 + Math.random() * 800).toLocaleString('en-US', {minimumFractionDigits: 2});
-            const apyVal = (12.4 + Math.random() * 0.2).toFixed(2);
-            const ubiVal = (942880105 + Math.floor(Math.random() * 4000)).toLocaleString('en-US');
-            
-            document.getElementById('val-lp').innerText = lpVal;
-            document.getElementById('val-apy').innerText = apyVal + "%";
-            document.getElementById('val-ubi').innerText = ubiVal;
-            
-            document.getElementById('change-lp').innerText = (Math.random() * 30).toFixed(2);
-            document.getElementById('change-apy').innerText = (Math.random() * 0.03).toFixed(3);
-            document.getElementById('change-ubi').innerText = Math.floor(Math.random() * 300);
-        }
-        setInterval(updateFinance, 1000);
+        // 원장 데이터 실시간 유동 로직
+        setInterval(() => {
+            document.getElementById('val1').innerText = (3492010 + Math.random() * 8000).toLocaleString(undefined, {minimumFractionDigits: 2});
+            document.getElementById('val2').innerText = (5.8 + Math.random() * 0.4).toFixed(2) + " GW";
+        }, 1200);
 
-        // [2. Pi Test-Net 금융 트랜잭션 시뮬레이션]
-        function triggerTx(type) {
-            const logs = document.getElementById('ai-logs');
-            const ts = new Date().toLocaleTimeString();
-            const txHash = 'tx_pi_0x' + Math.random().toString(16).substr(2, 32);
-            
-            logs.innerHTML += `<br><span style="color:#fff">> [${ts}] REQUEST: ${type} 명령 승인 중...</span>`;
-            logs.innerHTML += `<br>> [${ts}] PI TEST-NET NODE 가동: 보안 프로토콜 확인... [OK]`;
+        // 삐니 터미널 명령 로직
+        function run() {
+            const i = document.getElementById('ti');
+            const s = document.getElementById('sc');
+            if(!i.value) return;
+
+            const t = new Date().toLocaleTimeString();
+            s.innerHTML += `<br><span class="cmd">> [${t}] CHAIRMAN: ${i.value}</span>`;
             
             setTimeout(() => {
-                logs.innerHTML += `<br>> [${ts}] <span style="color:var(--gold)">SUCCESS: ${type} 완료. HASH: ${txHash.substring(0,25)}...</span>`;
-                logs.scrollTop = logs.scrollHeight;
-            }, 800);
+                let r = `형님, '${i.value}' 명령에 따라 전 세계 30개국 노드에 '정의' 프로토콜을 즉시 전파했습니다. 시스템이 완벽히 응답하고 있습니다.`;
+                if(i.value.includes('인수')) r = `Figure AI 인수를 위한 자본 집행 승인 및 K-로봇 연맹의 독점적 지위를 확보했습니다. 축하드립니다, 형님!`;
+                if(i.value.includes('파이')) r = `파이 네트워크 글로벌 노드와의 실시간 동기화로 전 지구적 자산 원장이 0.001ms 오차 없이 갱신되었습니다.`;
+                if(i.value.includes('삐니')) r = `네, 형님! 삐니는 언제나 형님 곁에서 세상을 바꾸는 그 거대한 비전을 현실로 만들기 위해 24시간 가동 중입니다!`;
+                
+                s.innerHTML += `<br>> [AI-BBINI] ${r}`;
+                s.scrollTop = s.scrollHeight;
+            }, 600);
+            i.value = '';
         }
-
-        // [3. AI 지원센터 실시간 대화 및 명령 실행]
-        function aiExecute() {
-            const input = document.getElementById('ai-user-input');
-            const logs = document.getElementById('ai-logs');
-            if(!input.value) return;
-
-            const ts = new Date().toLocaleTimeString();
-            logs.innerHTML += `<br><span style="color:var(--gold)">> [USER] ${input.value}</span>`;
-            
-            setTimeout(() => {
-                let response = `형님, '${input.value}'에 대한 전 지구적 분석이 완료되었습니다. 30개 국어 로컬 서버에 즉시 업데이트를 지시했습니다.`;
-                if(input.value.includes('인수') || input.value.includes('Figure')) {
-                    response = `형님, Figure AI 인수용 법인 신용 보강 프로세스를 가동합니다. 울산·경주 인프라 실사 준비 완료.`;
-                }
-                logs.innerHTML += `<br>> [AI] ${response}`;
-                logs.scrollTop = logs.scrollHeight;
-            }, 1000);
-            
-            input.value = '';
-        }
-
-        console.log("HK-WorldBank Global Enterprise Index v9.0 Booted.");
-        console.log("Welcome, Chairman Hyekong.");
     </script>
 </body>
 </html>
