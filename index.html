@@ -3,296 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WORLD BANK | Protocol V23 | 2 Billion Salvation</title>
-    
-    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
+    <title>HK-WorldBank Global | Founder Hyekong</title>
     <style>
-        /* [70% IDENTITY: 혜공 형님의 럭셔리 다크 시스템] */
-        :root { 
-            --gold: #f1c40f; 
-            --gold-deep: #d4af37;
-            --gold-glow: rgba(241, 196, 15, 0.6);
-            --green: #00ff88; 
-            --bg: #000; 
-            --card: #0c0c0c; 
-            --border: #181818; 
-            --pink: #ff4d6d;
-            --cyan: #00d9ff;
-            --glass: rgba(255, 255, 255, 0.02);
+        :root {
+            --hk-gold: #D4AF37; --hk-dark: #020202; --hk-glass: rgba(255, 255, 255, 0.04);
+            --hk-border: rgba(212, 175, 55, 0.3); --hk-green: #00ff88;
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', 'Pretendard', sans-serif; }
-        body { background: var(--bg); color: #fff; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-
-        /* [Header: 글로벌 권위의 상징] */
-        header {
-            position: fixed; top: 0; width: 100%; height: 95px;
-            background: rgba(0,0,0,0.95); backdrop-filter: blur(40px);
-            display: flex; justify-content: flex-end; align-items: center;
-            padding: 0 35px; z-index: 10000; border-bottom: 2px solid var(--border);
-        }
-        .lang-trigger {
-            background: linear-gradient(145deg, #151515, #050505); color: var(--gold); border: 2.5px solid var(--gold);
-            padding: 15px 30px; border-radius: 22px; font-weight: 900;
-            display: flex; align-items: center; gap: 18px; cursor: pointer;
-            box-shadow: 0 0 35px var(--gold-glow); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .container { max-width: 540px; margin: 0 auto; padding: 140px 25px 200px; }
-
-        /* [Brand Identity] */
-        .brand-section { text-align: center; margin-bottom: 70px; }
-        .brand-h1 { 
-            font-size: 48px; font-weight: 900; color: var(--gold); 
-            letter-spacing: 10px; text-shadow: 0 15px 40px var(--gold-glow);
-            text-transform: uppercase; font-style: italic;
-        }
-
-        /* [70% IDENTITY: 메인 자산 통합 원장 카드] */
-        .asset-master-card {
-            background: var(--card); border-radius: 55px; padding: 65px 45px;
-            border: 1px solid var(--border); text-align: center; margin-bottom: 45px;
-            position: relative; overflow: hidden;
-            box-shadow: 0 60px 120px rgba(0,0,0,0.95);
-        }
-        .asset-master-card::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(241,196,15,0.08) 0%, transparent 65%);
-        }
-
-        .ledger-label { color: var(--gold); font-size: 18px; font-weight: 900; display: block; margin-bottom: 55px; letter-spacing: 3px; }
-        .balance-main { font-size: 82px; font-weight: 900; letter-spacing: -5px; line-height: 1; margin-bottom: 25px; }
-        .unit-pi { color: var(--gold); font-size: 44px; margin-left: 18px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        body { background: var(--hk-dark); color: #fff; font-family: 'Pretendard', sans-serif; overflow-x: hidden; }
         
-        .gcv-badge {
-            display: inline-block; border: 3px solid var(--green); color: var(--green);
-            padding: 18px 50px; border-radius: 90px; font-size: 24px; font-weight: 900;
-            margin: 45px 0; background: rgba(0, 255, 136, 0.15);
-            box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
-        }
+        .container { max-width: 600px; margin: 0 auto; padding: 25px; min-height: 100vh; position: relative; }
+        header { border-bottom: 2px solid #111; padding-bottom: 20px; margin-bottom: 20px; text-align: center; }
+        .logo h1 { font-size: 1.8rem; font-weight: 900; background: linear-gradient(135deg, #fff, var(--hk-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .logo p { font-size: 0.7rem; color: var(--hk-gold); font-weight: 800; letter-spacing: 3px; text-transform: uppercase; }
 
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 50px; }
-        .stat-item { background: #121212; padding: 38px; border-radius: 40px; text-align: left; border: 1px solid #202020; }
-        .stat-item label { color: var(--green); font-size: 15px; font-weight: 900; display: block; margin-bottom: 20px; }
-        .stat-item p { font-size: 34px; font-weight: 900; color: #fff; }
-
-        .liquidity-total {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent); 
-            padding: 55px; border-radius: 45px; border: 1px solid rgba(255, 255, 255, 0.1); text-align: center;
+        /* [50개국 국기 셀렉터 - 이모지 방식] */
+        .flag-grid-container { 
+            background: #0a0a0a; border-radius: 20px; padding: 15px; 
+            margin-bottom: 25px; border: 1px solid #1a1a1a;
         }
-        .liquidity-total label { font-size: 18px; color: #666; display: block; margin-bottom: 25px; font-weight: 800; }
-        .liquidity-total p { font-size: 44px; font-weight: 900; color: #fff; letter-spacing: -2px; }
-
-        /* [70% IDENTITY: 하단 3구 액션 버튼] */
-        .btn-action-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 50px 0; }
-        .btn-prime {
-            height: 95px; border-radius: 32px; border: none; font-size: 19px; font-weight: 900;
-            cursor: pointer; transition: 0.5s;
+        .flag-label { font-size: 0.65rem; color: #555; font-weight: 800; margin-bottom: 10px; display: block; }
+        .flag-grid { 
+            display: grid; grid-template-columns: repeat(10, 1fr); gap: 10px; 
+            max-height: 150px; overflow-y: auto; padding-right: 5px;
         }
-        .btn-w { background: #fff; color: #000; }
-        .btn-g { background: var(--gold); color: #000; box-shadow: 0 18px 40px var(--gold-glow); }
-        .btn-v { background: #27ae60; color: #fff; }
-
-        /* [70% IDENTITY: 서비스 6구 메뉴] */
-        .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-bottom: 60px; }
-        .service-card {
-            background: var(--card); aspect-ratio: 1/1; border-radius: 45px;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            border: 1px solid var(--glass); cursor: pointer; transition: 0.5s;
+        .flag-grid::-webkit-scrollbar { width: 3px; }
+        .flag-grid::-webkit-scrollbar-thumb { background: var(--hk-gold); border-radius: 10px; }
+        .flag-node { 
+            aspect-ratio: 1; display: flex; align-items: center; justify-content: center; 
+            font-size: 1.5rem; background: #111; border-radius: 8px; cursor: pointer; 
+            transition: 0.3s; opacity: 0.4; border: 1px solid #222;
         }
-        .service-card:hover { border-color: var(--gold); transform: translateY(-12px); box-shadow: 0 20px 40px rgba(241,196,15,0.1); }
-        .service-card i { color: var(--gold); font-size: 44px; margin-bottom: 25px; }
-        .service-card span { font-size: 18px; color: #777; font-weight: 900; }
+        .flag-node.active { opacity: 1; transform: scale(1.1); border-color: var(--hk-gold); background: #1a1a1a; box-shadow: 0 0 10px rgba(212, 175, 55, 0.3); }
 
-        /* [70% IDENTITY: HK 양자 방패 섹션] */
-        .shield-box {
-            background: #040404; border-radius: 55px; padding: 60px;
-            border: 1px solid rgba(0, 217, 255, 0.4); margin-bottom: 55px;
-            box-shadow: inset 0 0 40px rgba(0, 217, 255, 0.05);
+        /* [메인 자산 관리 센터] */
+        .main-ledger { 
+            background: linear-gradient(145deg, #111, #000); border-radius: 30px; padding: 40px 30px;
+            border: 1px solid var(--hk-border); box-shadow: 0 30px 60px rgba(0,0,0,1); margin-bottom: 30px;
         }
-        .shield-head { color: var(--cyan); font-weight: 900; font-size: 28px; margin-bottom: 45px; display: flex; align-items: center; gap: 22px; }
-        .shield-list { display: flex; align-items: center; gap: 25px; margin-bottom: 25px; font-size: 19px; color: #999; }
-        .shield-indicator { width: 10px; height: 32px; background: var(--cyan); border-radius: 16px; box-shadow: 0 0 20px var(--cyan); }
+        .label { font-size: 0.75rem; color: #666; font-weight: 700; letter-spacing: 2px; }
+        .val-main { font-size: 3.2rem; font-weight: 900; color: var(--hk-gold); margin: 15px 0; font-variant-numeric: tabular-nums; }
+        .status-row { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; font-weight: 700; color: var(--hk-green); }
+        .pulse { width: 10px; height: 10px; background: var(--hk-green); border-radius: 50%; box-shadow: 0 0 15px var(--hk-green); animation: pulse-anim 2s infinite; }
+        @keyframes pulse-anim { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-        /* [Global Support Action] */
-        .mega-support-btn {
-            width: 100%; background: var(--pink); color: #fff; padding: 45px;
-            border-radius: 55px; border: none; font-size: 28px; font-weight: 900;
-            box-shadow: 0 35px 80px rgba(255, 77, 109, 0.6); cursor: pointer; margin-bottom: 50px;
-        }
+        /* [실시간 데이터 그리드] */
+        .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
+        .data-box { background: var(--hk-glass); padding: 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.03); }
+        .d-label { font-size: 0.6rem; color: #555; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 8px; }
+        .d-val { font-size: 1.1rem; font-weight: 900; color: var(--hk-gold); font-variant-numeric: tabular-nums; }
 
-        /* [30% INNOVATION: 50개국 글로벌 성궤 레이어] */
-        #globalLayer {
-            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.99);
-            z-index: 50000; padding: 100px 30px; overflow-y: auto;
+        /* [양파 지원 센터 레이어] */
+        .onion-layer { 
+            position: fixed; bottom: -100%; left: 0; width: 100%; height: 94%; 
+            background: #050505; border-top: 4px solid var(--hk-gold); border-radius: 40px 40px 0 0;
+            z-index: 2000; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1); padding: 35px; overflow-y: auto;
         }
-        .nation-grid-master { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
-        .nation-item { 
-            background: #0f0f0f; padding: 35px; border-radius: 35px; border: 1px solid #252525;
-            text-align: left; font-size: 20px; font-weight: 900; cursor: pointer;
-            display: flex; align-items: center; gap: 22px; transition: 0.4s;
-        }
-        .nation-item:hover { border-color: var(--gold); background: #151515; transform: scale(1.05); }
+        .onion-layer.active { bottom: 0; }
+        .faq-box { margin-top: 30px; }
+        .faq-item { background: #0f0f0f; border-radius: 15px; margin-bottom: 12px; border: 1px solid #1a1a1a; }
+        .faq-q { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; font-weight: 800; font-size: 0.9rem; }
+        .faq-a { padding: 0 20px; height: 0; opacity: 0; transition: 0.4s; font-size: 0.85rem; color: #888; overflow: hidden; line-height: 1.7; }
+        .faq-item.open .faq-a { padding: 20px; height: auto; opacity: 1; border-top: 1px solid #111; }
 
+        /* [Bini AI Interface] */
+        .bini-panel { background: #000; border: 1.5px dashed var(--hk-gold); border-radius: 30px; padding: 30px; margin-top: 40px; }
+        .bini-chat { font-size: 0.95rem; color: #ddd; margin-bottom: 20px; line-height: 1.6; }
+        .chat-input { width: 100%; padding: 18px; border-radius: 12px; border: 1px solid #222; background: #0a0a0a; color: #fff; outline: none; }
+
+        .btn-call { width: 100%; padding: 22px; background: var(--hk-gold); color: #000; border: none; border-radius: 22px; font-weight: 900; font-size: 1.1rem; cursor: pointer; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); margin-top: 10px; }
+        footer { margin-top: 60px; padding: 40px 0; border-top: 1px solid #111; text-align: center; }
+        .footer-logo { font-size: 0.7rem; color: #444; letter-spacing: 3px; font-weight: 800; }
     </style>
 </head>
 <body>
 
-<div id="globalLayer">
-    <h2 style="color:var(--gold); text-align:center; margin-bottom:80px; font-size:42px; letter-spacing:5px; font-weight:900;">2 BILLION PEOPLE PROJECT</h2>
-    <div class="nation-grid-master" id="nationContainer"></div>
-    <button onclick="toggleGlobal(false)" style="margin:80px 0; width:100%; padding:40px; background:var(--gold); color:#000; border:none; border-radius:35px; font-weight:900; font-size:28px;">ACTIVATE SELECTION</button>
+<div class="container">
+    <header>
+        <div class="logo">
+            <h1 id="ui-brand">HK-WorldBank</h1>
+            <p id="ui-mission">GLOBAL UBI FOUNDATION</p>
+        </div>
+    </header>
+
+    <div class="flag-grid-container">
+        <span class="flag-label">GLOBAL REGION SELECT (50+)</span>
+        <div class="flag-grid" id="flag-grid">
+            </div>
+    </div>
+
+    <main>
+        <div class="main-ledger">
+            <div id="ui-ledger-label" class="label">Total Integrated Asset Ledger</div>
+            <div id="val-balance" class="val-main">314,159.2738</div>
+            <div class="status-row">
+                <div class="pulse"></div>
+                <span id="ui-status">실시간 기본소득 배분 가동 중</span>
+            </div>
+        </div>
+
+        <div class="data-grid">
+            <div class="data-box">
+                <span id="ui-label-apy" class="d-label">Staking APY</span>
+                <div id="val-apy" class="d-val">31.415%</div>
+            </div>
+            <div class="data-box">
+                <span id="ui-label-lp" class="d-label">Total LP Supply</span>
+                <div id="val-lp" class="d-val">$2,000,000,000</div>
+            </div>
+            <div class="data-box">
+                <span id="ui-label-dex" class="d-label">DEX Pi Stock</span>
+                <div id="val-dex" class="d-val">100,000,000 Pi</div>
+            </div>
+            <div class="data-box">
+                <span id="ui-label-yield" class="d-label">Yield Profit</span>
+                <div id="val-yield" class="d-val">0.00014 Pi</div>
+            </div>
+        </div>
+
+        <button class="btn-call" id="ui-btn-support" onclick="HK.toggleSupport()">글로벌 AI 공익 지원 센터</button>
+    </main>
+
+    <footer>
+        <div class="footer-logo">HK GROUP | 2,000,000,000 MISSION</div>
+        <div id="ui-founder" style="font-size:0.6rem; color:#666; margin-top:10px; font-weight:800;">Founder Lee Jaewan (Hyekong)</div>
+    </footer>
 </div>
 
-<header>
-    <div class="lang-trigger" onclick="toggleGlobal(true)">
-        <span id="f-icon">🇰🇷</span> <span id="f-name">KOREA</span> <i class="fas fa-chevron-down"></i>
-    </div>
-</header>
-
-<div class="container">
-    <div class="brand-section"><h1 class="brand-h1">HK WORLD BANK</h1></div>
-
-    <section class="asset-master-card" id="ledger-box">
-        <span class="ledger-label" id="l-txt">메인 자산 통합 원장</span>
-        <div class="balance-main">400.0212<span class="unit-pi">Pi</span></div>
-        <div class="gcv-badge">Value: $ 125,663,600 (GCV)</div>
-
-        <div class="stats-grid">
-            <div class="stat-item"><label id="st-l">스테이킹 이율</label><p>16.98%</p></div>
-            <div class="stat-item"><label id="yd-l">유동성 수익</label><p>26.38%</p></div>
-        </div>
-
-        <div class="liquidity-total">
-            <label id="lp-l">전체 유동성 LP 공급</label>
-            <p>$ 88,429,159,375</p>
-        </div>
-    </section>
-
-    <div class="btn-action-row">
-        <button class="btn-prime btn-w" id="b1">PI 수량</button>
-        <button class="btn-prime btn-g" id="b2">DEX 스왑</button>
-        <button class="btn-prime btn-v" id="b3">LP 공급</button>
+<div id="support-layer" class="onion-layer">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h2 id="ui-support-title" style="color:var(--hk-gold); font-size:1.4rem;">AI Support Layer</h2>
+        <button onclick="HK.toggleSupport()" style="background:none; border:none; color:#fff; font-size:2rem; cursor:pointer;">×</button>
     </div>
 
-    <section class="service-grid">
-        <div class="service-card"><i class="fas fa-paper-plane"></i><span id="m1">송금</span></div>
-        <div class="service-card"><i class="fas fa-shopping-cart"></i><span id="m2">결제</span></div>
-        <div class="service-card"><i class="fas fa-vault"></i><span id="m3">예치</span></div>
-        <div class="service-card"><i class="fas fa-medal"></i><span id="m4">보상</span></div>
-        <div class="service-card"><i class="fas fa-hand-holding-usd"></i><span id="m5">기본소득</span></div>
-        <div class="service-card"><i class="fas fa-sync-alt"></i><span id="m6">스왑</span></div>
-    </section>
+    <div class="faq-box" id="faq-box"></div>
 
-    <section class="shield-box">
-        <div class="shield-head" id="sh-h"><i class="fas fa-shield-alt"></i> HK 양자 방패 가동 중</div>
-        <div class="shield-list"><div class="shield-indicator"></div> <span id="s1">보안 기술 V23 적용 완료</span></div>
-        <div class="shield-list"><div class="shield-indicator"></div> <span id="s2">메인넷 자산 실시간 자동 연동</span></div>
-        <div class="shield-list"><div class="shield-indicator"></div> <span id="s3">AI 기반 이상 징후 즉시 차단</span></div>
-    </section>
-
-    <button class="mega-support-btn" id="ai-l">글로벌 AI 고객지원센터 가동</button>
-    
-    <div style="display: flex; gap: 25px; padding-bottom: 100px;">
-        <button style="flex:1; background:#f00; color:#fff; padding:35px; border-radius:40px; border:none; font-weight:900; font-size:20px;"><i class="fab fa-youtube"></i> YouTube</button>
-        <button style="flex:1; background:#fff; color:#000; padding:35px; border-radius:40px; border:none; font-weight:900; font-size:20px;"><i class="fab fa-tiktok"></i> TikTok</button>
+    <div class="bini-panel">
+        <div style="font-weight:900; color:var(--hk-gold); font-size:0.8rem; margin-bottom:12px;">BINI OS v3.0</div>
+        <div class="bini-chat" id="ui-welcome-chat">환영합니다. 형님의 비전을 위해 무엇을 도와드릴까요?</div>
+        <input type="text" class="chat-input" placeholder="Message Bini AI...">
+        <p style="font-size:0.65rem; color:#444; margin-top:20px; text-align:center;">AI 미해결 시 삐니 직접 지원: support@hkwb.ai.kr</p>
     </div>
 </div>
 
 <script>
-    // [30% INNOVATION: 50개국 글로벌 인류 구제 마스터 DB]
-    const masterData = [
-        {f:"🇰🇷", n:"한국어", l:"메인 자산 통합 원장", lp:"전체 유동성 LP 공급", b:["PI 수량","DEX 스왑","LP 공급"], m:["송금","결제","예치","보상","기본소득","스왑"], sh:"HK 양자 방패 가동 중", ai:"글로벌 AI 고객지원센터 가동", s:["보안 기술 V23 적용","메인넷 실시간 연동","이상 징후 즉시 차단"]},
-        {f:"🇺🇸", n:"English", l:"Main Integrated Ledger", lp:"Total Liquidity LP Supply", b:["PI Amount","DEX Swap","LP Supply"], m:["Send","Pay","Vault","Reward","UBI","Swap"], sh:"HK Quantum Shield Active", ai:"Launch Global AI Support", s:["V23 Security Active","Mainnet Auto-Sync","Instant AI Protection"]},
-        {f:"🇻🇳", n:"Tiếng Việt", l:"Sổ cái tài sản chính", lp:"Tổng thanh khoản LP", b:["Số lượng PI","DEX Swap","Cung cấp LP"], m:["Gửi tiền","Thanh toán","Gửi tiết kiệm","Phần thưởng","Thu nhập","Hoán đổi"], sh:"Khiên lượng tử HK", ai:"Khởi động Trung tâm AI", s:["Bảo mật V23 hoạt động","Đồng bộ Mainnet","Chặn mối đe dọa"]},
-        {f:"🇯🇵", n:"日本語", l:"メイン資産元帳", lp:"総流動性LP供給", b:["PI数量","DEXスワップ","LP供給"], m:["送金","決済","預金","報酬","基本所得","スワップ"], sh:"HK量子シールド稼働", ai:"AIサポート起動", s:["V23保護適用中","メインネット連動","異常検知即時遮断"]},
-        {f:"🇨🇳", n:"中文", l:"主资产整合账本", lp:"总流动性LP供应", b:["PI数量","DEX闪兑","LP供应"], m:["转账","支付","存款","奖励","基本收入","闪兑"], sh:"HK量子护盾启动", ai:"启动全球AI中心", s:["V23安全协议","主网实时同步","AI异常屏蔽"]},
-        {f:"🇮🇩", n:"Bahasa", l:"Buku Besar Utama", lp:"Total Likuiditas LP", b:["Jumlah PI","DEX Swap","Pasokan LP"], m:["Kirim","Bayar","Brankas","Hadiah","UBI","Tukar"], sh:"Perisai Kuantum HK", ai:"Luncurkan Dukungan AI", s:["Keamanan V23 Aktif","Sinkronisasi Mainnet","Blokir Ancaman"]},
-        {f:"🇹🇭", n:"ภาษาไทย", l:"บัญชีหลัก", lp:"สภาพคล่อง LP ทั้งหมด", b:["จำนวน PI","DEX Swap","จัดหา LP"], m:["ส่ง","จ่าย","ห้องนิรภัย","รางวัล","UBI","แลกเปลี่ยน"], sh:"โล่ควอนตัม HK", ai:"เปิดศูนย์ AI Global", s:["ความปลอดภัย V23","ซิงค์ Mainnet","AI บล็อกภัย"]},
-        {f:"🇵🇭", n:"Tagalog", l:"Main Integrated Ledger", lp:"Total Liquidity LP", b:["PI Halaga","DEX Swap","LP Supply"], m:["Ipadala","Magbayad","Vault","Gantimpala","UBI","Swap"], sh:"HK Quantum Shield", ai:"Ilunsad ang AI Support", s:["Security V23","Mainnet Auto-Sync","AI Proteksyon"]},
-        {f:"🇮🇳", n:"हिन्दी", l:"मुख्य बही", lp:"कुल तरलता एलपी", b:["PI राशि","DEX स्वैप","LP आपूर्ति"], m:["भेजें","भुगतान","वॉल्ट","पुरस्कार","UBI","स्वैप"], sh:"HK क्वांटम शील्ड", ai:"AI सहायता शुरू करें", s:["V23 सुरक्षा लागू","मेन넷 सिंक","AI सुरक्षा"]},
-        {f:"🇧🇷", n:"Português", l:"Livro Principal", lp:"Liquidez Total LP", b:["Qtd PI","DEX Swap","Suprimento LP"], m:["Enviar","Pagar","Cofre","Recompensa","UBI","Trocar"], sh:"Escudo Quântico HK", ai:"Lançar Suporte AI", s:["Segurança V23","Sincronia Mainnet","AI Proteção"]},
-        {f:"🇹🇷", n:"Türkçe", l:"Ana Varlık Defteri", lp:"Toplam Likidite LP", b:["PI Tutarı","Takas","LP Arzı"], m:["Gönder","Öde","Kasa","Ödül","UBI","Takas"], sh:"HK Kuantum Kalkanı", ai:"AI Desteğini Başlat", s:["V23 Güvenliği","Mainnet Senkronize","AI Koruma"]},
-        {f:"🇷🇺", n:"Русский", l:"Главный реестр", lp:"Общий пул LP", b:["PI Кол-во","Своп","LP Поставка"], m:["Отправить","Оплата","Сейф","Награда","UBI","Обмен"], sh:"Квантовый щит HK", ai:"Запуск AI поддержки", s:["Защита V23","Синхронизация","AI Блокировка"]},
-        {f:"🇩🇪", n:"Deutsch", l:"Hauptledger", lp:"Gesamt-Liquidität LP", b:["PI Menge","DEX Swap","LP Zufuhr"], m:["Senden","Zahlen","Tresor","Belohnung","UBI","Tausch"], sh:"HK Quantenschild", ai:"AI Support Starten", s:["V23 Sicherheit","Mainnet-Sync","AI Schutz"]},
-        {f:"🇫🇷", n:"Français", l:"Grand livre", lp:"Liquidité Totale LP", b:["Montant PI","DEX Swap","Apport LP"], m:["Envoyer","Payer","Coffre","Récompense","UBI","Échanger"], sh:"Bouclier Quantique HK", ai:"Lancer Support AI", s:["Sécurité V23","Sync Mainnet","AI Protection"]},
-        {f:"🇪🇸", n:"Español", l:"Libro Mayor", lp:"Liquidez Total LP", b:["Cantidad PI","DEX Swap","Suministro LP"], m:["Enviar","Pagar","Bóveda","Premio","UBI","Canje"], sh:"Escudo Cuántico HK", ai:"Iniciar Soporte AI", s:["Seguridad V23","Sincronía Mainnet","AI Bloqueo"]},
-        {f:"🇳🇬", n:"Yoruba", l:"Ledger Akọkọ", lp:"Liquidity LP lapapọ", b:["PI Amount","DEX Swap","LP Supply"], m:["Firanse","Sanwo","Vault","Ere","UBI","Swap"], sh:"HK Quantum Shield", ai:"Launch AI Support", s:["V23 Security","Mainnet Sync","AI Protection"]},
-        {f:"🇵🇰", n:"اردو", l:"مین لیجر", lp:"کل لیکویڈیٹی ایل پی", b:["PI رقم","تبادلہ","ایل پی سپلائی"], m:["بھجیں","ادائیگی","والٹ","انعام","UBI","تبادلہ"], sh:"HK کوانٹم شیلڈ", ai:"AI سپورٹ شروع کریں", s:["V23 سیکیورٹی","مین نیٹ سنک","AI تحفظ"]},
-        {f:"🇧🇩", n:"বাংলা", l:"প্রধান লেজার", lp:"মোট তারল্য এলপি", b:["PI পরিমাণ","অদলবদল","এলপি সরবরাহ"], m:["পাঠান","পেমেন্ট","ভল্ট","পুরস্কার","UBI","বিনিময়"], sh:"HK কোয়ান্টাম শিল্ড", ai:"AI সমর্থন শুরু করুন", s:["V23 নিরাপত্তা","মেননেট সিঙ্ক","AI সুরক্ষা"]},
-        {f:"🇮🇷", n:"فارسی", l:"دفتر کل اصلی", lp:"کل نقدینگی LP", b:["مقدار PI","معاوضه","تأمین LP"], m:["ارسال","پرداخت","خزانه","پاداش","UBI","تبادل"], sh:"سپر کوانتومی HK", ai:"راه اندازی پشتیبانی AI", s:["امنیت V23","همگام سازی مین نت","محافظت AI"]},
-        {f:"🇿🇦", n:"isiZulu", l:"I-Ledger Enkhulu", lp:"I-Liquidity LP", b:["Inani le-PI","DEX Swap","LP Supply"], m:["Thumela","Khokha","Vault","Umklomelo","UBI","Swap"], sh:"HK Quantum Shield", ai:"Qala Ukusekelwa AI", s:["V23 Ezokuphepha","Mainnet Sync","AI Ukuvikelwa"]},
-        {f:"🇪🇹", n:"አማርኛ", l:"ዋ나 ደብተር", lp:"ጠቅላላ ፈሳሽ LP", b:["የ PI መጠን","DEX ስዋፕ","LP አቅርቦት"], m:["ላክ","ክፈል","ቮልት","ሽልมาት","UBI","ቀይር"], sh:"HK ኳንተም ጋሻ", ai:"AI ድጋፍ ይጀምሩ", s:["V23 ደህንነት","ሜይንኔት ሲንክ","AI ጥበቃ"]},
-        {f:"🇰🇪", n:"Swahili", l:"Leja Kuu", lp:"Ukosefu wa LP", b:["Kiasi cha PI","DEX Swap","Ugavi wa LP"], m:["Tuma","Lipa","Vault","Tuzo","UBI","Badilisha"], sh:"Ngao ya Quantum HK", ai:"Anza Msaada wa AI", s:["Usalama wa V23","Sync ya Mainnet","AI Ulinzi"]},
-        {f:"🇲🇲", n:"မြန်မာ", l:"အဓိက စာရင်း", lp:"စုစုပေါင်း LP", b:["PI ပမာဏ","DEX လဲလှယ်","LP ထောက်ပံ့"], m:["ပို့မည်","ပေးမည်","သိမ်းမည်","ဆုလာဘ်","UBI","လဲလှယ်"], sh:"HK ကွမ်တမ် ဒိုင်း", ai:"AI ပံ့ပိုးမှု စတင်ပါ", s:["V23 လုံခြုံရေး","Mainnet ချိတ်ဆက်မှု","AI ကာကွယ်ရေး"]},
-        {f:"🇳🇵", n:"नेपाली", l:"मुख्य खाता", lp:"कुल तरलता एलपी", b:["PI रकम","DEX स्वैप","LP आपूर्ति"], m:["पठाउनुहोस्","तिर्नुहोस्","भल्ट","पुरस्कार","UBI","स्वैप"], sh:"HK क्वांटम शिल्ड", ai:"AI समर्थन सुरु गर्नुहोस्", s:["V23 सुरक्षा","मेननेट सिंक","AI सुरक्षा"]},
-        {f:"🇺🇿", n:"O'zbek", l:"Asosiy registr", lp:"Jami likvidlik LP", b:["PI miqdori","DEX almashish","LP ta'minoti"], m:["Yuborish","To'lash","Ombor","Mukofot","UBI","Almashish"], sh:"HK kvant qalqoni", ai:"AI qo'llab-quvvatlash", s:["V23 xavfsizlik","Mainnet sinxron","AI himoya"]},
-        {f:"🇰🇿", n:"Қазақша", l:"Негізгі тізілім", lp:"Жалпы өтімділік LP", b:["PI мөлшері","DEX Своп","LP жеткізу"], m:["Жіберу","Төлеу","Сейф","Сыйлық","UBI","Айырбас"], sh:"HK Кванттық қалқаны", ai:"AI қолдауды қосу", s:["V23 қауіпсіздігі","Мейннет синхр.","AI қорғаныс"]},
-        {f:"🇲🇾", n:"Melayu", l:"Buku Besar Utama", lp:"Jumlah Kecairan LP", b:["Aun PI","DEX Swap","Bekalan LP"], m:["Hantar","Bayar","Vault","Ganjaran","UBI","Tukar"], sh:"Perisai Kuantum HK", ai:"Lancarkan AI Sokongan", s:["V23 Keselamatan","Mainnet Segerak","AI Perlindungan"]},
-        {f:"🇵🇱", n:"Polski", l:"Główna Księga", lp:"Całkowita Płynność LP", b:["Ilość PI","DEX Swap","Podaż LP"], m:["Wyślij","Zapłać","Skarbiec","Nagroda","UBI","Zamień"], sh:"Kwantowa Tarcza HK", ai:"Uruchom AI Support", s:["V23 Bezpieczeństwo","Sync Mainnet","AI Ochrona"]},
-        {f:"🇺🇦", n:"Українська", l:"Головний реєстр", lp:"Загальна ліквідність LP", b:["Кількість PI","Своп","LP Поставка"], m:["Надіслати","Оплата","Сейф","Нагорода","UBI","Обмін"], sh:"Квантовий щит HK", ai:"Запуск AI підтримки", s:["Захист V23","Синхронізація","AI Блокування"]},
-        {f:"🇬🇭", n:"Twi", l:"Asset Ledger", lp:"Liquidity LP Nyinaa", b:["PI Dodow","DEX Swap","LP Supply"], m:["Mene","Tua","Vault","Akyɛdeɛ","UBI","Swap"], sh:"HK Quantum Shield", ai:"Fi ase AI Support", s:["V23 Banbɔ","Mainnet Sync","AI Protection"]},
-        {f:"🇲🇽", n:"Español(MX)", l:"Libro Mayor", lp:"Liquidez Total LP", b:["Cantidad PI","DEX Swap","Suministro LP"], m:["Enviar","Pagar","Bóveda","Premio","UBI","Canje"], sh:"Escudo Cuántico HK", ai:"Iniciar Soporte AI", s:["Seguridad V23","Sincronía Mainnet","AI Protección"]},
-        {f:"🇮🇹", n:"Italiano", l:"Libro Mastro", lp:"Liquidità Totale LP", b:["Quantità PI","DEX Swap","Fornitura LP"], m:["Invia","Paga","Caveau","Premio","UBI","Scambia"], sh:"Scudo Quantistico HK", ai:"Lancia Supporto AI", s:["Sicurezza V23","Sync Mainnet","AI Protezione"]},
-        {f:"🇳🇱", n:"Nederlands", l:"Hoofdledger", lp:"Totale Liquiditeit LP", b:["PI Hoeveelheid","Swap","LP Aanbod"], m:["Verzenden","Betalen","Kluis","Beloning","UBI","Ruilen"], sh:"HK Kwantum Schild", ai:"Start AI Support", s:["V23 Beveiliging","Mainnet Sync","AI Bescherming"]},
-        {f:"🇸🇪", n:"Svenska", l:"Huvudledger", lp:"Total Likviditet LP", b:["PI Mängd","DEX Swap","LP Tillgång"], m:["Skicka","Betala","Valv","Belöning","UBI","Byt"], sh:"HK Kvantumsköld", ai:"Starta AI-stöd", s:["V23 Säkerhet","Mainnet-synk","AI-skydd"]},
-        {f:"🇵🇹", n:"Português(PT)", l:"Livro Integrado", lp:"Liquidez Total LP", b:["Qtd PI","DEX Swap","Suprimento LP"], m:["Enviar","Pagar","Cofre","Prémio","UBI","Trocar"], sh:"Escudo Quântico HK", ai:"Lançar Suporte AI", s:["Segurança V23","Sincronia Mainnet","AI Proteção"]},
-        {f:"🇬🇷", n:"Ελληνικά", l:"Κύριο Καθολικό", lp:"Συνολική Ρευστότητα LP", b:["Ποσό PI","DEX Swap","Προμήθεια LP"], m:["Αποστολή","Πληρωμή","Θησαυροφυλάκιο","Αμοιβή","UBI","Αλλαγή"], sh:"Κβαντική Ασπίδα HK", ai:"Έναρξη AI Support", s:["Ασφάλεια V23","Sync Mainnet","AI Προστασία"]},
-        {f:"🇭🇺", n:"Magyar", l:"Főkönyvi Eszköz", lp:"Összes Likviditás LP", b:["PI Mennyiség","DEX Swap","LP Ellátás"], m:["Küldés","Fizetés","Széf","Jutalom","UBI","Csere"], sh:"HK Kvantum Pajzs", ai:"AI Támogatás Indítása", s:["V23 Biztonság","Mainnet Szinkron","AI Védelem"]},
-        {f:"🇨🇿", n:"Čeština", l:"Hlavní Knihovna", lp:"Celková Likvidita LP", b:["PI Množství","DEX Swap","LP Nabídka"], m:["Poslat","Platit","Trezor","Odměna","UBI","Vyměnit"], sh:"HK Kvantový Štít", ai:"Spustit AI Podporu", s:["Zabezpečení V23","Mainnet Sync","AI Ochrana"]},
-        {f:"🇷🇴", n:"Română", l:"Registru Principal", lp:"Lichiditate Totală LP", b:["Cantitate PI","DEX Swap","Furnizare LP"], m:["Trimite","Plătește","Seif","Premiu","UBI","Schimbă"], sh:"Scut Cuantic HK", ai:"Lansare Suport AI", s:["Securitate V23","Mainnet Sync","AI Protecție"]},
-        {f:"🇰🇭", n:"ភាសាខ្មែរ", l:"សៀវភៅបញ្ជីមេ", lp:"សាច់ប្រាក់ងាយស្រួល LP", b:["ចំនួន PI","DEX Swap","ការផ្គត់ផ្គង់ LP"], m:["ផ្ញើ","បង់ប្រាក់","តុដេក","រង្វាន់","UBI","ដូរ"], sh:"របាំងកង់ទិច HK", ai:"បើកមជ្ឈមណ្ឌល AI", s:["សុវត្ថិភាព V23","Mainnet Sync","ការការពារ AI"]},
-        {f:"🇱🇦", n:"ພາສາລາວ", l:"ບັນຊີແຍກປະເພດມະຫາຊົນ", lp:"ສະພາບຄ່ອງ LP ທັງໝົດ", b:["ຈຳນວນ PI","DEX Swap","ການສະໜອງ LP"], m:["ສົ່ງ","ຈ່າຍ","ຫ້ອງນິລະໄພ","ລາງວັນ","UBI","ແລກປ່ຽນ"], sh:"ກຳແພງຄວນຕຳ HK", ai:"ເປີດສູນ AI Global", s:["ຄວາມປອດໄພ V23","Sync Mainnet","ປ້ອງກັນ AI"]},
-        {f:"🇸🇬", n:"English(SG)", l:"Master Asset Ledger", lp:"Total Liquidity LP Supply", b:["PI Balance","DEX Swap","LP Supply"], m:["Remit","Pay","Vault","Reward","UBI","Swap"], sh:"HK Quantum Shield Active", ai:"Launch Global AI Center", s:["V23 Protocol Active","Mainnet Auto-Sync","AI Threat Block"]},
-        {f:"🇦🇺", n:"English(AU)", l:"Core Asset Ledger", lp:"Total Liquidity LP Pool", b:["PI Total","DEX Swap","LP Supply"], m:["Send","Pay","Vault","Reward","UBI","Swap"], sh:"HK Quantum Shield", ai:"Launch AI Support", s:["V23 Secure","Mainnet Real-time","AI Guard"]},
-        {f:"🇨🇦", n:"English(CA)", l:"Global Asset Ledger", lp:"Total Liquidity LP Value", b:["PI Quantity","DEX Swap","LP Supply"], m:["Transfer","Pay","Safe","Reward","UBI","Exchange"], sh:"HK Quantum Shield Active", ai:"Global AI Helpdesk", s:["V23 Security","Mainnet Sync","AI Protection"]},
-        {f:"🇮🇪", n:"Gaeilge", l:"Príomhleabhar Sócmhainní", lp:"Leachtacht Iomlán LP", b:["Méid PI","DEX Babhtáil","LP Soláthar"], m:["Seol","Íoc","Vóta","Luach saothair","UBI","Babhtáil"], sh:"Sciath Quantum HK", ai:"Tacaíocht AI a Sheoladh", s:["Slándáil V23","Sync Mainnet","Cosaint AI"]},
-        {f:"🇳🇴", n:"Norsk", l:"Hovedbok", lp:"Total Likviditet LP", b:["PI Antall","DEX Bytte","LP Tilgang"], m:["Send","Betal","Hvelv","Belønning","UBI","Bytte"], sh:"HK Kvantumskjold", ai:"Start AI-støtte", s:["V23 Sikkerhet","Mainnet Synk","AI-beskyttelse"]},
-        {f:"🇫🇮", n:"Suomi", l:"Pääkirjanpito", lp:"Kokonaislikviditeetti LP", b:["PI Määrä","DEX Vaihto","LP Tarjonta"], m:["Lähetä","Maksa","Holvi","Palkinto","UBI","Vaihda"], sh:"HK Kvanttikilpi", ai:"Käynnistä AI-tuki", s:["V23 Suojaus","Mainnet Synkronointi","AI-suojaus"]},
-        {f:"🇩🇰", n:"Dansk", l:"Hovedledger", lp:"Total Likviditet LP", b:["PI Mængde","DEX Swap","LP Forsyning"], m:["Send","Betal","Boks","Belønning","UBI","Byt"], sh:"HK Kvantumskjold", ai:"Start AI-support", s:["V23 Sikkerhed","Mainnet Synkronisering","AI-beskyttelse"]},
-        {f:"🇮🇱", n:"עברית", l:"ספר נכסים ראשי", lp:"נזילות כוללת LP", b:["כמות PI","החלפת DEX","אספקת LP"], m:["שלח","שלם","כספת","תגמול","UBI","החלפה"], sh:"מגן קוונטי HK", ai:"הפעל תמיכת AI", s:["אבטחת V23 פעילה","סנכרון מייננט","הגנת AI"]},
-        {f:"🇦🇪", n:"العربية", l:"دفتر الأصول الرئيسي", lp:"إجمالي السيولة LP", b:["کمية PI","DEX تبادل","توريد LP"], m:["إرسال","دفع","خزنة","مكافأة","UBI","تبادل"], sh:"درع HK الكمي", ai:"إطلاق دعم AI العالمي", s:["تطبيق أمان V23","مزامنة الشبكة","حماية AI"]}
-    ];
+/**
+ * HK-WorldBank Megabuild v5.0
+ * Founder: Hyekong
+ */
+const HK_CORE = {
+    state: { balance: 314159.2738, apy: 31.415, lp: 2000000000, dex: 100000000, yield: 0.00014, lang: 'ko' },
+    
+    // 50개국 국기 데이터
+    flags: [
+        {c: '🇰🇷', l: 'ko'}, {c: '🇺🇸', l: 'en'}, {c: '🇨🇳', l: 'en'}, {c: '🇯🇵', l: 'en'}, {c: '🇻🇳', l: 'en'},
+        {c: '🇮🇳', l: 'en'}, {c: '🇩🇪', l: 'en'}, {c: '🇫🇷', l: 'en'}, {c: '🇵🇭', l: 'en'}, {c: '🇮🇩', l: 'en'},
+        {c: '🇬🇧', l: 'en'}, {c: '🇧🇷', l: 'en'}, {c: '🇨🇦', l: 'en'}, {c: '🇦🇺', l: 'en'}, {c: '🇷🇺', l: 'en'},
+        {c: '🇮🇹', l: 'en'}, {c: '🇪🇸', l: 'en'}, {c: '🇹🇷', l: 'en'}, {c: '🇲🇽', l: 'en'}, {c: '🇹🇭', l: 'en'},
+        {c: '🇸🇦', l: 'en'}, {c: '🇿🇦', l: 'en'}, {c: '🇦🇪', l: 'en'}, {c: '🇸🇬', l: 'en'}, {c: '🇲🇾', l: 'en'},
+        {c: '🇪🇬', l: 'en'}, {c: '🇳🇬', l: 'en'}, {c: '🇦🇷', l: 'en'}, {c: '🇳🇱', l: 'en'}, {c: '🇸위', l: 'en'},
+        {c: '🇸🇪', l: 'en'}, {c: '🇵🇱', l: 'en'}, {c: '🇳🇴', l: 'en'}, {c: '🇮🇱', l: 'en'}, {c: '🇧🇪', l: 'en'},
+        {c: '🇦스트리아', l: 'en'}, {c: '🇵tugal', l: 'en'}, {c: '🇨🇱', l: 'en'}, {c: '🇨🇴', l: 'en'}, {c: '🇵🇪', l: 'en'},
+        {c: '🇳🇿', l: 'en'}, {c: '🇮🇪', l: 'en'}, {c: '🇫🇮', l: 'en'}, {c: '🇩🇰', l: 'en'}, {c: '🇺🇦', l: 'en'},
+        {c: '🇵🇰', l: 'en'}, {c: '🇧🇩', l: 'en'}, {c: '🇶🇦', l: 'en'}, {c: '🇰🇼', l: 'en'}, {c: '🇰🇿', l: 'en'}
+    ],
 
-    function toggleGlobal(show) { 
-        document.getElementById('globalLayer').style.display = show ? 'block' : 'none'; 
-        if(show) gsap.from(".nation-item", {duration: 0.6, y: 30, opacity: 0, stagger: 0.05, ease: "back.out(1.7)"});
-    }
+    i18n: {
+        ko: { brand: "HK-월드뱅크", mission: "20억 인류 구제 미션", ledger: "통합 자산 관리 원장", st: "실시간 기본소득 배분 가동 중", apy: "스테이킹 연이율(APY)", lp: "전체 유동성(LP) 공급", dex: "DEX 파이 유동성", yield: "초당 이정선 수익", support: "글로벌 AI 공익 지원 센터 (ON)", founder: "설립자 및 회장: 이재완 (혜공)", welcome: "환영합니다. 무엇을 도와드릴까요?", q: ["파이 채굴 방법", "KYC 인증 지연", "기본소득 지급일", "HK 비전 설명", "노드 보상 체계", "DEX 이용 가이드", "LP 공급 방법", "계정 보안 강화", "비밀구절 분실", "국가별 정책", "에코시스템 참여", "메인넷 마이그레이션", "기술 지원 요청", "버그 리포트", "설립자 철학"] },
+        en: { brand: "HK-WorldBank", mission: "2B People Relief Mission", ledger: "Global Asset Ledger", st: "Live UBI Distribution Active", apy: "Staking APY", lp: "Total LP Supply", dex: "DEX Pi Liquidity", yield: "Yield per Second", support: "Global AI Support Center", founder: "Founder & Chairman: Lee Jaewan (Hyekong)", welcome: "Welcome. How can I assist you?", q: ["How to mine Pi", "KYC Pending issues", "UBI Payment date", "HK Vision", "Node Rewards", "DEX Guide", "LP Supply method", "Security setup", "Lost Passphrase", "Global policies", "Ecosystem", "Mainnet Migration", "Tech Support", "Bug Report", "Founder Message"] }
+    },
 
-    function applyNation(idx) {
-        const n = masterData[idx];
-        document.getElementById('f-icon').innerText = n.f;
-        document.getElementById('f-name').innerText = n.n;
-        document.getElementById('l-txt').innerText = n.l;
-        document.getElementById('lp-l').innerText = n.lp;
-        document.getElementById('sh-h').innerHTML = `<i class="fas fa-shield-alt"></i> ${n.sh}`;
-        document.getElementById('ai-l').innerText = n.ai;
-        for(let i=0; i<3; i++) {
-            document.getElementById(`b${i+1}`).innerText = n.b[i];
-            document.getElementById(`s${i+1}`).innerText = n.s[i];
-        }
-        for(let i=0; i<6; i++) document.getElementById(`m${i+1}`).innerText = n.m[i];
-        toggleGlobal(false);
-        gsap.from(".container", {duration: 1, opacity: 0, y: 120, ease: "power4.out"});
-    }
+    init() {
+        this.renderFlags();
+        this.renderFAQ();
+        this.startEngine();
+    },
 
-    const container = document.getElementById('nationContainer');
-    masterData.forEach((n, idx) => {
-        const item = document.createElement('div');
-        item.className = 'nation-item';
-        item.innerHTML = `<span style="font-size:36px;">${n.f}</span> ${n.n}`;
-        item.onclick = () => applyNation(idx);
-        container.appendChild(item);
-    });
+    renderFlags() {
+        const grid = document.getElementById('flag-grid');
+        this.flags.forEach((f, i) => {
+            const node = document.createElement('div');
+            node.className = `flag-node ${i===0?'active':''}`;
+            node.innerText = f.c;
+            node.onclick = (e) => this.switchLang(f.l, node);
+            grid.appendChild(node);
+        });
+    },
 
-    window.onload = () => {
-        gsap.from(".brand-h1", {duration: 1.8, y: -100, opacity: 0, ease: "elastic.out(1, 0.3)"});
-        gsap.from("#ledger-box", {duration: 1.5, scale: 0.85, opacity: 0, delay: 0.8, ease: "expo.out"});
-        gsap.from(".service-card", {duration: 0.8, y: 60, opacity: 0, stagger: 0.1, delay: 1.5, ease: "power3.out"});
-    };
+    startEngine() {
+        setInterval(() => {
+            this.state.balance += (Math.random() * 0.01);
+            this.state.apy += (Math.random() - 0.5) * 0.002;
+            this.state.lp += (Math.random() * 250);
+            this.state.dex += (Math.random() * 40);
+            this.state.yield += (Math.random() * 0.00003);
+            this.updateUI();
+        }, 1500);
+    },
+
+    updateUI() {
+        document.getElementById('val-balance').innerText = this.state.balance.toLocaleString(undefined, {minimumFractionDigits: 4});
+        document.getElementById('val-apy').innerText = this.state.apy.toFixed(3) + "%";
+        document.getElementById('val-lp').innerText = "$" + this.state.lp.toLocaleString();
+        document.getElementById('val-dex').innerText = this.state.dex.toLocaleString() + " Pi";
+        document.getElementById('val-yield').innerText = this.state.yield.toFixed(5) + " Pi";
+    },
+
+    switchLang(lang, el) {
+        this.state.lang = lang;
+        document.querySelectorAll('.flag-node').forEach(n => n.classList.remove('active'));
+        el.classList.add('active');
+        const d = this.i18n[lang] || this.i18n['en'];
+        
+        document.getElementById('ui-brand').innerText = d.brand;
+        document.getElementById('ui-mission').innerText = d.mission;
+        document.getElementById('ui-ledger-label').innerText = d.ledger;
+        document.getElementById('ui-status').innerText = d.st;
+        document.getElementById('ui-label-apy').innerText = d.apy;
+        document.getElementById('ui-label-lp').innerText = d.lp;
+        document.getElementById('ui-label-dex').innerText = d.dex;
+        document.getElementById('ui-label-yield').innerText = d.yield;
+        document.getElementById('ui-btn-support').innerText = d.support;
+        document.getElementById('ui-founder').innerText = d.founder;
+        document.getElementById('ui-welcome-chat').innerText = d.welcome;
+        this.renderFAQ();
+    },
+
+    renderFAQ() {
+        const box = document.getElementById('faq-box');
+        const qs = (this.i18n[this.state.lang] || this.i18n['en']).q;
+        box.innerHTML = '';
+        qs.forEach((q, i) => {
+            const item = document.createElement('div');
+            item.className = 'faq-item';
+            item.innerHTML = `
+                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>${i+1}. ${q}</span><span>▼</span></div>
+                <div class="faq-a">형님의 미션 수행을 위한 필수 데이터입니다. AI 챗봇 답변이 부족할 경우 삐니가 support@hkwb.ai.kr로 직접 지원합니다.</div>
+            `;
+            box.appendChild(item);
+        });
+    },
+
+    toggleSupport() { document.getElementById('support-layer').classList.toggle('active'); }
+};
+
+window.onload = () => HK_CORE.init();
 </script>
 </body>
 </html>
