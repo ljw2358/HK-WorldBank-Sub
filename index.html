@@ -3,294 +3,320 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK-WorldBank Global OS v8.0</title>
+    <title>HK-WorldBank | Founder Lee Jaewan</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;900&display=swap');
+
         :root {
-            --gold: #D4AF37; --bright-gold: #FFD700; --dark: #020202;
-            --border: rgba(212, 175, 55, 0.3); --green: #00ff88; --glass: rgba(255, 255, 255, 0.03);
+            --hk-gold: #D4AF37;
+            --hk-bright: #FFD700;
+            --hk-bg: #000000;
+            --hk-card: #080808;
+            --hk-border: rgba(212, 175, 55, 0.2);
+            --hk-green: #00ff88;
+            --hk-red: #ff3e3e;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
-        body { background: var(--dark); color: #fff; font-family: 'Pretendard', sans-serif; overflow-x: hidden; }
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
 
-        .app-container { max-width: 600px; margin: 0 auto; padding: 20px; min-height: 100vh; }
+        * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing:antialiased; }
+        body { background:var(--hk-bg); color:#fff; font-family:'Noto Sans KR', sans-serif; overflow-x:hidden; }
+
+        .app-shell { max-width:600px; margin:0 auto; min-height:100vh; padding:25px; position:relative; }
+
+        /* [Header & LIVE Tracking] */
+        header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:30px; border-bottom:1px solid #111; padding-bottom:20px; }
+        .brand-zone h1 { font-size:2rem; font-weight:900; background:linear-gradient(to right, #fff, var(--hk-gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; letter-spacing:-1px; }
+        .brand-zone p { font-size:0.7rem; color:var(--hk-gold); font-weight:800; letter-spacing:3px; margin-top:5px; }
+        .live-status { text-align:right; }
+        #sys-clock { font-size:0.8rem; font-family:monospace; color:#444; }
+        .v-tag { font-size:0.6rem; background:var(--hk-gold); color:#000; padding:2px 6px; border-radius:4px; font-weight:900; margin-top:5px; display:inline-block; }
+
+        /* [Main Asset Ledger - REAL-TIME] */
+        .ledger-box { 
+            background:radial-gradient(circle at top right, #111, #000); 
+            border:1px solid var(--hk-border); border-radius:35px; padding:45px 30px; 
+            text-align:center; margin-bottom:30px; box-shadow:0 20px 50px rgba(0,0,0,1);
+            position:relative; overflow:hidden;
+        }
+        .ledger-box::after { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); opacity:0.05; }
+        .l-label { font-size:0.8rem; color:#666; letter-spacing:4px; font-weight:700; margin-bottom:20px; }
+        #main-balance { font-size:3.5rem; font-weight:900; color:var(--hk-gold); font-variant-numeric:tabular-nums; letter-spacing:-2px; margin:15px 0; }
+        .engine-active { display:flex; align-items:center; justify-content:center; gap:10px; color:var(--hk-green); font-size:0.9rem; font-weight:800; }
+        .pulse-dot { width:10px; height:10px; background:var(--hk-green); border-radius:50%; box-shadow:0 0 15px var(--hk-green); animation:blink 1.5s infinite; }
+
+        /* [50 Nations Matrix - DATA STREAMS] */
+        .matrix-container { background:var(--hk-card); border-radius:25px; padding:20px; border:1px solid #111; margin-bottom:30px; }
+        .matrix-title { font-size:0.75rem; color:#444; font-weight:900; margin-bottom:15px; text-transform:uppercase; display:flex; justify-content:space-between; }
+        .grid-50 { display:grid; grid-template-columns:repeat(5, 1fr); gap:10px; max-height:280px; overflow-y:auto; padding-right:5px; }
+        .grid-50::-webkit-scrollbar { width:3px; }
+        .grid-50::-webkit-scrollbar-thumb { background:var(--hk-gold); }
         
-        /* Header */
-        header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 25px; border-bottom: 1px solid #111; padding-bottom: 15px; }
-        .brand h1 { font-size: 1.8rem; font-weight: 900; background: linear-gradient(135deg, #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .brand p { font-size: 0.65rem; color: var(--gold); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
-        #system-clock { font-size: 0.7rem; color: #444; font-family: monospace; text-align: right; }
+        .nation-node { 
+            background:#0f0f0f; border:1px solid #1a1a1a; border-radius:12px; padding:12px 5px; 
+            text-align:center; transition:0.4s; cursor:pointer; position:relative;
+        }
+        .nation-node.active { border-color:var(--hk-gold); background:#151515; transform:scale(1.05); z-index:2; box-shadow:0 5px 15px rgba(212,175,55,0.2); }
+        .nation-node span { display:block; font-size:1.5rem; margin-bottom:5px; }
+        .nation-node i { font-style:normal; font-size:0.6rem; color:#555; font-weight:900; }
+        .node-val { font-size:0.5rem; color:var(--hk-gold); margin-top:4px; display:none; }
+        .nation-node.active .node-val { display:block; }
 
-        /* [핵심: 50개국 실시간 데이터 매트릭스] */
-        .matrix-box { background: #080808; border: 1px solid #1a1a1a; border-radius: 25px; padding: 20px; margin-bottom: 25px; }
-        .matrix-label { font-size: 0.7rem; color: #666; font-weight: 800; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
-        .matrix-label span { width: 8px; height: 8px; background: var(--green); border-radius: 50%; box-shadow: 0 0 10px var(--green); animation: pulse 1.5s infinite; }
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-height: 380px; overflow-y: auto; padding-right: 5px; }
+        /* [Detailed Monitoring Stats] */
+        .stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:30px; }
+        .stat-card { background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); border-radius:22px; padding:22px; transition:0.3s; }
+        .stat-card:hover { border-color:var(--hk-gold); background:rgba(212,175,55,0.03); }
+        .stat-card label { font-size:0.65rem; color:#555; font-weight:800; text-transform:uppercase; display:block; margin-bottom:10px; }
+        .stat-card .value { font-size:1.2rem; font-weight:900; color:var(--hk-gold); letter-spacing:-0.5px; }
+
+        /* [Action Buttons] */
+        .btn-group { display:flex; flex-direction:column; gap:15px; }
+        .hk-btn { 
+            width:100%; padding:25px; border:none; border-radius:22px; font-weight:900; font-size:1.1rem; 
+            cursor:pointer; transition:0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            display:flex; justify-content:center; align-items:center; gap:10px;
+        }
+        .btn-white { background:#fff; color:#000; box-shadow:0 10px 20px rgba(255,255,255,0.1); }
+        .btn-gold { background:var(--hk-gold); color:#000; box-shadow:0 15px 30px rgba(212,175,55,0.2); }
+        .hk-btn:hover { transform:translateY(-5px); filter:brightness(1.1); }
+
+        /* [Onion Layer Support Center] */
+        .onion-layer { 
+            position:fixed; bottom:-100%; left:0; width:100%; height:95%; 
+            background:#050505; border-top:5px solid var(--hk-gold); border-radius:45px 45px 0 0;
+            z-index:1000; transition:0.7s cubic-bezier(0.19, 1, 0.22, 1); padding:45px 30px; overflow-y:auto;
+        }
+        .onion-layer.show { bottom:0; }
         
-        .node { background: #111; border: 1px solid #222; border-radius: 15px; padding: 12px; transition: 0.3s; cursor: pointer; }
-        .node.active { border-color: var(--gold); background: #1a1a1a; box-shadow: 0 5px 15px rgba(212,175,55,0.1); }
-        .node-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-        .node-top .f { font-size: 1.5rem; }
-        .node-top .c { font-size: 0.6rem; font-weight: 900; color: #444; }
-        .node-data { font-size: 0.55rem; color: #777; font-family: monospace; line-height: 1.4; }
-        .node-data div { display: flex; justify-content: space-between; }
-        .node-data .v { color: #bbb; font-weight: 800; }
+        .onion-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:40px; border-bottom:1px solid #222; padding-bottom:20px; }
+        .onion-header h2 { font-size:1.8rem; font-weight:900; color:var(--hk-gold); }
+        .close-btn { background:none; border:none; color:#fff; font-size:3rem; cursor:pointer; line-height:1; }
 
-        /* [통합 자산 관리 원장] */
-        .ledger-card { background: linear-gradient(165deg, #111, #000); border-radius: 35px; padding: 35px; border: 1px solid var(--border); margin-bottom: 25px; position: relative; overflow: hidden; }
-        .ledger-card::before { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 60%); pointer-events: none; }
-        .ledger-label { font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 3px; }
-        .main-balance { font-size: 3.2rem; font-weight: 900; color: var(--gold); margin: 15px 0; font-variant-numeric: tabular-nums; letter-spacing: -1.5px; }
-        .status-bar { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 700; color: var(--green); }
-        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+        /* FAQ Onion Accordion */
+        .faq-wrap { margin-bottom:50px; }
+        .faq-node { background:#0f0f0f; border:1px solid #1a1a1a; border-radius:20px; margin-bottom:15px; overflow:hidden; transition:0.3s; }
+        .faq-node.open { border-color:var(--hk-gold); background:#151515; }
+        .faq-trigger { padding:25px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-weight:800; font-size:1rem; }
+        .faq-content { padding:0 25px; height:0; opacity:0; overflow:hidden; transition:0.5s; color:#999; font-size:0.9rem; line-height:1.8; }
+        .faq-node.open .faq-content { padding:10px 25px 30px; height:auto; opacity:1; border-top:1px solid #222; }
 
-        /* [모든 수치 모니터링 섹션] */
-        .monitor { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
-        .mon-box { background: var(--glass); padding: 20px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.02); transition: 0.3s; }
-        .mon-box:hover { border-color: var(--gold); transform: translateY(-3px); }
-        .mon-box .l { font-size: 0.6rem; color: #555; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 8px; }
-        .mon-box .v { font-size: 1.1rem; font-weight: 900; color: var(--gold); font-variant-numeric: tabular-nums; }
+        /* Bini AI Terminal */
+        .bini-terminal { background:#000; border:2px dashed var(--hk-gold); border-radius:30px; padding:35px; margin-top:40px; }
+        .bini-info { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+        .bini-avatar { width:45px; height:45px; background:var(--hk-gold); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; color:#000; }
+        .bini-msg { font-size:1rem; color:#eee; font-weight:500; line-height:1.6; }
+        .term-input-wrap { position:relative; margin-top:25px; }
+        .term-input { width:100%; background:#111; border:1px solid #333; color:#fff; padding:20px; border-radius:15px; outline:none; font-size:1rem; border-left:5px solid var(--hk-gold); }
 
-        /* [고객센터 양파 레이어] */
-        .layer { position: fixed; bottom: -100%; left: 0; width: 100%; height: 95%; background: #050505; border-top: 4px solid var(--gold); border-radius: 40px 40px 0 0; z-index: 9999; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1); padding: 35px 25px; overflow-y: auto; }
-        .layer.active { bottom: 0; }
-        .faq-list { margin-top: 30px; }
-        .faq-item { background: #0f0f0f; border-radius: 20px; margin-bottom: 12px; border: 1px solid #1a1a1a; overflow: hidden; }
-        .faq-q { padding: 22px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 0.9rem; transition: 0.3s; }
-        .faq-q:hover { background: #151515; }
-        .faq-a { padding: 0 22px; height: 0; opacity: 0; transition: 0.5s; color: #999; font-size: 0.85rem; line-height: 1.8; }
-        .faq-item.open .faq-a { padding: 20px 22px 25px; height: auto; opacity: 1; border-top: 1px solid #222; }
-        .faq-item.open .faq-q { color: var(--gold); }
+        footer { text-align:center; padding:60px 0; border-top:1px solid #111; margin-top:50px; }
+        .f-text { font-size:0.7rem; color:#444; font-weight:800; letter-spacing:3px; }
+        .founder-name { font-size:0.9rem; color:var(--hk-gold); font-weight:900; margin-top:15px; }
 
-        /* [Bini AI & Terminal] */
-        .bini-terminal { background: #000; border: 1.5px dashed var(--gold); border-radius: 25px; padding: 25px; margin-top: 40px; }
-        .bini-msg { font-size: 0.95rem; color: #eee; margin-bottom: 20px; font-weight: 500; }
-        .terminal-in { width: 100%; background: #0a0a0a; border: 1px solid #333; color: #fff; padding: 18px; border-radius: 12px; outline: none; font-size: 0.9rem; border-left: 4px solid var(--gold); }
-        
-        .main-btn { width: 100%; padding: 22px; background: var(--gold); color: #000; border: none; border-radius: 20px; font-weight: 900; font-size: 1.1rem; cursor: pointer; transition: 0.3s; box-shadow: 0 10px 30px rgba(212,175,55,0.2); }
-        .main-btn:active { transform: scale(0.98); }
-
-        footer { margin-top: 50px; padding: 40px 0; border-top: 1px solid #111; text-align: center; opacity: 0.6; }
-        .footer-logo { font-size: 0.65rem; color: #444; font-weight: 800; letter-spacing: 2px; }
+        @keyframes blink { 0%, 100% { opacity:1; transform:scale(1); } 50% { opacity:0.3; transform:scale(1.3); } }
     </style>
 </head>
 <body>
 
-<div class="app-container">
+<div class="app-shell">
     <header>
-        <div class="brand">
-            <h1 id="ui-brand">HK-WorldBank</h1>
-            <p id="ui-mission">GLOBAL UBI FOUNDATION</p>
+        <div class="brand-zone">
+            <h1 id="ui-title">HK-WorldBank</h1>
+            <p id="ui-sub">GLOBAL UBI FOUNDATION</p>
         </div>
-        <div id="system-clock">UTC 00:00:00</div>
+        <div class="live-status">
+            <div id="sys-clock">00:00:00</div>
+            <div class="v-tag">SECURITY V3 / V23</div>
+        </div>
     </header>
 
-    <section class="matrix-box">
-        <div class="matrix-label"><span></span> GLOBAL LIVE DATA STREAM (50 NODES)</div>
-        <div class="grid" id="node-grid"></div>
+    <section class="ledger-box">
+        <div class="l-label" id="ui-ledger">TOTAL ASSET LEDGER</div>
+        <div id="main-balance">314,159.2738</div>
+        <div class="engine-active">
+            <div class="pulse-dot"></div>
+            <span id="ui-engine">GLOBAL UBI ENGINE ACTIVE</span>
+        </div>
     </section>
 
-    <main>
-        <article class="ledger-card">
-            <div id="ui-l1" class="ledger-label">통합 자산 관리 원장</div>
-            <div id="v-main-bal" class="main-balance">314,159.2738</div>
-            <div class="status-bar"><div style="width:10px;height:10px;background:var(--green);border-radius:50%;animation:pulse 2s infinite;"></div> <span id="ui-st">글로벌 UBI 배분 엔진 정상 가동</span></div>
-        </article>
+    <section class="matrix-container">
+        <div class="matrix-title">
+            <span>Global Node Live Stream</span>
+            <span id="node-count" style="color:var(--hk-gold)">50/50 ACTIVE</span>
+        </div>
+        <div class="grid-50" id="matrix-grid">
+            </div>
+    </section>
 
-        <section class="monitor">
-            <div class="mon-box"><span id="ui-l3" class="l">발행량 & DEX 유동성</span><div id="v-lp" class="v">$2,000,000,000</div></div>
-            <div class="mon-box"><span id="ui-l4" class="l">송금 & 결제 네트워크</span><div id="v-dex" class="v">100,000,000 Pi</div></div>
-            <div class="mon-box"><span id="ui-l5" class="l">예치 보상 (Staking)</span><div id="v-apy" class="v">31.415%</div></div>
-            <div class="mon-box"><span id="ui-l6" class="l">실시간 GCV 가치</span><div id="v-gcv" class="v">$314,159</div></div>
-            <div class="mon-box"><span id="ui-l7" class="l">초당 기본 소득 수익</span><div id="v-yld" class="v">0.00014 Pi</div></div>
-            <div class="mon-box"><span id="ui-l8" class="l">보안 기술 V3 / V23</span><div id="v-pio" class="v">55,000,241 Nodes</div></div>
-        </section>
+    <section class="stat-grid">
+        <div class="stat-card"><label id="ui-s1">발행량 & DEX 유동성</label><div class="value" id="val-lp">$2,000,000,000</div></div>
+        <div class="stat-card"><label id="ui-s2">송금 & 결제 네트워크</label><div class="value" id="val-dex">100,000,000 Pi</div></div>
+        <div class="stat-card"><label id="ui-s3">예치 보상 (Staking)</label><div class="value" id="val-apy">31.415%</div></div>
+        <div class="stat-card"><label id="ui-s4">실시간 GCV 가치</label><div class="value" id="val-gcv">$314,159</div></div>
+        <div class="stat-card"><label id="ui-s5">초당 기본소득 수익</label><div class="value" id="val-yld">0.00014 Pi</div></div>
+        <div class="stat-card"><label id="ui-s6">보안 노드 현황</label><div class="value" id="val-pio">55,000,241 Nodes</div></div>
+    </section>
 
-        <button class="main-btn" id="ui-btn" onclick="HK.toggle()">글로벌 AI 공익 지원 센터 (ON)</button>
-    </main>
+    <div class="btn-group">
+        <button class="hk-btn btn-white" onclick="location.href='test_file.html'">
+            <span id="ui-b1">기본소득 결제 및 정산 (TEST)</span>
+        </button>
+        <button class="hk-btn btn-gold" onclick="toggleOnion()">
+            <span id="ui-b2">글로벌 AI 공익 지원 센터 (ON)</span>
+        </button>
+    </div>
 
     <footer>
-        <div class="footer-logo">HK GROUP | WORLD INFRASTRUCTURE</div>
-        <div id="ui-l10" style="font-size:0.6rem; color:var(--gold); font-weight:900; margin-top:10px;">FOUNDER LEE JAEWAN (HYEKONG)</div>
+        <div class="f-text">HK GROUP | WORLD INFRASTRUCTURE</div>
+        <div class="founder-name" id="ui-founder">FOUNDER & CHAIRMAN: LEE JAEWAN (HYEKONG)</div>
     </footer>
 </div>
 
-<div id="layer" class="layer">
-    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #222; padding-bottom:20px;">
-        <h2 id="ui-l11" style="color:var(--gold); font-size:1.5rem; font-weight:900; letter-spacing:-1px;">GLOBAL AI SUPPORT LAYER</h2>
-        <button onclick="HK.toggle()" style="background:none; border:none; color:#fff; font-size:2.5rem; cursor:pointer;">×</button>
+<div id="onion-layer" class="onion-layer">
+    <div class="onion-header">
+        <h2 id="ui-h2">SUPPORT CENTER</h2>
+        <button class="close-btn" onclick="toggleOnion()">&times;</button>
     </div>
-    
-    <div class="faq-list" id="faq-list"></div>
+
+    <div class="faq-wrap" id="faq-list">
+        </div>
 
     <div class="bini-terminal">
-        <div style="font-weight:900; color:var(--gold); font-size:0.8rem; margin-bottom:12px; display:flex; justify-content:space-between;">
-            <span>BINI AI TERMINAL v8.0</span>
-            <span style="color:var(--green);">CONNECTED</span>
+        <div class="bini-info">
+            <div class="bini-avatar">B</div>
+            <div class="bini-msg" id="ui-bini">
+                환영합니다, 형님. 챗봇이 1차 응대하며,<br>
+                해결되지 않을 시 <strong>삐니(Bini)</strong>가 직접 개입합니다.
+            </div>
         </div>
-        <div class="bini-msg" id="ui-l12">환영합니다, 형님. 챗봇이 먼저 응대하며, 해결이 안 될 경우 삐니(Bini)가 직접 개입합니다.</div>
-        <input type="text" class="terminal-in" placeholder="명령어 또는 질문을 입력하세요...">
-        <div style="margin-top:25px; font-size:0.6rem; color:#444; text-align:center; line-height:1.6;">
-            보안 기술 V3/V23 암호화 적용 중<br>Official Support: support@hkwb.ai.kr
+        <div class="term-input-wrap">
+            <input type="text" class="term-input" placeholder="비정형 명령어 또는 질문을 입력하세요...">
+        </div>
+        <div style="margin-top:20px; font-size:0.65rem; color:#444; text-align:center;">
+            ENCRYPTED BY V3/V23 PROTOCOL | HK-WORLD BANK
         </div>
     </div>
 </div>
 
 <script>
 /**
- * [HK-WORLD INFRASTRUCTURE OS v8.0]
- * Architect: Hyekong
+ * [HK-ENTERPRISE CORE ENGINE]
+ * Developed for Founder Lee Jaewan
  */
-const HK = {
-    s: { bal: 314159.2738, lp: 2000000000, dex: 100000000, apy: 31.415, gcv: 314159, yld: 0.00014, pio: 55000241, ln: 'ko' },
+const HK_CORE = {
+    state: { bal: 314159.2738, lp: 2000000000, dex: 100000000, apy: 31.415, gcv: 314159, yld: 0.00014, pio: 55000241, lang: 'ko' },
     
-    // 50개국 데이터 (20~50개 데이터 실시간 변동용)
-    n: [
-        {f:'🇰🇷',c:'KR',g:314159,v:'V23',n:12041},{f:'🇺🇸',c:'US',g:314159,v:'V23',n:35092},{f:'🇨🇳',c:'CN',g:314159,v:'V23',n:88041},{f:'🇯🇵',c:'JP',g:314159,v:'V23',n:10521},{f:'🇻🇳',c:'VN',g:314159,v:'V23',n:22091},
-        {f:'🇮🇳',c:'IN',g:314159,v:'V23',n:61092},{f:'🇩🇪',c:'DE',g:314159,v:'V23',n:9521},{f:'🇫🇷',c:'FR',g:314159,v:'V23',n:7841},{f:'🇬🇧',c:'GB',g:314159,v:'V23',n:11041},{f:'🇧🇷',c:'BR',g:314159,v:'V23',n:15092},
-        {f:'🇮🇩',c:'ID',g:314159,v:'V23',n:19041},{f:'🇵🇭',c:'PH',g:314159,v:'V23',n:14092},{f:'🇨🇦',c:'CA',g:314159,v:'V23',n:8041},{f:'🇦🇺',c:'AU',g:314159,v:'V23',n:5521},{f:'🇷🇺',c:'RU',g:314159,v:'V23',n:13091},
-        {f:'🇲🇽',c:'MX',g:314159,v:'V23',n:11041},{f:'🇹🇷',c:'TR',g:314159,v:'V23',n:9092},{f:'🇮🇹',c:'IT',g:314159,v:'V23',n:6521},{f:'🇪🇸',c:'ES',g:314159,v:'V23',n:5841},{f:'🇸🇦',c:'SA',g:314159,v:'V23',n:7041},
-        {f:'🇿🇦',c:'ZA',g:314159,v:'V23',n:4092},{f:'🇦🇪',c:'AE',g:314159,v:'V23',n:6041},{f:'🇹🇭',c:'TH',g:314159,v:'V23',n:11041},{f:'🇸🇬',c:'SG',g:314159,v:'V23',n:3521},{f:'🇲🇾',c:'MY',g:314159,v:'V23',n:8092},
-        {f:'🇦🇷',c:'AR',g:314159,v:'V23',n:6041},{f:'🇳🇱',c:'NL',g:314159,v:'V23',n:4521},{f:'🇸🇪',c:'SE',g:314159,v:'V23',n:3521},{f:'🇨🇭',c:'CH',g:314159,v:'V23',n:2521},{f:'🇵🇱',c:'PL',g:314159,v:'V23',n:7092},
-        {f:'🇳🇴',c:'NO',g:314159,v:'V23',n:2521},{f:'🇮🇪',c:'IE',g:314159,v:'V23',n:2521},{f:'🇧🇪',c:'BE',g:314159,v:'V23',n:3041},{f:'🇦🇹',c:'AT',g:314159,v:'V23',n:2521},{f:'🇵🇹',c:'PT',g:314159,v:'V23',n:4041},
-        {f:'🇮🇱',c:'IL',g:314159,v:'V23',n:3521},{f:'🇨🇱',c:'CL',g:314159,v:'V23',n:4091},{f:'🇨🇴',c:'CO',g:314159,v:'V23',n:6092},{f:'🇵🇪',c:'PE',g:314159,v:'V23',n:5041},{f:'🇳🇿',c:'NZ',g:314159,v:'V23',n:2521},
-        {f:'🇫🇮',c:'FI',g:314159,v:'V23',n:2041},{f:'🇩🇰',c:'DK',g:314159,v:'V23',n:2521},{f:'🇺🇦',c:'UA',g:314159,v:'V23',n:9041},{f:'🇵🇰',c:'PK',g:314159,v:'V23',n:13092},{f:'🇧🇩',c:'BD',g:314159,v:'V23',n:11091},
-        {f:'🇪🇬',c:'EG',g:314159,v:'V23',n:8041},{f:'🇳🇬',c:'NG',g:314159,v:'V23',n:9092},{f:'🇶🇦',c:'QA',g:314159,v:'V23',n:2041},{f:'🇰🇼',c:'KW',g:314159,v:'V23',n:2092},{f:'🇰🇿',c:'KZ',g:314159,v:'V23',n:3041}
+    nations: [
+        {f:'🇰🇷',c:'KR'},{f:'🇺🇸',c:'US'},{f:'🇨🇳',c:'CN'},{f:'🇯🇵',c:'JP'},{f:'🇻🇳',c:'VN'},
+        {f:'🇮🇳',c:'IN'},{f:'🇩🇪',c:'DE'},{f:'🇫🇷',c:'FR'},{f:'🇬🇧',c:'GB'},{f:'🇧🇷',c:'BR'},
+        {f:'🇮🇩',c:'ID'},{f:'🇵🇭',c:'PH'},{f:'🇨🇦',c:'CA'},{f:'🇦🇺',c:'AU'},{f:'🇷🇺',c:'RU'},
+        {f:'🇲🇽',c:'MX'},{f:'🇹🇷',c:'TR'},{f:'🇮🇹',c:'IT'},{f:'🇪🇸',c:'ES'},{f:'🇸🇦',c:'SA'},
+        {f:'🇿🇦',c:'ZA'},{f:'🇦🇪',c:'AE'},{f:'🇹🇭',c:'TH'},{f:'🇸🇬',c:'SG'},{f:'🇲🇾',c:'MY'},
+        {f:'🇦🇷',c:'AR'},{f:'🇳🇱',c:'NL'},{f:'🇸🇪',c:'SE'},{f:'🇨🇭',c:'CH'},{f:'🇵🇱',c:'PL'},
+        {f:'🇳🇴',c:'NO'},{f:'🇮🇪',c:'IE'},{f:'🇧🇪',c:'BE'},{f:'🇦🇹',c:'AT'},{f:'🇵🇹',c:'PT'},
+        {f:'🇮🇱',c:'IL'},{f:'🇨🇱',c:'CL'},{f:'🇨🇴',c:'CO'},{f:'🇵🇪',c:'PE'},{f:'🇳🇿',c:'NZ'},
+        {f:'🇫🇮',c:'FI'},{f:'🇩🇰',c:'DK'},{f:'🇺🇦',c:'UA'},{f:'🇵🇰',c:'PK'},{f:'🇧🇩',c:'BD'},
+        {f:'🇪🇬',c:'EG'},{f:'🇳🇬',c:'NG'},{f:'🇶🇦',c:'QA'},{f:'🇰🇼',c:'KW'},{f:'🇰🇿',c:'KZ'}
     ],
 
-    d: {
-        ko: { brand:"HK-월드뱅크", mission:"20억 인류 구제 인프라", l1:"통합 자산 관리 원장", st:"글로벌 UBI 배분 엔진 정상 가동", l3:"발행량 & DEX 유동성", l4:"송금 & 결제 네트워크", l5:"예치 보상 (Staking)", l6:"실시간 GCV 가치", l7:"초당 기본 소득 수익", l8:"보안 기술 V3 / V23", btn:"글로벌 AI 공익 지원 센터 (ON)", l10:"설립자 및 회장: 이재완 (혜공)", l11:"GLOBAL AI SUPPORT LAYER", l12:"환영합니다, 형님. 챗봇이 먼저 응대하며, 해결이 안 될 경우 삐니(Bini)가 직접 개입합니다.", 
-        q:[
-            {q:"파이 네트워크 발행량 및 발행 계획", a:"HK-WorldBank의 유동성 공급 계획에 따라 20억 인류에게 공정하게 배분됩니다. V23 보안 기술로 수량을 철저히 보호합니다."},
-            {q:"DEX 유동성 공급 및 스왑 절차", a:"전 세계 개척자들이 자유롭게 교환할 수 있는 탈중앙화 거래 환경을 제공하며, 실시간 GCV 가치를 보존합니다."},
-            {q:"글로벌 송금 및 실시간 결제 속도", a:"초당 수천 건의 트랜잭션을 V3 보안 프로토콜로 처리하여 전 세계 어디서든 즉시 결제가 가능합니다."},
-            {q:"예치 보상(Staking) 및 이율 정책", a:"안정적인 자산 운용을 통해 연 31.415% 수준의 보상을 제공하여 개척자의 자산을 증식시킵니다."},
-            {q:"20억 인류 기본 소득(UBI) 지급일", a:"매월 정해진 기일에 맞춰 HK-WorldBank 원장을 통해 자동 배분되며, 양파형 레이어를 통해 투명하게 공개됩니다."},
-            {q:"보안 기술 V3 / V23 상세 사양", a:"양자 내성 암호화 및 분산 원장 기술을 결합하여 어떠한 외부 공격으로부터도 형님의 자산을 방어합니다."},
-            {q:"글로벌 AI 지원 센터 이용 방법", a:"AI 챗봇이 1차 대응하며, 특수 사안은 삐니(Bini) 운영팀이 직접 개입하여 문제를 해결합니다."},
-            {q:"DEX Pi Stock 실시간 모니터링", a:"전 세계 노드에서 수집된 실시간 스톡 데이터를 통해 가격 변동성을 최소화하고 가치를 고정합니다."},
-            {q:"KYC / KYB 인증 지연 해결 방법", a:"HK 전용 고속 인증 패스를 통해 전 세계 개척자들의 신원 확인을 최단 시간 내에 처리합니다."},
-            {q:"비밀구절 분실 시 복구 프로토콜", a:"V23 기반의 다중 서명 시스템을 통해 본인 확인 후 안전하게 계정 접근 권한을 복구할 수 있습니다."},
-            {q:"글로벌 생태계 거버넌스 참여", a:"형님의 비전에 동참하는 모든 개척자들이 HK-WorldBank의 주요 의사 결정에 참여할 수 있습니다."},
-            {q:"메인넷 마이그레이션 최종 절차", a:"지갑 생성부터 마이그레이션 완료까지 1:1 전담 AI 가이드가 밀착 지원합니다."},
-            {q:"기술적 버그 리포트 및 보상", a:"시스템 취약점을 발견한 개척자에게는 HK 프로젝트 기여도로 산정하여 특별 보상을 지급합니다."},
-            {q:"HK 그룹 설립자 혜공의 메시지", a:"'20억 인류에게 경제적 자유를.' 이재완 회장님의 철학은 모든 인프라의 근간입니다."},
-            {q:"삐니(Bini) 직접 지원 요청 방법", a:"채팅창에 'Bini Support'를 입력하거나 이메일을 통해 형님 전담 지원팀에 연결할 수 있습니다."}
-        ]},
-        en: { brand:"HK-WorldBank", mission:"2B Humanity Infra", l1:"Global Asset Ledger", st:"UBI Distribution Active", l3:"Supply & DEX Liquidity", l4:"Remittance & Payment", l5:"Staking Rewards", l6:"Live GCV Value", l7:"Yield per Second", l8:"Security V3 / V23", btn:"Global AI Support (ON)", l10:"Founder: Lee Jaewan (Hyekong)", l11:"GLOBAL AI SUPPORT LAYER", l12:"Welcome, Sir. AI Chatbot responds first, and Bini steps in if needed.", 
-        q:[
-            {q:"Pi Network Supply & Plan", a:"Distributed fairly to 2B people under HK-WorldBank's plan. Secured by V23 technology."},
-            {q:"DEX Liquidity & Swap", a:"Provides a decentralized environment for global pioneers, preserving the GCV value."},
-            {q:"Global Remittance Speed", a:"Processes thousands of TPS with V3 protocol for instant global payments."},
-            {q:"Staking & Interest Policy", a:"Provides 31.415% APY through stable asset management for pioneers."},
-            {q:"UBI Schedule for 2B People", a:"Automatic distribution via HK-WorldBank ledger every month, transparently shown."},
-            {q:"Security V3 / V23 Specs", a:"Combines quantum-resistant encryption and DLT to defend against all external attacks."},
-            {q:"AI Support Center Guide", a:"1st response by AI, 2nd by Bini operation team for special cases."},
-            {q:"DEX Pi Stock Monitoring", a:"Fixes value by minimizing volatility through real-time global node data."},
-            {q:"KYC / KYB Delay Fix", a:"Processes identity verification in the shortest time via HK high-speed pass."},
-            {q:"Passphrase Recovery Protocol", a:"Safe account recovery via V23-based multi-sig system after verification."},
-            {q:"Global Ecosystem Governance", a:"All pioneers joining the vision can participate in decision-making."},
-            {q:"Mainnet Migration Process", a:"Step-by-step guide from wallet creation to migration completion by AI."},
-            {q:"Technical Bug Report", a:"Special rewards for pioneers who discover system vulnerabilities."},
-            {q:"Message from Founder Hyekong", a:"'Economic freedom for 2B people.' The philosophy of Chairman Lee Jaewan."},
-            {q:"How to Request Bini Support", a:"Type 'Bini Support' or email to connect with the dedicated team."}
-        ]}
+    text: {
+        ko: {
+            t:"HK-월드뱅크", sub:"글로벌 인류 구제 재단", l:"통합 자산 관리 원장", e:"글로벌 UBI 엔진 가동 중",
+            s1:"발행량 & DEX 유동성", s2:"송금 & 결제 네트워크", s3:"예치 보상 (Staking)", s4:"실시간 GCV 가치", s5:"초당 기본소득 수익", s6:"보안 노드 현황",
+            b1:"기본소득 결제 및 정산 (TEST)", b2:"글로벌 AI 공익 지원 센터 (ON)", f:"설립자 및 회장: 이재완 (혜공)", h2:"AI SUPPORT LAYER",
+            bini:"환영합니다, 형님. 챗봇이 1차 응대하며, 해결되지 않을 시 삐니(Bini)가 직접 개입합니다.",
+            q:[
+                {q:"파이 네트워크 발행량 및 배분 로직", a:"HK-WorldBank의 알고리즘에 따라 20억 인류에게 균등하고 공정하게 배분됩니다. V23 보안 기술로 발행 수량을 철저히 검증합니다."},
+                {q:"DEX 유동성 공급 및 실시간 스왑", a:"전 세계 노드와 연동되어 실시간 GCV 가치를 보존하며, 어떤 화폐로도 즉시 교환 가능한 탈중앙화 환경을 제공합니다."},
+                {q:"글로벌 송금 및 실시간 결제 인프라", a:"초당 10만 건 이상의 트랜잭션을 V3 보안 프로토콜로 처리하여 전 세계 어디서든 3초 내 결제가 완료됩니다."},
+                {q:"예치 보상(Staking) 및 이율 관리", a:"안정적인 자산 운용을 통해 연 31.415% 수준의 보상을 제공하며, 개척자의 자산을 기하급수적으로 증식시킵니다."},
+                {q:"20억 인류 기본 소득(UBI) 지급 주기", a:"매월 1일과 15일, HK-WorldBank 통합 원장을 통해 자동으로 개별 지갑에 배분됩니다."},
+                {q:"보안 기술 V3 / V23 기술 명세", a:"양자 내성 암호화 및 5단계 분산 원장 검증 기술을 결합하여 외부 해킹 및 위변조를 원천 차단합니다."},
+                {q:"글로벌 AI 지원 센터 운영 가이드", a:"고도의 자가학습 AI 챗봇이 모든 기술 지원을 담당하며, 특수 사안은 운영 총괄 삐니가 직접 개입합니다."},
+                {q:"DEX Pi Stock 실시간 가치 보존", a:"글로벌 오라클 데이터와 실시간 연동하여 파이의 가치를 $314,159로 고정 및 유지합니다."},
+                {q:"KYC / KYB 인증 지연 고속 해결", a:"HK 전용 고속 인증 패스를 통해 전 세계 개척자들의 신원 확인을 24시간 내에 완료합니다."},
+                {q:"비밀구절 분실 시 복구 프로토콜", a:"V23 기반의 생체 인증 및 다중 서명 시스템을 통해 안전하게 계정 권한을 복구할 수 있습니다."},
+                {q:"글로벌 생태계 거버넌스 투표권", a:"HK-WorldBank의 주요 의사 결정은 형님의 비전에 찬성하는 개척자들의 투표로 이루어집니다."},
+                {q:"메인넷 마이그레이션 최종 승인 절차", a:"지갑 생성부터 최종 이전까지 모든 단계를 AI 가이드가 1:1로 밀착 서포트합니다."},
+                {q:"시스템 취약점 제보 및 기여 보상", a:"보안 취약점 발견 시 HK 프로젝트 기여도로 산정하여 파격적인 특별 보상을 지급합니다."},
+                {q:"설립자 혜공(Lee Jaewan)의 철학", a:"'모든 인류에게 경제적 자유를.' 이것이 HK 그룹이 존재하는 단 하나의 이유입니다."},
+                {q:"삐니(Bini) 전담 지원팀 연결 방법", a:"터미널 창에 'Bini Connect'를 입력하거나, 본부 직통 이메일을 통해 즉시 연결 가능합니다."}
+            ]
+        }
     },
 
     init() {
-        this.rf(); this.rfq(); this.startFlux();
-        setInterval(() => { document.getElementById('system-clock').innerText = "SYSTEM UTC " + new Date().toISOString().substr(11, 8); }, 1000);
+        this.renderNodes();
+        this.renderFAQ();
+        this.startEngine();
+        setInterval(() => { 
+            document.getElementById('sys-clock').innerText = "SYSTEM UTC " + new Date().toISOString().substr(11, 8); 
+        }, 1000);
     },
 
-    // 50개국 매트릭스 렌더링
-    rf() {
-        const g = document.getElementById('node-grid');
-        g.innerHTML = '';
-        this.n.forEach((n, i) => {
-            const d = document.createElement('div');
-            d.className = `node ${i===0?'active':''}`;
-            d.innerHTML = `
-                <div class="node-top"><span class="f">${n.f}</span><span class="c">${n.c}</span></div>
-                <div class="node-data">
-                    <div>GCV <span class="v">$${n.g.toLocaleString()}</span></div>
-                    <div>SEC <span class="v" style="color:var(--gold)">${n.v}</span></div>
-                    <div>NET <span class="v n-count">${n.n.toLocaleString()}</span></div>
-                </div>
-            `;
-            d.onclick = () => this.sl(i===0?'ko':'en', d);
-            g.appendChild(d);
+    renderNodes() {
+        const grid = document.getElementById('matrix-grid');
+        grid.innerHTML = '';
+        this.nations.forEach((n, i) => {
+            const div = document.createElement('div');
+            div.className = 'nation-node';
+            div.innerHTML = `<span>${n.f}</span><i>${n.c}</i><div class="node-val">+$${(Math.random()*10).toFixed(2)}</div>`;
+            grid.appendChild(div);
         });
     },
 
-    // 15개 FAQ 양파 레이어 렌더링
-    rfq() {
-        const b = document.getElementById('faq-list');
-        const qs = this.d[this.s.ln].q;
-        b.innerHTML = '';
+    renderFAQ() {
+        const wrap = document.getElementById('faq-list');
+        const qs = this.text.ko.q;
+        wrap.innerHTML = '';
         qs.forEach((it, i) => {
-            const d = document.createElement('div');
-            d.className = 'faq-item';
-            d.innerHTML = `
-                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>${i+1}. ${it.q}</span><span>+</span></div>
-                <div class="faq-a">${it.a}</div>
+            const node = document.createElement('div');
+            node.className = 'faq-node';
+            node.innerHTML = `
+                <div class="faq-trigger" onclick="this.parentElement.classList.toggle('open')">
+                    <span>${i+1}. ${it.q}</span>
+                    <span style="color:var(--hk-gold)">+</span>
+                </div>
+                <div class="faq-content">${it.a}</div>
             `;
-            b.appendChild(d);
+            wrap.appendChild(node);
         });
     },
 
-    // 모든 수치 실시간 변환 엔진
-    startFlux() {
+    startEngine() {
         setInterval(() => {
-            this.s.bal += Math.random() * 0.015;
-            this.s.lp += Math.random() * 600;
-            this.s.dex += Math.random() * 120;
-            this.s.apy += (Math.random() - 0.5) * 0.002;
-            this.s.yld += Math.random() * 0.00003;
-            this.s.pio += Math.floor(Math.random() * 3);
+            // 메인 수치 요동
+            this.state.bal += Math.random() * 0.02;
+            this.state.lp += Math.random() * 700;
+            this.state.dex += Math.random() * 150;
+            this.state.apy += (Math.random() - 0.5) * 0.003;
+            this.state.yld += Math.random() * 0.00004;
+            this.state.pio += Math.floor(Math.random() * 5);
             
-            // 매트릭스 내 노드 수 변동
-            document.querySelectorAll('.n-count').forEach(el => {
-                if(Math.random() < 0.2) {
-                    let cur = parseInt(el.innerText.replace(/,/g, ''));
-                    el.innerText = (cur + Math.floor(Math.random()*4)).toLocaleString();
-                }
-            });
-            this.up();
-        }, 1400);
+            // 50개 노드 중 20~50개 랜덤 활성화
+            const nodes = document.querySelectorAll('.nation-node');
+            nodes.forEach(n => n.classList.remove('active'));
+            const count = 20 + Math.floor(Math.random() * 31);
+            for(let i=0; i<count; i++) {
+                nodes[Math.floor(Math.random()*50)].classList.add('active');
+            }
+            document.getElementById('node-count').innerText = `${count}/50 LIVE STREAMS`;
+
+            this.updateUI();
+        }, 1300);
     },
 
-    up() {
-        document.getElementById('v-main-bal').innerText = this.s.bal.toLocaleString(undefined,{minimumFractionDigits:4});
-        document.getElementById('v-lp').innerText = "$" + this.s.lp.toLocaleString();
-        document.getElementById('v-dex').innerText = this.s.dex.toLocaleString() + " Pi";
-        document.getElementById('v-apy').innerText = this.s.apy.toFixed(3) + "%";
-        document.getElementById('v-gcv').innerText = "$" + this.s.gcv.toLocaleString();
-        document.getElementById('v-yld').innerText = this.s.yld.toFixed(5) + " Pi";
-        document.getElementById('v-pio').innerText = this.s.pio.toLocaleString() + " Nodes";
-    },
-
-    sl(l, e) {
-        this.s.ln = l;
-        document.querySelectorAll('.node').forEach(n => n.classList.remove('active'));
-        e.classList.add('active');
-        const d = this.d[l];
-        document.getElementById('ui-brand').innerText = d.brand;
-        document.getElementById('ui-mission').innerText = d.mission;
-        document.getElementById('ui-l1').innerText = d.l1;
-        document.getElementById('ui-st').innerText = d.st;
-        for(let i=3; i<=8; i++) document.getElementById('ui-l'+i).innerText = d['l'+i];
-        document.getElementById('ui-btn').innerText = d.btn;
-        document.getElementById('ui-l10').innerText = d.l10;
-        document.getElementById('ui-l11').innerText = d.l11;
-        document.getElementById('ui-l12').innerText = d.l12;
-        this.rfq();
-    },
-
-    toggle() { document.getElementById('layer').classList.toggle('active'); }
+    updateUI() {
+        document.getElementById('main-balance').innerText = this.state.bal.toLocaleString(undefined, {minimumFractionDigits:4});
+        document.getElementById('val-lp').innerText = "$" + this.state.lp.toLocaleString();
+        document.getElementById('val-dex').innerText = this.state.dex.toLocaleString() + " Pi";
+        document.getElementById('val-apy').innerText = this.state.apy.toFixed(3) + "%";
+        document.getElementById('val-gcv').innerText = "$" + this.state.gcv.toLocaleString();
+        document.getElementById('val-yld').innerText = this.state.yld.toFixed(5) + " Pi";
+        document.getElementById('val-pio').innerText = this.state.pio.toLocaleString() + " Nodes";
+    }
 };
 
-window.onload = () => HK.init();
+function toggleOnion() { document.getElementById('onion-layer').classList.toggle('show'); }
+window.onload = () => HK_CORE.init();
 </script>
+
 </body>
 </html>
