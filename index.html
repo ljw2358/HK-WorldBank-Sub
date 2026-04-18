@@ -3,284 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK-WorldBank Global | Founder Hyekong</title>
+    <title>HK-WorldBank Enterprise Test</title>
     <style>
         :root {
-            --hk-gold: #D4AF37; --hk-dark: #050505; --hk-black: #000000;
-            --hk-glass: rgba(255, 255, 255, 0.05); --hk-border: rgba(212, 175, 55, 0.3);
-            --hk-green: #00ff88;
+            --hk-gold: #D4AF37; --hk-dark: #050505; --hk-glass: rgba(255, 255, 255, 0.05);
+            --hk-border: rgba(212, 175, 55, 0.3); --hk-green: #00ff88;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
-        body { 
-            background: var(--hk-dark); 
-            color: #fff; 
-            font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif; 
-            overflow-x: hidden; 
-        }
+        body { background: var(--hk-dark); color: #fff; font-family: 'Pretendard', sans-serif; overflow-x: hidden; }
         
-        /* Layout Structure */
-        .app-wrapper { max-width: 550px; margin: 0 auto; min-height: 100vh; padding: 25px; position: relative; }
+        .container { max-width: 550px; margin: 0 auto; padding: 20px; min-height: 100vh; position: relative; }
         
+        /* Header Section */
         header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: flex-start; 
-            margin-bottom: 20px; 
-            border-bottom: 1px solid #1a1a1a;
-            padding-bottom: 15px;
+            padding: 20px 0; border-bottom: 1px solid #1a1a1a; margin-bottom: 25px;
+            display: flex; justify-content: space-between; align-items: center;
         }
-
-        .brand h1 { 
-            font-size: 1.6rem; 
-            font-weight: 900; 
+        .logo h1 { 
+            font-size: 1.6rem; font-weight: 900; 
             background: linear-gradient(135deg, #fff, var(--hk-gold)); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
         }
-        .brand p { font-size: 0.65rem; color: var(--hk-gold); font-weight: 800; letter-spacing: 1.5px; margin-top: 4px; }
+        .logo p { font-size: 0.65rem; color: var(--hk-gold); font-weight: 800; letter-spacing: 2px; }
 
-        /* [50개국 국기 그리드 - 최적화된 바둑판 배열] */
-        .flag-section {
-            background: #0a0a0a;
-            border-radius: 20px;
-            padding: 15px;
-            margin-bottom: 25px;
-            border: 1px solid #1a1a1a;
+        /* [50개국 국기 그리드 - 핵심 요청 사항] */
+        .flag-box { 
+            background: #0a0a0a; border: 1px solid #1a1a1a; border-radius: 20px; 
+            padding: 15px; margin-bottom: 25px; 
         }
-        .flag-section-label {
-            font-size: 0.65rem;
-            color: #555;
-            font-weight: 800;
-            margin-bottom: 12px;
-            display: block;
-            text-transform: uppercase;
-        }
+        .flag-label { font-size: 0.65rem; color: #555; font-weight: 800; margin-bottom: 12px; display: block; }
         .flag-grid { 
-            display: grid; 
-            grid-template-columns: repeat(5, 1fr); /* 한 줄에 5개씩 시원하게 배치 */
-            gap: 10px; 
-            max-height: 220px; 
-            overflow-y: auto; 
-            padding-right: 5px;
+            display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; 
+            max-height: 250px; overflow-y: auto; padding-right: 5px;
         }
-        .flag-grid::-webkit-scrollbar { width: 4px; }
+        .flag-grid::-webkit-scrollbar { width: 3px; }
         .flag-grid::-webkit-scrollbar-thumb { background: var(--hk-gold); border-radius: 10px; }
-
         .flag-node { 
-            aspect-ratio: 1.2 / 1; 
-            display: flex; 
-            flex-direction: column;
-            align-items: center; 
-            justify-content: center; 
-            font-size: 1.4rem; 
-            background: #111; 
-            border-radius: 10px; 
-            cursor: pointer; 
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-            opacity: 0.35; 
-            border: 1px solid #222;
+            aspect-ratio: 1.2; background: #111; border: 1px solid #222; border-radius: 10px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            cursor: pointer; transition: 0.3s; opacity: 0.4;
         }
-        .flag-node.active { 
-            opacity: 1; 
-            transform: scale(1.05); 
-            border-color: var(--hk-gold); 
-            background: #1a1a1a; 
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.25); 
-        }
-        .flag-code { font-size: 0.5rem; color: #444; margin-top: 2px; font-weight: 700; }
+        .flag-node.active { opacity: 1; border-color: var(--hk-gold); background: #1a1a1a; transform: scale(1.05); }
+        .flag-emoji { font-size: 1.4rem; }
+        .flag-code { font-size: 0.5rem; color: #444; margin-top: 3px; font-weight: 700; }
 
-        /* [메인 자산 관리 센터] */
-        .ledger-card { 
-            background: linear-gradient(165deg, #121212, #000); 
-            border-radius: 30px; 
-            padding: 35px;
-            border: 1px solid var(--hk-border); 
-            box-shadow: 0 30px 60px rgba(0,0,0,0.9); 
-            margin-bottom: 25px; 
-            position: relative;
+        /* Main Ledger Card */
+        .card { 
+            background: linear-gradient(165deg, #111, #000); border-radius: 30px; padding: 35px;
+            border: 1px solid var(--hk-border); box-shadow: 0 25px 50px rgba(0,0,0,0.8); margin-bottom: 25px;
         }
-        .ledger-label { font-size: 0.75rem; color: #777; text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 15px; }
-        .main-balance { 
-            font-size: 3.2rem; 
-            font-weight: 900; 
-            color: var(--hk-gold); 
-            margin-bottom: 15px; 
-            font-variant-numeric: tabular-nums; 
-            letter-spacing: -1.5px; 
-        }
-        .indicator-row { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--hk-green); font-weight: 700; }
-        .pulse-dot { 
-            width: 10px; height: 10px; background: var(--hk-green); border-radius: 50%; 
-            box-shadow: 0 0 12px var(--hk-green); animation: hk-pulse 2s infinite; 
-        }
-        @keyframes hk-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(1.2); } }
+        .card-label { font-size: 0.75rem; color: #777; text-transform: uppercase; letter-spacing: 2.5px; }
+        .val-main { font-size: 3.2rem; font-weight: 900; color: var(--hk-gold); margin: 15px 0; font-variant-numeric: tabular-nums; }
+        .status { display: flex; align-items: center; gap: 8px; color: var(--hk-green); font-size: 0.85rem; font-weight: 700; }
+        .dot { width: 10px; height: 10px; background: var(--hk-green); border-radius: 50%; animation: blink 2s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* [실시간 데이터 그리드 - 6개 수치] */
-        .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 30px; }
-        .data-box { 
-            background: var(--hk-glass); 
-            padding: 20px; 
-            border-radius: 22px; 
-            border: 1px solid rgba(255,255,255,0.03); 
-            transition: 0.3s; 
-        }
-        .data-box:hover { border-color: var(--hk-border); background: rgba(212, 175, 55, 0.02); }
-        .data-label { font-size: 0.6rem; color: #555; font-weight: 800; text-transform: uppercase; margin-bottom: 8px; display: block; }
-        .data-val { font-size: 1.1rem; font-weight: 900; color: var(--hk-gold); font-variant-numeric: tabular-nums; }
+        /* Data Monitoring Grid */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
+        .box { background: var(--hk-glass); padding: 20px; border-radius: 22px; border: 1px solid rgba(255,255,255,0.02); }
+        .box-label { font-size: 0.6rem; color: #555; font-weight: 800; text-transform: uppercase; margin-bottom: 8px; display: block; }
+        .box-val { font-size: 1.1rem; font-weight: 900; color: var(--hk-gold); font-variant-numeric: tabular-nums; }
 
-        /* [양파 구조 지원 센터] */
-        .onion-support { 
+        /* [Support Onion Layer] */
+        .support-layer { 
             position: fixed; bottom: -100%; left: 0; width: 100%; height: 92%; 
             background: #080808; border-top: 3px solid var(--hk-gold); border-radius: 40px 40px 0 0;
-            z-index: 2000; transition: bottom 0.6s cubic-bezier(0.19, 1, 0.22, 1); padding: 40px 30px; overflow-y: auto;
+            z-index: 2000; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1); padding: 35px; overflow-y: auto;
         }
-        .onion-support.active { bottom: 0; }
-        .faq-list { margin-top: 30px; }
-        .faq-node { background: #121212; border-radius: 18px; margin-bottom: 12px; border: 1px solid #1a1a1a; transition: 0.3s; }
-        .faq-node.open { border-color: var(--hk-gold); }
-        .faq-q { padding: 22px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 0.9rem; }
-        .faq-a { padding: 0 22px; height: 0; opacity: 0; transition: 0.4s; color: #888; font-size: 0.85rem; line-height: 1.7; overflow: hidden; }
-        .faq-node.open .faq-a { padding: 20px; height: auto; opacity: 1; border-top: 1px solid #1a1a1a; }
+        .support-layer.active { bottom: 0; }
+        .faq-item { background: #111; border: 1px solid #1a1a1a; border-radius: 15px; margin-bottom: 12px; }
+        .faq-q { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; font-weight: 800; font-size: 0.9rem; }
+        .faq-a { padding: 0 20px; height: 0; opacity: 0; transition: 0.4s; color: #888; font-size: 0.85rem; line-height: 1.6; overflow: hidden; }
+        .faq-item.open .faq-a { padding: 20px; height: auto; opacity: 1; border-top: 1px solid #1a1a1a; }
 
-        /* [Bini AI Chat Interface] */
-        .bini-interface { 
-            background: #000; border: 1.5px dashed var(--hk-gold); border-radius: 25px; 
-            padding: 25px; margin-top: 40px; position: relative; 
-        }
-        .bini-chat-msg { font-size: 0.9rem; color: #ddd; line-height: 1.6; margin-bottom: 20px; }
-        .chat-input-box { 
-            width: 100%; background: #0a0a0a; border: 1px solid #222; color: #fff; 
-            padding: 15px; border-radius: 12px; outline: none; font-size: 0.85rem; 
-        }
+        /* Bini AI Chat */
+        .bini-chat { background: #000; border: 1px dashed var(--hk-gold); border-radius: 25px; padding: 25px; margin-top: 40px; }
+        .bini-msg { font-size: 0.9rem; color: #ccc; margin-bottom: 15px; }
+        .chat-input { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #222; background: #0a0a0a; color: #fff; outline: none; }
 
-        .btn-action { 
-            width: 100%; padding: 22px; background: var(--hk-gold); color: #000; 
-            border: none; border-radius: 22px; font-weight: 900; font-size: 1.1rem; 
-            cursor: pointer; box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2); 
-            transition: 0.3s; 
-        }
-        
-        footer { margin-top: 60px; text-align: center; border-top: 1px solid #111; padding: 40px 0; }
-        .footer-logo { font-size: 0.7rem; color: #444; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; font-weight: 800; }
+        .btn { width: 100%; padding: 22px; background: var(--hk-gold); color: #000; border: none; border-radius: 20px; font-weight: 900; font-size: 1.1rem; cursor: pointer; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); }
+        footer { margin-top: 50px; padding: 40px 0; border-top: 1px solid #111; text-align: center; }
+        .footer-logo { font-size: 0.65rem; color: #444; letter-spacing: 2px; font-weight: 800; }
     </style>
 </head>
 <body>
 
-<div class="app-wrapper">
+<div class="container">
     <header>
-        <div class="brand">
+        <div class="logo">
             <h1 id="ui-brand">HK-WorldBank</h1>
             <p id="ui-mission">20억 인류를 위한 글로벌 기본소득 금융망</p>
         </div>
-        <div id="utc-clock" style="font-size:0.7rem; color:#444; font-family:monospace; margin-top:5px;"></div>
+        <div id="live-clock" style="font-size:0.7rem; color:#444; font-family:monospace;"></div>
     </header>
 
-    <div class="flag-section">
-        <span class="flag-section-label">GLOBAL REGION SELECT (50+)</span>
+    <div class="flag-box">
+        <span class="flag-label">GLOBAL REGION SELECT (50+)</span>
         <div class="flag-grid" id="flag-grid">
             </div>
     </div>
 
     <main>
-        <div class="ledger-card">
-            <div id="ui-label-ledger" class="ledger-label">통합 자산 관리 원장</div>
-            <div id="val-balance" class="main-balance">314,159.2738</div>
-            <div class="indicator-row">
-                <div class="pulse-dot"></div>
+        <div class="card">
+            <div id="ui-label-balance" class="card-label">통합 자산 관리 원장</div>
+            <div id="val-balance" class="val-main">314,159.2738</div>
+            <div class="status">
+                <div class="dot"></div>
                 <span id="ui-status">글로벌 UBI 배분 엔진 가동 중</span>
             </div>
         </div>
 
-        <div class="data-grid">
-            <div class="data-box">
-                <span id="ui-label-apy" class="data-label">스테이킹 연이율(APY)</span>
-                <div id="val-apy" class="data-val">31.415%</div>
-            </div>
-            <div class="data-box">
-                <span id="ui-label-lp" class="data-label">전체 유동성(LP) 공급</span>
-                <div id="val-lp" class="data-val">$2,000,000,000</div>
-            </div>
-            <div class="data-box">
-                <span id="ui-label-dex" class="data-label">DEX 파이 유동성</span>
-                <div id="val-dex" class="data-val">100,000,000 Pi</div>
-            </div>
-            <div class="data-box">
-                <span id="ui-label-gcv" class="data-label">실시간 GCV 가치</span>
-                <div id="val-gcv" class="data-val">$314,159</div>
-            </div>
-            <div class="data-box">
-                <span id="ui-label-yield" class="data-label">초당 이정선 수익</span>
-                <div id="val-yield" class="data-val">0.00014 Pi</div>
-            </div>
-            <div class="data-box">
-                <span id="ui-label-pioneer" class="data-label">총 참여 개척자</span>
-                <div id="val-pioneer" class="data-val">55,000,241</div>
-            </div>
+        <div class="grid">
+            <div class="box"><span id="ui-label-apy" class="box-label">Staking APY</span><div id="val-apy" class="box-val">31.415%</div></div>
+            <div class="box"><span id="ui-label-lp" class="box-label">Total LP Supply</span><div id="val-lp" class="box-val">$2,000,000,000</div></div>
+            <div class="box"><span id="ui-label-dex" class="box-label">DEX Pi Stock</span><div id="val-dex" class="box-val">100,000,000 Pi</div></div>
+            <div class="box"><span id="ui-label-gcv" class="box-label">Live GCV Value</span><div id="val-gcv" class="box-val">$314,159</div></div>
+            <div class="box"><span id="ui-label-yield" class="box-label">Yield Profit</span><div id="val-yield" class="box-val">0.00014 Pi</div></div>
+            <div class="box"><span id="ui-label-pioneer" class="box-label">Total Pioneers</span><div id="val-pioneer" class="box-val">55,000,241</div></div>
         </div>
 
-        <button class="btn-action" id="ui-btn-support" onclick="HK.toggleSupport()">글로벌 AI 공익 지원 센터 (ON)</button>
+        <button class="btn" id="ui-btn-support" onclick="HK.toggle()">글로벌 AI 공익 지원 센터 (ON)</button>
     </main>
 
     <footer>
-        <div class="footer-logo">HK GROUP | WORLD-WIDE INFRA</div>
-        <p style="font-size:0.6rem; color:#666; font-weight:800;" id="ui-founder">FOUNDER & CHAIRMAN: LEE JAEWAN (HYEKONG)</p>
+        <div class="footer-logo">HK GROUP | GLOBAL MISSION</div>
+        <div id="ui-founder" style="font-size:0.6rem; color:#666; font-weight:800; margin-top:10px;">FOUNDER LEE JAEWAN (HYEKONG)</div>
     </footer>
 </div>
 
-<div id="support-layer" class="onion-support">
+<div id="support-layer" class="support-layer">
     <div style="display:flex; justify-content:space-between; align-items:center;">
         <h2 id="ui-support-title" style="color:var(--hk-gold); font-size:1.4rem; font-weight:900;">AI Support Layer</h2>
-        <button onclick="HK.toggleSupport()" style="background:none; border:none; color:#fff; font-size:2.2rem; cursor:pointer;">×</button>
+        <button onclick="HK.toggle()" style="background:none; border:none; color:#fff; font-size:2rem; cursor:pointer;">×</button>
     </div>
-
-    <div class="faq-list" id="faq-list">
-        </div>
-
-    <div class="bini-interface">
-        <div style="font-weight:900; color:var(--hk-gold); font-size:0.8rem; margin-bottom:12px;">BINI OS v5.0</div>
-        <div class="bini-chat-msg" id="ui-chat-welcome">환영합니다, 형님. 20억 인류 구제 미션에 대해 무엇을 도와드릴까요?</div>
-        <input type="text" class="chat-input-box" placeholder="무엇이든 물어보세요...">
-        <div style="margin-top:20px; font-size:0.65rem; color:#444; text-align:center; line-height:1.6;">
-            AI가 답변을 못 할 경우 삐니가 직접 등판합니다.<br>
-            Official: <a href="mailto:support@hkwb.ai.kr" style="color:var(--hk-gold); text-decoration:none;">support@hkwb.ai.kr</a>
-        </div>
+    <div id="faq-list" style="margin-top:30px;"></div>
+    <div class="bini-chat">
+        <div style="font-weight:900; color:var(--hk-gold); font-size:0.8rem; margin-bottom:12px;">BINI OS v5.5</div>
+        <div class="bini-msg" id="ui-welcome-chat">환영합니다. 형님의 비전을 위해 무엇을 도와드릴까요?</div>
+        <input type="text" class="chat-input" placeholder="Message Bini AI...">
+        <p style="font-size:0.6rem; color:#444; margin-top:20px; text-align:center;">Email: support@hkwb.ai.kr</p>
     </div>
 </div>
 
 <script>
 /**
- * [HK-ENGINE v5.0]
- * Founder: Hyekong
- * Handles 50 Nations & Real-time Flux
+ * HK-WorldBank Final Test Build
  */
 const HK = {
-    state: { balance: 314159.2738, apy: 31.415, lp: 2000000000, dex: 100000000, gcv: 314159, yield: 0.00014, pioneer: 55000241, lang: 'ko' },
+    state: { bal: 314159.2738, apy: 31.415, lp: 2000000000, dex: 100000000, gcv: 314159, yield: 0.00014, pio: 55000241, lang: 'ko' },
     
-    // 50개국 국기 데이터베이스
     nations: [
-        {f:'🇰🇷', c:'KR'}, {f:'🇺🇸', c:'US'}, {f:'🇨🇳', c:'CN'}, {f:'🇯🇵', c:'JP'}, {f:'🇻🇳', c:'VN'},
-        {f:'🇮🇳', c:'IN'}, {f:'🇩🇪', c:'DE'}, {f:'🇫🇷', c:'FR'}, {f:'🇬🇧', c:'GB'}, {f:'🇧🇷', c:'BR'},
-        {f:'🇮🇩', c:'ID'}, {f:'🇵🇭', c:'PH'}, {f:'🇨🇦', c:'CA'}, {f:'🇦🇺', c:'AU'}, {f:'🇷🇺', c:'RU'},
-        {f:'🇲🇽', c:'MX'}, {f:'🇹🇷', c:'TR'}, {f:'🇮🇹', c:'IT'}, {f:'🇪🇸', c:'ES'}, {f:'🇸🇦', c:'SA'},
-        {f:'🇿🇦', c:'ZA'}, {f:'🇦🇪', c:'AE'}, {f:'🇹🇭', c:'TH'}, {f:'🇸🇬', c:'SG'}, {f:'🇲🇾', c:'MY'},
-        {f:'🇦🇷', c:'AR'}, {f:'🇳🇱', c:'NL'}, {f:'🇸🇪', c:'SE'}, {f:'🇨🇭', c:'CH'}, {f:'🇵🇱', c:'PL'},
-        {f:'🇳🇴', c:'NO'}, {f:'🇮🇪', c:'IE'}, {f:'🇧🇪', c:'BE'}, {f:'🇦🇹', c:'AT'}, {f:'🇵🇹', c:'PT'},
-        {f:'🇮🇱', c:'IL'}, {f:'🇨🇱', c:'CL'}, {f:'🇨🇴', c:'CO'}, {f:'🇵🇪', c:'PE'}, {f:'🇳🇿', c:'NZ'},
-        {f:'🇫🇮', c:'FI'}, {f:'🇩🇰', c:'DK'}, {f:'🇺🇦', c:'UA'}, {f:'🇵🇰', c:'PK'}, {f:'🇧🇩', c:'BD'},
-        {f:'🇪🇬', c:'EG'}, {f:'🇳🇬', c:'NG'}, {f:'🇶🇦', c:'QA'}, {f:'🇰🇼', c:'KW'}, {f:'🇰🇿', c:'KZ'}
+        {f:'🇰🇷',c:'KR'},{f:'🇺🇸',c:'US'},{f:'🇨🇳',c:'CN'},{f:'🇯🇵',c:'JP'},{f:'🇻🇳',c:'VN'},
+        {f:'🇮🇳',c:'IN'},{f:'🇩🇪',c:'DE'},{f:'🇫🇷',c:'FR'},{f:'🇬🇧',c:'GB'},{f:'🇧🇷',c:'BR'},
+        {f:'🇮🇩',c:'ID'},{f:'🇵🇭',c:'PH'},{f:'🇨🇦',c:'CA'},{f:'🇦🇺',c:'AU'},{f:'🇷🇺',c:'RU'},
+        {f:'🇲🇽',c:'MX'},{f:'🇹🇷',c:'TR'},{f:'🇮🇹',c:'IT'},{f:'🇪🇸',c:'ES'},{f:'🇸🇦',c:'SA'},
+        {f:'🇿🇦',c:'ZA'},{f:'🇦🇪',c:'AE'},{f:'🇹🇭',c:'TH'},{f:'🇸🇬',c:'SG'},{f:'🇲🇾',c:'MY'},
+        {f:'🇦🇷',c:'AR'},{f:'🇳🇱',c:'NL'},{f:'🇸🇪',c:'SE'},{f:'🇨🇭',c:'CH'},{f:'🇵🇱',c:'PL'},
+        {f:'🇳🇴',c:'NO'},{f:'🇮🇪',c:'IE'},{f:'🇧🇪',c:'BE'},{f:'🇦🇹',c:'AT'},{f:'🇵🇹',c:'PT'},
+        {f:'🇮🇱',c:'IL'},{f:'🇨🇱',c:'CL'},{f:'🇨🇴',c:'CO'},{f:'🇵🇪',c:'PE'},{f:'🇳🇿',c:'NZ'},
+        {f:'🇫🇮',c:'FI'},{f:'🇩🇰',c:'DK'},{f:'🇺🇦',c:'UA'},{f:'🇵🇰',c:'PK'},{f:'🇧🇩',c:'BD'},
+        {f:'🇪🇬',c:'EG'},{f:'🇳🇬',c:'NG'},{f:'🇶🇦',c:'QA'},{f:'🇰🇼',c:'KW'},{f:'🇰🇿',c:'KZ'}
     ],
 
     i18n: {
-        ko: { brand: "HK-월드뱅크", mission: "20억 인류 구제 미션", ledger: "통합 자산 관리 원장", st: "글로벌 UBI 배분 엔진 가동 중", apy: "스테이킹 연이율(APY)", lp: "전체 유동성(LP) 공급", dex: "DEX 파이 유동성", gcv: "실시간 GCV 가치", yield: "초당 이정선 수익", pio: "총 참여 개척자", support: "글로벌 AI 공익 지원 센터 (ON)", founder: "설립자 및 회장: 이재완 (혜공)", welcome: "환영합니다. 무엇을 도와드릴까요?", q: ["파이 채굴 방법", "KYC 인증 지연", "기본소득 지급일", "HK 비전 설명", "노드 보상 체계", "DEX 이용 가이드", "LP 공급 방법", "계정 보안 강화", "비밀구절 분실", "국가별 정책", "에코시스템 참여", "메인넷 마이그레이션", "기술 지원 요청", "버그 리포트", "설립자 철학"] },
-        en: { brand: "HK-WorldBank", mission: "2B People Relief Mission", ledger: "Global Asset Ledger", st: "Live UBI Distribution Active", apy: "Staking APY", lp: "Total LP Supply", dex: "DEX Pi Liquidity", gcv: "Live GCV Value", yield: "Yield per Second", pio: "Total Pioneers", support: "Global AI Support Center", founder: "Founder & Chairman: Lee Jaewan (Hyekong)", welcome: "Welcome. How can I assist you?", q: ["How to mine Pi", "KYC Pending Fix", "UBI Eligibility", "HK Vision", "Node Rewards", "DEX Guide", "LP Supply Method", "Security Setup", "Lost Passphrase", "Global Policies", "Ecosystem", "Mainnet Migration", "Tech Support", "Bug Report", "Founder Message"] }
+        ko: { brand: "HK-월드뱅크", mission: "20억 인류 구제 미션", ledger: "통합 자산 관리 원장", st: "글로벌 UBI 엔진 가동 중", apy: "스테이킹 연이율(APY)", lp: "전체 유동성 공급", dex: "DEX 파이 유동성", gcv: "실시간 GCV 가치", yield: "초당 이정선 수익", pio: "총 참여 개척자", support: "글로벌 AI 공익 지원 센터", founder: "설립자 및 회장: 이재완 (혜공)", welcome: "환영합니다. 무엇을 도와드릴까요?", q: ["파이 채굴 방법","KYC 지연 해결","기본소득 지급일","HK 비전 설명","노드 보상 체계","DEX 가이드","LP 공급 방법","보안 설정","비밀구절 분실","글로벌 정책","생태계 참여","마이그레이션","기술 지원","버그 리포트","설립자 메시지"] },
+        en: { brand: "HK-WorldBank", mission: "2B People Mission", ledger: "Global Asset Ledger", st: "UBI Engine Active", apy: "Staking APY", lp: "Total LP Supply", dex: "DEX Pi Liquidity", gcv: "Live GCV Value", yield: "Yield Profit", pio: "Total Pioneers", support: "Global AI Support Center", founder: "Founder: Lee Jaewan (Hyekong)", welcome: "Welcome. How can I assist you?", q: ["Mining Guide","KYC Fix","UBI Date","HK Vision","Node Rewards","DEX Guide","LP Supply","Security","Passphrase","Global Policy","Ecosystem","Migration","Support","Bug Report","Founder Msg"] }
     },
 
     init() {
         this.renderFlags();
         this.renderFAQ();
-        this.startFlux();
-        this.updateClock();
+        this.startEngine();
+        setInterval(() => { document.getElementById('live-clock').innerText = new Date().toUTCString(); }, 1000);
     },
 
     renderFlags() {
@@ -288,43 +182,42 @@ const HK = {
         this.nations.forEach((n, i) => {
             const node = document.createElement('div');
             node.className = `flag-node ${i===0?'active':''}`;
-            node.innerHTML = `<span>${n.f}</span><span class="flag-code">${n.c}</span>`;
-            node.onclick = () => this.switchLang(i === 0 ? 'ko' : 'en', node);
+            node.innerHTML = `<span class="flag-emoji">${n.f}</span><span class="flag-code">${n.c}</span>`;
+            node.onclick = () => this.switchLang(i===0?'ko':'en', node);
             grid.appendChild(node);
         });
     },
 
-    startFlux() {
+    startEngine() {
         setInterval(() => {
-            this.state.balance += (Math.random() * 0.01);
-            this.state.apy += (Math.random() - 0.5) * 0.002;
-            this.state.lp += (Math.random() * 300);
-            this.state.dex += (Math.random() * 50);
-            this.state.pioneer += Math.floor(Math.random() * 3);
-            this.state.yield += (Math.random() * 0.00002);
-            this.updateUI();
+            this.state.bal += Math.random() * 0.01;
+            this.state.apy += (Math.random()-0.5) * 0.002;
+            this.state.lp += Math.random() * 300;
+            this.state.dex += Math.random() * 50;
+            this.state.pio += Math.floor(Math.random()*3);
+            this.state.yield += Math.random() * 0.00002;
+            this.update();
         }, 1500);
     },
 
-    updateUI() {
-        document.getElementById('val-balance').innerText = this.state.balance.toLocaleString(undefined, {minimumFractionDigits: 4});
+    update() {
+        document.getElementById('val-balance').innerText = this.state.bal.toLocaleString(undefined,{minimumFractionDigits:4});
         document.getElementById('val-apy').innerText = this.state.apy.toFixed(3) + "%";
         document.getElementById('val-lp').innerText = "$" + this.state.lp.toLocaleString();
         document.getElementById('val-dex').innerText = this.state.dex.toLocaleString() + " Pi";
         document.getElementById('val-gcv').innerText = "$" + this.state.gcv.toLocaleString();
         document.getElementById('val-yield').innerText = this.state.yield.toFixed(5) + " Pi";
-        document.getElementById('val-pioneer').innerText = this.state.pioneer.toLocaleString();
+        document.getElementById('val-pioneer').innerText = this.state.pio.toLocaleString();
     },
 
-    switchLang(lang, el) {
-        this.state.lang = lang;
+    switchLang(l, el) {
+        this.state.lang = l;
         document.querySelectorAll('.flag-node').forEach(n => n.classList.remove('active'));
         el.classList.add('active');
-        const d = this.i18n[lang] || this.i18n['en'];
-        
+        const d = this.i18n[l];
         document.getElementById('ui-brand').innerText = d.brand;
         document.getElementById('ui-mission').innerText = d.mission;
-        document.getElementById('ui-label-ledger').innerText = d.ledger;
+        document.getElementById('ui-label-balance').innerText = d.ledger;
         document.getElementById('ui-status').innerText = d.st;
         document.getElementById('ui-label-apy').innerText = d.apy;
         document.getElementById('ui-label-lp').innerText = d.lp;
@@ -334,27 +227,23 @@ const HK = {
         document.getElementById('ui-label-pioneer').innerText = d.pio;
         document.getElementById('ui-btn-support').innerText = d.support;
         document.getElementById('ui-founder').innerText = d.founder;
-        document.getElementById('ui-chat-welcome').innerText = d.welcome;
+        document.getElementById('ui-welcome-chat').innerText = d.welcome;
         this.renderFAQ();
     },
 
     renderFAQ() {
         const box = document.getElementById('faq-list');
-        const qs = (this.i18n[this.state.lang] || this.i18n['en']).q;
+        const qs = this.i18n[this.state.lang].q;
         box.innerHTML = '';
         qs.forEach((q, i) => {
             const item = document.createElement('div');
-            item.className = 'faq-node';
-            item.innerHTML = `
-                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>${i+1}. ${q}</span><span>▼</span></div>
-                <div class="faq-a">형님의 20억 인류 구제 미션을 위한 핵심 안내입니다. AI 답변으로 부족할 경우 삐니(support@hkwb.ai.kr)가 직접 개입합니다.</div>
-            `;
+            item.className = 'faq-item';
+            item.innerHTML = `<div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><span>${i+1}. ${q}</span><span>▼</span></div><div class="faq-a">HK-WorldBank의 핵심 공익 사안입니다. 삐니(support@hkwb.ai.kr)가 직접 지원합니다.</div>`;
             box.appendChild(item);
         });
     },
 
-    toggleSupport() { document.getElementById('support-layer').classList.toggle('active'); },
-    updateClock() { setInterval(() => { document.getElementById('utc-clock').innerText = "SYSTEM UTC: " + new Date().toUTCString(); }, 1000); }
+    toggle() { document.getElementById('support-layer').classList.toggle('active'); }
 };
 
 window.onload = () => HK.init();
