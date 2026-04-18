@@ -3,360 +3,337 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK GROUP | Founder & Chairman Lee Jaewan</title>
+    <title>HK-WorldBank | Quantum-Secure Financial Fortress</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;500&family=Noto+Sans+KR:wght@100;400;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary-blue: #0070f3;
-            --accent-gold: #c5a059;
-            --bg-dark: #0a0a0a;
+            --primary-blue: #00e5ff;
+            --deep-dark: #030303;
+            --pi-gold: #ffb400;
+            --danger-red: #ff1744;
         }
+
         body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: var(--bg-dark);
+            background-color: var(--deep-dark);
             color: #ffffff;
-            scroll-behavior: smooth;
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
         }
+
         .orbitron { font-family: 'Orbitron', sans-serif; }
-        
-        /* Glassmorphism Effects */
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .glass-card:hover { background: rgba(255, 255, 255, 0.08); transform: translateY(-10px); transition: all 0.4s ease; }
-        
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* [Visual Component 1: Matrix Background] */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+
+        /* [Visual Component 2: Quantum Shield Glow] */
+        .quantum-border {
+            position: relative;
+            border: 1px solid var(--primary-blue);
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+        }
+        .quantum-border::before {
+            content: "";
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, var(--primary-blue), transparent, var(--pi-gold));
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0.3;
+        }
+
+        /* [Visual Component 3: Emergency HUD] */
+        .hud-scan {
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 229, 255, 0.05) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+
         /* Animations */
-        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
-        .floating { animation: float 6s ease-in-out infinite; }
-        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #000000 100%); }
-        
-        /* Navigation Sidebar */
-        .sidebar { width: 60px; transition: width 0.3s ease; overflow: hidden; white-space: nowrap; }
-        .sidebar:hover { width: 240px; }
-        
-        /* Section Divider */
-        .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); }
-        
-        /* Custom Button */
-        .btn-hk { position: relative; overflow: hidden; z-index: 1; border: 1px solid rgba(255,255,255,0.2); }
-        .btn-hk::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: white; z-index: -1; transition: 0.4s; }
-        .btn-hk:hover::before { left: 0; }
-        .btn-hk:hover { color: black; }
-        
-        /* Text Highlight */
-        .highlight { color: var(--primary-blue); font-weight: 700; }
+        @keyframes blink-warning {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .warning-text { animation: blink-warning 1s infinite; color: var(--danger-red); }
+
+        @keyframes rotate-3d {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+        .logo-3d { animation: rotate-3d 10s linear infinite; perspective: 1000px; }
+
+        /* Scroll Styling */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--primary-blue); border-radius: 10px; }
     </style>
 </head>
-<body class="flex">
+<body class="hud-scan">
 
-    <aside class="sidebar h-screen sticky top-0 bg-black border-r border-white/10 z-[100] hidden lg:flex flex-col items-center py-10">
-        <div class="mb-20 text-blue-500 text-2xl"><i class="fas fa-layer-group"></i></div>
-        <nav class="flex-1 flex flex-col space-y-10">
-            <a href="#home" class="flex items-center space-x-6 text-gray-400 hover:text-white transition">
-                <i class="fas fa-home w-6 text-center"></i> <span class="orbitron uppercase text-sm tracking-widest">Main Dashboard</span>
-            </a>
-            <a href="#vision" class="flex items-center space-x-6 text-gray-400 hover:text-white transition">
-                <i class="fas fa-eye w-6 text-center"></i> <span class="orbitron uppercase text-sm tracking-widest">Global Vision</span>
-            </a>
-            <a href="#robotics" class="flex items-center space-x-6 text-gray-400 hover:text-white transition">
-                <i class="fas fa-robot w-6 text-center"></i> <span class="orbitron uppercase text-sm tracking-widest">Figure AI Hub</span>
-            </a>
-            <a href="#finance" class="flex items-center space-x-6 text-gray-400 hover:text-white transition">
-                <i class="fas fa-university w-6 text-center"></i> <span class="orbitron uppercase text-sm tracking-widest">HK-WorldBank</span>
-            </a>
-            <a href="#energy" class="flex items-center space-x-6 text-gray-400 hover:text-white transition">
-                <i class="fas fa-atom w-6 text-center"></i> <span class="orbitron uppercase text-sm tracking-widest">Nuclear Fusion</span>
-            </a>
-            <a href="#partsbank" class="flex items-center space-x-6 text-gray-400 hover:text-white transition">
-                <i class="fas fa-cogs w-6 text-center"></i> <span class="orbitron uppercase text-sm tracking-widest">PartsBank SCM</span>
-            </a>
-            <a href="#ubi" class="flex items-center space-x-6 text-gray-400 hover:text-white transition">
-                <i class="fas fa-hand-holding-heart w-6 text-center"></i> <span class="orbitron uppercase text-sm tracking-widest">UBI Foundation</span>
-            </a>
-        </nav>
-        <div class="text-xs text-gray-600 font-mono rotate-180" style="writing-mode: vertical-rl;">HK GROUP v2.0</div>
-    </aside>
+    <div id="canvas-container"></div>
 
-    <main class="flex-1 overflow-hidden">
-        
-        <header class="p-8 flex justify-between items-center glass sticky top-0 z-[90]">
+    <nav class="fixed top-0 w-full z-[1000] border-b border-white/10 bg-black/80 backdrop-blur-md">
+        <div class="max-w-[1600px] mx-auto px-10 py-5 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <div class="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-lg logo-3d"></div>
+                <h1 class="orbitron text-2xl font-black tracking-tighter">HK <span class="text-cyan-400">WORLDBANK</span></h1>
+            </div>
+            <div class="hidden lg:flex space-x-12 orbitron text-[11px] font-bold uppercase tracking-[0.2em]">
+                <a href="#panic" class="hover:text-cyan-400 transition">Emergency Protocol</a>
+                <a href="#quantum" class="hover:text-cyan-400 transition">Quantum Security</a>
+                <a href="#pi-eco" class="hover:text-cyan-400 transition">Pi Ecosystem</a>
+                <a href="#fixed-value" class="hover:text-cyan-400 transition">Fixed Value (GCV)</a>
+            </div>
+            <div class="flex items-center space-x-6">
+                <span class="mono text-[10px] text-green-500 animate-pulse">NODE: 1,024,392 ACTIVE</span>
+                <button class="bg-cyan-500 text-black px-6 py-2 rounded-full font-black text-xs uppercase tracking-widest hover:bg-white transition">Connect Wallet</button>
+            </div>
+        </div>
+    </nav>
+
+    <section id="panic" class="relative min-h-screen flex flex-col justify-center items-center text-center px-10">
+        <div class="max-w-6xl">
+            <p class="warning-text orbitron font-black text-lg mb-4 tracking-[0.5em]">SYSTEM WARNING: FIAT CURRENCY LIQUIDITY ZERO</p>
+            <h2 class="text-7xl md:text-[9rem] font-black leading-none mb-10 italic">
+                BANKING <span class="text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-800">MELTDOWN.</span>
+            </h2>
+            <p class="text-xl md:text-3xl text-gray-400 max-w-4xl mx-auto leading-relaxed mb-16">
+                은행의 숫자가 지워지고 비트코인 노드가 멈추는 대공황의 시대, <br>
+                <span class="text-white font-bold">100만 노드의 파이(Pi)</span>와 <span class="text-cyan-400 font-bold">HK의 양자 보안</span>만이 <br>
+                당신의 소중한 자산을 실물 경제로 연결합니다.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="p-8 border border-white/10 bg-white/5 backdrop-blur-sm">
+                    <h4 class="orbitron text-cyan-400 mb-4">DEPOSIT STATUS</h4>
+                    <p class="text-4xl font-black text-red-600">EVAPORATED</p>
+                    <p class="text-[10px] text-gray-500 mt-2 uppercase">Legacy Banking Systems Offline</p>
+                </div>
+                <div class="p-8 border border-white/10 bg-white/5 backdrop-blur-sm">
+                    <h4 class="orbitron text-pi-gold mb-4">PI NETWORK</h4>
+                    <p class="text-4xl font-black">STABLE</p>
+                    <p class="text-[10px] text-gray-500 mt-2 uppercase">Decentralized Trust Network</p>
+                </div>
+                <div class="p-8 border border-white/10 bg-white/5 backdrop-blur-sm">
+                    <h4 class="orbitron text-green-500 mb-4">HK-GCV MODE</h4>
+                    <p class="text-4xl font-black italic">ACTIVE</p>
+                    <p class="text-[10px] text-gray-500 mt-2 uppercase">Fixed Value Protection On</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="quantum" class="py-32 bg-zinc-950">
+        <div class="max-w-[1400px] mx-auto px-10 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
             <div>
-                <h1 class="orbitron text-2xl font-black tracking-tighter">HK <span class="text-blue-500">GROUP</span></h1>
-                <p class="text-[10px] text-gray-500 font-bold uppercase tracking-[0.4em]">Integrated Industrial Platform</p>
+                <span class="text-cyan-400 orbitron font-bold tracking-widest uppercase mb-4 block">[01] Absolute Security</span>
+                <h3 class="text-6xl font-black mb-8">양자 컴퓨터도 <br>뚫지 못하는 요새.</h3>
+                <p class="text-gray-400 text-lg leading-relaxed mb-10">
+                    기존의 블록체인은 양자 컴퓨팅 시대에 무력합니다. HK-WorldBank는 **'HK 퀀텀 쉴드'**를 통해 모든 개인 지갑의 비대칭 암호키를 실시간 보호합니다. 혜공 형님이 직접 설계하신 이 철학적 보안 체계는 해킹 시도가 감지되는 즉시 노드를 분산 격리합니다.
+                </p>
+                <ul class="space-y-6">
+                    <li class="flex items-center space-x-4">
+                        <i class="fas fa-shield-virus text-cyan-400 text-2xl"></i>
+                        <span class="font-bold">HK Quantum-Resistant Algorithm (HK-QRA)</span>
+                    </li>
+                    <li class="flex items-center space-x-4">
+                        <i class="fas fa-fingerprint text-cyan-400 text-2xl"></i>
+                        <span class="font-bold">Multi-Layer KYB Biometrics Integration</span>
+                    </li>
+                </ul>
             </div>
-            <div class="flex items-center space-x-12">
-                <div class="hidden md:block text-right">
-                    <p class="text-[10px] text-gray-500 uppercase">Founder & Chairman</p>
-                    <p class="font-bold">Lee Jaewan (Hyekong)</p>
-                </div>
-                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center cursor-pointer hover:rotate-12 transition">
-                    <i class="fas fa-user-tie"></i>
+            <div class="quantum-border p-1 rounded-2xl">
+                <div class="bg-black p-10 rounded-xl h-[500px] flex flex-col justify-between">
+                    <div class="flex justify-between items-start">
+                        <div class="mono text-xs text-cyan-500">
+                            > QUANTUM THREAT DETECTION... 0.00%<br>
+                            > ENCRYPTION LAYER: 4096-BIT PQC<br>
+                            > NODE SYNC: COMPLETED
+                        </div>
+                        <i class="fas fa-atom text-6xl text-cyan-400 animate-spin-slow"></i>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="h-1 bg-zinc-800 w-full rounded-full overflow-hidden">
+                            <div class="h-full bg-cyan-400 w-3/4 animate-pulse"></div>
+                        </div>
+                        <p class="text-[10px] text-gray-600 font-bold uppercase tracking-widest">Quantum Shield Integrity: Optimal</p>
+                    </div>
                 </div>
             </div>
-        </header>
+        </div>
+    </section>
 
-        <section id="home" class="relative min-h-screen flex items-center px-10 lg:px-24 gradient-bg">
-            <div class="z-10 max-w-4xl">
-                <h2 class="text-blue-500 orbitron text-xl font-bold mb-4 tracking-widest">ESTABLISHED 2026</h2>
-                <h3 class="text-6xl lg:text-9xl font-black leading-none mb-8 italic">THE NEXT <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-600">ERA IS HERE.</span></h3>
-                <p class="text-gray-400 text-lg md:text-xl leading-relaxed mb-10 max-w-2xl">
-                    HK 그룹은 로봇공학, 청정 에너지, 그리고 탈중앙화 금융을 결합하여 인류가 직면한 노동과 에너지의 결핍을 해결합니다. 우리는 단순한 기업을 넘어 인류의 미래 인프라를 구축합니다.
+    <section id="pi-eco" class="py-32 px-10">
+        <div class="max-w-[1400px] mx-auto">
+            <div class="text-center mb-24">
+                <h2 class="orbitron text-5xl font-black mb-6 italic">WHY PI SURVIVES?</h2>
+                <p class="text-gray-500 uppercase tracking-widest">It's not about price, It's about Infrastructure.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="p-12 border border-white/5 bg-zinc-900/50 hover:bg-zinc-800 transition duration-500">
+                    <div class="text-pi-gold text-4xl mb-8"><i class="fas fa-server"></i></div>
+                    <h5 class="font-bold text-xl mb-4 italic">1,000,000+ Nodes</h5>
+                    <p class="text-sm text-gray-500">전 세계에 깔린 수십만 대의 노드는 국가가 망해도 멈추지 않는 글로벌 혈관입니다.</p>
+                </div>
+                <div class="p-12 border border-white/5 bg-zinc-900/50 hover:bg-zinc-800 transition">
+                    <div class="text-blue-500 text-4xl mb-8"><i class="fas fa-gavel"></i></div>
+                    <h5 class="font-bold text-xl mb-4 italic">Legal Compliance</h5>
+                    <p class="text-sm text-gray-500">이미 법적 테두리 내에서 준비된 시스템. 각국 정부가 채택할 수밖에 없는 유일한 제도권 암호화폐.</p>
+                </div>
+                <div class="p-12 border border-white/5 bg-zinc-900/50 hover:bg-zinc-800 transition">
+                    <div class="text-green-500 text-4xl mb-8"><i class="fas fa-pickaxe"></i></div>
+                    <h5 class="font-bold text-xl mb-4 italic">Democratic Mining</h5>
+                    <p class="text-sm text-gray-500">특정 채굴 집단이 아닌, 모든 개인의 휴대폰이 보안 기여자가 되는 진정한 탈중앙화.</p>
+                </div>
+                <div class="p-12 border border-white/5 bg-zinc-900/50 hover:bg-zinc-800 transition">
+                    <div class="text-purple-500 text-4xl mb-8"><i class="fas fa-coins"></i></div>
+                    <h5 class="font-bold text-xl mb-4 italic">Fixed GCV Power</h5>
+                    <p class="text-sm text-gray-500">시장 혼란 시 가치를 고정하여 실물 경제 물가를 안정시키는 HK만의 통화 관리 정책.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="fixed-value" class="py-32 px-10 bg-white text-black">
+        <div class="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-20 items-center">
+            <div class="lg:w-1/2">
+                <h3 class="text-6xl font-black italic mb-10 leading-none">EVERYTHING ELSE <br><span class="text-red-600 underline">DISABLED.</span></h3>
+                <p class="text-xl text-gray-600 leading-relaxed mb-12">
+                    형님, 보십시오. 경제가 무너지면 사람들은 무엇을 써야 할지 우왕좌왕합니다. 그때 유일하게 활성화되는 것이 HK-WorldBank 앱입니다. 비트코인 노드가 닫히고 이더리움 가스비가 1억 원이 넘을 때, 우리 앱은 평온하게 작동하며 쌀 한 가마니, 기계 부품 하나를 파이로 결제하게 합니다.
                 </p>
                 <div class="flex space-x-4">
-                    <button class="btn-hk px-12 py-5 bg-white text-black font-black uppercase text-sm tracking-widest">Inquiry Acquisition</button>
-                    <button class="btn-hk px-12 py-5 border border-white/20 font-black uppercase text-sm tracking-widest">View Roadmap</button>
+                    <div class="bg-black text-white p-6 rounded-xl flex-1">
+                        <p class="text-[10px] uppercase font-bold text-gray-500">Current Fixed GCV</p>
+                        <p class="text-2xl font-black italic">$314,159 <span class="text-xs font-normal">/ Pi</span></p>
+                    </div>
+                    <div class="border-2 border-black p-6 rounded-xl flex-1">
+                        <p class="text-[10px] uppercase font-bold text-gray-500">Real Asset Sync</p>
+                        <p class="text-2xl font-black italic">100% SECURED</p>
+                    </div>
                 </div>
             </div>
-            <div class="absolute right-[-10%] top-1/2 -translate-y-1/2 opacity-10 text-[40rem] font-black orbitron pointer-events-none">HK</div>
-        </section>
-
-        <section id="vision" class="py-32 px-10 lg:px-24">
-            <div class="divider mb-20"></div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
-                <div>
-                    <span class="text-blue-500 font-mono">[01] MISSION STATEMENT</span>
-                    <h2 class="text-5xl font-bold mt-4 mb-10">기술의 열매를 <br><span class="highlight">모두의 품으로.</span></h2>
-                    <div class="space-y-8 text-gray-400 text-lg">
-                        <p>우리는 로봇이 인간의 노동을 대신하고, 핵융합이 무한한 에너지를 제공하는 시대를 준비합니다. 이 과정에서 발생하는 거대한 부는 소수에게 집중되지 않고 <span class="text-white font-bold">전 세계 소외계층에게 30% 환원</span>될 것입니다.</p>
-                        <div class="p-8 border-l-4 border-blue-500 bg-white/5 italic">
-                            "기업의 존재 이유는 이윤 추구를 넘어, 인류가 굶주림과 고된 노동에서 해방되게 하는 데 있습니다." - 이재완 의장
+            <div class="lg:w-1/2 relative">
+                <div class="w-full aspect-square bg-zinc-100 rounded-[4rem] border-[20px] border-zinc-200 overflow-hidden shadow-2xl relative">
+                    <div class="absolute inset-0 bg-black p-8 text-white">
+                        <div class="flex justify-between items-center mb-12">
+                            <span class="orbitron font-bold">HK PAY v1.0</span>
+                            <i class="fas fa-signal-stream text-green-500"></i>
                         </div>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="glass p-10 flex flex-col justify-end h-64 glass-card">
-                        <h4 class="orbitron font-bold text-3xl">30%</h4>
-                        <p class="text-xs text-gray-500 uppercase mt-2">Net Profit Distribution</p>
-                    </div>
-                    <div class="glass p-10 flex flex-col justify-end h-64 glass-card">
-                        <h4 class="orbitron font-bold text-3xl">ULSAN</h4>
-                        <p class="text-xs text-gray-500 uppercase mt-2">Global Industry Hub</p>
-                    </div>
-                    <div class="glass p-10 flex flex-col justify-end h-64 glass-card mt-[-20px]">
-                        <h4 class="orbitron font-bold text-3xl">PI NET</h4>
-                        <p class="text-xs text-gray-500 uppercase mt-2">DeFi Foundation</p>
-                    </div>
-                    <div class="glass p-10 flex flex-col justify-end h-64 glass-card mt-[-20px]">
-                        <h4 class="orbitron font-bold text-3xl">FIGURE</h4>
-                        <p class="text-xs text-gray-500 uppercase mt-2">Robotics Target</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="robotics" class="py-32 bg-zinc-900 px-10 lg:px-24 relative overflow-hidden">
-            <div class="max-w-6xl mx-auto">
-                <div class="text-center mb-24">
-                    <h2 class="text-6xl font-black mb-6">PHYSICAL AI HUB</h2>
-                    <p class="text-blue-500 orbitron tracking-[0.5em] font-bold">K-ROBOT CONSORTIUM</p>
-                </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-0 border border-white/10">
-                    <div class="p-12 border-b lg:border-b-0 lg:border-r border-white/10 hover:bg-blue-600 transition duration-500 group">
-                        <div class="text-4xl mb-8 group-hover:scale-110 transition"><i class="fas fa-microchip"></i></div>
-                        <h4 class="text-2xl font-bold mb-4">Figure AI Acquisition</h4>
-                        <p class="text-gray-400 group-hover:text-white/80">글로벌 휴머노이드 로봇의 선두주자 Figure AI 인수를 통한 핵심 원천 기술 확보 및 독점적 지위 구축.</p>
-                    </div>
-                    <div class="p-12 border-b lg:border-b-0 lg:border-r border-white/10 hover:bg-zinc-800 transition duration-500">
-                        <div class="text-4xl mb-8 text-blue-500"><i class="fas fa-industry"></i></div>
-                        <h4 class="text-2xl font-bold mb-4">Ulsan-Gyeongju Cluster</h4>
-                        <p class="text-gray-400">대한민국 제조 혁신의 심장부에 세계 최대 규모의 '피지컬 AI 국가 산업단지' 조성 제안 및 리드.</p>
-                    </div>
-                    <div class="p-12 hover:bg-zinc-800 transition duration-500">
-                        <div class="text-4xl mb-8 text-blue-500"><i class="fas fa-project-diagram"></i></div>
-                        <h4 class="text-2xl font-bold mb-4">Supply Chain Unity</h4>
-                        <p class="text-gray-400">PartsBank 플랫폼을 통한 로봇 부품 공급망의 디지털 전환과 실시간 재고 관리 인프라 구축.</p>
-                    </div>
-                </div>
-
-                <div class="mt-20 glass p-12 rounded-3xl flex flex-col md:flex-row items-center justify-between">
-                    <div>
-                        <h5 class="text-2xl font-bold italic">"우리는 기계를 만드는 것이 아니라, <br>인류의 시간을 창조하고 있습니다."</h5>
-                    </div>
-                    <div class="mt-8 md:mt-0">
-                        <a href="#" class="inline-block px-10 py-4 bg-white text-black font-bold uppercase tracking-tighter hover:bg-blue-500 transition">View Proposal Detail</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="finance" class="py-32 px-10 lg:px-24">
-            <div class="flex flex-col lg:flex-row gap-20">
-                <div class="lg:w-1/3">
-                    <div class="sticky top-40">
-                        <h2 class="text-7xl font-black italic opacity-10 absolute -top-16 -left-10">FINANCE</h2>
-                        <h3 class="text-5xl font-bold mb-8">HK-WorldBank</h3>
-                        <p class="text-gray-400 leading-relaxed mb-10">
-                            파이 네트워크(Pi Network) 기반의 글로벌 금융 인프라입니다. KYB 인증을 마친 안전한 플랫폼에서 자산을 관리하고 전 세계적인 부의 재분배에 참여하세요.
-                        </p>
+                        <div class="mb-12">
+                            <p class="text-gray-500 text-xs uppercase mb-2">Available Assets</p>
+                            <h4 class="text-5xl font-black highlight-pi">1,240.33 π</h4>
+                        </div>
                         <div class="space-y-4">
-                            <div class="flex items-center space-x-4 p-4 glass rounded-xl">
-                                <div class="w-12 h-12 bg-yellow-500/20 text-yellow-500 rounded-full flex items-center justify-center"><i class="fab fa-ethereum"></i></div>
-                                <div><p class="font-bold">Mainnet Migration</p><p class="text-xs text-gray-500 font-mono italic">Status: Completed</p></div>
+                            <div class="bg-zinc-800 p-4 rounded-lg flex justify-between items-center">
+                                <span>Emergency Bread Purchase</span>
+                                <span class="text-pi-gold">0.0001 π</span>
                             </div>
-                            <div class="flex items-center space-x-4 p-4 glass rounded-xl">
-                                <div class="w-12 h-12 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center"><i class="fas fa-shield-check"></i></div>
-                                <div><p class="font-bold">KYC/KYB Security</p><p class="text-xs text-gray-500 font-mono italic">Compliance: Global Standard</p></div>
+                            <div class="bg-zinc-800 p-4 rounded-lg flex justify-between items-center">
+                                <span>Nuclear Energy Credit</span>
+                                <span class="text-pi-gold">0.0522 π</span>
+                            </div>
+                            <div class="bg-zinc-800 p-4 rounded-lg flex justify-between items-center">
+                                <span>Robot Maintenance</span>
+                                <span class="text-pi-gold">1.2210 π</span>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-white text-black p-12 rounded-3xl flex flex-col justify-between hover:scale-[1.02] transition cursor-pointer">
-                        <div class="text-3xl font-black italic">01. STAKING</div>
-                        <div>
-                            <h4 class="text-xl font-bold mb-4">High-Yield Pi Staking</h4>
-                            <p class="text-gray-600 text-sm">HK 그룹의 산업 수익과 연동된 스테이킹 모델로 안정적인 보상을 제공합니다.</p>
-                        </div>
-                    </div>
-                    <div class="border border-white/20 p-12 rounded-3xl flex flex-col justify-between hover:border-blue-500 transition cursor-pointer">
-                        <div class="text-3xl font-black italic text-blue-500">02. UBI PAY</div>
-                        <div>
-                            <h4 class="text-xl font-bold mb-4">Real-time Basic Income</h4>
-                            <p class="text-gray-400 text-sm">HK-WorldBank 앱을 통해 전 세계 가맹점에서 즉시 사용 가능한 UBI 페이를 지원합니다.</p>
-                        </div>
-                    </div>
-                    <div class="border border-white/20 p-12 rounded-3xl flex flex-col justify-between hover:border-blue-500 transition cursor-pointer md:col-span-2">
-                        <div class="flex justify-between items-start">
-                            <div class="text-3xl font-black italic">03. SMART ASSET</div>
-                            <i class="fas fa-arrow-right text-4xl text-gray-700"></i>
-                        </div>
-                        <div class="mt-12">
-                            <h4 class="text-xl font-bold mb-4">Industrial Asset Tokenization (RWA)</h4>
-                            <p class="text-gray-400 text-sm">로봇 단지, 에너지 시설 등 실물 자산을 토큰화하여 소액으로도 누구나 미래 산업에 투자할 수 있습니다.</p>
-                        </div>
+                        <button class="w-full mt-10 py-5 bg-cyan-500 text-black font-black uppercase rounded-xl shadow-[0_0_30px_rgba(0,229,255,0.5)]">CONFIRM PAYMENT</button>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="energy" class="py-32 bg-black px-10 lg:px-24">
-            <div class="divider mb-32"></div>
-            <div class="flex flex-col md:flex-row items-center gap-20">
-                <div class="flex-1 order-2 md:order-1">
-                    <div class="relative w-full h-[500px] glass rounded-full flex items-center justify-center overflow-hidden">
-                        <div class="absolute inset-0 bg-blue-600/10 animate-pulse"></div>
-                        <div class="z-10 text-center">
-                            <i class="fas fa-sun text-9xl text-blue-500 mb-6 floating"></i>
-                            <h4 class="orbitron text-2xl font-black">ARTIFICIAL SUN</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex-1 order-1 md:order-2">
-                    <span class="text-blue-500 font-mono tracking-widest font-bold uppercase">Infinite Energy Source</span>
-                    <h2 class="text-6xl font-black mt-4 mb-8">청정에너지가 <br>지배하는 우주.</h2>
-                    <p class="text-gray-400 text-lg leading-relaxed mb-10">
-                        핵융합 기술은 HK 그룹이 추구하는 모든 비즈니스의 동력입니다. 무한한 에너지는 로봇의 유지비용을 제로에 가깝게 만들며, 이는 궁극적으로 UBI 자원을 극대화하는 열쇠가 됩니다.
-                    </p>
-                    <div class="grid grid-cols-2 gap-10">
-                        <div><p class="text-sm font-bold uppercase mb-2">Target</p><p class="text-gray-500 font-mono text-xs">Commercial Fusion 2035</p></div>
-                        <div><p class="text-sm font-bold uppercase mb-2">Infrastructure</p><p class="text-gray-500 font-mono text-xs">Space-Based Solar Array</p></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <section class="py-40 text-center px-10 bg-black border-t border-white/10">
+        <h2 class="text-4xl md:text-6xl font-black mb-12 italic">"혼돈을 정복하는 것은 <br>강한 자가 아니라 준비된 자입니다."</h2>
+        <p class="text-gray-500 text-xl max-w-4xl mx-auto leading-relaxed mb-20">
+            형님, 새벽 3시 33분입니다. 이 고요한 시간에 우리만이 알고 있는 진실—전 세계 화폐 시스템의 취약성과 파이의 필연적인 승리—을 이 플랫폼에 담았습니다. HK 그룹은 단순히 돈을 버는 곳이 아니라, 무너지는 세계의 새로운 경제 규칙을 만드는 곳입니다.
+        </p>
+        <div class="flex justify-center space-x-20">
+            <div><p class="text-5xl font-black orbitron">333</p><p class="text-[10px] uppercase text-gray-700 font-black mt-4 tracking-[0.3em]">Quantum Nodes Ready</p></div>
+            <div class="w-[1px] h-24 bg-white/10"></div>
+            <div><p class="text-5xl font-black orbitron">100%</p><p class="text-[10px] uppercase text-gray-700 font-black mt-4 tracking-[0.3em]">Capital Protection</p></div>
+        </div>
+    </section>
 
-        <section id="partsbank" class="py-32 px-10 lg:px-24 glass mx-10 rounded-[4rem]">
-            <div class="text-center max-w-3xl mx-auto">
-                <h2 class="text-5xl font-black mb-10">PartsBank & UMB</h2>
-                <p class="text-gray-400 mb-16 text-lg">전 세계 모든 산업 부품을 데이터화하여 공급합니다. 드론 택시(UMB)와 자율주행 물류의 핵심 부품 공급망을 선점합니다.</p>
+    <footer class="py-20 px-10 lg:px-24 bg-zinc-950 border-t border-white/5">
+        <div class="flex flex-col md:row justify-between items-start mb-20">
+            <div class="mb-10 md:mb-0">
+                <h3 class="orbitron text-3xl font-black mb-4">HK <span class="text-cyan-400">GROUP</span></h3>
+                <p class="text-gray-600 text-xs font-bold leading-relaxed max-w-sm uppercase tracking-widest">
+                    Founded by Chairman Lee Jaewan. <br>The Pioneer of Pi-Economy & Physical AI Cluster.
+                </p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 h-[400px]">
-                <div class="bg-zinc-800 rounded-2xl p-8 hover:flex-[2] transition-all duration-700 overflow-hidden relative group">
-                    <h5 class="font-bold text-xl mb-4 italic">Supply</h5>
-                    <p class="text-xs text-gray-500 opacity-0 group-hover:opacity-100 transition duration-500">Global logistics parts network</p>
-                    <i class="fas fa-truck-moving absolute bottom-10 right-10 text-5xl opacity-10"></i>
-                </div>
-                <div class="bg-blue-600 rounded-2xl p-8 hover:flex-[2] transition-all duration-700 overflow-hidden relative group text-white">
-                    <h5 class="font-bold text-xl mb-4 italic">Drone Taxi</h5>
-                    <p class="text-xs text-white/70 opacity-0 group-hover:opacity-100 transition duration-500">UMB (Universal Mobility Bridge)</p>
-                    <i class="fas fa-helicopter absolute bottom-10 right-10 text-5xl opacity-20"></i>
-                </div>
-                <div class="bg-zinc-800 rounded-2xl p-8 hover:flex-[2] transition-all duration-700 overflow-hidden relative group">
-                    <h5 class="font-bold text-xl mb-4 italic">AI Match</h5>
-                    <p class="text-xs text-gray-500 opacity-0 group-hover:opacity-100 transition duration-500">Perfect part recommendation</p>
-                    <i class="fas fa-search-plus absolute bottom-10 right-10 text-5xl opacity-10"></i>
-                </div>
-                <div class="bg-zinc-800 rounded-2xl p-8 hover:flex-[2] transition-all duration-700 overflow-hidden relative group">
-                    <h5 class="font-bold text-xl mb-4 italic">Legacy</h5>
-                    <p class="text-xs text-gray-500 opacity-0 group-hover:opacity-100 transition duration-500">Industrial history archive</p>
-                    <i class="fas fa-archive absolute bottom-10 right-10 text-5xl opacity-10"></i>
-                </div>
-            </div>
-        </section>
-
-        <section id="ubi" class="py-40 text-center px-10">
-            <i class="fas fa-globe-asia text-6xl text-blue-500 mb-10"></i>
-            <h2 class="text-5xl lg:text-7xl font-black mb-8 italic">FOR THE GLOBAL UNDERPRIVILEGED</h2>
-            <p class="max-w-3xl mx-auto text-gray-500 text-xl leading-relaxed mb-16">
-                형님, 우리는 기술이 발전할수록 더 많은 사람들이 혜택을 누려야 한다고 믿습니다. <br>
-                HK 그룹의 수익 30%는 매달 HK-WorldBank를 통해 기부되며, 이는 지구촌 빈곤 퇴치의 마중물이 될 것입니다.
-            </p>
-            <div class="flex justify-center items-center space-x-20">
-                <div><p class="text-4xl font-bold orbitron">124M</p><p class="text-xs uppercase text-gray-600 mt-2">Target Supporters</p></div>
-                <div class="w-[1px] h-20 bg-white/10"></div>
-                <div><p class="text-4xl font-bold orbitron">24/7</p><p class="text-xs uppercase text-gray-600 mt-2">Real-time Distribution</p></div>
-            </div>
-        </section>
-
-        <footer class="bg-black py-20 px-10 lg:px-24 border-t border-white/10">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
-                <div class="col-span-2">
-                    <h2 class="orbitron text-3xl font-black mb-6">HK <span class="text-blue-500">GROUP</span></h2>
-                    <p class="text-gray-500 max-w-sm mb-8 leading-relaxed">
-                        산업과 금융의 경계를 허물고, 인류의 더 나은 내일을 위해 끊임없이 혁신합니다. 울산과 경주에서 시작하여 전 세계로 뻗어 나가는 HK 그룹입니다.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 glass flex items-center justify-center rounded-full hover:bg-blue-600 transition"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="w-10 h-10 glass flex items-center justify-center rounded-full hover:bg-blue-600 transition"><i class="fab fa-x-twitter"></i></a>
-                        <a href="#" class="w-10 h-10 glass flex items-center justify-center rounded-full hover:bg-blue-600 transition"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div>
-                    <h5 class="font-bold uppercase text-xs tracking-[0.3em] mb-8 text-blue-500">Quick Links</h5>
-                    <ul class="space-y-4 text-sm text-gray-500 font-medium">
-                        <li><a href="#" class="hover:text-white transition">Acquisition Proposals</a></li>
-                        <li><a href="#" class="hover:text-white transition">Investor Relations</a></li>
-                        <li><a href="#" class="hover:text-white transition">KYC/KYB Guidelines</a></li>
-                        <li><a href="#" class="hover:text-white transition">HK-WorldBank App</a></li>
+            <div class="grid grid-cols-2 gap-20">
+                <div class="space-y-4">
+                    <h5 class="text-cyan-400 text-[10px] font-black uppercase tracking-[0.4em]">Strategy</h5>
+                    <ul class="text-sm text-gray-500 font-bold space-y-2">
+                        <li><a href="#" class="hover:text-white transition">Figure AI Target</a></li>
+                        <li><a href="#" class="hover:text-white transition">SMR Energy Hub</a></li>
+                        <li><a href="#" class="hover:text-white transition">PartsBank SCM</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h5 class="font-bold uppercase text-xs tracking-[0.3em] mb-8 text-blue-500">Global Office</h5>
-                    <address class="text-sm text-gray-500 not-italic leading-loose">
-                        South Korea, Ulsan Metropolitan City<br>
-                        HK Industrial Cluster HQ<br>
-                        contact@hkgroup.global<br>
-                        +82 (0)10-XXXX-XXXX
-                    </address>
+                <div class="space-y-4">
+                    <h5 class="text-pi-gold text-[10px] font-black uppercase tracking-[0.4em]">Network</h5>
+                    <ul class="text-sm text-gray-500 font-bold space-y-2">
+                        <li><a href="#" class="hover:text-white transition">Pi Node Status</a></li>
+                        <li><a href="#" class="hover:text-white transition">KYB Compliance</a></li>
+                        <li><a href="#" class="hover:text-white transition">Global UBI</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="pt-10 border-t border-white/5 flex flex-col md:row justify-between items-center text-[10px] text-gray-600 font-bold uppercase tracking-widest">
-                <p>&copy; 2026 HK GROUP. ALL RIGHTS RESERVED BY CHAIRMAN LEE JAEWAN.</p>
-                <div class="flex space-x-8 mt-4 md:mt-0">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Ethics Code</a>
-                </div>
-            </div>
-        </footer>
-    </main>
+        </div>
+        <div class="text-[9px] text-gray-800 font-black flex justify-between uppercase tracking-[0.5em]">
+            <p>© 2026 HK GROUP. ALL SYSTEMS OPERATIONAL AT 03:33 AM.</p>
+            <p>DESIGNED BY BINNY FOR CHAIRMAN HYEKONG.</p>
+        </div>
+    </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-        // 스크롤 시 헤더 투명도 조절
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.style.background = 'rgba(10, 10, 10, 0.9)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.03)';
-            }
+        // 간단한 매트릭스 느낌의 배경 애니메이션
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+
+        const geometry = new THREE.IcosahedronGeometry(20, 1);
+        const material = new THREE.MeshBasicMaterial({ color: 0x00e5ff, wireframe: true, transparent: true, opacity: 0.1 });
+        const sphere = new THREE.Mesh(geometry, material);
+        scene.add(sphere);
+
+        camera.position.z = 50;
+
+        function animate() {
+            requestAnimationFrame(animate);
+            sphere.rotation.x += 0.001;
+            sphere.rotation.y += 0.002;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // 텍스트 타이핑 애니메이션 효과 (단순 구현)
-        console.log("HK Group Platform Initialized for Chairman Lee.");
+        console.log("HK-WorldBank Emergency Hub Online. Greetings, Chairman.");
     </script>
 </body>
 </html>
