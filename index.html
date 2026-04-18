@@ -118,7 +118,33 @@
    <button class="btn-global-cs" id="btn-cs" onclick="toggleSupport()" style="width: 100%; padding: 20px; background-color: #ff5f7e; color: white; border: none; border-radius: 15px; font-size: 18px; font-weight: bold; cursor: pointer;">
     글로벌 AI 고객지원센터 
 </button>
+<div id="support-expansion" style="display: none; background: #1a1a1a; border: 1px solid #ffcc00; border-radius: 20px; margin: 15px 0; padding: 25px; color: #ddd; text-align: left;">
+    
+    <div style="background: #000; padding: 18px; border-radius: 12px; font-size: 13px; line-height: 1.7; border-left: 5px solid #ffcc00; margin-bottom: 25px;">
+        <strong id="support-title" style="color: #ffcc00; font-size: 15px;">[공식 안내]</strong><br>
+        <span id="support-desc">현재 모든 문의에 즉각 답변은 어려우나, HK 운영팀이 실시간 모니터링 중입니다.</span>
+    </div>
 
+    <div id="faq-list" style="max-height: 400px; overflow-y: auto; background: #222; border-radius: 10px; padding: 10px; margin-bottom: 20px;">
+        <div style="padding:12px; border-bottom:1px solid #333;"><b id="q1">1. UBI 재원은 무엇인가요?</b><br><span id="a1" style="color:#ffcc00; font-size:12px;">(답변: 그룹 순이익의 30%를 전 세계 취약계층 재원으로 사용합니다.)</span></div>
+        <div style="padding:12px; border-bottom:1px solid #333;"><b id="q2">2. 지갑 연동은 안전한가요?</b><br><span id="a2" style="color:#ffcc00; font-size:12px;">(답변: HK 양자 방패 기술이 실시간으로 자산을 보호합니다.)</span></div>
+        <div style="padding:12px; border-bottom:1px solid #333;"><b id="q3">3. 24시간 보안 기술 적용 확인?</b><br><span id="a3" style="color:#ffcc00; font-size:12px;">(답변: AI 보안 엔진이 모든 거래를 실시간 감시합니다.)</span></div>
+        <div style="padding:12px; border-bottom:1px solid #333;"><b id="q4">4. KYC 승인 지연 시 대처법?</b><br><span id="a4" style="color:#ffcc00; font-size:12px;">(답변: 앱 내 재검토 요청 기능을 이용해 주세요.)</span></div>
+        <div style="padding:12px; border-bottom:1px solid #333;"><b id="q5">5. 글로벌 노드 보상 체계는?</b><br><span id="a5" style="color:#ffcc00; font-size:12px;">(답변: 기여도에 따라 파이 자산이 자동 배분됩니다.)</span></div>
+        <div style="padding:12px; border-bottom:1px solid #333;"><b id="q6">6. 로봇 인프라 참여 방법은?</b><br><span id="a6" style="color:#ffcc00; font-size:12px;">(답변: HK 클러스터 공식 파트너십을 통해 참여 가능합니다.)</span></div>
+        <div style="padding:12px; border-bottom:1px solid #333;"><b id="q7">7. 물리적 AI 국가 클러스터란?</b><br><span id="a7" style="color:#ffcc00; font-size:12px;">(답변: 로봇과 핵융합 에너지가 결합된 차세대 산업 단지입니다.)</span></div>
+        <div style="padding:12px; border-bottom:1px solid #333;"><b id="q8">8. 스테이킹 수익금 정산 방식은?</b><br><span id="a8" style="color:#ffcc00; font-size:12px;">(답변: 매월 정해진 일자에 지갑으로 자동 입금됩니다.)</span></div>
+        <div style="padding:12px; border-bottom:1px solid #333;"><b id="q9">9. 삐니 AI 챗봇 상담 범위는?</b><br><span id="a9" style="color:#ffcc00; font-size:12px;">(답변: 기술 지원부터 비즈니스 제안까지 모두 가능합니다.)</span></div>
+        <div style="padding:12px; border-bottom:1px solid #333;"><b id="q10">10. 향후 금융 서비스 로드맵은?</b><br><span id="a10" style="color:#ffcc00; font-size:12px;">(답변: 파이 생태계 기반 DeFi 서비스를 하반기에 런칭합니다.)</span></div>
+    </div>
+
+    <div style="text-align: center; font-size: 14px; margin-bottom: 15px;">
+        <span id="mail-text">비공개 상세 문의:</span> <a href="mailto:support@hkwb.ai.kr" style="color:#ffcc00; text-decoration: underline;">support@hkwb.ai.kr</a>
+    </div>
+    <button id="chatbot-btn-text" onclick="alert('삐니 챗봇이 가동되었습니다.')" style="width: 100%; padding: 15px; background: transparent; border: 2px solid #ffcc00; color: #ffcc00; border-radius: 12px; font-weight: bold;">
+        삐니 AI 챗봇과 즉시 대화
+    </button>
+</div>
 <div id="support-expansion" style="display: none; background: #1a1a1a; border: 1px solid #ffcc00; border-radius: 20px; margin: 15px 0; padding: 25px; color: #ddd; text-align: left; animation: slideDown 0.4s ease-out;">
     
     <div style="background: #000; padding: 18px; border-radius: 12px; font-size: 13px; line-height: 1.7; border-left: 5px solid #ffcc00; margin-bottom: 25px;">
@@ -157,8 +183,60 @@
         <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="sns-btn" style="background:#000;"><i class="fab fa-tiktok"></i> TikTok</a>
     </div>
 </div>
-
 <script>
+// 1. 고객지원센터 열고 닫기 함수
+function toggleSupport() {
+    const content = document.getElementById('support-expansion');
+    if (content.style.display === 'none' || content.style.display === '') {
+        content.style.display = 'block';
+    } else {
+        content.style.display = 'none';
+    }
+}
+
+// 2. 다국어 데이터 (형님이 사진에서 작업하시던 i18n 부분입니다)
+const i18n = {
+    ko: {
+        "support-title": "[공식 안내]",
+        "support-desc": "현재 모든 문의에 즉각 답변은 어려우나, HK 운영팀이 전수 모니터링 중입니다.",
+        "faq-h": "자주 묻는 질문 (FAQ)",
+        "q1": "1. HK-WorldBank UBI 지급은 언제인가요?",
+        "a1": "(답변: 그룹 순이익의 30%를 전 세계 취약계층 재원으로 사용합니다.)",
+        "mail-text": "비공개 상세 문의:",
+        "chatbot-btn": "삐니 AI 챗봇과 즉시 대화"
+    },
+    en: {
+        "support-title": "[Official Notice]",
+        "support-desc": "Immediate replies are difficult, but the HK team is monitoring all inquiries.",
+        "faq-h": "Frequently Asked Questions (FAQ)",
+        "q1": "1. When is the HK-WorldBank UBI paid?",
+        "a1": "(Answer: 30% of group net profit is used for global UBI.)",
+        "mail-text": "Private Inquiry:",
+        "chatbot-btn": "Chat with Bini AI"
+    }
+};
+
+// 3. 언어 변경 시 화면 글자를 바꿔주는 함수
+function changeLanguage() {
+    const lang = document.getElementById('langSelect').value;
+    const d = i18n[lang] || i18n['en'];
+
+    const mapping = {
+        'support-title': d['support-title'],
+        'support-desc': d['support-desc'],
+        'faq-h': d['faq-h'],
+        'q1': d['q1'],
+        'a1': d['a1'],
+        'mail-text': d['mail-text'],
+        'chatbot-btn-text': d['chatbot-btn']
+    };
+
+    for (let id in mapping) {
+        const el = document.getElementById(id);
+        if (el) el.innerText = mapping[id];
+    }
+}
+
 function toggleSupport() {
     const content = document.getElementById('support-expansion');
     if (content.style.display === 'none' || content.style.display === '') {
