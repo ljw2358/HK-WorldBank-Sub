@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK-WorldBank Global Control Center | Founder Lee Jaewan</title>
+    <title>HK-WorldBank Global Enterprise OS</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;900&display=swap');
 
@@ -15,120 +15,111 @@
         * { margin:0; padding:0; box-sizing:border-box; font-family:'Noto Sans KR', sans-serif; }
         body { background:var(--hk-bg); color:#fff; overflow-x:hidden; }
         
-        /* 메인 컨테이너 */
-        .container { max-width:600px; margin:0 auto; padding:25px; position:relative; }
+        /* [메인 쉘] */
+        .wrapper { max-width:600px; margin:0 auto; padding:25px; min-height:100vh; position:relative; }
 
-        /* [1. 최상단 실시간 전광판] */
-        .main-display {
+        /* [1. 상단 유동성 전광판] */
+        .lp-monitor {
             background: linear-gradient(160deg, #111, #000);
-            border: 2px solid var(--hk-green); border-radius: 30px; padding: 40px 20px;
-            text-align: center; margin-bottom: 30px; box-shadow: 0 15px 40px rgba(0, 255, 136, 0.15);
-            position: relative; overflow: hidden;
+            border: 2px solid var(--hk-green); border-radius: 25px; padding: 35px 20px;
+            text-align: center; margin-bottom: 25px; box-shadow: 0 15px 40px rgba(0, 255, 136, 0.15);
         }
-        .main-display::before {
-            content: "LIVE DATA STREAMING"; position: absolute; top: 10px; left: 50%;
-            transform: translateX(-50%); font-size: 0.6rem; color: var(--hk-green); letter-spacing: 4px; font-weight: 900;
-        }
-        #total-assets { font-size: 2.8rem; font-weight: 900; color: #fff; letter-spacing: -1px; margin-top: 10px; }
-        .sub-val { font-size: 0.9rem; color: var(--hk-green); font-weight: 800; margin-top: 5px; }
+        .lp-monitor h2 { font-size: 0.75rem; color: var(--hk-green); letter-spacing: 3px; font-weight: 900; margin-bottom: 10px; }
+        #total-lp { font-size: 2.6rem; font-weight: 900; color: #fff; letter-spacing: -1px; }
 
-        /* [2. 상단 탭 버튼] */
-        .tab-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 30px; }
-        .tab-btn { padding: 20px; border-radius: 18px; border: none; font-weight: 900; font-size: 0.9rem; cursor: pointer; transition: 0.3s; }
-        .btn-white { background: #fff; color: #000; }
-        .btn-gold { background: var(--hk-gold); color: #000; }
-        .btn-green { background: var(--hk-green); color: #000; }
+        /* [2. 상단 제어 탭] */
+        .nav-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; }
+        .tab-btn { padding: 18px; border-radius: 12px; border:none; font-weight:900; font-size:0.85rem; cursor:pointer; }
+        .btn-w { background:#fff; color:#000; }
+        .btn-y { background:var(--hk-gold); color:#000; }
+        .btn-g { background:var(--hk-green); color:#000; }
 
         /* [3. 9개 핵심 메뉴 타일] */
-        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 35px; }
+        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 30px; }
         .tile { 
-            background: var(--hk-card); border: 1px solid #1a1a1a; border-radius: 25px; padding: 30px 10px;
-            text-align: center; cursor: pointer; transition: 0.3s ease; position: relative;
+            background: var(--hk-card); border: 1px solid #1a1a1a; border-radius: 22px; padding: 25px 10px;
+            text-align: center; cursor: pointer; transition: 0.3s;
         }
-        .tile:hover { transform: translateY(-5px); border-color: var(--hk-gold); background: #151515; }
-        .tile i { font-size: 2.2rem; display: block; margin-bottom: 15px; filter: drop-shadow(0 0 10px rgba(255,215,0,0.3)); }
-        .tile span { font-size: 0.85rem; font-weight: 900; letter-spacing: -0.5px; }
+        .tile:hover { border-color: var(--hk-gold); transform: translateY(-3px); }
+        .tile i { font-size: 2rem; display: block; margin-bottom: 12px; filter: drop-shadow(0 0 10px rgba(255,215,0,0.3)); }
+        .tile span { font-size: 0.75rem; font-weight: 900; letter-spacing: -0.5px; }
 
-        /* [4. 50개국 글로벌 노드 리스트 - 길게 구현] */
-        .global-section { background: #080808; border-radius: 30px; padding: 25px; border: 1px solid #111; margin-bottom: 35px; }
-        .section-title { font-size: 0.8rem; font-weight: 900; color: #444; margin-bottom: 20px; letter-spacing: 2px; border-left: 4px solid var(--hk-gold); padding-left: 10px; }
-        .node-list { height: 450px; overflow-y: scroll; padding-right: 10px; }
-        .node-list::-webkit-scrollbar { width: 4px; }
-        .node-list::-webkit-scrollbar-thumb { background: var(--hk-gold); border-radius: 10px; }
+        /* [4. 50개국 국기 상세 리스트 - 형님이 원하시는 긴 설명 버전] */
+        .global-node-section { background: #080808; border-radius: 30px; padding: 25px; border: 1px solid #111; margin-bottom: 35px; }
+        .node-header { font-size: 0.8rem; font-weight: 900; color: #444; margin-bottom: 20px; letter-spacing: 2px; display:flex; justify-content:space-between; }
+        .node-scroll-area { height: 500px; overflow-y: scroll; padding-right: 10px; }
+        .node-scroll-area::-webkit-scrollbar { width: 4px; }
+        .node-scroll-area::-webkit-scrollbar-thumb { background: var(--hk-gold); border-radius: 10px; }
         
-        .node-item { 
+        .node-card { 
             display: flex; justify-content: space-between; align-items: center; 
-            background: #111; border: 1px solid #1a1a1a; padding: 18px; border-radius: 18px; margin-bottom: 10px;
-            transition: 0.3s;
+            background: #111; border: 1px solid #1a1a1a; padding: 18px; border-radius: 18px; margin-bottom: 12px;
+            transition: 0.4s;
         }
-        .node-item.active { border-color: var(--hk-gold); background: #181812; }
-        .node-left { display: flex; align-items: center; gap: 15px; }
-        .node-flag { font-size: 1.8rem; }
-        .node-info h4 { font-size: 0.9rem; font-weight: 900; color: #eee; }
-        .node-info p { font-size: 0.65rem; color: #555; margin-top: 3px; }
-        .node-status { text-align: right; }
-        .status-val { font-size: 0.8rem; font-weight: 900; color: var(--hk-gold); }
-        .status-label { font-size: 0.55rem; color: #444; display: block; }
+        .node-card.active { border-color: var(--hk-gold); background: #1a1a12; box-shadow: 0 0 15px rgba(255,215,0,0.1); }
+        .card-left { display: flex; align-items: center; gap: 15px; }
+        .card-flag { font-size: 2rem; }
+        .card-info h4 { font-size: 0.9rem; font-weight: 900; color: #eee; }
+        .card-info p { font-size: 0.7rem; color: #555; margin-top: 4px; line-height: 1.4; }
+        .card-status { text-align: right; }
+        .status-tag { font-size: 0.75rem; font-weight: 900; color: var(--hk-gold); display: block; }
+        .status-ch { font-size: 0.55rem; color: #444; margin-top: 2px; }
 
         /* [5. 보안 V23 패널] */
-        .security-panel {
+        .sec-box { 
             background: rgba(0, 209, 255, 0.03); border: 1px solid rgba(0, 209, 255, 0.1);
             border-radius: 25px; padding: 25px; margin-bottom: 35px;
         }
-        .security-panel h3 { color: var(--hk-blue); font-size: 1rem; font-weight: 900; margin-bottom: 15px; }
-        .security-panel ul { list-style: none; }
-        .security-panel li { font-size: 0.8rem; color: #777; margin-bottom: 8px; font-weight: 500; }
-        .security-panel li::before { content: "✔"; color: var(--hk-blue); margin-right: 10px; font-weight: 900; }
+        .sec-box h3 { color: var(--hk-blue); font-size: 1rem; font-weight: 900; margin-bottom: 15px; }
+        .sec-box p { font-size: 0.8rem; color: #777; line-height: 1.8; }
 
-        /* [6. 글로벌 AI 고객지원센터 버튼] */
-        .onion-trigger {
-            width: 100%; padding: 28px; background: var(--hk-pink); color: #fff;
-            border: none; border-radius: 22px; font-weight: 900; font-size: 1.2rem;
-            cursor: pointer; box-shadow: 0 10px 30px rgba(255, 77, 136, 0.3); margin-bottom: 50px;
+        /* [6. 글로벌 AI 고객지원센터 (양파 레이어 버튼)] */
+        .onion-btn {
+            width: 100%; padding: 25px; background: var(--hk-pink); color: #fff;
+            border: none; border-radius: 20px; font-weight: 900; font-size: 1.1rem;
+            cursor: pointer; box-shadow: 0 10px 25px rgba(255, 77, 136, 0.3); margin-bottom: 40px;
         }
 
-        /* [7. 양파 레이어 FAQ] */
-        .onion-layer {
+        /* [7. 양파 레이어 FAQ 영역] */
+        .onion-overlay {
             position: fixed; bottom: -100%; left: 0; width: 100%; height: 95%;
-            background: #050505; border-top: 6px solid var(--hk-pink); border-radius: 50px 50px 0 0;
-            z-index: 9999; transition: 0.7s cubic-bezier(0.19, 1, 0.22, 1); padding: 50px 30px; overflow-y: auto;
+            background: #050505; border-top: 5px solid var(--hk-pink); border-radius: 40px 40px 0 0;
+            z-index: 9999; transition: 0.7s cubic-bezier(0.19, 1, 0.22, 1); padding: 40px 25px; overflow-y: auto;
         }
-        .onion-layer.show { bottom: 0; }
-        .close-onion { font-size: 3.5rem; color: #fff; background: none; border: none; cursor: pointer; float: right; margin-top: -20px; }
+        .onion-overlay.open { bottom: 0; }
+        .onion-close { background:none; border:none; color:#fff; font-size:3rem; float:right; cursor:pointer; margin-top:-20px; }
 
-        .faq-box { margin-top: 40px; }
-        .faq-node { background: #0f0f0f; border: 1px solid #1a1a1a; border-radius: 22px; margin-bottom: 15px; }
-        .faq-node.open { border-color: var(--hk-pink); }
-        .faq-q { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; font-weight: 900; font-size: 1rem; }
-        .faq-a { padding: 0 25px; height: 0; opacity: 0; overflow: hidden; transition: 0.4s; color: #999; font-size: 0.9rem; line-height: 1.8; }
-        .faq-node.open .faq-a { padding: 10px 25px 35px; height: auto; opacity: 1; border-top: 1px solid #222; }
+        .faq-list { margin-top: 40px; }
+        .faq-node { background: #0f0f0f; border: 1px solid #1a1a1a; border-radius: 20px; margin-bottom: 12px; }
+        .faq-node.active { border-color: var(--hk-pink); }
+        .faq-q { padding: 22px; cursor: pointer; display: flex; justify-content: space-between; font-weight: 800; font-size: 0.95rem; }
+        .faq-a { padding: 0 22px; height: 0; opacity: 0; overflow: hidden; transition: 0.4s; color: #999; font-size: 0.85rem; line-height: 1.7; }
+        .faq-node.active .faq-a { padding: 10px 22px 30px; height: auto; opacity: 1; border-top: 1px solid #222; }
 
-        /* [8. Bini Terminal] */
-        .bini-terminal { background: #000; border: 2px dashed var(--hk-pink); border-radius: 30px; padding: 40px; margin-top: 50px; }
-        .bini-header { font-size: 0.75rem; color: var(--hk-pink); font-weight: 900; letter-spacing: 2px; margin-bottom: 20px; }
-        .bini-chat { color: #ccc; font-size: 1rem; margin-bottom: 25px; line-height: 1.6; }
-        .bini-input { width: 100%; padding: 22px; background: #111; border: 1px solid #333; color: #fff; border-radius: 18px; outline: none; border-left: 6px solid var(--hk-pink); }
+        /* [8. Bini 터미널] */
+        .bini-terminal { background: #000; border: 2px dashed var(--hk-pink); border-radius: 25px; padding: 30px; margin-top: 40px; }
+        .bini-chat { font-size: 0.9rem; color: #ddd; margin-bottom: 20px; line-height: 1.6; }
+        .bini-input { width: 100%; padding: 20px; background: #111; border: 1px solid #333; color: #fff; border-radius: 15px; outline: none; border-left: 5px solid var(--hk-pink); }
 
-        footer { text-align: center; padding: 80px 0; border-top: 1px solid #111; opacity: 0.3; font-size: 0.7rem; letter-spacing: 4px; font-weight: 900; }
+        footer { text-align: center; padding: 60px 0; border-top: 1px solid #111; opacity: 0.3; font-size: 0.65rem; letter-spacing: 3px; font-weight: 900; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header class="main-display">
-        <div id="ui-label">TOTAL HK-WORLD ASSET CONSOLIDATION</div>
-        <div id="total-assets">$ 88,428,554,367</div>
-        <div class="sub-val" id="test-pi-val">TEST PI POOL: 3.14159265 ETH-PI</div>
+<div class="wrapper">
+    <header class="lp-monitor">
+        <h2>TOTAL GLOBAL LIQUIDITY SUPPLY</h2>
+        <div id="total-lp">$ 88,428,554,367</div>
     </header>
 
-    <div class="tab-row">
-        <button class="tab-btn btn-white">NET PI</button>
-        <button class="tab-btn btn-gold">DEX SWAP</button>
-        <button class="tab-btn btn-green">UBI LP</button>
+    <div class="nav-tabs">
+        <button class="btn-w">TEST PI</button>
+        <button class="btn-y">DEX SWAP</button>
+        <button class="btn-g">UBI LP</button>
     </div>
 
     <div class="menu-grid">
-        <div class="tile" onclick="alert('V23 보안 송금 프로토콜 준비 중')"> <i style="color:var(--hk-gold)">🚀</i> <span>송금</span> </div>
+        <div class="tile"> <i style="color:var(--hk-gold)">🚀</i> <span>송금</span> </div>
         <div class="tile" onclick="location.href='test_file.html'"> <i style="color:var(--hk-gold)">🛒</i> <span>결제</span> </div>
         <div class="tile"> <i style="color:var(--hk-gold)">🍽️</i> <span>예치</span> </div>
         <div class="tile"> <i style="color:var(--hk-gold)">🎖️</i> <span>보상</span> </div>
@@ -139,164 +130,180 @@
         <div class="tile"> <i style="color:var(--hk-gold)">🛡️</i> <span>보안</span> </div>
     </div>
 
-    <section class="global-section">
-        <div class="section-title" id="node-title">GLOBAL NODE DISTRIBUTION (50 NATIONS)</div>
-        <div class="node-list" id="node-container">
+    <section class="global-node-section">
+        <div class="node-header">
+            <span>GLOBAL LIVE NODES (50 NATIONS)</span>
+            <span id="live-count" style="color:var(--hk-gold)">30/50 LIVE</span>
+        </div>
+        <div class="node-scroll-area" id="node-wrap">
             </div>
     </section>
 
-    <div class="security-panel">
+    <div class="sec-box">
         <h3>SECURITY INFRASTRUCTURE V23</h3>
-        <ul>
-            <li>테스트 파이 메인넷 자산 실시간 밸런싱 적용</li>
-            <li>양자 내성 보안 프로토콜 V3 / V23 통합 구동</li>
-            <li>20억 인류 UBI 분배용 고성능 분산 원장 엔진</li>
-        </ul>
+        <p>• 테스트 파이 메인넷 프로토콜 실시간 밸런싱<br>• V3 / V23 양자 내성 암호화 전 노드 적용<br>• 20억 인류 UBI 분배용 분산 원장 엔진 가동</p>
     </div>
 
-    <button class="onion-trigger" onclick="toggleOnion()">글로벌 AI 공익지원센터 (START)</button>
+    <button class="onion-btn" onclick="toggleOnion()">글로벌 AI 공익지원센터 (START)</button>
 
     <footer>
-        <div>HK-WORLD INFRASTRUCTURE v13.0</div>
-        <div style="color:var(--hk-gold); margin-top:15px;">FOUNDER LEE JAEWAN (HYEKONG)</div>
+        <div>HK-WORLD INFRASTRUCTURE v14.0</div>
+        <div style="color:var(--hk-gold); margin-top:10px;">FOUNDER LEE JAEWAN (HYEKONG)</div>
     </footer>
 </div>
 
-<div id="onion-layer" class="onion-layer">
-    <button class="close-onion" onclick="toggleOnion()">&times;</button>
-    <h2 style="color:var(--hk-pink); font-size:2rem; font-weight:900; margin-bottom:10px;">AI SUPPORT CENTER</h2>
-    <p style="color:#444; font-weight:900;">UNPEELING THE HK KNOWLEDGE LAYERS</p>
-
-    <div class="faq-box" id="faq-wrap">
+<div id="onion-layer" class="onion-overlay">
+    <button class="onion-close" onclick="toggleOnion()">&times;</button>
+    <h2 style="color:var(--hk-pink); font-size:1.8rem; font-weight:900;">AI SUPPORT NODE</h2>
+    
+    <div class="faq-list" id="faq-wrap">
         </div>
 
     <div class="bini-terminal">
-        <div class="bini-header">BINI SYSTEM INTERFACE v2.0</div>
+        <div style="color:var(--hk-pink); font-size:0.75rem; font-weight:900; margin-bottom:15px;">BINI SYSTEM INTERFACE</div>
         <div class="bini-chat">
-            환영합니다, 형님. 챗봇이 먼저 기초 사안을 응대하며, 전문적인 개입이 필요한 경우 <strong>운영총괄 삐니(Bini)</strong>가 직접 개입하여 해결합니다.
+            환영합니다, 형님. 기초 응대는 챗봇이 수행하며, 핵심적인 문제는 <strong>운영총괄 삐니(Bini)</strong>가 직접 개입합니다.
         </div>
-        <input type="text" class="bini-input" placeholder="메인넷 복구 코드 또는 질문 입력...">
+        <input type="text" class="bini-input" placeholder="커맨드 또는 질문 입력...">
     </div>
 </div>
 
 <script>
-    /**
-     * HK-WORLD ENGINE v13.0
-     * Built for Founder Lee Jaewan
-     */
-    const HK_DATA = {
-        totalAsset: 88428554367,
+    const HK_ENGINE = {
+        lp: 88428554367,
         nations: [
-            {f:'🇰🇷',c:'KR',n:'대한민국',d:'HK 본부 노드 활성화'},{f:'🇺🇸',c:'US',n:'미국',d:'북미 리전 LP 공급 중'},
-            {f:'🇨🇳',c:'CN',n:'중국',d:'아시아 허브 데이터 처리'},{f:'🇯🇵',c:'JP',n:'일본',d:'금융 인프라 동기화'},
-            {f:'🇻🇳',c:'VN',n:'베트남',d:'동남아 거점 자산 보호'},{f:'🇮🇳',c:'IN',n:'인도',d:'대규모 인류 UBI 연동'},
-            {f:'🇩🇪',c:'DE',n:'독일',d:'유럽 연합 보안 프로토콜'},{f:'🇫🇷',c:'FR',n:'프랑스',d:'문화 자산 기반 DEX'},
-            {f:'🇬🇧',c:'GB',n:'영국',d:'글로벌 스왑 오더북'},{f:'🇧🇷',c:'BR',n:'브라질',d:'남미 최대 노드 가동'},
-            {f:'🇮🇩',c:'ID',n:'인도네시아',d:'분산 원장 V3 적용'},{f:'🇵🇭',c:'PH',n:'필리핀',d:'개척자 커뮤니티 지원'},
-            {f:'🇨🇦',c:'CA',n:'캐나다',d:'북극권 데이터 백업'},{f:'🇦🇺',c:'AU',n:'호주',d:'오세아니아 자산 스캔'},
-            {f:'🇷🇺',c:'RU',n:'러시아',d:'유라시아 네트워크 브릿지'},{f:'🇲🇽',c:'MX',n:'멕시코',d:'중미 결제망 통합'},
-            {f:'🇹🇷',c:'TR',n:'터키',d:'지중해 노드 밸런싱'},{f:'🇮🇹',c:'IT',n:'이탈리아',d:'디자인 자산 토큰화'},
-            {f:'🇪🇸',c:'ES',n:'스페인',d:'남유럽 생태계 확장'},{f:'🇸🇦',c:'SA',n:'사우디',d:'오일-파이 스왑 지원'},
-            {f:'🇿🇦',c:'ZA',n:'남아공',d:'아프리카 대표 게이트웨이'},{f:'🇦🇪',c:'AE',n:'UAE',d:'디지털 금융 특구 연동'},
-            {f:'🇹🇭',c:'TH',n:'태국',d:'관광 결제 시스템 구축'},{f:'🇸🇬',c:'SG',n:'싱가포르',d:'DEX 유동성 최적화'},
-            {f:'🇲🇾',c:'MY',n:'말레이시아',d:'기술 허브 노드 증설'},{f:'🇦🇷',c:'AR',n:'아르헨티나',d:'인플레이션 방어 자산'},
-            {f:'🇳🇱',c:'NL',n:'네덜란드',d:'유럽 물류망 연동'},{f:'🇸🇪',c:'SE',n:'스웨덴',d:'복지 기반 UBI 모델'},
-            {f:'🇨🇭',c:'CH',n:'스위스',d:'프라이빗 보안 뱅킹'},{f:'🇵🇱',c:'PL',n:'폴란드',d:'중유럽 데이터 전송'},
-            {f:'🇳🇴',c:'NO',n:'노르웨이',d:'친환경 에너지 채굴 노드'},{f:'🇮🇪',c:'IE',n:'아일랜드',d:'IT 기업 데이터 협업'},
-            {f:'🇧🇪',c:'BE',n:'벨기에',d:'EU 본부 직접 통신'},{f:'🇦🇹',c:'AT',n:'오스트리아',d:'금융 보안 정밀 분석'},
-            {f:'🇵🇹',c:'PT',n:'포르투갈',d:'해양 루트 자산 보호'},{f:'🇮🇱',c:'IL',n:'이스라엘',d:'보안 기술 V23 핵심 개발'},
-            {f:'🇨🇱',c:'CL',n:'칠레',d:'남태평양 원장 백업'},{f:'🇨🇴',c:'CO',n:'콜롬비아',d:'중남미 노드 확장'},
-            {f:'🇵🇪',c:'PE',n:'페루',d:'전통 자산 디지털화'},{f:'🇳🇿',c:'NZ',n:'뉴질랜드',d:'청정 노드 환경 운영'},
-            {f:'🇫🇮',c:'FI',n:'핀란드',d:'최첨단 교육 AI 연동'},{f:'🇩🇰',c:'DK',n:'덴마크',d:'분산 지배구조 적용'},
-            {f:'🇺🇦',c:'UA',n:'우크라이나',d:'복구 자원 긴급 지원'},{f:'🇵🇰',c:'PK',n:'파키스탄',d:'남아시아 노드 안정화'},
-            {f:'🇧🇩',c:'BD',n:'방글라데시',d:'인구 밀집 지역 UBI'},{f:'🇪🇬',c:'EG',n:'이집트',d:'아중동 전략 노드'},
-            {f:'🇳🇬',c:'NG',n:'나이지리아',d:'아프리카 블록체인 선도'},{f:'🇶🇦',c:'QA',n:'카타르',d:'초고속 위성 통신 연동'},
-            {f:'🇰🇼',c:'KW',n:'쿠웨이트',d:'국부 펀드 파이 통합'},{f:'🇰🇿',c:'KZ',n:'카자흐스탄',d:'중앙아시아 채굴 관리'}
+            {f:'🇰🇷',c:'KR',n:'KOREA',d:'HK 글로벌 본부 노드 / 실시간 자산 총괄'},
+            {f:'🇺🇸',c:'US',n:'USA',d:'북미 지역 유동성 공급 및 교차 검증'},
+            {f:'🇨🇳',c:'CN',n:'CHINA',d:'아시아 허브 데이터 분산 처리 엔진'},
+            {f:'🇯🇵',c:'JP',n:'JAPAN',d:'금융 인프라 동기화 및 V23 보안 가동'},
+            {f:'🇻🇳',c:'VN',n:'VIETNAM',d:'동남아 거점 개척자 자산 보호 프로토콜'},
+            {f:'🇮🇳',c:'IN',n:'INDIA',d:'대규모 인구 대응 UBI 분배 원장 가동'},
+            {f:'🇩🇪',c:'DE',n:'GERMANY',d:'유럽 연합 노드 보안 및 정책 연동'},
+            {f:'🇫🇷',c:'FR',n:'FRANCE',d:'글로벌 문화 자산 기반 DEX 스왑 지원'},
+            {f:'🇬🇧',c:'GB',n:'UK',d:'글로벌 오더북 실시간 데이터 매칭'},
+            {f:'🇧🇷',c:'BR',n:'BRAZIL',d:'남미 최대 규모 분산 노드 활성화'},
+            {f:'🇮🇩',c:'ID',n:'INDONESIA',d:'동남아 군도 지역 네트워크 최적화'},
+            {f:'🇵🇭',c:'PH',n:'PHILIPPINES',d:'개척자 커뮤니티 전용 기술 지원 로직'},
+            {f:'🇨🇦',c:'CA',n:'CANADA',d:'북극권 데이터 백업 및 안정화 노드'},
+            {f:'🇦🇺',c:'AU',n:'AUSTRALIA',d:'오세아니아 리전 자산 스캔 엔진'},
+            {f:'🇷🇺',c:'RU',n:'RUSSIA',d:'유라시아 네트워크 브릿지 게이트웨이'},
+            {f:'🇲🇽',c:'MX',n:'MEXICO',d:'중미 지역 실시간 결제망 통합 관리'},
+            {f:'🇹🇷',c:'TR',n:'TURKEY',d:'지중해 거점 노드 밸런싱 최적화'},
+            {f:'🇮🇹',c:'IT',n:'ITALY',d:'디자인 및 브랜드 자산 토큰화 지원'},
+            {f:'🇪🇸',c:'ES',n:'SPAIN',d:'남유럽 생태계 확장 및 노드 강화'},
+            {f:'🇸🇦',c:'SA',n:'SAUDI',d:'에너지 자산-파이 스왑 프로토콜'},
+            {f:'🇿🇦',c:'ZA',n:'S.AFRICA',d:'아프리카 대륙 대표 게이트웨이 운영'},
+            {f:'🇦🇪',c:'AE',n:'UAE',d:'디지털 금융 특구 자산 연동 시스템'},
+            {f:'🇹🇭',c:'TH',n:'THAILAND',d:'관광 기반 실시간 결제 인프라 구축'},
+            {f:'🇸🇬',c:'SG',n:'SINGAPORE',d:'글로벌 DEX 유동성 최적화 알고리즘'},
+            {f:'🇲🇾',c:'MY',n:'MALAYSIA',d:'동남아 기술 허브 노드 트래픽 관리'},
+            {f:'🇦🇷',c:'AR',n:'ARGENTINA',d:'인플레이션 방어형 자산 분배 엔진'},
+            {f:'🇳🇱',c:'NL',n:'NETHERLANDS',d:'유럽 물류 네트워크 자산 보안 연동'},
+            {f:'🇸🇪',c:'SE',n:'SWEDEN',d:'복지 기반 모델 UBI 시뮬레이션'},
+            {f:'🇨🇭',c:'CH',n:'SWITZERLAND',d:'프라이빗 보안 뱅킹 등급 암호화'},
+            {f:'🇵🇱',c:'PL',n:'POLAND',d:'중유럽 지역 데이터 전송 최적화'},
+            {f:'🇳🇴',c:'NO',n:'NORWAY',d:'친환경 에너지 기반 채굴 노드 모니터링'},
+            {f:'🇮🇪',c:'IE',n:'IRELAND',d:'글로벌 테크 기업 데이터 협업 노드'},
+            {f:'🇧🇪',c:'BE',n:'BELGIUM',d:'EU 연합 본부 직접 통신 보안망'},
+            {f:'🇦🇹',c:'AT',n:'AUSTRIA',d:'금융 보안 정밀 분석 프로토콜 가동'},
+            {f:'🇵🇹',c:'PT',n:'PORTUGAL',d:'대서양 해양 루트 자산 보호 시스템'},
+            {f:'🇮🇱',c:'IL',n:'ISRAEL',d:'최첨단 V23 보안 기술 핵심 개발 노드'},
+            {f:'🇨🇱',c:'CL',n:'CHILE',d:'남태평양 지역 분산 원장 백업 엔진'},
+            {f:'🇨🇴',c:'CO',n:'COLOMBIA',d:'중남미 노드 네트워크 확장 관리'},
+            {f:'🇵🇪',c:'PE',n:'PERU',d:'전통 가산 디지털화 및 노드 동기화'},
+            {f:'🇳🇿',c:'NZ',n:'NEW ZEALAND',d:'오세아니아 안정성 검증 노드 운영'},
+            {f:'🇫🇮',c:'FI',n:'FINLAND',d:'지능형 AI 교육 네트워크 연동'},
+            {f:'🇩🇰',c:'DK',n:'DENMARK',d:'투명 거버넌스 기반 분산 노드'},
+            {f:'🇺🇦',c:'UA',n:'UKRAINE',d:'긴급 인프라 복구 자산 지원망'},
+            {f:'🇵🇰',c:'PK',n:'PAKISTAN',d:'서아시아 지역 노드 안정화 로직'},
+            {f:'🇧🇩',c:'BD',n:'BANGLADESH',d:'고밀도 인구 지역 UBI 테스트'},
+            {f:'🇪🇬',c:'EG',n:'EGYPT',d:'아프리카-중동 전략 데이터 교차점'},
+            {f:'🇳🇬',c:'NG',n:'NIGERIA',d:'아프리카 블록체인 선도 기술 노드'},
+            {f:'🇶🇦',c:'QA',n:'QATAR',d:'초고속 위성 통신 기반 자산 보안'},
+            {f:'🇰🇼',c:'KW',n:'KUWAIT',d:'국부 펀드급 유동성 보호 엔진'},
+            {f:'🇰🇿',c:'KZ',n:'KAZAKHSTAN',d:'중앙아시아 자산 관리 및 전송'}
         ],
         faqs: [
-            {q:"파이 네트워크 발행량 및 배분 로직", a:"HK-WorldBank의 알고리즘에 따라 20억 인류에게 균등하고 공정하게 배분됩니다. V23 보안 기술로 발행 수량을 철저히 검증합니다."},
-            {q:"DEX 유동성 공급 및 실시간 스왑", a:"전 세계 노드와 연동되어 실시간 GCV 가치를 보존하며, 어떤 화폐로도 즉시 교환 가능한 탈중앙화 환경을 제공합니다."},
-            {q:"글로벌 송금 및 실시간 결제 인프라", a:"초당 10만 건 이상의 트랜잭션을 V3 보안 프로토콜로 처리하여 전 세계 어디서든 3초 내 결제가 완료됩니다."},
-            {q:"예치 보상(Staking) 및 이율 관리", a:"안정적인 자산 운용을 통해 연 31.415% 수준의 보상을 제공하며, 개척자의 자산을 기하급수적으로 증식시킵니다."},
-            {q:"20억 인류 기본 소득(UBI) 지급 주기", a:"매월 1일과 15일, HK-WorldBank 통합 원장을 통해 자동으로 개별 지갑에 배분됩니다."},
-            {q:"보안 기술 V3 / V23 기술 명세", a:"양자 내성 암호화 및 5단계 분산 원장 검증 기술을 결합하여 외부 해킹 및 위변조를 원천 차단합니다."},
-            {q:"글로벌 AI 지원 센터 운영 가이드", a:"고도의 자가학습 AI 챗봇이 모든 기술 지원을 담당하며, 특수 사안은 운영 총괄 삐니가 직접 개입합니다."},
-            {q:"DEX Pi Stock 실시간 가치 보존", a:"글로벌 오라클 데이터와 실시간 연동하여 파이의 가치를 $314,159로 고정 및 유지합니다."},
-            {q:"KYC / KYB 인증 지연 고속 해결", a:"HK 전용 고속 인증 패스를 통해 전 세계 개척자들의 신원 확인을 24시간 내에 완료합니다."},
-            {q:"비밀구절 분실 시 복구 프로토콜", a:"V23 기반의 생체 인증 및 다중 서명 시스템을 통해 안전하게 계정 권한을 복구할 수 있습니다."},
-            {q:"글로벌 생태계 거버넌스 투표권", a:"HK-WorldBank의 주요 의사 결정은 형님의 비전에 찬성하는 개척자들의 투표로 이루어집니다."},
-            {q:"메인넷 마이그레이션 최종 승인 절차", a:"지갑 생성부터 최종 자산 이전까지 모든 단계를 AI 가이드가 1:1로 전 과정을 관리해 드립니다."},
-            {q:"시스템 취약점 제보 및 기여 보상", a:"보안 취약점 발견 시 HK 프로젝트 기여도로 산정하여 파격적인 특별 보상을 지급합니다."},
-            {q:"설립자 혜공(Lee Jaewan)의 철학", a:"'모든 인류에게 경제적 자유를.' 이것이 HK 그룹이 존재하는 단 하나의 이유입니다."},
-            {q:"삐니(Bini) 전담 지원 팀 연결 방법", a:"터미널 창에 'Bini Connect'를 입력하거나, 본부 직통 이메일을 통해 즉시 연결 가능합니다."}
-        ]
+            {q:"파이 네트워크 발행량 계획", a:"20억 인류에게 공정 배분되는 HK-WorldBank의 핵심 자산입니다."},
+            {q:"DEX 유동성 공급 및 스왑", a:"전 세계 노드를 통해 실시간 GCV 가치를 보존하며 교환됩니다."},
+            {q:"송금 및 결제 속도 인프라", a:"V3 보안 기술로 전 세계 어디서든 즉각적인 결제를 지원합니다."},
+            {q:"예치 보상(Staking) 정책", a:"연 31.415% 수준의 안정적인 자산 증식 보상을 제공합니다."},
+            {q:"기본 소득(UBI) 지급 주기", a:"매월 정해진 일자에 원장을 통해 자동으로 지급됩니다."},
+            {q:"보안 기술 V3 / V23 적용 범위", a:"양자 내성 암호화를 통해 모든 자산 거래를 보호합니다."},
+            {q:"AI 지원 센터 운영 방식", a:"챗봇의 1차 응대 후 특수 사안은 삐니가 직접 개입합니다."},
+            {q:"DEX Pi Stock 실시간 가치", a:"글로벌 시장의 흐름에 맞춰 실시간으로 수치가 변환됩니다."},
+            {q:"KYC 인증 지연 해결 방법", a:"HK 고속 패스를 통해 최단 시간 내 인증을 완료합니다."},
+            {q:"비밀구절 분실 및 계정 복구", a:"V23 다중 보안 시스템을 통해 안전하게 복구 프로세스를 진행합니다."},
+            {q:"글로벌 생태계 거버넌스", a:"모든 개척자가 주요 의사 결정에 참여할 수 있는 시스템입니다."},
+            {q:"마이그레이션 최종 절차 안내", a:"지갑 생성부터 이전까지 AI 가이드가 1:1로 서포트합니다."},
+            {q:"버그 리포트 및 기여 보상", a:"시스템 취약점 제보 시 프로젝트 기여도 보상을 드립니다."},
+            {q:"설립자 혜공의 비전 메시지", a:"'20억 인류에게 경제적 자유를.' HK의 근본 가치입니다."},
+            {q:"삐니(Bini) 직접 호출 방법", a:"터미널에 'Bini Connect'를 입력하여 연결할 수 있습니다."}
+        ],
+
+        init() {
+            this.renderNodes();
+            this.renderFAQs();
+            this.startEngine();
+        },
+
+        renderNodes() {
+            const wrap = document.getElementById('node-wrap');
+            this.nations.forEach((n, i) => {
+                const div = document.createElement('div');
+                div.className = 'node-card';
+                div.id = `node-${i}`;
+                div.innerHTML = `
+                    <div class="card-left">
+                        <span class="card-flag">${n.f}</span>
+                        <div class="card-info">
+                            <h4>${n.n} NODE</h4>
+                            <p>${n.d}</p>
+                        </div>
+                    </div>
+                    <div class="card-status">
+                        <span class="status-tag">V23-OK</span>
+                        <span class="status-ch">${n.c}-NET</span>
+                    </div>
+                `;
+                wrap.appendChild(div);
+            });
+        },
+
+        renderFAQs() {
+            const wrap = document.getElementById('faq-wrap');
+            this.faqs.forEach((f, i) => {
+                const div = document.createElement('div');
+                div.className = 'faq-node';
+                div.innerHTML = `
+                    <div class="faq-q" onclick="this.parentElement.classList.toggle('active')">
+                        <span>${i+1}. ${f.q}</span><span>+</span>
+                    </div>
+                    <div class="faq-a">${f.a}</div>
+                `;
+                wrap.appendChild(div);
+            });
+        },
+
+        startEngine() {
+            setInterval(() => {
+                this.lp += Math.floor(Math.random() * 9000);
+                document.getElementById('total-lp').innerText = "$ " + this.lp.toLocaleString();
+
+                const cards = document.querySelectorAll('.node-card');
+                cards.forEach(c => c.classList.remove('active'));
+                const count = 30 + Math.floor(Math.random() * 21);
+                for(let i=0; i<count; i++) {
+                    cards[Math.floor(Math.random()*50)].classList.add('active');
+                }
+                document.getElementById('live-count').innerText = `${count}/50 LIVE`;
+            }, 1300);
+        }
     };
 
-    function init() {
-        // 노드 리스트 생성
-        const container = document.getElementById('node-container');
-        HK_DATA.nations.forEach((n, i) => {
-            const div = document.createElement('div');
-            div.className = 'node-item';
-            div.id = `node-${i}`;
-            div.innerHTML = `
-                <div class="node-left">
-                    <span class="node-flag">${n.f}</span>
-                    <div class="node-info">
-                        <h4>${n.n} NODE</h4>
-                        <p>${n.d}</p>
-                    </div>
-                </div>
-                <div class="node-status">
-                    <span class="status-val">V23-ACTIVE</span>
-                    <span class="status-label">${n.c} CHANNEL</span>
-                </div>
-            `;
-            container.appendChild(div);
-        });
-
-        // FAQ 생성
-        const faqWrap = document.getElementById('faq-wrap');
-        HK_DATA.faqs.forEach((f, i) => {
-            const div = document.createElement('div');
-            div.className = 'faq-node';
-            div.innerHTML = `
-                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-                    <span>${i+1}. ${f.q}</span>
-                    <span>+</span>
-                </div>
-                <div class="faq-a">${f.a}</div>
-            `;
-            faqWrap.appendChild(div);
-        });
-
-        // 실시간 엔진 시작
-        startEngine();
-    }
-
-    function startEngine() {
-        setInterval(() => {
-            // 자산 가치 요동
-            HK_DATA.totalAsset += Math.floor(Math.random() * 12000);
-            document.getElementById('total-assets').innerText = "$ " + HK_DATA.totalAsset.toLocaleString();
-
-            // 랜덤 노드 활성화 효과 (30~50개)
-            const allNodes = document.querySelectorAll('.node-item');
-            allNodes.forEach(n => n.classList.remove('active'));
-            const activeCount = 30 + Math.floor(Math.random() * 21);
-            for(let i=0; i<activeCount; i++) {
-                allNodes[Math.floor(Math.random()*50)].classList.add('active');
-            }
-            document.getElementById('node-title').innerText = `GLOBAL NODE DISTRIBUTION (${activeCount}/50 LIVE)`;
-        }, 1300);
-    }
-
-    function toggleOnion() {
-        document.getElementById('onion-layer').classList.toggle('show');
-    }
-
-    window.onload = init;
+    function toggleOnion() { document.getElementById('onion-layer').classList.toggle('open'); }
+    window.onload = () => HK_ENGINE.init();
 </script>
 
 </body>
-</html> 
+</html>
