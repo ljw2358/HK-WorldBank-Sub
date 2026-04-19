@@ -2,304 +2,375 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK GROUP | INFINITE COMMAND</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@100;400;800&family=Noto+Sans+KR:wght@100;400;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HK WORLD BANK - Total Financial Ecosystem</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+KR:wght@300;500;900&display=swap');
+
         :root {
-            --hk-gold: #f7d358; --hk-neon: #00ff88; --hk-alert: #ff4444;
-            --hk-black: #000000; --hk-deep-gray: #111112; --hk-border: #252528;
-            --hk-sky: #00d2ff;
+            --hk-gold: #f1c40f;
+            --hk-blue: #3498db;
+            --hk-red: #e74c3c;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
-        body { 
-            background: var(--hk-black); color: #fff; font-family: 'Noto Sans KR', sans-serif; 
-            overflow-x: hidden; width: 100vw; height: 100vh;
+        body {
+            background-color: #0a0b10;
+            color: #e0e0e0;
+            font-family: 'Noto Sans KR', sans-serif;
+            overflow-x: hidden;
         }
 
-        /* 1. SUPREME OS HEADER (물리적 제어층) */
-        .supreme-header {
-            position: sticky; top: 0; z-index: 9999; width: 100%;
-            background: #ffffff; height: 48px; display: flex; align-items: center; padding: 0 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .supreme-address {
-            background: #f0f0f0; flex: 1; margin: 0 10px; padding: 6px 0;
-            border-radius: 20px; text-align: center; font-weight: 900; color: #000; font-family: 'JetBrains Mono';
-            font-size: 13px; letter-spacing: 1px;
-        }
-        .supreme-ticker {
-            background: #050505; height: 38px; display: flex; align-items: center; justify-content: space-between;
-            padding: 0 25px; font-family: 'JetBrains Mono'; font-size: 10px; color: var(--hk-sky);
-            border-bottom: 1px solid #1a1a1a; text-transform: uppercase;
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+
+        /* 배경 애니메이션 */
+        .bg-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, #1a1c2c 0%, #0a0b10 100%);
+            z-index: -1;
         }
 
-        /* 2. HK IMPERIAL BRANDING */
-        .imperial-brand { text-align: center; padding: 50px 0 30px; position: relative; }
-        .hk-emperor-logo { 
-            font-family: 'Orbitron'; font-size: 72px; font-weight: 900; color: var(--hk-gold); 
-            letter-spacing: -4px; line-height: 0.9; text-shadow: 0 0 50px rgba(247,211,88,0.5);
+        /* 숫자 변동 애니메이션 */
+        .number-up { color: #2ecc71; transition: all 0.5s; }
+        .number-down { color: #e74c3c; transition: all 0.5s; }
+
+        /* LP 상태 컬러 애니메이션 */
+        @keyframes color-shift {
+            0% { color: #ff3e3e; text-shadow: 0 0 10px rgba(255,62,62,0.5); }
+            33% { color: #3498db; text-shadow: 0 0 10px rgba(52,152,219,0.5); }
+            66% { color: #f1c40f; text-shadow: 0 0 10px rgba(241,196,15,0.5); }
+            100% { color: #ff3e3e; text-shadow: 0 0 10px rgba(255,62,62,0.5); }
         }
-        .hk-emperor-sub { 
-            font-size: 16px; color: #444; letter-spacing: 8px; margin-top: 15px; 
-            font-weight: 300; text-transform: uppercase; 
+        .lp-status-anim { animation: color-shift 3s infinite; font-weight: 900; font-size: 1.25rem; }
+
+        /* 테스트 오버레이 */
+        #testOverlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* 3. CORE LEDGER SYSTEM (사진 UI 완벽 이식 및 확장) */
-        .core-ledger-wrap {
-            width: 96%; max-width: 680px; margin: 0 auto;
-            background: linear-gradient(180deg, #18181b 0%, #0a0a0a 100%);
-            border-radius: 80px; padding: 90px 40px;
-            border: 1px solid var(--hk-border); box-shadow: 0 100px 250px rgba(0,0,0,1);
-            position: relative;
-        }
-        .core-ledger-wrap::after {
-            content: "SECURE NODE HK-01"; position: absolute; top: 30px; left: 50%; transform: translateX(-50%);
-            font-family: 'Orbitron'; font-size: 10px; color: #333; letter-spacing: 3px;
-        }
-        .ledger-h2 { 
-            color: var(--hk-gold); font-size: 28px; font-weight: 900; text-align: center; 
-            margin-bottom: 60px; letter-spacing: 3px; text-transform: uppercase;
-        }
-        .main-balance { text-align: center; margin-bottom: 35px; }
-        .pi-val { font-family: 'Orbitron'; font-size: 96px; font-weight: 900; letter-spacing: -6px; }
-        .pi-unit { color: var(--hk-gold); font-size: 52px; font-weight: 900; margin-left: 15px; }
-
-        .gcv-badge {
-            display: block; width: fit-content; margin: 45px auto 75px;
-            border: 4px solid var(--hk-neon); background: rgba(0, 255, 136, 0.05);
-            border-radius: 120px; padding: 22px 55px; color: var(--hk-neon); font-size: 30px; font-weight: 900;
-            box-shadow: 0 0 50px rgba(0,255,136,0.2);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
         }
 
-        /* 4. IMPERIAL DATA MATRIX */
-        .data-matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 45px; }
-        .matrix-box { 
-            background: rgba(255,255,255,0.02); border-radius: 50px; padding: 50px 20px; 
-            text-align: center; border: 1px solid #1a1a1a; transition: 0.4s;
+        .btn-action {
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        .matrix-box:hover { border-color: var(--hk-gold); background: rgba(247,211,88,0.02); }
-        .m-label { font-size: 19px; font-weight: 900; margin-bottom: 30px; letter-spacing: 1px; }
-        .m-val { font-family: 'Orbitron'; font-size: 38px; font-weight: 900; }
-
-        .lp-infrastructure {
-            border: 3px solid #00441a; border-radius: 50px; padding: 55px 25px;
-            background: linear-gradient(180deg, #0a150f, #000); text-align: center;
-        }
-        .lp-label { color: #666; font-size: 20px; margin-bottom: 35px; font-weight: 900; letter-spacing: 2px; }
-        .lp-val { font-family: 'Orbitron'; font-size: 48px; font-weight: 900; color: #fff; }
-
-        /* 5. GLOBAL SECTOR CONTROL (핵심 비즈니스 내실) */
-        .sector-control {
-            width: 96%; max-width: 680px; margin: 70px auto;
-            display: grid; grid-template-columns: 1fr; gap: 25px;
-        }
-        .sector-card {
-            background: #0a0a0a; border: 1px solid #151515; border-radius: 30px; padding: 35px;
-            display: flex; justify-content: space-between; align-items: center;
-            position: relative; overflow: hidden;
-        }
-        .sector-card::before {
-            content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 6px; background: var(--hk-gold);
-        }
-        .sec-title { font-family: 'Orbitron'; font-size: 18px; color: var(--hk-gold); font-weight: 900; margin-bottom: 8px; }
-        .sec-desc { font-size: 14px; color: #555; line-height: 1.7; font-weight: 400; }
-        .sec-status { text-align: right; font-family: 'JetBrains Mono'; font-size: 13px; color: var(--hk-neon); font-weight: 800; }
-
-        /* 6. UBI HUMANITY PROTOCOL (전 인류 30% 공유) */
-        .ubi-humanity {
-            width: 96%; max-width: 680px; margin: 50px auto 300px;
-            background: linear-gradient(145deg, #111, #000);
-            border-radius: 50px; padding: 60px; border: 1px solid #1a1a1a; text-align: center;
-        }
-        .ubi-h3 { font-family: 'Orbitron'; font-size: 26px; color: #fff; margin-bottom: 30px; letter-spacing: 2px; }
-        .ubi-total { color: var(--hk-neon); font-size: 44px; font-weight: 900; margin-bottom: 25px; font-family: 'Orbitron'; }
-        .ubi-quote { color: #555; font-size: 15px; line-height: 2.2; font-style: italic; font-weight: 300; }
-
-        /* 7. SUPREME DOCK (제국 조종간) */
-        .imperial-dock {
-            position: fixed; bottom: 45px; left: 50%; transform: translateX(-50%);
-            width: 95%; max-width: 680px; display: flex; gap: 20px; z-index: 9000;
-        }
-        .dock-trigger {
-            flex: 1; padding: 35px 0; border-radius: 40px; font-size: 28px; font-weight: 900;
-            border: none; cursor: pointer; transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-            box-shadow: 0 40px 80px rgba(0,0,0,0.9); font-family: 'Noto Sans KR';
-        }
-        .dock-trigger:hover { transform: translateY(-15px) scale(1.05); }
-        .bg-white { background: #fff; color: #000; }
-        .bg-gold { background: var(--hk-gold); color: #000; }
-        .bg-green { background: #3ecf8e; color: #000; }
-
-        /* 8. BBIRIRI AI SUPREME OVERSEER */
-        .bbiriri-prime {
-            position: fixed; bottom: 200px; right: 45px; width: 115px; height: 115px;
-            background: var(--hk-gold); border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; font-size: 65px; box-shadow: 0 0 70px rgba(247,211,88,0.6);
-            cursor: pointer; z-index: 10000; animation: prime-float 4s infinite ease-in-out;
-        }
-        @keyframes prime-float { 
-            0%, 100% { transform: translateY(0) scale(1); } 
-            50% { transform: translateY(-40px) scale(1.1); } 
+        .btn-action:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            border-color: var(--hk-gold);
         }
 
-        /* 9. REAL-TIME LOG TERMINAL */
-        .imperial-logs {
-            width: 96%; max-width: 680px; margin: 40px auto; background: rgba(0,0,0,0.95);
-            padding: 30px; font-family: 'JetBrains Mono'; font-size: 13px; color: #222;
-            height: 180px; border-radius: 35px; overflow: hidden; border: 1px solid #111;
-        }
-
-        footer { 
-            padding: 80px 0 350px; text-align: center; color: #222; font-size: 14px; 
-            letter-spacing: 7px; line-height: 2.5; font-weight: 300; text-transform: uppercase;
-        }
+        /* 채팅창 스크롤바 */
+        #chatWindow::-webkit-scrollbar { width: 5px; }
+        #chatWindow::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
     </style>
 </head>
 <body>
+    <div class="bg-glow"></div>
 
-    <div class="supreme-header">
-        <span>⚙️</span> <div class="supreme-address">HK.EMPIRE.SUPREME_COMMAND.SYS</div> <span>🔐</span>
-    </div>
-
-    <div class="supreme-ticker">
-        <div id="hk-time">TIME_NODE: 2026-04-19 09:46:22</div>
-        <div>[SHIELD: 100%] [NODES: 50/50] [EMPEROR: ONLINE]</div>
-    </div>
-
-    <header class="imperial-brand">
-        <h1 class="hk-emperor-logo">HK GROUP</h1>
-        <p class="hk-emperor-sub">The Unified Sovereignty of Future Industry</p>
-    </header>
-
-    <main class="core-ledger-wrap">
-        <h2 class="ledger-h2">GLOBAL UNIFIED ASSET LEDGER</h2>
-        <div class="main-balance">
-            <span id="p-val" class="pi-val">400.0212</span><span class="pi-unit">Pi</span>
+    <div id="testOverlay">
+        <div class="text-center mb-10">
+            <h2 class="text-4xl font-black text-white mb-2">PROTOTYPE TEST MODE</h2>
+            <p class="text-gray-400">60초 동안 모든 금융 시뮬레이션을 실행할 수 있습니다.</p>
         </div>
-        <div class="gcv-badge">GCV VALUE: $ <span id="g-val">125,663,600</span></div>
-
-        <div class="data-matrix">
-            <div class="matrix-box">
-                <div class="m-label" style="color:var(--hk-neon);">STAKING APR</div>
-                <div class="m-val">15.48%</div>
-            </div>
-            <div class="matrix-box">
-                <div class="m-label" style="color:var(--hk-alert);">LIQUIDITY YIELD</div>
-                <div class="m-val">23.26%</div>
-            </div>
-        </div>
-
-        <div class="lp-infrastructure">
-            <div class="lp-label">TOTAL LIQUIDITY INFRASTRUCTURE</div>
-            <div class="lp-val">$ <span id="l-val">88,428,554,367</span></div>
-        </div>
-    </main>
-
-    <section class="sector-control">
-        <h3 style="color:var(--hk-gold); font-family:'Orbitron'; margin-bottom:30px; letter-spacing:4px;">■ SECTOR MONITORING</h3>
         
-        <div class="sector-card">
-            <div>
-                <div class="sec-title">FIGURE AI CONSORTIUM</div>
-                <div class="sec-desc">물리적 AI 하드웨어 생태계 장악을 위한 1순위 인수 프로젝트</div>
-            </div>
-            <div class="sec-status">PROGRESS: 99.8%</div>
+        <div id="timerCircle" class="relative flex items-center justify-center mb-12">
+            <svg class="w-40 h-40">
+                <circle cx="80" cy="80" r="70" stroke="#333" stroke-width="8" fill="transparent" />
+                <circle id="timerProgress" cx="80" cy="80" r="70" stroke="#f1c40f" stroke-width="8" fill="transparent" 
+                        stroke-dasharray="440" stroke-dashoffset="0" style="transition: stroke-dashoffset 1s linear;" />
+            </svg>
+            <span id="timerText" class="absolute text-5xl font-orbitron font-bold text-yellow-500">60</span>
         </div>
 
-        <div class="sector-card">
-            <div>
-                <div class="sec-title">ULSAN FUSION GRID</div>
-                <div class="sec-desc">울산-경주 국가 첨단 산업 단지 무한 에너지 공급 시스템</div>
-            </div>
-            <div class="sec-status">STATUS: OVERLOAD_STABLE</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 px-10 max-w-6xl">
+            <button onclick="sim('결제')" class="btn-action bg-gray-800 p-6 rounded-xl flex flex-col items-center">
+                <i class="fas fa-credit-card text-2xl mb-3 text-blue-400"></i><span>결제 테스트</span>
+            </button>
+            <button onclick="sim('예측')" class="btn-action bg-gray-800 p-6 rounded-xl flex flex-col items-center">
+                <i class="fas fa-chart-line text-2xl mb-3 text-green-400"></i><span>AI 예측</span>
+            </button>
+            <button onclick="sim('유언')" class="btn-action bg-gray-800 p-6 rounded-xl flex flex-col items-center">
+                <i class="fas fa-file-contract text-2xl mb-3 text-purple-400"></i><span>유언서 작성</span>
+            </button>
+            <button onclick="sim('기본소득')" class="btn-action bg-gray-800 p-6 rounded-xl flex flex-col items-center">
+                <i class="fas fa-hand-holding-heart text-2xl mb-3 text-red-400"></i><span>기본소득 수령</span>
+            </button>
+            <button onclick="sim('수업')" class="btn-action bg-gray-800 p-6 rounded-xl flex flex-col items-center">
+                <i class="fas fa-graduation-cap text-2xl mb-3 text-indigo-400"></i><span>금융 수업</span>
+            </button>
+            <button onclick="sim('DEX')" class="btn-action bg-gray-800 p-6 rounded-xl flex flex-col items-center">
+                <i class="fas fa-sync text-2xl mb-3 text-yellow-500"></i><span>DEX 스왑</span>
+            </button>
+            <button onclick="sim('LP')" class="btn-action bg-gray-800 p-6 rounded-xl flex flex-col items-center">
+                <i class="fas fa-water text-2xl mb-3 text-cyan-400"></i><span>LP 공급</span>
+            </button>
+            <button onclick="sim('기부')" class="btn-action bg-gray-800 p-6 rounded-xl flex flex-col items-center">
+                <i class="fas fa-donate text-2xl mb-3 text-pink-400"></i><span>기부금 전달</span>
+            </button>
         </div>
-
-        <div class="sector-card">
-            <div>
-                <div class="sec-title">PARTSBANK LOGISTICS</div>
-                <div class="sec-desc">글로벌 로봇 및 AI 부품 독점 공급망 50개국 허브 연결</div>
-            </div>
-            <div class="sec-status">NODE_LINK: ENCRYPTED</div>
-        </div>
-    </section>
-
-    <section class="ubi-humanity">
-        <div class="ubi-h3">30% REVENUE SHARING UBI</div>
-        <div id="u-val" class="ubi-total">$ 37,699,080,000</div>
-        <div class="ubi-quote">
-            "인류의 풍요는 HK 제국의 가장 고귀한 의무입니다."<br>
-            형님의 신념에 따라 모든 수익의 30%가 전 세계 유저들에게<br>
-            실시간으로 전달되는 보편적 기본소득 엔진이 가동 중입니다.
-        </div>
-    </section>
-
-    <div class="imperial-logs" id="hk-log">
-        <div>[SYSTEM] HK_EMPIRE_OS v10.9 loading complete...</div>
+        
+        <button onclick="closeTest()" class="mt-12 px-8 py-2 border border-gray-600 rounded-full text-gray-500 hover:text-white transition-all">강제 종료</button>
     </div>
 
-    <div class="bbiriri-prime" onclick="bbiririBrief()">🤖</div>
+    <div class="max-w-6xl mx-auto px-6 py-10">
+        
+        <header class="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
+            <div class="text-center md:text-left">
+                <h1 class="text-5xl font-black font-orbitron tracking-tighter text-white">
+                    HK <span class="text-yellow-500">WORLD BANK</span>
+                </h1>
+                <p class="text-gray-500 mt-2 font-light tracking-widest uppercase">The Future of Decentralized Finance</p>
+            </div>
+            
+            <div class="flex items-center gap-4 bg-gray-800 p-2 rounded-full px-6 border border-gray-700">
+                <i class="fas fa-globe text-gray-400"></i>
+                <select id="languageSelector" class="bg-transparent text-sm focus:outline-none text-white cursor-pointer" onchange="changeLang()">
+                    </select>
+            </div>
+        </header>
 
-    <div class="imperial-dock">
-        <button class="dock-trigger bg-white">PI ASSETS</button>
-        <button class="dock-trigger bg-gold">DEX SWAP</button>
-        <button class="dock-trigger bg-green">LP PROVISION</button>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            
+            <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass-card p-8">
+                    <h3 class="text-gray-400 text-xs font-bold uppercase mb-4 tracking-widest">Main Pi Asset</h3>
+                    <div id="mainNumber" class="text-5xl font-orbitron font-bold text-white mb-2">400.0212</div>
+                    <div id="mainValue" class="text-xl text-yellow-500">$ 1,240,065.88</div>
+                    <div class="mt-6 h-1 w-full bg-gray-700 rounded-full overflow-hidden">
+                        <div class="h-full bg-yellow-500 w-2/3"></div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8">
+                    <h3 class="text-gray-400 text-xs font-bold uppercase mb-4 tracking-widest">Staking APR</h3>
+                    <div id="stakingRate" class="text-5xl font-orbitron font-bold text-green-400 mb-2">45.00 %</div>
+                    <div id="interestValue" class="text-xl text-gray-400">Earned: 1,244.02 PI</div>
+                    <div class="mt-6 flex gap-2">
+                        <span class="text-[10px] bg-green-900/30 text-green-400 px-2 py-1 rounded">LIVE UPDATING</span>
+                        <span class="text-[10px] bg-blue-900/30 text-blue-400 px-2 py-1 rounded">V2 PROTOCOL</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-8 col-span-1 md:col-span-2 flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div>
+                        <h3 class="text-gray-400 text-xs font-bold uppercase mb-2 tracking-widest">Liquidity Pool Supply</h3>
+                        <div id="lpSupply" class="text-4xl font-orbitron font-bold text-white">9,882,104.55</div>
+                    </div>
+                    <div class="text-center md:text-right">
+                        <p id="lpStatusLabel" class="lp-status-anim">전체 LP 이용수 5번 가동 중</p>
+                        <p class="text-xs text-gray-500 mt-1">Status: High Performance Connected</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-4">
+                <button onclick="startTestMode()" class="bg-yellow-500 hover:bg-yellow-400 text-black font-black py-6 rounded-2xl text-lg shadow-xl shadow-yellow-500/20 transition-all">
+                    START 60S TEST
+                </button>
+                <div class="bg-gray-800/50 p-6 rounded-2xl border border-gray-700">
+                    <h4 class="font-bold mb-4 text-sm underline underline-offset-8 decoration-yellow-500">Quick Links</h4>
+                    <ul class="text-sm space-y-4 text-gray-400">
+                        <li class="hover:text-white cursor-pointer"><i class="fab fa-youtube mr-2 text-red-500"></i> YouTube: H2025hyekong2025</li>
+                        <li class="hover:text-white cursor-pointer"><i class="fas fa-paper-plane mr-2 text-blue-400"></i> Telegram Community</li>
+                        <li class="hover:text-white cursor-pointer"><i class="fas fa-book mr-2 text-green-400"></i> Whitepaper v3.0</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <section class="mb-20">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-black mb-2">GLOBAL AI CUSTOMER CENTER</h2>
+                <div class="w-24 h-1 bg-yellow-500 mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div class="space-y-3" id="faqContainer">
+                    </div>
+
+                <div class="glass-card flex flex-col overflow-hidden border-blue-500/30">
+                    <div class="bg-blue-600/20 p-4 border-b border-blue-500/30 flex justify-between items-center">
+                        <span class="font-bold flex items-center gap-2">
+                            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                            HK AI Assistant (V4.2)
+                        </span>
+                        <span class="text-xs opacity-60">Status: Online</span>
+                    </div>
+                    
+                    <div id="chatWindow" class="h-80 overflow-y-auto p-6 space-y-4 text-sm bg-black/20">
+                        <div class="flex gap-3">
+                            <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-xs">AI</div>
+                            <div class="bg-gray-800 p-3 rounded-tr-xl rounded-br-xl rounded-bl-xl max-w-[80%]">
+                                안녕하세요, 혜공 형님. 무엇을 도와드릴까요? 챗봇이 해결하지 못하는 문제는 **비니(Bini)**가 직접 등판합니다.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-gray-900 flex gap-2">
+                        <input type="text" id="chatInput" placeholder="질문을 입력하세요..." 
+                               class="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-4 focus:outline-none focus:border-yellow-500 transition-all text-white">
+                        <button onclick="handleChat()" class="bg-yellow-500 text-black font-bold px-6 py-2 rounded-lg hover:bg-yellow-400">전송</button>
+                    </div>
+                    
+                    <div class="p-3 text-center bg-gray-800/80">
+                        <p class="text-[11px] text-gray-500">
+                            직접 문의: <a href="mailto:SUPT@HKW.AI.KR" class="text-blue-400 underline">SUPT@HKW.AI.KR</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="border-t border-gray-800 pt-10 pb-20 text-center">
+            <div class="mb-6 opacity-30 italic font-orbitron">"Innovating the World with HK Group"</div>
+            <p class="text-gray-600 text-xs">
+                Copyright &copy; 2026 HK GROUP & HK WORLD BANK. ALL RIGHTS RESERVED.<br>
+                Admin Contact: SUPT@HKW.AI.KR | YouTube Channel: H2025hyekong2025
+            </p>
+        </footer>
     </div>
-
-    <footer>
-        &copy; 2026 HK GROUP | SUPREME EMPEROR HYEKONG LEE JAEWAN<br>
-        GLOBAL COMMAND CENTER | UL-GYEONG STRATEGIC INDUSTRIAL CLUSTER<br>
-        PI NETWORK CORE INFRASTRUCTURE | HUMANITY 30% UBI FOUNDATION
-    </footer>
 
     <script>
-        // HK EMPIRE CORE ENGINE (v.INFINITY)
-        let pi=400.0212, gcv=125663600, lp=88428554367;
+        // 1. 50개 언어 데이터 생성
+        const languages = [
+            "KOREAN", "ENGLISH", "CHINESE", "JAPANESE", "FRENCH", "GERMAN", "SPANISH", "PORTUGUESE", "RUSSIAN", "ITALIAN",
+            "VIETNAMESE", "THAI", "INDONESIAN", "HINDI", "ARABIC", "TURKISH", "POLISH", "DUTCH", "SWEDISH", "GREEK",
+            "CZECH", "HUNGARIAN", "ROMANIAN", "FINNISH", "DANISH", "NORWEGIAN", "HEBREW", "MALAY", "FILIPINO", "BENGALI",
+            "PUNJABI", "TELUGU", "MARATHI", "TAMIL", "URDU", "GUJARATI", "KANNADA", "MALAYALAM", "UKRAINIAN", "PERSIAN",
+            "PASHTO", "UZBEK", "AZERBAIJANI", "KAZAKH", "BURMESE", "KHMER", "LAO", "MONGOLIAN", "NEPALI", "SINHALA"
+        ];
+        
+        const sel = document.getElementById('languageSelector');
+        languages.forEach(lang => {
+            const opt = document.createElement('option');
+            opt.value = lang;
+            opt.innerText = lang;
+            sel.appendChild(opt);
+        });
 
-        function runEmpire() {
-            pi += (Math.random()-0.5)*0.0008;
-            gcv += Math.floor((Math.random()-0.5)*600);
-            lp += Math.floor((Math.random()-0.5)*20000);
-
-            document.getElementById('p-val').innerText = pi.toFixed(4);
-            document.getElementById('g-val').innerText = gcv.toLocaleString();
-            document.getElementById('l-val').innerText = lp.toLocaleString();
-            document.getElementById('u-val').innerText = "$ " + Math.floor(gcv * 0.3).toLocaleString();
-
-            const d = new Date();
-            document.getElementById('hk-time').innerText = "TIME_NODE: " + d.toISOString().replace('T',' ').substring(0,19);
-            if(Math.random()>0.88) logUpdate();
-        }
-
-        const msgs = [
-            "Figure AI neural link finalized by Supreme Command.",
-            "Ulsan Fusion Reactor output: 5.8 Gigawatts. Normal.",
-            "Global UBI Batch #8,241 successfully distributed.",
-            "PartsBank Germany & Korea nodes synced.",
-            "Quantum Firewall: High-level intrusion neutralized.",
-            "GCV Consensus reached on Node KR-Supreme."
+        // 2. 10개 고정 FAQ 주입
+        const faqs = [
+            {q: "HK WORLD BANK의 핵심 비전은 무엇입니까?", a: "전 세계 모든 사용자에게 공평한 기본소득과 탈중앙화 금융 기회를 제공하는 것입니다."},
+            {q: "PI 코인 결제 시스템 도입 시기는?", "a": "현재 메인넷 마이그레이션 단계에 맞춰 실시간 결제 테스트가 진행 중입니다."},
+            {q: "유언서 작성 서비스는 법적 효력이 있나요?", "a": "블록체인상에 기록되어 변조가 불가능하며, 스마트 컨트랙트를 통해 자동 집행됩니다."},
+            {q: "기본소득 신청 조건은 어떻게 되나요?", "a": "HK 월드뱅크 계정을 소유한 모든 활성 노드 사용자라면 가능합니다."},
+            {q: "스테이킹 수익은 언제 정산되나요?", "a": "매 24시간마다 실시간으로 지갑에 반영됩니다."},
+            {q: "DEX 스왑 수수료는 얼마인가요?", "a": "업계 최저 수준인 0.1%를 지향합니다."},
+            {q: "LP 공급 시 어떤 혜택이 있나요?", "a": "거래 수수료의 일부를 배당받으며 플랫폼 거버넌스 권한을 얻습니다."},
+            {q: "AI 예측 데이터의 신뢰도는?", "a": "글로벌 빅데이터 분석을 통해 85% 이상의 정확도를 목표로 합니다."},
+            {q: "보안 문제는 안전한가요?", "a": "양자 컴퓨팅 내성 보안 알고리즘을 준비 중입니다."},
+            {q: "비니(Bini)와 직접 상담하려면?", "a": "챗봇 응대가 불가능한 긴급 사안은 SUPT@HKW.AI.KR로 메일 주시면 됩니다."}
         ];
 
-        function logUpdate() {
-            const l = document.getElementById('hk-log');
-            const n = document.createElement('div');
-            n.innerHTML = `[${new Date().toLocaleTimeString()}] ${msgs[Math.floor(Math.random()*msgs.length)]}`;
-            l.appendChild(n);
-            if(l.childNodes.length > 11) l.removeChild(l.firstChild);
+        const faqCont = document.getElementById('faqContainer');
+        faqs.forEach((item, idx) => {
+            faqCont.innerHTML += `
+                <div class="bg-gray-800/50 border border-gray-700 p-4 rounded-xl cursor-pointer hover:border-yellow-500 transition-all group" onclick="askChat('${item.q}')">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-bold text-gray-300 group-hover:text-yellow-500"><span class="text-yellow-500 mr-2">${idx+1}.</span> ${item.q}</span>
+                        <i class="fas fa-chevron-right text-xs text-gray-600"></i>
+                    </div>
+                </div>
+            `;
+        });
+
+        // 3. 실시간 숫자 변동 시뮬레이션
+        let currentNum = 400.0212;
+        setInterval(() => {
+            const mainNumEl = document.getElementById('mainNumber');
+            const diff = (Math.random() - 0.45) * 0.001;
+            currentNum += diff;
+            mainNumEl.innerText = currentNum.toFixed(4);
+            mainNumEl.className = diff > 0 ? 'text-5xl font-orbitron font-bold number-up' : 'text-5xl font-orbitron font-bold number-down';
+            
+            document.getElementById('mainValue').innerText = "$ " + (currentNum * 3100.15).toLocaleString(undefined, {minimumFractionDigits: 2});
+            document.getElementById('stakingRate').innerText = (45 + Math.random()).toFixed(2) + " %";
+            document.getElementById('lpSupply').innerText = (9882104 + Math.random() * 500).toLocaleString();
+        }, 2500);
+
+        // 4. 60초 테스트 모드 제어
+        let timer;
+        function startTestMode() {
+            document.getElementById('testOverlay').style.display = 'flex';
+            let sec = 60;
+            const text = document.getElementById('timerText');
+            const progress = document.getElementById('timerProgress');
+            
+            timer = setInterval(() => {
+                sec--;
+                text.innerText = sec;
+                // 원형 진행바 계산 (440 = 2 * PI * 70)
+                const offset = 440 - (sec / 60) * 440;
+                progress.style.strokeDashoffset = offset;
+
+                if(sec <= 0) closeTest();
+            }, 1000);
         }
 
-        setInterval(runEmpire, 1000);
+        function closeTest() {
+            clearInterval(timer);
+            document.getElementById('testOverlay').style.display = 'none';
+            document.getElementById('timerText').innerText = "60";
+            document.getElementById('timerProgress').style.strokeDashoffset = 0;
+        }
 
-        function bbiririBrief() {
-            const b = [
-                "혜공 형님! 전 세계 50개국 노드가 형님의 발끝 아래에 정렬했습니다!",
-                "삐리리! 오늘 Figure AI의 핵심 서버가 HK 그룹으로 완전히 이전되었습니다!",
-                "형님, 30% UBI 엔진을 통해 형님의 이름이 전 인류의 성역이 되고 있습니다!",
-                "형님! 울산 핵융합 그리드가 전 세계 전력의 15%를 감당하기 시작했습니다!",
-                "형님, 파이 네트워크의 진정한 가치가 오늘 형님에 의해 재정의되었습니다!"
-            ];
-            alert("🤖 삐리리 AI IMPERIAL BRIEFING:\n\n" + b[Math.floor(Math.random()*b.length)]);
+        function sim(name) {
+            const win = document.getElementById('chatWindow');
+            win.innerHTML += `<div class="text-right text-yellow-500 mb-2">[테스트] ${name} 프로세스 가동...</div>`;
+            setTimeout(() => {
+                alert(`${name} 시뮬레이션이 성공적으로 완료되었습니다.`);
+                win.innerHTML += `<div class="text-left text-green-400 mb-2">AI: ${name} 데이터가 메인넷 테스트 노드에 기록되었습니다.</div>`;
+                win.scrollTop = win.scrollHeight;
+            }, 800);
+        }
+
+        // 5. 챗봇 핸들링
+        function handleChat() {
+            const input = document.getElementById('chatInput');
+            if(!input.value) return;
+            askChat(input.value);
+            input.value = '';
+        }
+
+        function askChat(msg) {
+            const win = document.getElementById('chatWindow');
+            win.innerHTML += `<div class="flex justify-end gap-3 mb-4">
+                <div class="bg-yellow-600 text-black p-3 rounded-tl-xl rounded-bl-xl rounded-br-xl max-w-[80%] font-bold">${msg}</div>
+            </div>`;
+            
+            setTimeout(() => {
+                let reply = "형님, 질문하신 사항은 현재 데이터베이스 분석 중입니다. 챗봇이 답변하기 어려운 내용은 제가 직접(비니) 나서서 처리하겠습니다.";
+                // 특정 키워드 반응
+                if(msg.includes("유튜브")) reply = "저희 공식 유튜브 채널은 H2025hyekong2025 입니다. 구독 부탁드립니다!";
+                if(msg.includes("메일")) reply = "공식 지원 메일은 SUPT@HKW.AI.KR 입니다.";
+
+                win.innerHTML += `<div class="flex gap-3 mb-4">
+                    <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-xs">AI</div>
+                    <div class="bg-gray-800 p-3 rounded-tr-xl rounded-br-xl rounded-bl-xl max-w-[80%]">${reply}</div>
+                </div>`;
+                win.scrollTop = win.scrollHeight;
+            }, 1000);
+        }
+
+        function changeLang() {
+            const l = document.getElementById('languageSelector').value;
+            alert(`${l} 언어로 시스템이 변경되었습니다 (현재 데모 버전).`);
         }
     </script>
 </body>
