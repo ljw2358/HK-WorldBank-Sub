@@ -9,226 +9,303 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@300;400;700;900&display=swap');
         
-        :root { --gold: #facc15; --blue: #0ea5e9; }
-        body { background: #000; color: #fff; font-family: 'Noto Sans KR', sans-serif; overflow-x: hidden; }
-        .orbitron { font-family: 'Orbitron', sans-serif; }
+        :root {
+            --hk-gold: #facc15;
+            --hk-blue: #3b82f6;
+            --hk-dark: #020617;
+        }
+
+        body { 
+            background-color: #000; 
+            color: #fff; 
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-font { font-family: 'Orbitron', sans-serif; }
         
-        /* 실시간 숫자 네온 효과 */
-        .live-num { color: var(--gold); text-shadow: 0 0 10px rgba(250, 204, 21, 0.5); font-weight: 900; }
-        
-        /* 6구 메뉴 카드 애니메이션 */
-        .hk-card {
-            background: rgba(15, 23, 42, 0.8);
+        /* 실시간 숫자 애니메이션 스타일 */
+        .live-counter {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--hk-gold);
+            text-shadow: 0 0 15px rgba(250, 204, 21, 0.6);
+        }
+
+        /* 6구 그리드 카드 디자인 */
+        .menu-card {
+            background: rgba(15, 23, 42, 0.7);
             border: 1px solid #1e293b;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            border-radius: 2.5rem;
         }
-        .hk-card:hover {
-            border-color: var(--gold);
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(250, 204, 21, 0.1);
+        .menu-card:hover {
+            border-color: var(--hk-gold);
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(250, 204, 21, 0.15);
         }
 
         /* 30개국어 셀렉트 박스 */
         .lang-select {
             background: #000;
-            color: var(--gold);
-            border: 2px solid var(--gold);
+            color: var(--hk-gold);
+            border: 2px solid var(--hk-gold);
             border-radius: 50px;
-            padding: 8px 20px;
-            font-weight: 700;
+            padding: 8px 24px;
+            font-weight: 900;
             outline: none;
             cursor: pointer;
+            transition: 0.3s;
         }
+        .lang-select:hover { background: var(--hk-gold); color: #000; }
 
-        /* 비디오 컨테이너 */
-        .video-box {
-            background: #0a0a0a;
-            border: 1px solid #222;
-            border-radius: 2rem;
+        /* 비디오 섹션 스타일 */
+        .video-player {
+            background: #050505;
+            border: 2px solid #111;
+            border-radius: 3rem;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
+            aspect-ratio: 16/9;
         }
 
-        /* 흐르는 공지사항 */
-        .marquee {
-            white-space: nowrap;
+        /* 흐르는 상단 바 */
+        .ticker-wrap {
+            width: 100%;
             overflow: hidden;
-            background: var(--gold);
+            background: var(--hk-gold);
             color: #000;
-            padding: 5px 0;
+            padding: 8px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
             font-weight: 900;
+            font-size: 14px;
         }
-        .marquee-inner {
+        .ticker {
             display: inline-block;
-            animation: marquee 30s linear infinite;
+            white-space: nowrap;
+            animation: ticker 40s linear infinite;
         }
-        @keyframes marquee {
+        @keyframes ticker {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
+
+        /* 스크롤바 커스텀 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--hk-gold); }
     </style>
 </head>
-<body class="pb-24">
+<body class="pb-32">
 
-    <div class="marquee sticky top-0 z-[100]">
-        <div class="marquee-inner">
-            WELCOME TO HK-WORLDBANK GLOBAL PORTAL | CHAIRMAN LEE JAEWAN | NODE V23 ACTIVE | WELCOME TO HK-WORLDBANK GLOBAL PORTAL | CHAIRMAN LEE JAEWAN | NODE V23 ACTIVE | 
+    <div class="ticker-wrap shadow-2xl">
+        <div class="ticker">
+            WELCOME TO HK-WORLDBANK GLOBAL MASTER PORTAL | NODE V23 STATUS: ACTIVE | CHAIRMAN LEE JAEWAN LEADERSHIP | QUANTUM SHIELD ON | WELCOME TO HK-WORLDBANK GLOBAL MASTER PORTAL | NODE V23 STATUS: ACTIVE | CHAIRMAN LEE JAEWAN LEADERSHIP | QUANTUM SHIELD ON |
         </div>
     </div>
 
-    <header class="p-8 flex flex-col md:flex-row justify-between items-center gap-6 bg-black/90 border-b border-zinc-900 sticky top-[34px] z-50">
-        <div class="text-center md:text-left">
-            <h1 class="orbitron text-3xl font-black text-yellow-500 tracking-tighter">HK-WORLD BANK</h1>
-            <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-[0.4em]">Global Digital Financial Leader</p>
+    <header class="p-8 flex flex-col lg:flex-row justify-between items-center gap-8 bg-black/90 border-b border-zinc-900 sticky top-[38px] z-50 backdrop-blur-md">
+        <div class="text-center lg:text-left">
+            <h1 class="header-font text-4xl font-black text-yellow-500 tracking-tighter">HK-WORLD BANK</h1>
+            <p class="text-[10px] text-zinc-500 font-bold uppercase tracking-[0.5em] mt-1">Advanced Pi-Network Ecosystem</p>
         </div>
         
-        <div class="flex items-center gap-4">
-            <i class="fa-solid fa-earth-asia text-yellow-500 text-xl"></i>
-            <select id="langSwitch" onchange="translatePage()" class="lang-select text-sm">
+        <div class="flex items-center gap-6">
+            <div class="hidden md:flex flex-col items-end">
+                <span class="text-[10px] text-yellow-500 font-bold">SYSTEM STATUS</span>
+                <span class="text-xs font-black">100% OPERATIONAL</span>
+            </div>
+            <select id="languageSelector" onchange="switchLang()" class="lang-select">
                 <option value="ko">KOREAN 🇰🇷</option><option value="en">ENGLISH 🇺🇸</option><option value="zh">CHINESE 🇨🇳</option>
-                <option value="ja">JAPANESE 🇯🇵</option><option value="vi">VIETNAMESE 🇻🇳</option><option value="es">SPANISH 🇪🇸</option>
-                <option value="fr">FRENCH 🇫🇷</option><option value="de">GERMAN 🇩🇪</option><option value="ru">RUSSIAN 🇷🇺</option>
-                <option value="pt">PORTUGUESE 🇵🇹</option><option value="hi">HINDI 🇮🇳</option><option value="th">THAI 🇹🇭</option>
-                <option value="id">INDONESIAN 🇮🇩</option><option value="it">ITALIAN 🇮🇹</option><option value="tr">TURKISH 🇹🇷</option>
-                </select>
+                <option value="ja">JAPANESE 🇯🇵</option><option value="vi">VIETNAMESE 🇻🇳</option><option value="fr">FRENCH 🇫🇷</option>
+                <option value="de">GERMAN 🇩🇪</option><option value="es">SPANISH 🇪🇸</option><option value="ru">RUSSIAN 🇷🇺</option>
+                <option value="pt">PORTUGUESE 🇵🇹</option><option value="hi">HINDI 🇮🇳</option><option value="ar">ARABIC 🇸🇦</option>
+                <option value="th">THAI 🇹🇭</option><option value="id">INDONESIAN 🇮🇩</option><option value="tr">TURKISH 🇹🇷</option>
+                <option value="it">ITALIAN 🇮🇹</option><option value="nl">DUTCH 🇳🇱</option><option value="pl">POLISH 🇵🇱</option>
+                <option value="sv">SWEDISH 🇸🇪</option><option value="no">NORWEGIAN 🇳🇴</option><option value="da">DANISH 🇩🇰</option>
+                <option value="fi">FINNISH 🇫🇮</option><option value="el">GREEK 🇬🇷</option><option value="cs">CZECH 🇨🇿</option>
+                <option value="hu">HUNGARIAN 🇭🇺</option><option value="ro">ROMANIAN 🇷🇴</option><option value="uk">UKRAINIAN 🇺🇦</option>
+                <option value="he">HEBREW 🇮🇱</option><option value="ms">MALAY 🇲🇾</option><option value="tl">TAGALOG 🇵🇭</option>
+            </select>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-6 py-16">
+    <main class="max-w-7xl mx-auto px-6 pt-12">
 
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-            <div class="hk-card rounded-[2rem] p-8 text-center border-t-4 border-t-yellow-500">
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
+            <div class="menu-card p-10 text-center">
                 <p class="text-xs text-zinc-500 mb-2 font-bold tr" data-ko="네트워크 노드" data-en="Network Nodes">네트워크 노드</p>
-                <h2 id="live1" class="orbitron text-3xl live-num">1,245,678</h2>
+                <h2 id="counter1" class="live-counter text-4xl font-black">1,245,678</h2>
             </div>
-            <div class="hk-card rounded-[2rem] p-8 text-center border-t-4 border-t-blue-500">
-                <p class="text-xs text-zinc-500 mb-2 font-bold tr" data-ko="24h 거래량" data-en="24h Volume">24h 거래량</p>
-                <h2 id="live2" class="orbitron text-3xl live-num">π 85,203,419</h2>
+            <div class="menu-card p-10 text-center">
+                <p class="text-xs text-zinc-500 mb-2 font-bold tr" data-ko="트랜잭션 속도" data-en="TX Speed">트랜잭션 속도</p>
+                <h2 id="counter2" class="live-counter text-4xl font-black">8,203 TPS</h2>
             </div>
-            <div class="hk-card rounded-[2rem] p-8 text-center border-t-4 border-t-green-500">
-                <p class="text-xs text-zinc-500 mb-2 font-bold tr" data-ko="글로벌 접속자" data-en="Global Users">글로벌 접속자</p>
-                <h2 id="live3" class="orbitron text-3xl live-num">92,410</h2>
+            <div class="menu-card p-10 text-center">
+                <p class="text-xs text-zinc-500 mb-2 font-bold tr" data-ko="총 유동성 가치" data-en="Total TVL">총 유동성 가치</p>
+                <h2 id="counter3" class="live-counter text-4xl font-black">$4,829,150K</h2>
             </div>
-        </section>
-
-        <section class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-24">
-            <div class="hk-card rounded-[2.5rem] p-10 text-center group cursor-pointer">
-                <div class="mb-4 inline-block p-5 bg-yellow-500/10 rounded-full group-hover:bg-yellow-500 transition-all">
-                    <i class="fa-solid fa-paper-plane text-3xl text-yellow-500 group-hover:text-black"></i>
-                </div>
-                <h3 class="text-xl font-black tr" data-ko="송금" data-en="Transfer">송금</h3>
-            </div>
-            <div class="hk-card rounded-[2.5rem] p-10 text-center group cursor-pointer">
-                <div class="mb-4 inline-block p-5 bg-yellow-500/10 rounded-full group-hover:bg-yellow-500 transition-all">
-                    <i class="fa-solid fa-cart-shopping text-3xl text-yellow-500 group-hover:text-black"></i>
-                </div>
-                <h3 class="text-xl font-black tr" data-ko="결제" data-en="Payment">결제</h3>
-            </div>
-            <div class="hk-card rounded-[2.5rem] p-10 text-center group cursor-pointer">
-                <div class="mb-4 inline-block p-5 bg-yellow-500/10 rounded-full group-hover:bg-yellow-500 transition-all">
-                    <i class="fa-solid fa-vault text-3xl text-yellow-500 group-hover:text-black"></i>
-                </div>
-                <h3 class="text-xl font-black tr" data-ko="예치" data-en="Deposit">예치</h3>
-            </div>
-            <div class="hk-card rounded-[2.5rem] p-10 text-center group cursor-pointer">
-                <div class="mb-4 inline-block p-5 bg-yellow-500/10 rounded-full group-hover:bg-yellow-500 transition-all">
-                    <i class="fa-solid fa-award text-3xl text-yellow-500 group-hover:text-black"></i>
-                </div>
-                <h3 class="text-xl font-black tr" data-ko="보상" data-en="Rewards">보상</h3>
-            </div>
-            <div class="hk-card rounded-[2.5rem] p-10 text-center group cursor-pointer">
-                <div class="mb-4 inline-block p-5 bg-yellow-500/10 rounded-full group-hover:bg-yellow-500 transition-all">
-                    <i class="fa-solid fa-hand-holding-dollar text-3xl text-yellow-500 group-hover:text-black"></i>
-                </div>
-                <h3 class="text-xl font-black tr" data-ko="기본소득" data-en="UBI">기본소득</h3>
-            </div>
-            <div class="hk-card rounded-[2.5rem] p-10 text-center group cursor-pointer">
-                <div class="mb-4 inline-block p-5 bg-yellow-500/10 rounded-full group-hover:bg-yellow-500 transition-all">
-                    <i class="fa-solid fa-right-left text-3xl text-yellow-500 group-hover:text-black"></i>
-                </div>
-                <h3 class="text-xl font-black tr" data-ko="스왑" data-en="Swap">스왑</h3>
+            <div class="menu-card p-10 text-center">
+                <p class="text-xs text-zinc-500 mb-2 font-bold tr" data-ko="활성 유저" data-en="Active Users">활성 유저</p>
+                <h2 id="counter4" class="live-counter text-4xl font-black">92,410</h2>
             </div>
         </section>
 
-        <button class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-12 rounded-[3rem] text-3xl shadow-2xl transition-all mb-32 tr"
-                data-ko="글로벌 AI 지원센터 가동" data-en="ACTIVATE AI SUPPORT">
-            글로벌 AI 지원센터 가동
-        </button>
+        <h2 class="header-font text-3xl font-black text-yellow-500 text-center mb-12 tr" data-ko="핵심 뱅킹 서비스" data-en="Core Banking Services">핵심 뱅킹 서비스</h2>
+        <section class="grid grid-cols-2 lg:grid-cols-3 gap-8 mb-32">
+            <div class="menu-card p-12 text-center group cursor-pointer hover:bg-zinc-900">
+                <div class="mb-6 inline-block p-6 bg-yellow-500/10 rounded-full group-hover:bg-yellow-500 transition-all">
+                    <i class="fa-solid fa-paper-plane text-5xl text-yellow-500 group-hover:text-black"></i>
+                </div>
+                <h3 class="text-2xl font-black tr" data-ko="송금" data-en="Transfer">송금</h3>
+                <p class="text-xs text-zinc-500 mt-2">Instant Global Assets Transfer</p>
+            </div>
+            <div class="menu-card p-12 text-center group cursor-pointer hover:bg-zinc-900">
+                <div class="mb-6 inline-block p-6 bg-yellow-500/10 rounded-full group-hover:bg-yellow-500 transition-all">
+                    <i class="fa-solid fa-cart-shopping text-5xl text-yellow-500 group-hover:text-black"></i>
+                </div>
+                <h3 class="text-2xl font-black tr" data-ko="결제" data-en="Payment">결제</h3>
+                <p class="text-xs text-zinc-500 mt-2">Smart Web3 Pay Solution</p>
+            </div>
+            <div class="menu-card p-12 text-center group cursor-pointer hover:bg-zinc-900">
+                <div class="mb-6 inline-block p-6 bg-yellow-500/10 rounded-full group-hover:bg-yellow-500 transition-all">
+                    <i class="fa-solid fa-vault text-5xl text-yellow-500 group-hover:text-black"></i>
+                </div>
+                <h3 class="text-2xl font-black tr" data-ko="예치" data-en="Deposit">예치</h3>
+                <p class="text-xs text-zinc-500 mt-2">Quantum Shield Asset Vault</p>
+            </div>
+            <div class="menu-card p-12 text-center group cursor-pointer hover:bg-zinc-900">
+                <div class="mb-6 inline-block p-6 bg-yellow-500/10 rounded-full group-hover:bg-yellow-500 transition-all">
+                    <i class="fa-solid fa-award text-5xl text-yellow-500 group-hover:text-black"></i>
+                </div>
+                <h3 class="text-2xl font-black tr" data-ko="보상" data-en="Rewards">보상</h3>
+                <p class="text-xs text-zinc-500 mt-2">Ecosystem Loyalty Bonus</p>
+            </div>
+            <div class="menu-card p-12 text-center group cursor-pointer hover:bg-zinc-900">
+                <div class="mb-6 inline-block p-6 bg-yellow-500/10 rounded-full group-hover:bg-yellow-500 transition-all">
+                    <i class="fa-solid fa-hand-holding-dollar text-5xl text-yellow-500 group-hover:text-black"></i>
+                </div>
+                <h3 class="text-2xl font-black tr" data-ko="기본소득" data-en="UBI">기본소득</h3>
+                <p class="text-xs text-zinc-500 mt-2">Universal Basic Income Plan</p>
+            </div>
+            <div class="menu-card p-12 text-center group cursor-pointer hover:bg-zinc-900">
+                <div class="mb-6 inline-block p-6 bg-yellow-500/10 rounded-full group-hover:bg-yellow-500 transition-all">
+                    <i class="fa-solid fa-shuffle text-5xl text-yellow-500 group-hover:text-black"></i>
+                </div>
+                <h3 class="text-2xl font-black tr" data-ko="스왑" data-en="Swap">스왑</h3>
+                <p class="text-xs text-zinc-500 mt-2">Real-time Currency Exchange</p>
+            </div>
+        </section>
+
+        <div class="mb-32">
+            <button class="w-full bg-gradient-to-r from-red-600 via-rose-600 to-red-600 hover:scale-[1.02] text-white font-black py-16 rounded-[4rem] text-4xl shadow-[0_40px_80px_rgba(225,29,72,0.3)] transition-all tr"
+                    data-ko="글로벌 AI 지원센터 가동" data-en="ACTIVATE GLOBAL AI SUPPORT">
+                글로벌 AI 지원센터 가동
+            </button>
+        </div>
 
         <section class="mb-32">
-            <h2 class="text-3xl font-black mb-12 text-center text-yellow-500 tr" data-ko="HK 미디어 쇼케이스" data-en="HK Media Showcase">HK 미디어 쇼케이스</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="video-box aspect-video md:col-span-2 border-2 border-yellow-500/30">
-                    <i class="fa-solid fa-play text-6xl text-yellow-500 opacity-20"></i>
-                    <p class="absolute bottom-6 left-8 font-bold text-xl">MAIN BRAND VIDEO</p>
+            <h2 class="header-font text-4xl text-center font-black mb-16 text-yellow-500 tr" data-ko="HK 미디어 쇼케이스" data-en="HK Media Showcase">HK 미디어 쇼케이스</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="video-player md:col-span-2 border-4 border-yellow-500/20 group">
+                    <i class="fa-solid fa-play text-8xl text-yellow-500 opacity-20 group-hover:opacity-100 transition-all"></i>
+                    <div class="absolute bottom-10 left-10 text-left">
+                        <span class="bg-yellow-500 text-black px-4 py-1 rounded-full font-bold text-xs uppercase">Main Film</span>
+                        <h4 class="text-3xl font-black mt-3">HK-WorldBank: Vision 2026</h4>
+                    </div>
                 </div>
-                <div class="video-box aspect-video border border-zinc-800">Video 02</div>
-                <div class="video-box aspect-video border border-zinc-800">Video 03</div>
-                <div class="video-box aspect-video border border-zinc-800">Video 04</div>
-                <div class="video-box aspect-video border border-zinc-800">Video 05</div>
+                <div class="video-player group border border-zinc-800">
+                    <i class="fa-solid fa-play text-4xl text-zinc-800 group-hover:text-yellow-500"></i>
+                    <p class="absolute bottom-6 left-8 font-bold text-zinc-600">Promotion 02</p>
+                </div>
+                <div class="video-player group border border-zinc-800">
+                    <i class="fa-solid fa-play text-4xl text-zinc-800 group-hover:text-yellow-500"></i>
+                    <p class="absolute bottom-6 left-8 font-bold text-zinc-600">Promotion 03</p>
+                </div>
+                <div class="video-player group border border-zinc-800">
+                    <i class="fa-solid fa-play text-4xl text-zinc-800 group-hover:text-yellow-500"></i>
+                    <p class="absolute bottom-6 left-8 font-bold text-zinc-600">Promotion 04</p>
+                </div>
+                <div class="video-player group border border-zinc-800">
+                    <i class="fa-solid fa-play text-4xl text-zinc-800 group-hover:text-yellow-500"></i>
+                    <p class="absolute bottom-6 left-8 font-bold text-zinc-600">Promotion 05</p>
+                </div>
             </div>
         </section>
 
         <section class="mb-32">
-            <h2 class="text-3xl font-black mb-10 border-l-8 border-yellow-500 pl-6 tr" data-ko="자주 묻는 질문 (FAQ)" data-en="FAQ">자주 묻는 질문 (FAQ)</h2>
-            <div class="space-y-4">
-                <div class="hk-card p-6 rounded-2xl">
-                    <p class="text-yellow-500 font-bold mb-2">Q1. HK-WorldBank 서비스의 목적은?</p>
-                    <p class="text-zinc-500 text-sm">A. 전 세계 Pi Network 참여자들에게 안전하고 혁신적인 금융 인프라를 제공하는 것입니다.</p>
+            <h2 class="text-4xl font-black mb-16 border-b-8 border-yellow-500 pb-8 inline-block tr" data-ko="자주 묻는 질문 (FAQ)" data-en="FAQ">자주 묻는 질문 (FAQ)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="menu-card p-10">
+                    <h5 class="text-yellow-500 font-black text-xl mb-4">Q1. HK-WorldBank의 사명은?</h5>
+                    <p class="text-zinc-500 text-sm leading-relaxed">전 세계 Pi Network 참여자들에게 가장 혁신적이고 안전한 금융 시스템을 제공하여 인류의 경제적 자유를 실현하는 것입니다.</p>
                 </div>
-                <div class="hk-card p-6 rounded-2xl">
-                    <p class="text-yellow-500 font-bold mb-2">Q2. 양자 방패 보안이란?</p>
-                    <p class="text-zinc-500 text-sm">A. 양자 컴퓨팅 기술에 대응하는 최신 암호화 알고리즘으로 자산을 보호하는 시스템입니다.</p>
+                <div class="menu-card p-10">
+                    <h5 class="text-yellow-500 font-black text-xl mb-4">Q2. 양자 방패 보안이란?</h5>
+                    <p class="text-zinc-500 text-sm leading-relaxed">미래의 양자 컴퓨팅 해킹 위협에 대비해 HK 그룹이 독자 개발한 최신 암호화 방어 시스템입니다.</p>
                 </div>
-                <div class="hk-card p-6 rounded-2xl">
-                    <p class="text-yellow-500 font-bold mb-2">Q3. UBI는 언제 지급되나요?</p>
-                    <p class="text-zinc-500 text-sm">A. 생태계 활성화 기여도에 따라 실시간으로 산정되어 매일 지급됩니다.</p>
+                <div class="menu-card p-10">
+                    <h5 class="text-yellow-500 font-black text-xl mb-4">Q3. UBI 지급 조건은?</h5>
+                    <p class="text-zinc-500 text-sm leading-relaxed">HK 생태계에 정기적으로 참여하고 노드를 유지하는 모든 유저에게 공정하게 지급됩니다.</p>
                 </div>
-                <div class="hk-card p-6 rounded-2xl">
-                    <p class="text-yellow-500 font-bold mb-2">Q4. 노드 가동의 이점은?</p>
-                    <p class="text-zinc-500 text-sm">A. 네트워크 보안에 기여하며 추가적인 보상 포인트를 획득할 수 있습니다.</p>
+                <div class="menu-card p-10">
+                    <h5 class="text-yellow-500 font-black text-xl mb-4">Q4. 30개국어 지원 범위는?</h5>
+                    <p class="text-zinc-500 text-sm leading-relaxed">아시아, 유럽, 아메리카, 아프리카 등 전 세계 주요 거점 국가의 모든 언어를 실시간 지원합니다.</p>
                 </div>
-                <div class="hk-card p-6 rounded-2xl">
-                    <p class="text-yellow-500 font-bold mb-2">Q5. 30개국어 지원 기준은?</p>
-                    <p class="text-zinc-500 text-sm">A. 전 세계 주요 거점 국가의 언어를 모두 포함하여 글로벌 접근성을 높였습니다.</p>
-                </div>
-                </div>
+                <div class="menu-card p-10"><h5 class="text-yellow-500 font-black text-xl mb-4">Q5. 기술 지원...</h5></div>
+                <div class="menu-card p-10"><h5 class="text-yellow-500 font-black text-xl mb-4">Q6. 메인넷 연동...</h5></div>
+                <div class="menu-card p-10"><h5 class="text-yellow-500 font-black text-xl mb-4">Q7. 수수료 정책...</h5></div>
+                <div class="menu-card p-10"><h5 class="text-yellow-500 font-black text-xl mb-4">Q8. 파트너십 문의...</h5></div>
+                <div class="menu-card p-10"><h5 class="text-yellow-500 font-black text-xl mb-4">Q9. 모바일 앱 출시...</h5></div>
+                <div class="menu-card p-10"><h5 class="text-yellow-500 font-black text-xl mb-4">Q10. 이재완 의장 비전...</h5></div>
+            </div>
         </section>
 
     </main>
 
-    <footer class="bg-zinc-950 py-20 border-t border-zinc-900 text-center">
-        <h2 class="orbitron text-2xl font-bold text-zinc-700 mb-6">HK GROUP GLOBAL</h2>
-        <div class="flex justify-center gap-8 mb-10">
-            <i class="fa-brands fa-youtube text-3xl text-zinc-800 hover:text-red-600 transition-all"></i>
-            <i class="fa-brands fa-tiktok text-3xl text-zinc-800 hover:text-white transition-all"></i>
-            <i class="fa-brands fa-facebook text-3xl text-zinc-800 hover:text-blue-600 transition-all"></i>
+    <footer class="bg-zinc-950 py-32 border-t border-zinc-900 text-center">
+        <h2 class="header-font text-4xl font-black text-zinc-800 mb-10">HK GROUP GLOBAL</h2>
+        <div class="flex justify-center gap-12 mb-16">
+            <a href="#" class="text-4xl text-zinc-800 hover:text-red-600 transition-all"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" class="text-4xl text-zinc-800 hover:text-white transition-all"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#" class="text-4xl text-zinc-800 hover:text-blue-500 transition-all"><i class="fa-brands fa-facebook"></i></a>
         </div>
-        <p class="text-xs text-zinc-800 font-bold uppercase tracking-[1em]">Chairman Lee Jaewan. All Rights Reserved.</p>
+        <p class="header-font text-xs text-zinc-700 tracking-[1.5em] font-bold">CHAIRMAN LEE JAEWAN | HK-WORLDBANK</p>
     </footer>
 
     <script>
-        // 숫자가 실시간으로 움직이는 로직 (오빠가 원하신 핵심!)
-        function startLiveStats() {
+        // 숫자가 실시간으로 변하는 로직 (오빠 영상 속 핵심 기능)
+        function animateStats() {
             setInterval(() => {
-                document.getElementById('live1').innerText = (Math.floor(Math.random() * 1000) + 1245600).toLocaleString();
-                document.getElementById('live2').innerText = 'π ' + (Math.floor(Math.random() * 5000) + 85203000).toLocaleString();
-                document.getElementById('live3').innerText = (Math.floor(Math.random() * 200) + 92400).toLocaleString();
+                const c1 = document.getElementById('counter1');
+                const c2 = document.getElementById('counter2');
+                const c3 = document.getElementById('counter3');
+                const c4 = document.getElementById('counter4');
+                
+                c1.innerText = (Math.floor(Math.random() * 500) + 1245600).toLocaleString();
+                c2.innerText = (Math.floor(Math.random() * 50) + 8200).toLocaleString() + " TPS";
+                c3.innerText = '$' + (Math.floor(Math.random() * 5000) + 4829100).toLocaleString() + "K";
+                c4.innerText = (Math.floor(Math.random() * 100) + 92400).toLocaleString();
             }, 1000);
         }
-        startLiveStats();
+        animateStats();
 
-        // 30개국어 번역 트리거
-        function translatePage() {
-            const l = document.getElementById('langSwitch').value;
-            document.querySelectorAll('.tr').forEach(el => {
-                const text = el.getAttribute(`data-${l}`) || el.getAttribute('data-ko');
-                el.innerText = text;
+        // 30개국어 번역 시스템 (샘플 기반)
+        function switchLang() {
+            const l = document.getElementById('languageSelector').value;
+            const transElements = document.querySelectorAll('.tr');
+            transElements.forEach(el => {
+                const txt = el.getAttribute(`data-${l}`) || el.getAttribute('data-ko');
+                el.innerText = txt;
             });
+            console.log("Language changed to: " + l);
         }
     </script>
 </body>
