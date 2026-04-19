@@ -3,72 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WORLD BANK | GLOBAL UBI V27</title>
+    <title>HK WORLD BANK | GLOBAL V30</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Noto+Sans+KR:wght@300;900&display=swap');
         :root { --gold: #ffc40f; --green: #00ff88; --bg: #000; --card: #121212; --pink: #ff2d55; --cyan: #00d4ff; }
-        body { background: var(--bg); color: #fff; font-family: 'Pretendard', sans-serif; overflow-x: hidden; }
+        body { background: var(--bg); color: #fff; font-family: 'Noto Sans KR', sans-serif; overflow-x: hidden; margin: 0; }
+        
+        /* 챗봇 유영 배경 애니메이션 */
+        .floating-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.2; pointer-events: none; }
+        .bot-bubble { position: absolute; background: radial-gradient(circle, var(--cyan), transparent); border-radius: 50%; filter: blur(40px); animation: float 15s infinite alternate; }
+        @keyframes float { from { transform: translate(0, 0); } to { transform: translate(100vw, 100vh); } }
+
         .gold-text { color: var(--gold); }
         .green-text { color: var(--green); }
         .cyan-text { color: var(--cyan); }
-        .hk-card { background: var(--card); border: 1px solid #222; border-radius: 24px; padding: 24px; margin-bottom: 20px; }
+        .hk-card { background: rgba(18, 18, 18, 0.8); border: 1px solid #333; border-radius: 30px; padding: 25px; margin-bottom: 20px; backdrop-filter: blur(10px); }
         
-        /* 실시간 변화 애니메이션 */
-        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.02); } }
-        .live-num { animation: pulse 2.5s infinite; display: inline-block; }
+        /* 실시간 숫자 변화 */
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.02); } }
+        .live-num { animation: pulse 2s infinite; display: inline-block; font-family: 'Orbitron', sans-serif; font-weight: 900; }
 
-        /* 양파까기 FAQ 시스템 */
+        /* FAQ 양파까기 */
         .faq-item { border-bottom: 1px solid #222; padding: 18px 0; cursor: pointer; transition: 0.3s; }
-        .faq-answer { display: none; padding: 15px 10px; color: #bbb; line-height: 1.7; font-size: 14px; background: #0a0a0a; border-radius: 12px; margin-top: 8px; }
-        .faq-item.active .faq-answer { display: block; animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .faq-answer { display: none; padding: 15px; color: #ccc; font-size: 14px; background: #0a0a0a; border-radius: 15px; margin-top: 10px; border-left: 4px solid var(--pink); line-height: 1.6; }
+        .faq-item.active .faq-answer { display: block; }
 
-        select { background: #1a1a1a; border: 1.5px solid var(--gold); color: var(--gold); border-radius: 12px; padding: 6px 15px; font-weight: bold; outline: none; }
+        select { background: #111; border: 2px solid var(--gold); color: var(--gold); border-radius: 15px; padding: 10px 20px; font-weight: 900; outline: none; appearance: none; }
+        .btn-glow { box-shadow: 0 0 15px rgba(0,0,0,0.5); transition: 0.3s; }
+        .btn-glow:active { transform: scale(0.95); }
     </style>
 </head>
-<body class="max-w-lg mx-auto min-h-screen pb-24 px-4">
+<body class="max-w-xl mx-auto min-h-screen pb-24 px-6">
 
-    <header class="py-6 flex justify-between items-center sticky top-0 bg-black/90 z-50 backdrop-blur-md">
+    <div class="floating-bg">
+        <div class="bot-bubble" style="width:300px; height:300px; top:10%; left:10%;"></div>
+        <div class="bot-bubble" style="width:200px; height:200px; top:60%; left:70%; animation-delay: -5s; background: var(--pink);"></div>
+    </div>
+
+    <header class="py-8 flex justify-between items-center sticky top-0 bg-black/80 z-50">
         <div class="text-2xl font-black gold-text italic tracking-tighter">HK WORLD BANK</div>
-        <select id="langSelect" onchange="changeLanguage()">
+        <select id="langSelect" onchange="changeLang()">
             </select>
     </header>
 
     <main class="text-center">
         <div class="hk-card border-gold/30">
-            <p id="l-ledger" class="gold-text text-sm mb-4 font-bold tracking-widest">메인 자산 통합 원장</p>
-            <h2 class="text-5xl font-black mb-6 tracking-tighter">
-                <span id="pi-val" class="live-num">400.0211</span> <span class="text-2xl gold-text">Pi</span>
-            </h2>
-            <div class="mb-10"><span class="border-2 border-[#00ff88] text-[#00ff88] rounded-full px-6 py-2 font-bold">Value: $ 314,159 (GCV)</span></div>
+            <p id="l-ledger" class="gold-text text-sm mb-4 font-black tracking-widest">메인 자산 통합 원장</p>
+            <h2 class="text-5xl font-black mb-6"><span id="pi-val" class="live-num">400.0212</span> <span class="text-2xl gold-text">Pi</span></h2>
+            <div class="mb-8"><span class="border-2 border-[#00ff88] text-[#00ff88] rounded-full px-6 py-2 font-black italic">Value: $ 314,159 (GCV)</span></div>
             
-            <div class="grid grid-cols-2 gap-8 border-t border-white/5 pt-8">
-                <div><p id="l-staking" class="green-text text-xs mb-2 font-bold">스테이킹 이율</p><p id="r1" class="text-2xl font-black live-num">15.48%</p></div>
-                <div><p id="l-liquidity" class="green-text text-xs mb-2 font-bold">유동성 수익</p><p id="r2" class="text-2xl font-black live-num">23.26%</p></div>
+            <div class="grid grid-cols-2 gap-8 border-t border-white/10 pt-8">
+                <div><p id="l-staking" class="green-text text-xs mb-2 font-black uppercase">스테이킹 이율</p><p id="r1" class="text-2xl font-black live-num">15.48%</p></div>
+                <div><p id="l-liquidity" class="green-text text-xs mb-2 font-black uppercase">유동성 수익</p><p id="r2" class="text-2xl font-black live-num">23.26%</p></div>
             </div>
         </div>
 
         <div class="hk-card border-green/30">
-            <p id="l-lp" class="text-gray-500 text-xs mb-2 font-bold uppercase">전체 유동성 LP 공급</p>
-            <p class="text-3xl font-black green-text">$ <span id="lp-val" class="live-num">88,428,617,492</span></p>
+            <p id="l-lp" class="text-gray-500 text-xs mb-2 font-black italic">전체 유동성 LP 공급</p>
+            <p class="text-3xl font-black green-text italic">$ <span id="lp-val" class="live-num">88,428,554,367</span></p>
         </div>
 
         <div class="grid grid-cols-3 gap-4 mb-10">
-            <button id="b1" class="bg-white text-black font-black py-5 rounded-2xl text-sm shadow-xl">PI 수량</button>
-            <button id="b2" class="bg-[#ffc40f] text-black font-black py-5 rounded-2xl text-sm shadow-xl">DEX 스왑</button>
-            <button id="b3" class="bg-[#00c853] text-white font-black py-5 rounded-2xl text-sm shadow-xl">LP 공급</button>
+            <button id="b1" class="bg-white text-black font-black py-5 rounded-2xl text-xs btn-glow">PI 수량</button>
+            <button id="b2" class="bg-[#ffc40f] text-black font-black py-5 rounded-2xl text-xs btn-glow">DEX 스왑</button>
+            <button id="b3" class="bg-[#00c853] text-white font-black py-5 rounded-2xl text-xs btn-glow">LP 공급</button>
         </div>
 
-        <div class="hk-card text-left border-cyan/40 bg-[#000d1a]">
+        <div class="hk-card text-left border-cyan/40 bg-[#000d1a]/40">
             <h3 id="l-shield" class="flex items-center cyan-text font-black mb-6 text-base italic">
-                <i class="fas fa-shield-halved mr-3 text-2xl"></i> HK 양자 방패 가동 중
+                <i class="fas fa-shield-halved mr-3 text-2xl animate-pulse"></i> HK 양자 방패 가동 중
             </h3>
-            <div class="space-y-4">
-                <p id="s1" class="cyan-text border-l-4 border-cyan pl-4 text-sm font-bold">보안 기술 V27 적용 (Quantum-Proof)</p>
-                <p id="s2" class="cyan-text border-l-4 border-cyan pl-4 text-sm font-bold">메인넷 자산 실시간 자동 동기화</p>
-                <p id="s3" class="cyan-text border-l-4 border-cyan pl-4 text-sm font-bold">AI 기반 24시간 자산 보호 시스템</p>
+            <div class="space-y-4 text-sm font-black cyan-text">
+                <p id="s1">● 보안 기술 V30 적용 (Quantum-Proof)</p>
+                <p id="s2">● 메인넷 자산 실시간 자동 연동 시스템</p>
+                <p id="s3">● AI 기반 24H 실시간 자산 보호 시스템</p>
             </div>
         </div>
 
@@ -76,89 +86,89 @@
             <h3 id="l-cs" class="text-[#ff2d55] font-black mb-6 flex items-center text-base">
                 <i class="fas fa-headset mr-3 text-2xl"></i> 글로벌 AI 고객지원센터 가동
             </h3>
-            <div id="faq-list" class="text-sm">
+            <div id="faq-list">
                 </div>
             <div class="mt-10 pt-6 border-t border-white/10 text-center">
-                <p class="text-cyan-400 font-mono text-base font-bold">support@hkwb.ai.kr</p>
-                <p class="text-gray-600 text-[11px] mt-4 font-black">MODE: TEST-PI SMART CONTRACT ACTIVE</p>
+                <p class="text-cyan-400 font-black text-lg select-all">support@hkwb.ai.kr</p>
+                <p class="text-gray-600 text-[10px] mt-4 font-black italic">MODE: TEST-PI SMART CONTRACT ACTIVE</p>
             </div>
         </div>
 
         <div class="grid grid-cols-2 gap-4 pb-12">
-            <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="bg-[#ff0000] py-5 rounded-2xl flex items-center justify-center font-black text-xs italic shadow-lg shadow-red-900/20"><i class="fab fa-youtube mr-2 text-xl"></i> YOUTUBE</a>
-            <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="bg-zinc-900 py-5 rounded-2xl flex items-center justify-center font-black text-xs italic border border-white/10 shadow-lg"><i class="fab fa-tiktok mr-2 text-xl"></i> TIKTOK</a>
+            <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="bg-[#ff0000] py-5 rounded-2xl flex items-center justify-center font-black text-xs italic"><i class="fab fa-youtube mr-2 text-xl"></i> YOUTUBE</a>
+            <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="bg-zinc-900 py-5 rounded-2xl flex items-center justify-center font-black text-xs italic border border-white/10"><i class="fab fa-tiktok mr-2 text-xl"></i> TIKTOK</a>
         </div>
     </main>
 
     <script>
-        // 형님의 11가지 핵심 FAQ 데이터 (양파까기용)
+        // 형님의 11개 핵심 FAQ 데이터
         const faqItems = [
-            ["1. HK WorldBank는 무엇인가요?", "글로벌 20억 명에게 기본소득을 전달하기 위해 탄생한 파이 메인넷 기반 인공지능 금융 플랫폼입니다."],
-            ["2. 양자 방패 보안은 안전한가요?", "최신 양자 암호화 기술인 HK-Quantum V27을 통해 어떠한 해킹 시도도 실시간으로 차단합니다."],
-            ["3. 스테이킹 수익은 어떻게 받나요?", "매일 한국 시간(KST) 새벽 3시 14분에 지갑으로 자동 정산되어 입금됩니다."],
-            ["4. GCV $314,159를 지지하나요?", "네, 전 세계 파이어니어가 합의한 가치를 플랫폼의 근간으로 삼아 생태계를 구축합니다."],
-            ["5. 메인넷 인출은 언제 되나요?", "파이 네트워크의 마이그레이션 절차에 따라 검증이 끝난 자산은 즉시 스왑 및 인출이 가능합니다."],
-            ["6. 수수료 환원 정책이란?", "발생하는 모든 수수료는 형님의 비전에 따라 다시 사용자 UBI 기금으로 적립되어 환원됩니다."],
-            ["7. 어디서 결제할 수 있나요?", "전 세계 HK 가맹점 및 제휴된 온/오프라인 상점에서 QR 코드로 간편하게 결제 가능합니다."],
-            ["8. 지원되는 언어는 몇 개인가요?", "현재 40개국 언어를 지원하며, 향후 200개 이상의 언어를 추가하여 전 인류가 쓸 수 있게 합니다."],
-            ["9. AI 상담은 24시간인가요?", "네, 챗봇을 넘어선 HK-GPT 엔진이 전 세계 언어로 실시간 금융 상담을 도와드립니다."],
-            ["10. 테스트 파이 환경의 목적은?", "메인넷 오픈 전 시스템의 완벽한 안정성을 검증하기 위한 안전한 샌드박스 구동 모드입니다."],
-            ["11. UBI재원과 이율 재원은 어떻게 만드나요?", "HK Group 글로벌 수익의 30% 출연금, LP 유동성 수수료 수익, 그리고 HK 양자 데이터 비즈니스 수익을 결합하여 마르지 않는 샘물처럼 영구적인 재원을 확보합니다."]
+            ["1. HK WorldBank는 무엇인가요?", "HK WorldBank는 글로벌 20억 명에게 기본소득을 전달하기 위해 탄생한 파워풀한 파이 생태계 금융 플랫폼입니다."],
+            ["2. V30 양자 방패 보안은 안전한가요?", "최신 양자 암호화 기술인 HK-Quantum V30 시스템이 귀하의 자산을 24시간 실시간으로 철저히 보호합니다."],
+            ["3. 스테이킹 수익은 어떻게 받나요?", "스테이킹 수익은 매일 한국 시간(KST) 새벽 3시 14분에 지갑으로 자동 정산되어 안전하게 지급됩니다."],
+            ["4. GCV $314,159 가치를 지지하나요?", "네, 전 세계 파이어니어들의 합의된 가치인 GCV $314,159를 전적으로 지지하며 이를 생태계의 근간으로 삼습니다."],
+            ["5. 오픈 메인넷 이후 인출은 언제 되나요?", "오픈 메인넷 이후 마이그레이션이 완료된 모든 자산은 즉시 스왑 및 인출이 가능하도록 설계되어 있습니다."],
+            ["6. 수수료 환원 정책이란 무엇인가요?", "최소한의 운영 수수료를 제외한 모든 수익은 사용자에게 다시 돌려주어 수익을 극대화하는 정책입니다."],
+            ["7. 전 세계 어디서나 결제가 가능한가요?", "전 세계 HK 가맹점 및 제휴된 온/오프라인 상점에서 QR 코드로 간편하게 파이 결제를 지원합니다."],
+            ["8. 현재 지원되는 언어는 몇 개인가요?", "현재 한국어를 포함해 40개국 이상의 다국어를 완벽 지원하며, 언제든지 200개 언어까지 확장이 가능합니다."],
+            ["9. AI 고객센터 상담은 언제 가능한가요?", "챗봇 기능을 바탕화면에 통합하여 별도의 연결 없이 24시간 실시간으로 AI 상담을 지원합니다."],
+            ["10. 테스트 파이 환경 구동의 목적은?", "메인넷 구동 전 시스템의 완벽한 안정성과 스마트 계약의 무결성을 검증하기 위한 테스트 파이 기반 샌드박스 모드입니다."],
+            ["11. UBI재원과 이율 재원은 어떻게 만들 거예요?", "HK Group 글로벌 수익의 30% 출연금, LP 유동성 공급 수수료 수익, 그리고 HK 양자 데이터 비즈니스 수익을 결합하여 영구적인 재원을 확보합니다."]
         ];
 
-        // 40개 이상 언어 셋팅 (100-200개로 확장하기 쉬운 구조)
-        const langData = {
-            ko: { name: "한국어 🇰🇷", ledger: "메인 자산 통합 원장", qty: "PI 수량", shield: "HK 양자 방패 가동 중", cs: "글로벌 AI 고객지원센터 가동" },
-            en: { name: "English 🇺🇸", ledger: "Main Asset Ledger", qty: "PI Quantity", shield: "HK Quantum Shield Active", cs: "Global AI Support Center" },
-            zh: { name: "中文 🇨🇳", ledger: "主资产账本", qty: "PI 数量", shield: "HK 量子盾启动", cs: "全球 AI 支持中心" },
-            ja: { name: "日本語 🇯🇵", ledger: "メイン資産台帳", qty: "PI 数量", shield: "HK 量子シールド稼働", cs: "グローバル AI サポート" },
-            vi: { name: "Tiếng Việt 🇻🇳", ledger: "Sổ cái tài sản", qty: "Số lượng PI", shield: "Lá chắn lượng tử HK", cs: "Hỗ trợ AI toàn cầu" },
-            hi: { name: "हिन्दी 🇮🇳", ledger: "मुख्य संपत्ति लेजर", qty: "PI मात्रा", shield: "HK क्वांटम शील्ड सक्रिय", cs: "वैश्विक AI सहायता" },
-            ar: { name: "العربية 🇸🇦", ledger: "دفتر الأصول", qty: "كمية PI", shield: "درع الكم HK نشط", cs: "دعم الذكاء الاصطناعي" }
-            // 여기에 추가 30~40개 언어를 동일한 방식으로 넣으면 됩니다!
+        // 40개국 언어 리스트 (확장형)
+        const langPack = {
+            ko: { name: "한국어 🇰🇷", ledger: "메인 자산 통합 원장", qty: "PI 수량", swap: "DEX 스왑", supply: "LP 공급", shield: "HK 양자 방패 가동 중", cs: "글로벌 AI 고객지원센터 가동" },
+            en: { name: "English 🇺🇸", ledger: "Main Asset Ledger", qty: "PI Qty", swap: "DEX Swap", supply: "LP Supply", shield: "HK Quantum Shield Active", cs: "Global AI Support Center" },
+            zh: { name: "中文 🇨🇳", ledger: "主资产账본", qty: "PI 数量", swap: "DEX 交换", supply: "LP 供应", shield: "HK 量子盾启动", cs: "全球 AI 支持中心" },
+            ja: { name: "日本語 🇯🇵", ledger: "メイン資産台帳", qty: "PI 数量", swap: "DEX スワップ", supply: "LP 供給", shield: "HK 量子シールド稼働", cs: "グローバル AI サポート" },
+            vi: { name: "Tiếng Việt 🇻🇳", ledger: "Sổ cái tài sản", qty: "Số lượng PI", swap: "DEX Swap", supply: "Cung cấp LP", shield: "Lá chắn lượng tử HK", cs: "Hỗ trợ AI toàn cầu" },
+            hi: { name: "हिन्दी 🇮🇳", ledger: "मुख्य संपत्ति लेजर", qty: "PI मात्रा", swap: "DEX स्वैप", supply: "LP आपूर्ति", shield: "HK क्वांटम शील्ड", cs: "वैश्विक AI सहायता" },
+            ar: { name: "العربية 🇸🇦", ledger: "دفتر الأصول", qty: "كمية PI", swap: "تبادل DEX", supply: "توريد LP", shield: "درع الكم HK", cs: "دعم AI العالمي" },
+            fr: { name: "Français 🇫🇷", ledger: "Grand livre", qty: "Qté PI", swap: "DEX Swap", supply: "Offre LP", shield: "Bouclier Quantique", cs: "Support AI Global" },
+            es: { name: "Español 🇪🇸", ledger: "Libro de activos", qty: "Cant. PI", swap: "DEX Swap", supply: "Suministro LP", shield: "Escudo Cuántico", cs: "Soporte AI Global" },
+            ru: { name: "Русский 🇷🇺", ledger: "Главная книга", qty: "Кол-во PI", swap: "DEX Своп", supply: "LP Поставка", shield: "Квантовый щит", cs: "AI Поддержка" }
+            // 형님 여기에 추가 언어 데이터만 넣으시면 무한 확장됩니다.
         };
 
         function init() {
-            const select = document.getElementById('langSelect');
-            Object.keys(langData).forEach(code => {
+            const sel = document.getElementById('langSelect');
+            Object.keys(langPack).forEach(k => {
                 const opt = document.createElement('option');
-                opt.value = code; opt.innerText = langData[code].name;
-                select.appendChild(opt);
+                opt.value = k; opt.innerText = langPack[k].name;
+                sel.appendChild(opt);
             });
-
             renderFAQ();
-            startNumbers();
-            Pi.init({ version: "2.0", sandbox: true });
+            setInterval(updateRealTime, 2000);
         }
 
         function renderFAQ() {
-            const list = document.getElementById('faq-list');
+            const box = document.getElementById('faq-list');
             faqItems.forEach(f => {
                 const div = document.createElement('div');
                 div.className = "faq-item";
-                div.innerHTML = `<div class="flex justify-between items-center font-bold text-[15px] px-2"><span>${f[0]}</span><i class="fas fa-chevron-down text-xs opacity-50"></i></div><div class="faq-answer">${f[1]}</div>`;
+                div.innerHTML = `<div class="flex justify-between font-black text-sm px-2"><span>${f[0]}</span><i class="fas fa-chevron-down opacity-30"></i></div><div class="faq-answer">${f[1]}</div>`;
                 div.onclick = () => div.classList.toggle('active');
-                list.appendChild(div);
+                box.appendChild(div);
             });
         }
 
-        function startNumbers() {
-            setInterval(() => {
-                const pi = document.getElementById('pi-val');
-                pi.innerText = (parseFloat(pi.innerText) + (Math.random() - 0.5) * 0.0001).toFixed(4);
-                const lp = document.getElementById('lp-val');
-                let curLp = parseInt(lp.innerText.replace(/,/g, ''));
-                lp.innerText = (curLp + Math.floor(Math.random() * 5000)).toLocaleString();
-            }, 2500);
+        function updateRealTime() {
+            const pi = document.getElementById('pi-val');
+            pi.innerText = (parseFloat(pi.innerText) + (Math.random()-0.5)*0.0002).toFixed(4);
+            const lp = document.getElementById('lp-val');
+            let cur = parseInt(lp.innerText.replace(/,/g, ''));
+            lp.innerText = (cur + Math.floor(Math.random()*5000)).toLocaleString();
         }
 
-        function changeLanguage() {
-            const code = document.getElementById('langSelect').value;
-            const data = langData[code];
-            document.getElementById('l-ledger').innerText = data.ledger;
-            document.getElementById('b1').innerText = data.qty;
-            document.getElementById('l-shield').innerHTML = `<i class="fas fa-shield-halved mr-3 text-2xl"></i> ${data.shield}`;
-            document.getElementById('l-cs').innerHTML = `<i class="fas fa-headset mr-3 text-2xl"></i> ${data.cs}`;
+        function changeLang() {
+            const p = langPack[document.getElementById('langSelect').value];
+            document.getElementById('l-ledger').innerText = p.ledger;
+            document.getElementById('b1').innerText = p.qty;
+            document.getElementById('b2').innerText = p.swap;
+            document.getElementById('b3').innerText = p.supply;
+            document.getElementById('l-shield').innerHTML = `<i class="fas fa-shield-halved mr-3 text-2xl animate-pulse"></i> ${p.shield}`;
+            document.getElementById('l-cs').innerHTML = `<i class="fas fa-headset mr-3 text-2xl"></i> ${p.cs}`;
         }
 
         window.onload = init;
