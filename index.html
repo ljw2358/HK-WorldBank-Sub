@@ -3,374 +3,387 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK - Total Financial Ecosystem</title>
+    <title>HK WORLD BANK - Global Multi-Language System</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+KR:wght@300;500;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@100;400;900&display=swap');
 
         :root {
             --hk-gold: #f1c40f;
-            --hk-blue: #3498db;
-            --hk-red: #e74c3c;
+            --hk-dark: #050505;
+            --hk-glass: rgba(255, 255, 255, 0.03);
         }
 
         body {
-            background-color: #0a0b10;
-            color: #e0e0e0;
+            background-color: var(--hk-dark);
+            color: #f0f0f0;
             font-family: 'Noto Sans KR', sans-serif;
-            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         .font-orbitron { font-family: 'Orbitron', sans-serif; }
 
-        /* 배경 애니메이션 */
-        .bg-glow {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, #1a1c2c 0%, #0a0b10 100%);
+        /* 배경 우주 효과 */
+        .stars {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
             z-index: -1;
         }
 
-        /* 숫자 변동 애니메이션 */
-        .number-up { color: #2ecc71; transition: all 0.5s; }
-        .number-down { color: #e74c3c; transition: all 0.5s; }
+        /* 숫자 실시간 변동 컬러 효과 */
+        .val-up { color: #00ff88; text-shadow: 0 0 10px rgba(0,255,136,0.3); }
+        .val-down { color: #ff4d4d; text-shadow: 0 0 10px rgba(255,77,77,0.3); }
 
-        /* LP 상태 컬러 애니메이션 */
-        @keyframes color-shift {
-            0% { color: #ff3e3e; text-shadow: 0 0 10px rgba(255,62,62,0.5); }
-            33% { color: #3498db; text-shadow: 0 0 10px rgba(52,152,219,0.5); }
-            66% { color: #f1c40f; text-shadow: 0 0 10px rgba(241,196,15,0.5); }
-            100% { color: #ff3e3e; text-shadow: 0 0 10px rgba(255,62,62,0.5); }
+        /* LP 상태 텍스트 - 무지개 변색 효과 */
+        @keyframes rainbow-text {
+            0% { color: #ff0000; } 20% { color: #f1c40f; } 40% { color: #00ff00; }
+            60% { color: #00ffff; } 80% { color: #0000ff; } 100% { color: #ff0000; }
         }
-        .lp-status-anim { animation: color-shift 3s infinite; font-weight: 900; font-size: 1.25rem; }
+        .lp-status-flash { animation: rainbow-text 4s linear infinite; font-weight: 900; }
 
-        /* 테스트 오버레이 */
+        /* 60초 테스트 오버레이 정밀 디자인 */
         #testOverlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 9999;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98);
+            z-index: 9999; flex-direction: column; justify-content: center; align-items: center;
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            border-radius: 20px;
+        .glass-panel {
+            background: var(--hk-glass); border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(15px); border-radius: 24px; transition: all 0.4s;
         }
+        .glass-panel:hover { border-color: var(--hk-gold); transform: translateY(-3px); }
 
-        .btn-action {
-            transition: all 0.3s;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .btn-action:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-            border-color: var(--hk-gold);
-        }
+        /* 커스텀 스크롤바 */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--hk-gold); }
 
-        /* 채팅창 스크롤바 */
-        #chatWindow::-webkit-scrollbar { width: 5px; }
-        #chatWindow::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        /* 버튼 애니메이션 */
+        .btn-glow:hover {
+            box-shadow: 0 0 20px rgba(241, 196, 15, 0.4);
+            transform: scale(1.02);
+        }
     </style>
 </head>
 <body>
-    <div class="bg-glow"></div>
+    <div class="stars"></div>
 
     <div id="testOverlay">
-        <div class="text-center mb-10">
-            <h2 class="text-4xl font-black text-white mb-2">PROTOTYPE TEST MODE</h2>
-            <p class="text-gray-400">60초 동안 모든 금융 시뮬레이션을 실행할 수 있습니다.</p>
-        </div>
-        
-        <div id="timerCircle" class="relative flex items-center justify-center mb-12">
-            <svg class="w-40 h-40">
-                <circle cx="80" cy="80" r="70" stroke="#333" stroke-width="8" fill="transparent" />
-                <circle id="timerProgress" cx="80" cy="80" r="70" stroke="#f1c40f" stroke-width="8" fill="transparent" 
-                        stroke-dasharray="440" stroke-dashoffset="0" style="transition: stroke-dashoffset 1s linear;" />
-            </svg>
-            <span id="timerText" class="absolute text-5xl font-orbitron font-bold text-yellow-500">60</span>
+        <div class="text-center mb-12">
+            <h2 class="text-5xl font-black font-orbitron text-yellow-500 mb-4">60S RAPID TEST MODE</h2>
+            <p class="text-gray-400">실시간 데이터 송수신 및 트랜잭션 검증 단계</p>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 px-10 max-w-6xl">
-            <button onclick="sim('결제')" class="btn-action bg-gray-800 p-6 rounded-xl flex flex-col items-center">
-                <i class="fas fa-credit-card text-2xl mb-3 text-blue-400"></i><span>결제 테스트</span>
+        <div class="relative w-48 h-48 flex items-center justify-center mb-16">
+            <svg class="absolute inset-0 w-full h-full transform -rotate-90">
+                <circle cx="96" cy="96" r="88" stroke="#222" stroke-width="12" fill="transparent" />
+                <circle id="testProgress" cx="96" cy="96" r="88" stroke="#f1c40f" stroke-width="12" fill="transparent" 
+                        stroke-dasharray="553" stroke-dashoffset="0" style="transition: stroke-dashoffset 1s linear;" />
+            </svg>
+            <div id="testClock" class="text-6xl font-orbitron font-bold text-white">60</div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-5xl px-6">
+            <button onclick="runSim('결제')" class="glass-panel p-6 text-center group">
+                <i class="fas fa-wallet text-3xl mb-4 text-blue-400 group-hover:scale-110 transition"></i>
+                <div class="font-bold">결제/송금</div>
             </button>
-            <button onclick="sim('예측')" class="btn-action bg-gray-800 p-6 rounded-xl flex flex-col items-center">
-                <i class="fas fa-chart-line text-2xl mb-3 text-green-400"></i><span>AI 예측</span>
+            <button onclick="runSim('예측')" class="glass-panel p-6 text-center group">
+                <i class="fas fa-brain text-3xl mb-4 text-green-400 group-hover:scale-110 transition"></i>
+                <div class="font-bold">AI 자산예측</div>
             </button>
-            <button onclick="sim('유언')" class="btn-action bg-gray-800 p-6 rounded-xl flex flex-col items-center">
-                <i class="fas fa-file-contract text-2xl mb-3 text-purple-400"></i><span>유언서 작성</span>
+            <button onclick="runSim('유언')" class="glass-panel p-6 text-center group">
+                <i class="fas fa-stamp text-3xl mb-4 text-purple-400 group-hover:scale-110 transition"></i>
+                <div class="font-bold">유언 컨트랙트</div>
             </button>
-            <button onclick="sim('기본소득')" class="btn-action bg-gray-800 p-6 rounded-xl flex flex-col items-center">
-                <i class="fas fa-hand-holding-heart text-2xl mb-3 text-red-400"></i><span>기본소득 수령</span>
+            <button onclick="runSim('기본소득')" class="glass-panel p-6 text-center group">
+                <i class="fas fa-coins text-3xl mb-4 text-red-400 group-hover:scale-110 transition"></i>
+                <div class="font-bold">기본소득 배분</div>
             </button>
-            <button onclick="sim('수업')" class="btn-action bg-gray-800 p-6 rounded-xl flex flex-col items-center">
-                <i class="fas fa-graduation-cap text-2xl mb-3 text-indigo-400"></i><span>금융 수업</span>
+            <button onclick="runSim('DEX')" class="glass-panel p-6 text-center group">
+                <i class="fas fa-exchange-alt text-3xl mb-4 text-yellow-400 group-hover:scale-110 transition"></i>
+                <div class="font-bold">DEX 스왑</div>
             </button>
-            <button onclick="sim('DEX')" class="btn-action bg-gray-800 p-6 rounded-xl flex flex-col items-center">
-                <i class="fas fa-sync text-2xl mb-3 text-yellow-500"></i><span>DEX 스왑</span>
+            <button onclick="runSim('기문서')" class="glass-panel p-6 text-center group">
+                <i class="fas fa-file-medical text-3xl mb-4 text-cyan-400 group-hover:scale-110 transition"></i>
+                <div class="font-bold">기문서/증명서</div>
             </button>
-            <button onclick="sim('LP')" class="btn-action bg-gray-800 p-6 rounded-xl flex flex-col items-center">
-                <i class="fas fa-water text-2xl mb-3 text-cyan-400"></i><span>LP 공급</span>
+            <button onclick="runSim('수량입력')" class="glass-panel p-6 text-center group">
+                <i class="fas fa-calculator text-3xl mb-4 text-orange-400 group-hover:scale-110 transition"></i>
+                <div class="font-bold">수량 변동 테스트</div>
             </button>
-            <button onclick="sim('기부')" class="btn-action bg-gray-800 p-6 rounded-xl flex flex-col items-center">
-                <i class="fas fa-donate text-2xl mb-3 text-pink-400"></i><span>기부금 전달</span>
+            <button onclick="runSim('LP')" class="glass-panel p-6 text-center group">
+                <i class="fas fa-layer-group text-3xl mb-4 text-pink-400 group-hover:scale-110 transition"></i>
+                <div class="font-bold">LP 유동성 공급</div>
             </button>
         </div>
         
-        <button onclick="closeTest()" class="mt-12 px-8 py-2 border border-gray-600 rounded-full text-gray-500 hover:text-white transition-all">강제 종료</button>
+        <button onclick="stopSim()" class="mt-16 text-gray-500 hover:text-white underline tracking-widest uppercase">Emergency Stop</button>
     </div>
 
-    <div class="max-w-6xl mx-auto px-6 py-10">
+    <div class="max-w-7xl mx-auto px-6 py-8">
         
-        <header class="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
-            <div class="text-center md:text-left">
-                <h1 class="text-5xl font-black font-orbitron tracking-tighter text-white">
-                    HK <span class="text-yellow-500">WORLD BANK</span>
-                </h1>
-                <p class="text-gray-500 mt-2 font-light tracking-widest uppercase">The Future of Decentralized Finance</p>
+        <nav class="flex flex-col md:flex-row justify-between items-center mb-16 border-b border-gray-800 pb-8 gap-8">
+            <div class="flex items-center gap-4">
+                <div class="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center shadow-lg shadow-yellow-500/20">
+                    <span class="text-black font-black text-2xl font-orbitron">HK</span>
+                </div>
+                <div>
+                    <h1 class="text-4xl font-black font-orbitron tracking-tighter">HK <span class="text-yellow-500">WORLD BANK</span></h1>
+                    <p class="text-xs text-gray-500 font-bold uppercase tracking-[0.3em]">Advanced Digital Economy</p>
+                </div>
             </div>
-            
-            <div class="flex items-center gap-4 bg-gray-800 p-2 rounded-full px-6 border border-gray-700">
-                <i class="fas fa-globe text-gray-400"></i>
-                <select id="languageSelector" class="bg-transparent text-sm focus:outline-none text-white cursor-pointer" onchange="changeLang()">
+
+            <div class="flex items-center gap-3 bg-gray-900 border border-gray-700 px-5 py-3 rounded-2xl">
+                <i class="fas fa-language text-yellow-500"></i>
+                <select id="globalLang" class="bg-transparent text-sm font-bold focus:outline-none text-white w-48" onchange="langAlert()">
                     </select>
             </div>
-        </header>
+        </nav>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-            
-            <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="glass-card p-8">
-                    <h3 class="text-gray-400 text-xs font-bold uppercase mb-4 tracking-widest">Main Pi Asset</h3>
-                    <div id="mainNumber" class="text-5xl font-orbitron font-bold text-white mb-2">400.0212</div>
-                    <div id="mainValue" class="text-xl text-yellow-500">$ 1,240,065.88</div>
-                    <div class="mt-6 h-1 w-full bg-gray-700 rounded-full overflow-hidden">
-                        <div class="h-full bg-yellow-500 w-2/3"></div>
-                    </div>
+        <section class="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-16">
+            <div class="lg:col-span-2 glass-panel p-10 flex flex-col justify-between min-h-[250px] border-l-4 border-l-yellow-500">
+                <div>
+                    <p class="text-gray-500 font-bold text-xs mb-6 tracking-widest">REAL-TIME TOTAL PI</p>
+                    <div id="numMain" class="text-6xl font-orbitron font-bold mb-2">400.0212</div>
+                    <div id="valMain" class="text-2xl text-gray-400">$ 1,240,665.20</div>
                 </div>
-
-                <div class="glass-card p-8">
-                    <h3 class="text-gray-400 text-xs font-bold uppercase mb-4 tracking-widest">Staking APR</h3>
-                    <div id="stakingRate" class="text-5xl font-orbitron font-bold text-green-400 mb-2">45.00 %</div>
-                    <div id="interestValue" class="text-xl text-gray-400">Earned: 1,244.02 PI</div>
-                    <div class="mt-6 flex gap-2">
-                        <span class="text-[10px] bg-green-900/30 text-green-400 px-2 py-1 rounded">LIVE UPDATING</span>
-                        <span class="text-[10px] bg-blue-900/30 text-blue-400 px-2 py-1 rounded">V2 PROTOCOL</span>
-                    </div>
-                </div>
-
-                <div class="glass-card p-8 col-span-1 md:col-span-2 flex flex-col md:flex-row justify-between items-center gap-6">
-                    <div>
-                        <h3 class="text-gray-400 text-xs font-bold uppercase mb-2 tracking-widest">Liquidity Pool Supply</h3>
-                        <div id="lpSupply" class="text-4xl font-orbitron font-bold text-white">9,882,104.55</div>
-                    </div>
-                    <div class="text-center md:text-right">
-                        <p id="lpStatusLabel" class="lp-status-anim">전체 LP 이용수 5번 가동 중</p>
-                        <p class="text-xs text-gray-500 mt-1">Status: High Performance Connected</p>
-                    </div>
+                <div class="mt-8 flex items-center gap-2">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-ping"></span>
+                    <span class="text-[10px] text-gray-500 uppercase">Live Mainnet Syncing...</span>
                 </div>
             </div>
 
-            <div class="flex flex-col gap-4">
-                <button onclick="startTestMode()" class="bg-yellow-500 hover:bg-yellow-400 text-black font-black py-6 rounded-2xl text-lg shadow-xl shadow-yellow-500/20 transition-all">
-                    START 60S TEST
-                </button>
-                <div class="bg-gray-800/50 p-6 rounded-2xl border border-gray-700">
-                    <h4 class="font-bold mb-4 text-sm underline underline-offset-8 decoration-yellow-500">Quick Links</h4>
-                    <ul class="text-sm space-y-4 text-gray-400">
-                        <li class="hover:text-white cursor-pointer"><i class="fab fa-youtube mr-2 text-red-500"></i> YouTube: H2025hyekong2025</li>
-                        <li class="hover:text-white cursor-pointer"><i class="fas fa-paper-plane mr-2 text-blue-400"></i> Telegram Community</li>
-                        <li class="hover:text-white cursor-pointer"><i class="fas fa-book mr-2 text-green-400"></i> Whitepaper v3.0</li>
-                    </ul>
+            <div class="glass-panel p-8 border-l-4 border-l-green-500">
+                <p class="text-gray-500 font-bold text-xs mb-6 tracking-widest">STAKING APR</p>
+                <div id="numRate" class="text-5xl font-orbitron font-bold text-green-400 mb-2">15.42 %</div>
+                <div class="text-sm text-gray-500">이자율 변동 가동중</div>
+                <div class="mt-10 p-3 bg-green-900/10 rounded-lg text-xs text-green-500 font-bold text-center">
+                    COMPOUNDING ACTIVE
                 </div>
             </div>
-        </div>
 
-        <section class="mb-20">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-black mb-2">GLOBAL AI CUSTOMER CENTER</h2>
-                <div class="w-24 h-1 bg-yellow-500 mx-auto"></div>
+            <div class="glass-panel p-8 border-l-4 border-l-red-500 flex flex-col justify-between">
+                <div>
+                    <p class="text-gray-500 font-bold text-xs mb-6 tracking-widest">LP SUPPLY STATUS</p>
+                    <div id="numLP" class="text-3xl font-orbitron font-bold mb-4">5,200,901.00</div>
+                </div>
+                <div class="bg-black/40 p-4 rounded-xl text-center">
+                    <span id="lpStatusLabel" class="lp-status-flash">전체 LP 이용수 5번 가동 중</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-24">
+            <div class="flex items-center gap-4 mb-10">
+                <div class="h-[2px] bg-gray-800 flex-1"></div>
+                <h2 class="text-3xl font-black font-orbitron">GLOBAL AI CENTER</h2>
+                <div class="h-[2px] bg-gray-800 flex-1"></div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                <div class="space-y-3" id="faqContainer">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                <div class="lg:col-span-5 space-y-4" id="faqList">
                     </div>
 
-                <div class="glass-card flex flex-col overflow-hidden border-blue-500/30">
-                    <div class="bg-blue-600/20 p-4 border-b border-blue-500/30 flex justify-between items-center">
-                        <span class="font-bold flex items-center gap-2">
-                            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                            HK AI Assistant (V4.2)
-                        </span>
-                        <span class="text-xs opacity-60">Status: Online</span>
+                <div class="lg:col-span-7 glass-panel overflow-hidden border-blue-500/20 flex flex-col">
+                    <div class="p-6 border-b border-white/5 bg-blue-900/10 flex justify-between items-center">
+                        <div>
+                            <h3 class="font-black text-xl text-blue-400">HK AI CHAT-BOT</h3>
+                            <p class="text-[10px] text-gray-500 uppercase tracking-widest">Automated Customer Response System</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs bg-green-500/20 text-green-400 px-3 py-1 rounded-full font-bold">ONLINE</span>
+                        </div>
                     </div>
-                    
-                    <div id="chatWindow" class="h-80 overflow-y-auto p-6 space-y-4 text-sm bg-black/20">
-                        <div class="flex gap-3">
-                            <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-xs">AI</div>
-                            <div class="bg-gray-800 p-3 rounded-tr-xl rounded-br-xl rounded-bl-xl max-w-[80%]">
-                                안녕하세요, 혜공 형님. 무엇을 도와드릴까요? 챗봇이 해결하지 못하는 문제는 **비니(Bini)**가 직접 등판합니다.
+
+                    <div id="chatBox" class="h-[450px] overflow-y-auto p-8 space-y-6 bg-black/30">
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-2xl bg-blue-600 flex items-center justify-center font-bold">AI</div>
+                            <div class="bg-gray-800 p-5 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed shadow-xl">
+                                혜공 형님, 글로벌 AI 고객센터에 오신 것을 환영합니다! <br><br>
+                                기본적인 문의사항은 제가 즉시 답변해 드리며, 고도의 판단이 필요한 업무는 **비니(Bini)**가 직접 등판하여 해결해 드립니다. 무엇을 도와드릴까요?
                             </div>
                         </div>
                     </div>
 
-                    <div class="p-4 bg-gray-900 flex gap-2">
-                        <input type="text" id="chatInput" placeholder="질문을 입력하세요..." 
-                               class="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-4 focus:outline-none focus:border-yellow-500 transition-all text-white">
-                        <button onclick="handleChat()" class="bg-yellow-500 text-black font-bold px-6 py-2 rounded-lg hover:bg-yellow-400">전송</button>
+                    <div class="p-6 bg-gray-900/50 flex gap-4">
+                        <input type="text" id="chatMsg" placeholder="메시지를 입력해 주세요..." 
+                               class="flex-1 bg-gray-800 border-none rounded-2xl px-6 focus:ring-2 focus:ring-yellow-500 transition-all outline-none">
+                        <button onclick="sendChat()" class="bg-yellow-500 text-black font-black px-10 py-4 rounded-2xl btn-glow transition-all">
+                            SEND
+                        </button>
                     </div>
-                    
-                    <div class="p-3 text-center bg-gray-800/80">
-                        <p class="text-[11px] text-gray-500">
-                            직접 문의: <a href="mailto:SUPT@HKW.AI.KR" class="text-blue-400 underline">SUPT@HKW.AI.KR</a>
+
+                    <div class="p-4 bg-blue-900/20 text-center border-t border-white/5">
+                        <p class="text-xs text-gray-400 font-medium">
+                            챗봇 해결 불가 시 상담원 연결: 
+                            <a href="mailto:SUPT@HKW.AI.KR" class="text-blue-400 font-black underline ml-2">SUPT@HKW.AI.KR</a>
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <footer class="border-t border-gray-800 pt-10 pb-20 text-center">
-            <div class="mb-6 opacity-30 italic font-orbitron">"Innovating the World with HK Group"</div>
-            <p class="text-gray-600 text-xs">
-                Copyright &copy; 2026 HK GROUP & HK WORLD BANK. ALL RIGHTS RESERVED.<br>
-                Admin Contact: SUPT@HKW.AI.KR | YouTube Channel: H2025hyekong2025
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+            <button onclick="startSim()" class="bg-white text-black font-black py-8 rounded-3xl text-xl btn-glow transition-all flex items-center justify-center gap-4">
+                <i class="fas fa-play-circle text-2xl"></i>
+                LAUNCH 60S SYSTEM TEST
+            </button>
+            <div class="glass-panel p-8 flex items-center justify-center gap-8">
+                <a href="https://youtube.com/@H2025hyekong2025" target="_blank" class="text-gray-400 hover:text-red-500 text-4xl transition-all">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <div class="h-8 w-[1px] bg-gray-700"></div>
+                <div class="text-left">
+                    <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Official Channel</p>
+                    <p class="font-orbitron font-bold">H2025hyekong2025</p>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center pb-20 border-t border-gray-900 pt-12">
+            <p class="text-gray-600 text-[11px] leading-relaxed uppercase tracking-[0.2em]">
+                &copy; 2026 HK GROUP / HK WORLD BANK GLOBAL ECOSYSTEM<br>
+                All Financial Transactions are secured by Quantum-Resistant Encryption<br>
+                <span class="text-yellow-500/50 mt-4 block">Engineered for the 23rd Presidency Vision</span>
             </p>
         </footer>
     </div>
 
     <script>
-        // 1. 50개 언어 데이터 생성
-        const languages = [
-            "KOREAN", "ENGLISH", "CHINESE", "JAPANESE", "FRENCH", "GERMAN", "SPANISH", "PORTUGUESE", "RUSSIAN", "ITALIAN",
-            "VIETNAMESE", "THAI", "INDONESIAN", "HINDI", "ARABIC", "TURKISH", "POLISH", "DUTCH", "SWEDISH", "GREEK",
-            "CZECH", "HUNGARIAN", "ROMANIAN", "FINNISH", "DANISH", "NORWEGIAN", "HEBREW", "MALAY", "FILIPINO", "BENGALI",
-            "PUNJABI", "TELUGU", "MARATHI", "TAMIL", "URDU", "GUJARATI", "KANNADA", "MALAYALAM", "UKRAINIAN", "PERSIAN",
-            "PASHTO", "UZBEK", "AZERBAIJANI", "KAZAKH", "BURMESE", "KHMER", "LAO", "MONGOLIAN", "NEPALI", "SINHALA"
+        // 1. 40개국 국기 및 언어 데이터
+        const countryData = [
+            { flag: "🇰🇷", name: "KOREAN" }, { flag: "🇺🇸", name: "ENGLISH (US)" }, { flag: "🇨🇳", name: "CHINESE (Simplified)" },
+            { flag: "🇯🇵", name: "JAPANESE" }, { flag: "🇬🇧", name: "ENGLISH (UK)" }, { flag: "🇫🇷", name: "FRENCH" },
+            { flag: "🇩🇪", name: "GERMAN" }, { flag: "🇪🇸", name: "SPANISH" }, { flag: "🇮🇹", name: "ITALIAN" },
+            { flag: "🇷🇺", name: "RUSSIAN" }, { flag: "🇻🇳", name: "VIETNAMESE" }, { flag: "🇹🇭", name: "THAI" },
+            { flag: "🇮🇩", name: "INDONESIAN" }, { flag: "🇮🇳", name: "HINDI" }, { flag: "🇵🇭", name: "FILIPINO" },
+            { flag: "🇸🇦", name: "ARABIC" }, { flag: "🇹🇷", name: "TURKISH" }, { flag: "🇧🇷", name: "PORTUGUESE" },
+            { flag: "🇳🇱", name: "DUTCH" }, { flag: "🇸🇪", name: "SWEDISH" }, { flag: "🇨🇦", name: "ENGLISH (CA)" },
+            { flag: "🇲🇾", name: "MALAY" }, { flag: "🇸🇬", name: "ENGLISH (SG)" }, { flag: "🇦🇺", name: "ENGLISH (AU)" },
+            { flag: "🇨🇿", name: "CZECH" }, { flag: "🇵🇱", name: "POLISH" }, { flag: "🇭🇺", name: "HUNGARIAN" },
+            { flag: "🇷🇴", name: "ROMANIAN" }, { flag: "🇺🇦", name: "UKRAINIAN" }, { flag: "🇮🇱", name: "HEBREW" },
+            { flag: "🇬🇷", name: "GREEK" }, { flag: "🇳🇴", name: "NORWEGIAN" }, { flag: "🇩🇰", name: "DANISH" },
+            { flag: "🇫🇮", name: "FINNISH" }, { flag: "🇲🇽", name: "SPANISH (MX)" }, { flag: "🇦🇷", name: "SPANISH (AR)" },
+            { flag: "🇿🇦", name: "ENGLISH (ZA)" }, { flag: "🇪🇬", name: "ARABIC (EG)" }, { flag: "🇵🇰", name: "URDU" },
+            { flag: "🇧🇩", name: "BENGALI" }
         ];
-        
-        const sel = document.getElementById('languageSelector');
-        languages.forEach(lang => {
+
+        const langSel = document.getElementById('globalLang');
+        countryData.forEach(item => {
             const opt = document.createElement('option');
-            opt.value = lang;
-            opt.innerText = lang;
-            sel.appendChild(opt);
+            opt.innerText = `${item.flag} ${item.name}`;
+            langSel.appendChild(opt);
         });
 
-        // 2. 10개 고정 FAQ 주입
-        const faqs = [
-            {q: "HK WORLD BANK의 핵심 비전은 무엇입니까?", a: "전 세계 모든 사용자에게 공평한 기본소득과 탈중앙화 금융 기회를 제공하는 것입니다."},
-            {q: "PI 코인 결제 시스템 도입 시기는?", "a": "현재 메인넷 마이그레이션 단계에 맞춰 실시간 결제 테스트가 진행 중입니다."},
-            {q: "유언서 작성 서비스는 법적 효력이 있나요?", "a": "블록체인상에 기록되어 변조가 불가능하며, 스마트 컨트랙트를 통해 자동 집행됩니다."},
-            {q: "기본소득 신청 조건은 어떻게 되나요?", "a": "HK 월드뱅크 계정을 소유한 모든 활성 노드 사용자라면 가능합니다."},
-            {q: "스테이킹 수익은 언제 정산되나요?", "a": "매 24시간마다 실시간으로 지갑에 반영됩니다."},
-            {q: "DEX 스왑 수수료는 얼마인가요?", "a": "업계 최저 수준인 0.1%를 지향합니다."},
-            {q: "LP 공급 시 어떤 혜택이 있나요?", "a": "거래 수수료의 일부를 배당받으며 플랫폼 거버넌스 권한을 얻습니다."},
-            {q: "AI 예측 데이터의 신뢰도는?", "a": "글로벌 빅데이터 분석을 통해 85% 이상의 정확도를 목표로 합니다."},
-            {q: "보안 문제는 안전한가요?", "a": "양자 컴퓨팅 내성 보안 알고리즘을 준비 중입니다."},
-            {q: "비니(Bini)와 직접 상담하려면?", "a": "챗봇 응대가 불가능한 긴급 사안은 SUPT@HKW.AI.KR로 메일 주시면 됩니다."}
+        // 2. FAQ 10문 10답 내용물 채우기
+        const faqData = [
+            { q: "HK 월드뱅크의 지향점은?", a: "전 세계 70억 인구에게 블록체인 기반의 보편적 기본소득을 제공하는 것입니다." },
+            { q: "PI 코인 결제는 언제부터?", a: "현재 폐쇄형 메인넷 테스트 중이며, 오픈 메인넷 전환 즉시 연동됩니다." },
+            { q: "유언 서비스의 장점은?", a: "중앙 기관 없이 스마트 컨트랙트로 유산이 상속되어 투명하고 확실합니다." },
+            { q: "DEX 스왑 수수료가 낮나요?", a: "HK 생태계 내에서는 거의 제로(0)에 가까운 수수료를 목표로 합니다." },
+            { q: "글로벌 고객센터 운영 시간은?", a: "AI 기반으로 24시간 365일 무중단 상담이 가능합니다." },
+            { q: "비니(Bini)는 누구인가요?", a: "HK 월드뱅크의 핵심 AI 상담 전문가이자 시스템 관리 페르소나입니다." },
+            { q: "기본소득 지급 주기는?", a: "매월 1일, 시스템에 등록된 활성 유저에게 자동 배분됩니다." },
+            { q: "보안 알고리즘은?", a: "양자 내성 보안 알고리즘을 도입하여 해킹 위험을 원천 차단합니다." },
+            { q: "모바일 앱 지원 여부?", a: "현재 웹 기반으로 모든 기능을 제공하며 앱 개발이 진행 중입니다." },
+            { q: "이용수 5번의 의미는?", a: "유동성 공급 풀의 5단계 고속 트랜잭션 검증 시스템을 의미합니다." }
         ];
 
-        const faqCont = document.getElementById('faqContainer');
-        faqs.forEach((item, idx) => {
+        const faqCont = document.getElementById('faqList');
+        faqData.forEach((item, idx) => {
             faqCont.innerHTML += `
-                <div class="bg-gray-800/50 border border-gray-700 p-4 rounded-xl cursor-pointer hover:border-yellow-500 transition-all group" onclick="askChat('${item.q}')">
-                    <div class="flex justify-between items-center">
-                        <span class="text-sm font-bold text-gray-300 group-hover:text-yellow-500"><span class="text-yellow-500 mr-2">${idx+1}.</span> ${item.q}</span>
-                        <i class="fas fa-chevron-right text-xs text-gray-600"></i>
+                <div class="glass-panel p-5 cursor-pointer border-l-2 border-l-transparent hover:border-l-yellow-500 transition-all group" onclick="chatFill('${item.q}')">
+                    <div class="flex items-center gap-4">
+                        <span class="font-orbitron text-yellow-500 font-black text-xl">0${idx+1}</span>
+                        <h4 class="text-sm font-bold text-gray-300 group-hover:text-white">${item.q}</h4>
                     </div>
                 </div>
             `;
         });
 
-        // 3. 실시간 숫자 변동 시뮬레이션
-        let currentNum = 400.0212;
+        // 3. 실시간 숫자 변동 로직 (정밀화)
+        let baseNum = 400.0212;
         setInterval(() => {
-            const mainNumEl = document.getElementById('mainNumber');
-            const diff = (Math.random() - 0.45) * 0.001;
-            currentNum += diff;
-            mainNumEl.innerText = currentNum.toFixed(4);
-            mainNumEl.className = diff > 0 ? 'text-5xl font-orbitron font-bold number-up' : 'text-5xl font-orbitron font-bold number-down';
+            const numEl = document.getElementById('numMain');
+            const change = (Math.random() - 0.48) * 0.002;
+            baseNum += change;
+            numEl.innerText = baseNum.toFixed(4);
+            numEl.className = change > 0 ? 'text-6xl font-orbitron font-bold val-up' : 'text-6xl font-orbitron font-bold val-down';
             
-            document.getElementById('mainValue').innerText = "$ " + (currentNum * 3100.15).toLocaleString(undefined, {minimumFractionDigits: 2});
-            document.getElementById('stakingRate').innerText = (45 + Math.random()).toFixed(2) + " %";
-            document.getElementById('lpSupply').innerText = (9882104 + Math.random() * 500).toLocaleString();
-        }, 2500);
+            document.getElementById('valMain').innerText = "$ " + (baseNum * 3101.66).toLocaleString(undefined, {minimumFractionDigits: 2});
+            document.getElementById('numRate').innerText = (15 + Math.random()).toFixed(2) + " %";
+            document.getElementById('numLP').innerText = (5200901 + Math.random() * 800).toLocaleString();
+        }, 2000);
 
-        // 4. 60초 테스트 모드 제어
-        let timer;
-        function startTestMode() {
+        // 4. 60초 테스트 시뮬레이션 엔진
+        let simTimer;
+        function startSim() {
             document.getElementById('testOverlay').style.display = 'flex';
             let sec = 60;
-            const text = document.getElementById('timerText');
-            const progress = document.getElementById('timerProgress');
+            const clock = document.getElementById('testClock');
+            const prog = document.getElementById('testProgress');
             
-            timer = setInterval(() => {
+            simTimer = setInterval(() => {
                 sec--;
-                text.innerText = sec;
-                // 원형 진행바 계산 (440 = 2 * PI * 70)
-                const offset = 440 - (sec / 60) * 440;
-                progress.style.strokeDashoffset = offset;
+                clock.innerText = sec;
+                const offset = 553 - (sec / 60) * 553;
+                prog.style.strokeDashoffset = offset;
 
-                if(sec <= 0) closeTest();
+                if(sec <= 0) stopSim();
             }, 1000);
         }
 
-        function closeTest() {
-            clearInterval(timer);
+        function stopSim() {
+            clearInterval(simTimer);
             document.getElementById('testOverlay').style.display = 'none';
-            document.getElementById('timerText').innerText = "60";
-            document.getElementById('timerProgress').style.strokeDashoffset = 0;
+            document.getElementById('testClock').innerText = "60";
+            document.getElementById('testProgress').style.strokeDashoffset = 0;
         }
 
-        function sim(name) {
-            const win = document.getElementById('chatWindow');
-            win.innerHTML += `<div class="text-right text-yellow-500 mb-2">[테스트] ${name} 프로세스 가동...</div>`;
-            setTimeout(() => {
-                alert(`${name} 시뮬레이션이 성공적으로 완료되었습니다.`);
-                win.innerHTML += `<div class="text-left text-green-400 mb-2">AI: ${name} 데이터가 메인넷 테스트 노드에 기록되었습니다.</div>`;
-                win.scrollTop = win.scrollHeight;
-            }, 800);
+        function runSim(type) {
+            alert(`[HK-SYSTEM] ${type} 시뮬레이션 데이터를 생성하고 메인넷에 전송 중입니다.`);
+            chatFill(`${type} 테스트 진행 완료`);
         }
 
         // 5. 챗봇 핸들링
-        function handleChat() {
-            const input = document.getElementById('chatInput');
+        function sendChat() {
+            const input = document.getElementById('chatMsg');
             if(!input.value) return;
-            askChat(input.value);
+            chatFill(input.value);
             input.value = '';
         }
 
-        function askChat(msg) {
-            const win = document.getElementById('chatWindow');
-            win.innerHTML += `<div class="flex justify-end gap-3 mb-4">
-                <div class="bg-yellow-600 text-black p-3 rounded-tl-xl rounded-bl-xl rounded-br-xl max-w-[80%] font-bold">${msg}</div>
-            </div>`;
+        function chatFill(msg) {
+            const box = document.getElementById('chatBox');
+            box.innerHTML += `
+                <div class="flex justify-end gap-4">
+                    <div class="bg-yellow-500 text-black p-4 rounded-2xl rounded-tr-none max-w-[85%] text-sm font-bold shadow-lg shadow-yellow-500/10">
+                        ${msg}
+                    </div>
+                </div>
+            `;
             
             setTimeout(() => {
-                let reply = "형님, 질문하신 사항은 현재 데이터베이스 분석 중입니다. 챗봇이 답변하기 어려운 내용은 제가 직접(비니) 나서서 처리하겠습니다.";
-                // 특정 키워드 반응
-                if(msg.includes("유튜브")) reply = "저희 공식 유튜브 채널은 H2025hyekong2025 입니다. 구독 부탁드립니다!";
-                if(msg.includes("메일")) reply = "공식 지원 메일은 SUPT@HKW.AI.KR 입니다.";
-
-                win.innerHTML += `<div class="flex gap-3 mb-4">
-                    <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-xs">AI</div>
-                    <div class="bg-gray-800 p-3 rounded-tr-xl rounded-br-xl rounded-bl-xl max-w-[80%]">${reply}</div>
-                </div>`;
-                win.scrollTop = win.scrollHeight;
-            }, 1000);
+                let reply = "형님, 요청하신 데이터 처리를 시작합니다. 자세한 결과는 관리자 페이지에서 확인해 주세요.";
+                if(msg.includes("월드뱅크")) reply = "HK 월드뱅크는 형님의 대통령 꿈과 함께 성장하는 차세대 금융 허브입니다.";
+                
+                box.innerHTML += `
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 rounded-2xl bg-blue-600 flex items-center justify-center font-bold">AI</div>
+                        <div class="bg-gray-800 p-5 rounded-2xl rounded-tl-none max-w-[85%] text-sm leading-relaxed">
+                            ${reply}
+                        </div>
+                    </div>
+                `;
+                box.scrollTop = box.scrollHeight;
+            }, 800);
         }
 
-        function changeLang() {
-            const l = document.getElementById('languageSelector').value;
-            alert(`${l} 언어로 시스템이 변경되었습니다 (현재 데모 버전).`);
+        function langAlert() {
+            const l = document.getElementById('globalLang').value;
+            alert(`시스템 언어가 ${l}로 변경되었습니다. 실시간 번역 엔진을 가동합니다.`);
         }
     </script>
 </body>
