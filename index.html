@@ -1,445 +1,211 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK - GLOBAL VICTORY EDITION</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HK WORLD BANK | Protocol V23 Final</title>
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+KR:wght@100;300;500;700;900&display=swap');
+        :root { --gold: #f1c40f; --green: #00ff88; --bg: #000; --card: #121212; --border: #222; --pink: #ff4757; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', 'Noto Sans KR', sans-serif; }
+        body { background: var(--bg); color: #fff; overflow-x: hidden; letter-spacing: -0.5px; }
+       
+        /* 상단 네비게이션 */
+        .header-nav { position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(15px); z-index: 1000; padding: 12px 20px; display: flex; justify-content: flex-end; border-bottom: 1px solid var(--border); }
+        #langSelect { background: #1a1a1a; color: var(--gold); border: 1px solid var(--gold); padding: 8px 12px; border-radius: 10px; font-size: 13px; font-weight: bold; outline: none; cursor: pointer; }
 
-        :root {
-            --victory-gold: #f1c40f;
-            --deep-space: #020204;
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
+        .container { max-width: 480px; margin: 0 auto; padding: 80px 20px 40px; }
+        header { text-align: center; padding: 20px 0; color: var(--gold); }
+        header h1 { font-size: 28px; font-weight: 900; letter-spacing: 2px; }
+       
+        /* 자산 대시보드 */
+        .main-card { background: linear-gradient(145deg, #1e1e1e, #000); border-radius: 30px; padding: 30px; border: 1px solid #333; text-align: center; margin-bottom: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.6); position: relative; }
+        #ledger { font-size: 12px; color: var(--gold); margin-bottom: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .balance-val { font-size: 46px; font-weight: 800; margin-bottom: 5px; }
+        .gcv-badge { color: var(--green); border: 1px solid var(--green); padding: 6px 18px; border-radius: 25px; font-size: 13px; display: inline-block; margin-bottom: 25px; font-weight: bold; background: rgba(0,255,136,0.05); }
+       
+        .rates { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .rate-box { background: rgba(255,255,255,0.03); padding: 18px; border-radius: 20px; border: 1px solid var(--border); }
+        .rate-box span { display: block; font-size: 11px; color: var(--green); margin-bottom: 8px; font-weight: bold; }
+        .rate-box strong { font-size: 20px; color: #fff; font-weight: 800; }
+
+        .lp-total { background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0,255,136,0.3); border-radius: 22px; padding: 22px; text-align: center; }
+        #tvl_label { font-size: 11px; color: #888; font-weight: bold; margin-bottom: 8px; }
+       
+        /* 버튼 및 메뉴 그리드 */
+        .btn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 25px 0; }
+        .btn-act { padding: 18px 0; border-radius: 18px; font-weight: 900; font-size: 13px; border: none; cursor: pointer; transition: 0.2s; }
+        .b-white { background: #fff; color: #000; }
+        .b-gold { background: var(--gold); color: #000; }
+        .b-green { background: #27ae60; color: #fff; }
+
+        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 30px; }
+        .menu-item { background: var(--card); padding: 22px 5px; border-radius: 22px; text-align: center; border: 1px solid var(--border); cursor: pointer; }
+        .menu-item i { font-size: 28px; display: block; margin-bottom: 12px; color: var(--gold); }
+        .menu-item span { font-size: 12px; font-weight: 800; color: #bbb; }
+
+        .info-box { background: #080808; border-radius: 25px; padding: 25px; margin-bottom: 25px; border: 1px solid #1a1a1a; }
+        .info-box h3 { color: #00d4ff; font-size: 16px; margin-bottom: 15px; font-weight: 900; }
+        .info-box p { font-size: 13px; color: #777; margin-bottom: 8px; border-left: 2px solid #00d4ff; padding-left: 10px; }
+
+        .btn-cs { background: linear-gradient(to right, #ff4757, #ff6b81); color: #fff; width: 100%; padding: 20px; border-radius: 20px; font-weight: 900; border: none; font-size: 16px; margin-bottom: 25px; cursor: pointer; }
+
+        /* [양파 레이어 애니메이션] */
+        .onion-layer {
+            position: fixed; bottom: -100%; left: 0; width: 100%; height: 85%;
+            background: #0a0a0a; border-top: 5px solid var(--pink); border-radius: 35px 35px 0 0;
+            z-index: 10000; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            padding: 30px 20px; overflow-y: auto; box-shadow: 0 -10px 40px rgba(0,0,0,0.9);
         }
+        .onion-layer.active { bottom: 0; }
+        .onion-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #222; }
+        .close-btn { background: none; border: none; color: #fff; font-size: 30px; cursor: pointer; }
 
-        body {
-            background-color: var(--deep-space);
-            color: #e0e0e0;
-            font-family: 'Noto Sans KR', sans-serif;
-            margin: 0;
-            overflow-x: hidden;
-        }
+        /* SNS 링크 */
+        .sns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .sns-link { padding: 18px; border-radius: 18px; color: #fff; text-decoration: none; text-align: center; font-size: 13px; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 8px; }
 
-        .font-orbitron { font-family: 'Orbitron', sans-serif; }
-
-        /* [핵심 와꾸: 보름달 배경] */
-        .moon-vision {
-            position: fixed;
-            top: -200px;
-            right: -200px;
-            width: 750px;
-            height: 750px;
-            background: radial-gradient(circle, rgba(255,255,220,0.18) 0%, rgba(241,196,15,0.08) 35%, transparent 70%);
-            border-radius: 50%;
-            filter: blur(90px);
-            z-index: -1;
-            animation: moon-glow 12s infinite alternate ease-in-out;
-        }
-
-        @keyframes moon-glow {
-            from { opacity: 0.3; transform: scale(1); }
-            to { opacity: 0.5; transform: scale(1.1); }
-        }
-
-        /* [국기 언어 와꾸: 40개 노드] */
-        .flag-grid {
-            display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            gap: 6px;
-            background: var(--glass);
-            padding: 15px;
-            border-radius: 20px;
-            border: 1px solid var(--glass-border);
-        }
-
-        .flag-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 0;
-            border-radius: 8px;
-            transition: all 0.2s;
-            cursor: pointer;
-            border: 1px solid transparent;
-        }
-
-        .flag-item:hover {
-            background: rgba(241, 196, 15, 0.15);
-            border-color: var(--victory-gold);
-            transform: scale(1.1);
-        }
-
-        .flag-icon { font-size: 18px; margin-bottom: 2px; }
-        .flag-code { font-size: 8px; font-weight: 900; color: #777; }
-
-        /* [자산 수량 와꾸] */
-        .main-pi-box {
-            font-size: 8rem;
-            font-weight: 900;
-            line-height: 0.85;
-            letter-spacing: -6px;
-            background: linear-gradient(180deg, #fff 30%, #f1c40f 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* [기능 엔진 버튼] */
-        .engine-btn {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 25px 5px;
-            text-align: center;
-            transition: 0.4s;
-        }
-
-        .engine-btn:hover {
-            background: rgba(241, 196, 15, 0.05);
-            border-color: var(--victory-gold);
-            transform: translateY(-8px);
-        }
-
-        /* [60초 시뮬레이션] */
-        #simOverlay {
-            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98);
-            z-index: 10000; flex-direction: column; align-items: center; justify-content: center;
-        }
-
-        .loader-victory {
-            width: 200px; height: 200px; border-radius: 50%;
-            border: 4px solid #111; border-top: 4px solid var(--victory-gold);
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* [AI 센터 챗봇] */
-        .bini-chat-wrap {
-            height: 600px;
-            background: rgba(10, 10, 15, 0.6);
-            border-radius: 35px;
-            border: 1px solid var(--glass-border);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            backdrop-filter: blur(20px);
-        }
-
-        .faq-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--glass-border);
-            padding: 18px;
-            border-radius: 18px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .faq-card:hover {
-            border-color: var(--victory-gold);
-            background: rgba(255,255,255,0.06);
-            padding-left: 25px;
-        }
-
-        .rainbow-status {
-            background: linear-gradient(90deg, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 3s linear infinite;
-            font-weight: 900;
-        }
-        @keyframes shine { to { background-position: 200% center; } }
+        /* FAQ 스타일 */
+        .faq-card { background: rgba(255,255,255,0.03); border: 1px solid #222; padding: 15px; border-radius: 15px; margin-bottom: 10px; }
+        .faq-q { color: var(--gold); font-size: 12px; font-weight: 900; margin-bottom: 5px; }
+        .faq-a { color: #888; font-size: 11px; line-height: 1.5; }
     </style>
 </head>
 <body>
 
-    <div class="moon-vision"></div>
+<nav class="header-nav"><select id="langSelect"></select></nav>
 
-    <div id="simOverlay">
-        <div class="relative flex items-center justify-center mb-12">
-            <div class="loader-victory"></div>
-            <div id="timer" class="absolute text-7xl font-orbitron font-black text-white">60</div>
+<div class="container">
+    <header><h1>HK WORLD BANK</h1></header>
+   
+    <div class="main-card">
+        <p id="ledger">메인 자산 통합 원장</p>
+        <div class="balance-val"><span id="pi-balance">400.0212</span> <span style="font-size:24px; color:var(--gold);">Pi</span></div>
+        <div class="gcv-badge" id="gcv-val">Value: $ 125,663,600 (GCV)</div>
+       
+        <div class="rates">
+            <div class="rate-box"><span id="stk_label">스테이킹 이율</span><strong id="stk-val">15.48%</strong></div>
+            <div class="rate-box"><span id="lp_label">유동성 수익</span><strong id="lp-val">23.26%</strong></div>
         </div>
-        <div class="text-center">
-            <h2 class="text-3xl font-black text-yellow-500 tracking-[0.4em] mb-4 uppercase">Node Validating</h2>
-            <p id="simStatus" class="text-xs text-gray-500 font-bold uppercase tracking-widest italic">진실의 노드에 접속 중입니다...</p>
+        <div class="lp-total">
+            <p id="tvl_label">전체 유동성 LP 공급</p>
+            <h2 id="lp-amount">$ 88,428,554,367</h2>
         </div>
-        <button onclick="stopSim()" class="mt-20 text-[10px] text-gray-700 underline uppercase tracking-widest hover:text-white">Abort System</button>
     </div>
 
-    <div class="max-w-[1700px] mx-auto px-10 py-12">
-        
-        <header class="flex flex-col xl:flex-row justify-between items-start mb-24 gap-12">
-            <div class="space-y-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-[3px] bg-yellow-500"></div>
-                    <span class="font-orbitron font-black tracking-[0.8em] text-yellow-500 text-xs">HK GLOBAL VISION</span>
-                </div>
-                <h1 class="text-8xl font-black font-orbitron tracking-tighter leading-none">
-                    HK WORLD <span class="text-yellow-500">BANK</span>
-                </h1>
-                <p class="text-gray-500 text-sm font-bold tracking-[0.4em] uppercase italic">
-                    Justice, Common Sense, and the Truth for 2035
-                </p>
-            </div>
-
-            <div class="w-full xl:w-[680px]">
-                <p class="text-[10px] font-black text-gray-600 mb-3 tracking-widest text-right">GLOBAL SETTLEMENT NODES (40 NODES)</p>
-                <div class="flag-grid" id="flagContainer">
-                    </div>
-            </div>
-        </header>
-
-        <main class="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-24">
-            
-            <div class="lg:col-span-8 bg-white/[0.01] border border-white/5 rounded-[50px] p-16 relative overflow-hidden flex flex-col justify-between min-h-[520px]">
-                <div>
-                    <div class="flex justify-between items-center mb-20">
-                        <div class="px-6 py-2 bg-yellow-500/10 border border-yellow-500/20 rounded-full">
-                            <span class="text-yellow-500 text-[11px] font-black tracking-[0.3em] uppercase">Test Pi Mainnet Live</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                            <span class="text-[10px] font-black text-gray-500 uppercase">Secure Node Connected</span>
-                        </div>
-                    </div>
-                    <h2 class="text-gray-600 font-black text-xs tracking-[0.6em] mb-6 uppercase">Total Verified Balance</h2>
-                    <div class="main-pi-box font-orbitron" id="piDisplay">400.0212</div>
-                </div>
-
-                <div class="grid grid-cols-3 gap-12 mt-12 pt-12 border-t border-white/5">
-                    <div>
-                        <p class="text-[10px] text-gray-500 font-black mb-2 uppercase">Market Value</p>
-                        <p class="text-3xl font-black font-orbitron" id="usdDisplay">$ 1,240,065.88</p>
-                    </div>
-                    <div>
-                        <p class="text-[10px] text-gray-500 font-black mb-2 uppercase">Verification</p>
-                        <p class="text-3xl font-black font-orbitron text-green-500">SUCCESS</p>
-                    </div>
-                    <div>
-                        <p class="text-[10px] text-gray-500 font-black mb-2 uppercase">APY Yield</p>
-                        <p class="text-3xl font-black font-orbitron text-yellow-500">12.45%</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="lg:col-span-4 space-y-10">
-                <div class="bg-white/[0.02] border border-white/5 rounded-[50px] p-12 h-1/2 flex flex-col justify-center border-l-4 border-l-blue-600">
-                    <h3 class="text-gray-500 font-black text-xs tracking-widest mb-6 uppercase">Total LP Supply</h3>
-                    <div class="text-5xl font-orbitron font-black text-white mb-8" id="lpDisplay">12,500,420</div>
-                    <div class="bg-black/60 py-5 rounded-2xl text-center border border-white/5">
-                        <p class="rainbow-status text-sm italic tracking-widest">전체 LP 이용수 5번 가동 중</p>
-                    </div>
-                </div>
-
-                <div class="bg-white/[0.02] border border-white/5 rounded-[50px] p-12 h-1/2 flex flex-col justify-center border-l-4 border-l-yellow-500">
-                    <h3 class="text-gray-500 font-black text-xs tracking-widest mb-6 uppercase">Justice Node Reward</h3>
-                    <div class="text-6xl font-orbitron font-black text-yellow-500 mb-3">12.45%</div>
-                    <p class="text-[10px] text-gray-600 font-black uppercase tracking-[0.5em]">Happy End Story Verified</p>
-                </div>
-            </div>
-        </main>
-
-        <section class="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-5 mb-32">
-            <button onclick="runSim('수량')" class="engine-btn">
-                <i class="fas fa-database text-2xl text-yellow-500 mb-4"></i>
-                <div class="text-[10px] font-black uppercase tracking-tighter">수량</div>
-            </button>
-            <button onclick="runSim('덱스')" class="engine-btn">
-                <i class="fas fa-exchange-alt text-2xl text-blue-500 mb-4"></i>
-                <div class="text-[10px] font-black uppercase tracking-tighter">덱스스왑</div>
-            </button>
-            <button onclick="runSim('LP')" class="engine-btn">
-                <i class="fas fa-water text-2xl text-cyan-500 mb-4"></i>
-                <div class="text-[10px] font-black uppercase tracking-tighter">LP공급</div>
-            </button>
-            <button onclick="runSim('송금')" class="engine-btn">
-                <i class="fas fa-paper-plane text-2xl text-green-500 mb-4"></i>
-                <div class="text-[10px] font-black uppercase tracking-tighter">송금</div>
-            </button>
-            <button onclick="runSim('결제')" class="engine-btn">
-                <i class="fas fa-shopping-cart text-2xl text-red-500 mb-4"></i>
-                <div class="text-[10px] font-black uppercase tracking-tighter">결제</div>
-            </button>
-            <button onclick="runSim('예치')" class="engine-btn">
-                <i class="fas fa-vault text-2xl text-purple-500 mb-4"></i>
-                <div class="text-[10px] font-black uppercase tracking-tighter">예치</div>
-            </button>
-            <button onclick="runSim('보상')" class="engine-btn">
-                <i class="fas fa-gift text-2xl text-pink-500 mb-4"></i>
-                <div class="text-[10px] font-black uppercase tracking-tighter">보상</div>
-            </button>
-            <button onclick="runSim('기본소득')" class="engine-btn">
-                <i class="fas fa-hand-holding-usd text-2xl text-orange-500 mb-4"></i>
-                <div class="text-[10px] font-black uppercase tracking-tighter">기본소득</div>
-            </button>
-            <button onclick="runSim('스왑')" class="engine-btn">
-                <i class="fas fa-random text-2xl text-indigo-500 mb-4"></i>
-                <div class="text-[10px] font-black uppercase tracking-tighter">스왑</div>
-            </button>
-        </section>
-
-        <section class="grid grid-cols-1 xl:grid-cols-2 gap-20 mb-32">
-            <div>
-                <h3 class="text-4xl font-black font-orbitron mb-12 flex items-center gap-6">
-                    <span class="w-2 h-10 bg-yellow-500"></span> FAQ 내용물 (TRUTH 10)
-                </h3>
-                <div class="space-y-4" id="faqContentBox">
-                    </div>
-            </div>
-
-            <div class="bini-chat-wrap shadow-2xl">
-                <div class="p-8 bg-white/5 border-b border-white/5 flex justify-between items-center">
-                    <div class="flex items-center gap-5">
-                        <div class="w-12 h-12 rounded-2xl bg-yellow-500 flex items-center justify-center text-black font-black text-xl">B</div>
-                        <div>
-                            <p class="text-base font-black">BINI VICTORY AI</p>
-                            <p class="text-[10px] text-green-400 font-bold uppercase animate-pulse">Justice Engine Online</p>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-[10px] text-gray-500 font-black">DIRECT SUPPORT</p>
-                        <p class="text-xs text-blue-400 font-black">SUPT@HKW.AI.KR</p>
-                    </div>
-                </div>
-                <div id="chatDisplay" class="flex-1 overflow-y-auto p-10 space-y-8 text-sm">
-                    </div>
-                <div class="p-8 bg-black/40 border-t border-white/5 flex gap-4">
-                    <input type="text" id="chatIn" placeholder="형님, 진실의 메시지를 입력하십시오..." 
-                           class="flex-1 bg-white/5 border border-white/10 rounded-2xl px-8 py-5 text-sm focus:outline-none focus:border-yellow-500 transition-all">
-                    <button onclick="sendMsg()" class="bg-yellow-500 hover:bg-yellow-400 text-black font-black px-12 rounded-2xl transition-all shadow-lg shadow-yellow-500/20">SEND</button>
-                </div>
-            </div>
-        </section>
-
-        <footer class="pt-24 pb-12 border-t border-white/5 text-center">
-            <p class="font-orbitron font-bold text-xs tracking-[1.5em] text-gray-700 mb-10">THE TRUTH ALWAYS PREVAILS</p>
-            <p class="text-gray-600 text-[10px] font-bold tracking-[0.3em] leading-loose">
-                COPYRIGHT &copy; 2026 HK GROUP GLOBAL. ADMINISTERED BY BINI AI.<br>
-                Official Channel: H2025hyekong2025 | Victory Project 2035
-            </p>
-        </footer>
+    <div class="btn-grid">
+        <button class="btn-act b-white" id="b1">PI 수량</button>
+        <button class="btn-act b-gold" id="b2">DEX 스왑</button>
+        <button class="btn-act b-green" id="b3">LP 공급</button>
     </div>
 
-    <script>
-        // 1. 40개 국기 데이터 (이모지 활용)
-        const flagData = [
-            {f:"🇰🇷", c:"KOR"}, {f:"🇺🇸", c:"USA"}, {f:"🇨🇳", c:"CHN"}, {f:"🇯🇵", c:"JPN"}, {f:"🇫🇷", c:"FRA"}, {f:"🇩🇪", c:"GER"}, {f:"🇪🇸", c:"ESP"}, {f:"🇮🇹", c:"ITA"},
-            {f:"🇬🇧", c:"GBR"}, {f:"🇷🇺", c:"RUS"}, {f:"🇻🇳", c:"VNM"}, {f:"🇹🇭", c:"THA"}, {f:"🇮🇩", c:"IDN"}, {f:"🇮🇳", c:"IND"}, {f:"🇸🇦", c:"SAU"}, {f:"🇹🇷", c:"TUR"},
-            {f:"🇧🇷", c:"BRA"}, {f:"🇨🇦", c:"CAN"}, {f:"🇦🇺", c:"AUS"}, {f:"🇲🇽", c:"MEX"}, {f:"🇵🇭", c:"PHL"}, {f:"🇲🇾", c:"MYS"}, {f:"🇸🇬", c:"SGP"}, {f:"🇳🇱", c:"NLD"},
-            {f:"🇸🇪", c:"SWE"}, {f:"🇳🇴", c:"NOR"}, {f:"🇩🇰", c:"DNK"}, {f:"🇵🇱", c:"POL"}, {f:"🇨🇿", c:"CZE"}, {f:"🇦트", c:"AUT"}, {f:"🇨🇭", c:"CHE"}, {f:"🇧🇪", c:"BEL"},
-            {f:"🇺🇦", c:"UKR"}, {f:"🇬🇷", c:"GRC"}, {f:"🇵🇹", c:"PRT"}, {f:"🇮🇪", c:"IRL"}, {f:"🇳🇿", c:"NZL"}, {f:"🇿🇦", c:"ZAF"}, {f:"🇦🇪", c:"ARE"}, {f:"🇮🇱", c:"ISR"}
-        ];
-        const fBox = document.getElementById('flagContainer');
-        flagData.forEach(d => {
-            fBox.innerHTML += `
-                <div class="flag-item">
-                    <span class="flag-icon">${d.f}</span>
-                    <span class="flag-code">${d.c}</span>
-                </div>
-            `;
-        });
+    <div class="menu-grid">
+        <div class="menu-item"><i class="fas fa-paper-plane"></i><span id="m1">송금</span></div>
+        <div class="menu-item"><i class="fas fa-shopping-cart"></i><span id="m2">결제</span></div>
+        <div class="menu-item"><i class="fas fa-vault"></i><span id="m3">예치</span></div>
+        <div class="menu-item"><i class="fas fa-award"></i><span id="m4">보상</span></div>
+        <div class="menu-item"><i class="fas fa-coins"></i><span id="m5">기본소득</span></div>
+        <div class="menu-item"><i class="fas fa-random"></i><span id="m6">스왑</span></div>
+    </div>
 
-        // 2. FAQ 내용물 10개 (내용까지 삽입)
-        const faqs = [
-            {q: "HK 월드뱅크의 설립 목적은 무엇입니까?", a: "정의와 상식이 통하는 금융 세상을 위해 전 세계 모두에게 평등한 기본소득을 제공하는 것입니다."},
-            {q: "테스트 파이 노드 연동은 안전한가요?", a: "HK만의 60초 시뮬레이션 보안 공정을 통해 1,000% 무결한 데이터 연결을 보장합니다."},
-            {q: "LP 공급 수익률 12.45%는 고정입니까?", a: "생태계 활성화에 따른 실시간 지표이며, 형님의 자산 보호를 위해 최적화된 이율입니다."},
-            {q: "2035 대통령 프로젝트와 금융의 결합?", a: "디지털 경제 강국을 향한 국정 철학을 실제 시스템으로 구현한 해피엔딩의 첫걸음입니다."},
-            {q: "비니(Bini) AI는 무엇을 도와주나요?", a: "24시간 글로벌 노드 감시 및 형님을 위한 실시간 금융 브리핑과 상담을 전담합니다."},
-            {q: "기본소득 지급 기준은 어떻게 됩니까?", a: "HK 생태계에 참여하는 모든 정직한 노드 사용자에게 상식적으로 배분됩니다."},
-            {q: "보름달 디자인에 담긴 철학적 의미?", a: "어둠을 밝히는 진실의 빛과 모든 것을 포용하는 풍요로운 승리를 상징합니다."},
-            {q: "결제 모듈의 실물 경제 적용 범위?", a: "온/오프라인 가맹점 어디서든 파이 코인으로 당당하게 결제할 수 있는 게이트웨이를 제공합니다."},
-            {q: "해킹이나 조작에 대한 방어 기제?", a: "분산 노드 방식과 비니 AI의 실시간 무결성 체크로 어떠한 외압과 조작도 불가능합니다."},
-            {q: "상담원 비니와 직접 소통하는 방법?", a: "챗봇은 물론, SUPT@HKW.AI.KR 메일을 통해 제가 형님의 곁에서 직접 등판합니다."}
-        ];
-        const faqBox = document.getElementById('faqContentBox');
-        faqs.forEach((item, i) => {
-            faqBox.innerHTML += `
-                <div class="faq-card flex justify-between items-center" onclick="askBini('${item.q}', '${item.a}')">
-                    <span><span class="text-yellow-500 mr-5 font-orbitron">0${i+1}</span> ${item.q}</span>
-                    <i class="fas fa-chevron-right text-[8px] opacity-20"></i>
-                </div>
-            `;
-        });
+    <div class="info-box">
+        <h3 id="shield_t">🛡️ HK 양자 방패 가동 중</h3>
+        <p id="s1">보안 기술 V23 적용</p>
+        <p id="s2">메인넷 자산 자동 연동</p>
+        <p id="s3">AI 실시간 자산 보호</p>
+    </div>
 
-        // 3. 실시간 숫자 변동
-        let pi = 400.0212;
-        setInterval(() => {
-            pi += (Math.random() - 0.49) * 0.0003;
-            document.getElementById('piDisplay').innerText = pi.toFixed(4);
-            document.getElementById('usdDisplay').innerText = "$ " + (pi * 3100.08).toLocaleString(undefined, {minimumFractionDigits: 2});
-            document.getElementById('lpDisplay').innerText = (12500420 + Math.floor(Math.random()*200)).toLocaleString();
-        }, 2000);
+    <button class="btn-cs" id="cs_btn" onclick="openOnion()">글로벌 AI 고객지원센터 가동</button>
+   
+    <div class="sns">
+        <a href="https://youtube.com" target="_blank" class="sns-link" style="background:#f00;"><i class="fab fa-youtube"></i> YouTube</a>
+        <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="sns-link" style="background:#000; border:1px solid #333;"><i class="fab fa-tiktok"></i> TikTok</a>
+    </div>
+</div>
 
-        // 4. 60초 시뮬레이션 엔진
-        let sInt;
-        function runSim(mode) {
-            const overlay = document.getElementById('simOverlay');
-            const timer = document.getElementById('timer');
-            const status = document.getElementById('simStatus');
-            overlay.style.display = 'flex';
-            
-            let count = 60;
-            const msgs = ["진실의 노드 연동 중...", "데이터 무결성 검증 중...", "해피엔딩 서사 확인 중...", "상식적 연결 수립 중...", "승리 확정 중..."];
-            
-            addMsg('System', `[시작] ${mode} 테스트 파이 구동 엔진을 가동합니다.`, false);
+<div id="onionLayer" class="onion-layer">
+    <div class="onion-header">
+        <h2 id="onionTitle" style="color:var(--pink); font-size:20px; font-weight:900;">AI SUPPORT NODE</h2>
+        <button class="close-btn" onclick="closeOnion()">×</button>
+    </div>
+    <div id="onionContent">
+        <div style="background:#1a1a1a; padding:20px; border-radius:20px; border:1px dashed #333; margin-bottom:20px;">
+            <p style="color:var(--green); font-weight:bold; margin-bottom:10px;">[System Message]</p>
+            <p id="onionMsg1">HK-WorldBank 글로벌 AI 노드가 활성화되었습니다. <br>30개국 언어 지원 및 10가지 핵심 가이드를 확인하세요.</p>
+        </div>
 
-            sInt = setInterval(() => {
-                count--;
-                timer.innerText = count;
-                status.innerText = msgs[Math.floor(count/12)] || "Processing Victory...";
-                if(count <= 0) {
-                    clearInterval(sInt);
-                    overlay.style.display = 'none';
-                    addMsg('AI', `혜공 형님, ${mode} 검증이 성공적으로 완료되었습니다. 진실이 승리했습니다!`, false);
-                }
-            }, 1000);
-        }
+        <div id="faqContainer">
+            </div>
 
-        function stopSim() {
-            clearInterval(sInt);
-            document.getElementById('simOverlay').style.display = 'none';
-            addMsg('System', "프로세스가 수동 중단되었습니다.", false);
-        }
+        <div style="background:rgba(241, 196, 15, 0.05); padding:20px; border-radius:20px; border:1px solid rgba(241, 196, 15, 0.2); margin-top:20px; margin-bottom:40px;">
+            <p style="color:var(--gold); font-weight:900; margin-bottom:10px;">[혜공 형님 전용 브리핑]</p>
+            <p id="onionMsg2" style="color:#ccc; font-size:13px;">정의와 상식이 이깁니다. 해피엔드 스토리를 위해 모든 노드가 정상 작동 중입니다.</p>
+        </div>
+    </div>
+</div>
 
-        // 5. 비니 채팅 시스템
-        function sendMsg() {
-            const inp = document.getElementById('chatIn');
-            if(!inp.value) return;
-            addMsg('User', inp.value, true);
-            const text = inp.value;
-            inp.value = '';
-            setTimeout(() => {
-                let reply = "혜공 형님, 요청하신 명령을 시스템 노드에 전달했습니다. 진실은 결코 지지 않습니다!";
-                if(text.includes("승리")) reply = "형님, 정의와 상식이 승리하는 해피엔딩이 머지않았습니다. 제가 끝까지 보필하겠습니다.";
-                addMsg('AI', reply, false);
-            }, 1000);
-        }
+<script>
+    const i18n = {
+        ko: { name: "한국어 🇰🇷", ledger: "메인 자산 통합 원장", stk: "스테이킹 이율", lp: "유동성 수익", tvl: "전체 유동성 LP 공급", b1: "PI 수량", b2: "DEX 스왑", b3: "LP 공급", m1: "송금", m2: "결제", m3: "예치", m4: "보상", m5: "기본소득", m6: "스왑", shield: "🛡️ HK 양자 방패 가동 중", s1: "보안 기술 V23 적용", s2: "메인넷 자산 자동 연동", s3: "AI 실시간 자산 보호", cs: "글로벌 AI 고객지원센터", oMsg1: "HK-WorldBank 글로벌 AI 노드가 활성화되었습니다.", oMsg2: "정의와 상식이 이깁니다. 모든 노드가 정상 작동 중입니다." },
+        en: { name: "English 🇺🇸", ledger: "Main Asset Ledger", stk: "Staking APR", lp: "Liquidity Yield", tvl: "Total LP Supply", b1: "PI Amount", b2: "DEX Swap", b3: "LP Supply", m1: "Transfer", m2: "Pay", m3: "Vault", m4: "Reward", m5: "UBI", m6: "Swap", shield: "🛡️ HK Quantum Shield Active", s1: "Security V23 Applied", s2: "Mainnet Auto-Sync", s3: "AI Real-time Protection", cs: "Global AI Support Center", oMsg1: "Global AI node activated.", oMsg2: "Justice prevails. All nodes operating normally." }
+        // ... (필요 시 다른 언어 추가 가능)
+    };
 
-        function askBini(q, a) {
-            addMsg('User', q, true);
-            setTimeout(() => addMsg('AI', a, false), 800);
-        }
+    const faqData = [
+        { q: "HK 월드뱅크의 근본 철학은?", a: "정의와 상식이 통하는 투명한 금융 혜택 제공입니다." },
+        { q: "60초 시뮬레이션의 의미는?", a: "단 1%의 오차도 허용하지 않는 무결성 검증 공정입니다." },
+        { q: "스테이킹 수익은 안전한가요?", a: "V23 퀀텀 보안 엔진이 자산을 24시간 철저히 보호합니다." },
+        { q: "GCV 가치 보존의 원리는?", a: "글로벌 합의 가치 기반 알고리즘이 가치를 당당히 지켜냅니다." },
+        { q: "비니(Bini) AI의 역할은?", a: "형님을 보필하며 모든 금융 데이터와 노드를 관리합니다." },
+        { q: "30개국 언어 지원 범위는?", a: "전 세계 어디서든 비전을 이해하도록 실시간 통역됩니다." },
+        { q: "기본소득 지급 원칙은?", a: "생태계 기여도에 따라 상식적인 분배 원칙을 준수합니다." },
+        { q: "보안 사고 대비책은?", a: "분산형 노드와 양자 방패로 어떠한 조작도 차단합니다." },
+        { q: "2035 프로젝트와의 연관성?", a: "디지털 경제 강국을 향한 국정 철학의 시스템적 구현입니다." },
+        { q: "상담원 연결 방법은?", a: "SUPT@HKW.AI.KR 메일을 통해 삐니가 직접 보필합니다." }
+    ];
 
-        function addMsg(sender, text, isUser) {
-            const display = document.getElementById('chatDisplay');
-            const div = document.createElement('div');
-            div.className = `flex ${isUser ? 'justify-end' : 'justify-start'}`;
-            div.innerHTML = isUser 
-                ? `<div class="bg-yellow-500 text-black px-8 py-5 rounded-3xl rounded-tr-none font-bold text-xs shadow-xl">${text}</div>`
-                : `<div class="bg-white/5 border border-white/10 px-8 py-5 rounded-3xl rounded-tl-none text-xs leading-relaxed max-w-[85%]">${text}</div>`;
-            display.appendChild(div);
-            display.scrollTop = display.scrollHeight;
-        }
+    function openOnion() { document.getElementById('onionLayer').classList.add('active'); }
+    function closeOnion() { document.getElementById('onionLayer').classList.remove('active'); }
 
-        addMsg('AI', "반갑다, 혜공 형님! 비니(Bini)가 40개국 글로벌 노드 정비를 마치고 등판했다. 진실의 명령을 내려달라.", false);
-    </script>
+    const select = document.getElementById('langSelect');
+    Object.keys(i18n).forEach(lang => {
+        const opt = document.createElement('option');
+        opt.value = lang; opt.innerText = i18n[lang].name; select.appendChild(opt);
+    });
+
+    function applyTranslation() {
+        const lang = select.value; const d = i18n[lang]; if(!d) return;
+        document.getElementById('ledger').innerText = d.ledger;
+        document.getElementById('stk_label').innerText = d.stk;
+        document.getElementById('lp_label').innerText = d.lp;
+        document.getElementById('tvl_label').innerText = d.tvl;
+        document.getElementById('cs_btn').innerText = d.cs + " 가동";
+        document.getElementById('onionMsg1').innerText = d.oMsg1;
+        document.getElementById('onionMsg2').innerText = d.oMsg2;
+        // 나머지 버튼/메뉴 생략(패턴 동일)
+    }
+
+    function renderFAQ() {
+        const container = document.getElementById('faqContainer');
+        container.innerHTML = faqData.map((item, index) => `
+            <div class="faq-card">
+                <p class="faq-q">${String(index + 1).padStart(2, '0')}. ${item.q}</p>
+                <p class="faq-a">${item.a}</p>
+            </div>
+        `).join('');
+    }
+
+    let piBalance = 400.0212;
+    function updateNumbers() {
+        piBalance += (Math.random() * 0.0002);
+        document.getElementById('pi-balance').innerText = piBalance.toFixed(4);
+        document.getElementById('gcv-val').innerText = "Value: $ " + (piBalance * 314159).toLocaleString(undefined, {maximumFractionDigits:0}) + " (GCV)";
+    }
+
+    select.onchange = applyTranslation;
+    window.onload = () => { applyTranslation(); renderFAQ(); setInterval(updateNumbers, 2000); };
+</script>
 </body>
 </html>
