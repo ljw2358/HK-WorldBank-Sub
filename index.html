@@ -11,8 +11,7 @@
         }
         body { margin: 0; padding: 0; background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; }
         .container { width: 100%; max-width: 480px; padding: 15px; box-sizing: border-box; padding-bottom: 120px; }
-        
-        /* 50개국어 대응 언어 선택바 */
+       
         .lang-bar { text-align: right; margin-bottom: 20px; position: sticky; top: 10px; z-index: 2000; }
         #langSelect { background: #111; color: var(--gold); border: 2px solid var(--gold); padding: 8px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 140px; }
 
@@ -35,7 +34,7 @@
 
         .main-btn-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
         .m-btn { padding: 15px 5px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; font-size: 0.8rem; transition: 0.2s; }
-        .m-btn:active { transform: scale(0.9); filter: brightness(1.5); }
+        .m-btn:active { transform: scale(0.95); filter: brightness(1.2); }
 
         .icon-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
         .icon-card { background: var(--card); padding: 18px 10px; border-radius: 15px; text-align: center; border: 1px solid #222; cursor: pointer; transition: 0.3s; }
@@ -48,12 +47,6 @@
         .faq-q { color: var(--gold); font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; border-left: 3px solid var(--gold); padding-left: 8px; }
         .faq-a { color: #ccc; font-size: 0.85rem; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #222; }
 
-        .social-box { display: flex; gap: 10px; margin-bottom: 30px; }
-        .social-link { flex: 1; padding: 15px; text-align: center; border-radius: 12px; text-decoration: none; font-weight: bold; color: white; }
-        .yt-btn { background: #FF0000; }
-        .tk-btn { background: #000; border: 1px solid #fff; }
-
-        /* CHATBOT SYSTEM */
         #ai-bot { position: fixed; bottom: 30px; right: 20px; width: 65px; height: 65px; background: var(--neon-lp); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 0 20px var(--neon-lp); cursor: pointer; z-index: 3000; color: white; animation: pulse 2s infinite; }
         #chat-window { display: none; position: fixed; bottom: 105px; right: 20px; width: 330px; height: 480px; background: #111; border: 2px solid var(--neon-lp); border-radius: 20px; z-index: 3001; flex-direction: column; overflow: hidden; }
         #chat-header { background: var(--neon-lp); padding: 15px; font-weight: bold; display: flex; justify-content: space-between; }
@@ -66,25 +59,28 @@
         #send-btn { background: var(--neon-lp); border: none; color: white; padding: 0 15px; margin-left: 8px; border-radius: 8px; cursor: pointer; }
 
         @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 255, 0.7); } 70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(255, 0, 255, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 255, 0); } }
+        
+        /* 2월 26일 강조용 애니메이션 */
+        .highlight-event { animation: border-glow 1.5s infinite alternate; }
+        @keyframes border-glow { from { border-color: #333; } to { border-color: var(--gold); box-shadow: 0 0 15px var(--gold); } }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="lang-bar">
-        <select id="langSelect" onchange="changeLanguage()">
-            </select>
+        <select id="langSelect" onchange="changeLanguage()"></select>
     </div>
 
     <header>
         <h1 class="title">HK WORLD BANK</h1>
         <div id="txt-ledger">통합 자산 관리 시스템</div>
-        <div class="pi-display"><span id="main-pi">412.3141</span> <span style="color:var(--gold)" id="pi-unit">Pi</span></div>
+        <div class="pi-display"><span id="main-pi">412.3141</span> <span style="color:var(--gold)">Pi</span></div>
         <div class="val-box">$ <span id="main-val">129,540,600</span> (GCV)</div>
     </header>
 
     <div class="token-info">
-        <div id="txt-hkwb-label" style="font-size:0.75rem; color:#aaa; margin-bottom:5px;">HKWB TOKEN REAL-TIME SUPPLY</div>
+        <div style="font-size:0.75rem; color:#aaa; margin-bottom:5px;" id="txt-supply-label">HKWB TOKEN REAL-TIME SUPPLY</div>
         <div class="token-supply" id="token-num">6,280,000.0000</div>
     </div>
 
@@ -99,7 +95,7 @@
         </div>
     </div>
 
-    <div class="lp-total-box">
+    <div class="lp-total-box" id="lp-box">
         <div id="txt-total-lp" style="font-size:0.8rem; color:var(--neon-green); margin-bottom:5px;">총 유동성 공급 (DEX LP)</div>
         <div id="lp-total-num">$ 88,432,159,375</div>
     </div>
@@ -122,9 +118,9 @@
     <button class="center-btn" id="btn-center" onclick="toggleFaq()">Global AI Support Center</button>
     <div class="faq-section" id="faqBox"><div id="faq-list"></div></div>
 
-    <div class="social-box">
-        <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="social-link yt-btn">YouTube</a>
-        <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="social-link tk-btn">TikTok</a>
+    <div style="display: flex; gap: 10px; margin-bottom: 30px;">
+        <a href="https://www.youtube.com/@Hyekong2025" target="_blank" style="flex:1; padding:15px; text-align:center; border-radius:12px; text-decoration:none; font-weight:bold; color:white; background:#FF0000;">YouTube</a>
+        <a href="https://www.tiktok.com/@hyekong2025" target="_blank" style="flex:1; padding:15px; text-align:center; border-radius:12px; text-decoration:none; font-weight:bold; color:white; background:#000; border:1px solid #fff;">TikTok</a>
     </div>
 </div>
 
@@ -139,21 +135,18 @@
 </div>
 
 <script>
-    /* 50개국어 언어 데이터 */
+    /* 언어 데이터 (50개국 확장 가능 구조) */
     const languages = [
         {c:"ko", n:"한국어"}, {c:"en", n:"English"}, {c:"zh", n:"中文"}, {c:"ja", n:"日本語"}, {c:"vi", n:"Tiếng Việt"},
-        {c:"fr", n:"Français"}, {c:"de", n:"Deutsch"}, {c:"es", n:"Español"}, {c:"pt", n:"Português"}, {c:"ru", n:"Русский"},
-        {c:"hi", n:"हिन्दी"}, {c:"ar", n:"العربية"}, {c:"th", n:"ไทย"}, {c:"id", n:"Indonesia"}, {c:"ms", n:"Melayu"},
-        {c:"tr", n:"Türkçe"}, {c:"it", n:"Italiano"}, {c:"nl", n:"Nederlands"}, {c:"pl", n:"Polski"}, {c:"sv", n:"Svenska"}
-        // ... (실제 구현 시 50개 리스트 확장)
+        {c:"fr", n:"Français"}, {c:"de", n:"Deutsch"}, {c:"es", n:"Español"}, {c:"pt", n:"Português"}, {c:"ru", n:"Русский"}
     ];
 
     const i18n = {
-        ko: { ledger: "통합 자산 관리 시스템", wallet: "지갑 연동", swap: "DEX 스왑", stake: "LP 스테이킹", m1: "송금", m2: "결제", m3: "예치", m4: "보상", m5: "UBI", m6: "전환", center: "글로벌 지원 센터", greet: "혜공 형님, 삐니입니다!" },
-        en: { ledger: "Asset Management System", wallet: "Connect Wallet", swap: "DEX Swap", stake: "LP Staking", m1: "Send", m2: "Pay", m3: "Deposit", m4: "Reward", m5: "UBI", m6: "Exchange", center: "Global Support Center", greet: "Greetings, Brother Hyekong!" }
+        ko: { ledger: "통합 자산 관리 시스템", wallet: "지갑 연동", swap: "DEX 스왑", stake: "LP 스테이킹", m1: "송금", m2: "결제", m3: "예치", m4: "보상", m5: "UBI", m6: "전환", center: "글로벌 지원 센터", greet: "혜공 형님, 삐니입니다! 무엇을 도와드릴까요?" },
+        en: { ledger: "Asset Management System", wallet: "Connect Wallet", swap: "DEX Swap", stake: "LP Staking", m1: "Send", m2: "Pay", m3: "Deposit", m4: "Reward", m5: "UBI", m6: "Exchange", center: "Global Support Center", greet: "Greetings, Brother Hyekong! Pi Testnet is Active." }
     };
 
-    /* 숫자 변동 엔진 (1.5초) */
+    /* 실시간 숫자 시뮬레이션 */
     let piBase = 412.314159; let gcvBase = 129540600; let lpBase = 88432159375;
     setInterval(() => {
         piBase += (Math.random() * 0.001 - 0.0005);
@@ -167,47 +160,22 @@
         document.getElementById('token-num').innerText = (6280000 + Math.random()).toFixed(4);
     }, 1500);
 
-    /* 텍스트 변동 엔진 (모든 글자가 살아 움직임) */
-    const textPool = ["LIVE", "ACTIVE", "SECURED", "DEX RUNNING", "UBI READY"];
-    setInterval(() => {
-        const target = document.getElementById('txt-ledger');
-        target.style.opacity = 0;
-        setTimeout(() => {
-            target.innerText = i18n[document.getElementById('langSelect').value]?.ledger || "HKWB GLOBAL SYSTEM";
-            target.style.opacity = 1;
-        }, 500);
-    }, 3000);
-
-    /* Pi SDK 시뮬레이션 (테스트 파이 구동) */
+    /* Pi SDK 인터페이스 (테스트넷 전용) */
     const PiSDK = {
-        connect: () => {
-            const addr = "GD2X...TEST...HKWB";
-            alert(`[Testnet] 지갑 연결 성공\n주소: ${addr}\n혜공 형님, 테스트 파이가 감지되었습니다.`);
+        connect: () => alert(`[HKWB Testnet]\n혜공 형님, 지갑 연결 완료!\n주소: GD2X...HKWB_LP_CORE`),
+        swap: () => alert("DEX 스왑 엔진 가동: Pi ↔ HKWB 토큰 전환을 시작합니다."),
+        provideLP: () => {
+            const amount = 1080;
+            confirm(`[거버넌스 확보] 2월 26일 이벤트: ${amount} Test-Pi를 LP Pool에 예치하시겠습니까?`) 
+            && alert(`${amount} Pi 예치 성공! 거버넌스 권한이 활성화되었습니다.`);
         },
-        swap: () => alert("DEX 유동성 스왑 엔진 가동... GCV $314,159 기반으로 전환됩니다."),
-        provideLP: () => alert("2월 26일 유동성 공급 예약: 1080 Pi가 LP Pool로 이동합니다."),
-        action: (type) => alert(`[HKWB Mainnet Protocol] ${type.toUpperCase()} 명령을 수신했습니다.`)
+        action: (type) => {
+            if(type === 'ubi') alert("[UBI Distribution] 전 세계 취약계층을 위한 기본소득 전송을 시작합니다.");
+            else alert(`[System Call] ${type.toUpperCase()} 트랜잭션을 실행합니다.`);
+        }
     };
 
-    /* FAQ 20선 구현 */
-    function loadFaq() {
-        const faqList = [
-            {q: "UBI의 핵심은?", a: "20억 인류에게 자동 지급되는 보편적 기본소득입니다."},
-            {q: "2월 26일의 의미?", a: "1080개 테스트 파이를 LP에 예치하여 거버넌스를 확보하는 날입니다."},
-            {q: "5월 18일 무엇이 변하나?", a: "테스트 데이터가 실제 메인넷 자산과 동기화됩니다."},
-            {q: "DEX 연동 방법은?", a: "Pi SDK를 통해 지갑을 연결하면 즉시 스왑 가능합니다."},
-            {q: "HKWB 토큰 가치는?", a: "GCV 가치를 기반으로 하는 생태계 기축 통화입니다."},
-            {q: "로그인 방식은?", a: "별도 가입 없이 Pi Browser 지갑 서명으로 접속합니다."},
-            {q: "보안 기술은?", a: "양자 암호화 및 삐니 AI가 실시간 감시합니다."},
-            {q: "6,280,000개의 의미?", a: "희소성을 극대화한 HKWB 토큰의 총 발행량입니다."},
-            {q: "송금 수수료는?", a: "UBI 생태계 유지를 위한 최소한의 비용만 발생합니다."},
-            {q: "오프라인 사용은?", a: "QR 코드 및 NFC 결제를 통해 전 세계 매장에서 사용 가능합니다."}
-            // ... (20개까지 확장)
-        ];
-        document.getElementById('faq-list').innerHTML = faqList.map(i => `<div class="faq-q">${i.q}</div><div class="faq-a">${i.a}</div>`).join('');
-    }
-
-    /* AI 챗봇 실제 구동 */
+    /* 챗봇 로직 */
     function askAI() {
         const input = document.getElementById('user-input');
         const msg = input.value.trim();
@@ -219,7 +187,7 @@
             if(msg.includes("1080")) res = "2월 26일, 1080개 Pi를 LP에 예치하십시오. 그것이 UBI 프로젝트의 시작입니다.";
             if(msg.includes("DEX")) res = "DEX 엔진이 1.5초 간격으로 시세를 동기화하고 있습니다.";
             addMsg(res, 'ai-msg');
-        }, 1000);
+        }, 800);
     }
 
     function addMsg(t, c) {
@@ -229,6 +197,7 @@
         b.appendChild(d); b.scrollTop = b.scrollHeight;
     }
 
+    /* 언어 변경 */
     function changeLanguage() {
         const l = document.getElementById('langSelect').value;
         const d = i18n[l] || i18n.en;
@@ -237,6 +206,7 @@
         document.getElementById('btn-swap').innerText = d.swap;
         document.getElementById('btn-stake').innerText = d.stake;
         document.getElementById('btn-center').innerText = d.center;
+        document.getElementById('txt-ai-greet').innerText = d.greet;
         ['m1','m2','m3','m4','m5','m6'].forEach(id => document.getElementById(id).innerText = d[id]);
     }
 
@@ -246,7 +216,21 @@
     window.onload = () => {
         const sel = document.getElementById('langSelect');
         languages.forEach(l => { const o = document.createElement('option'); o.value=l.c; o.innerText=l.n; sel.appendChild(o); });
-        loadFaq();
+        
+        // FAQ 데이터
+        const faq = [
+            {q: "UBI의 핵심은?", a: "20억 인류에게 자동 지급되는 보편적 기본소득입니다."},
+            {q: "2월 26일의 의미?", a: "1080개 테스트 파이를 LP에 예치하여 거버넌스를 확보하는 날입니다."},
+            {q: "DEX 연동 방법은?", a: "Pi Browser 지갑 서명으로 즉시 스왑 가능합니다."}
+        ];
+        document.getElementById('faq-list').innerHTML = faq.map(i => `<div class="faq-q">${i.q}</div><div class="faq-a">${i.a}</div>`).join('');
+        
+        // 날짜 체크 (2월 26일 강조)
+        const today = new Date();
+        if(today.getMonth() === 1 && today.getDate() === 26) {
+            document.getElementById('lp-box').classList.add('highlight-event');
+            document.getElementById('btn-stake').style.background = "linear-gradient(45deg, #FFD700, #FFA500)";
+        }
     };
 </script>
 </body>
