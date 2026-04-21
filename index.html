@@ -3,111 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK-WorldBank | Chairman Hyekong</title>
+    <title>HK-WorldBank | Global Empire</title>
     <style>
         :root {
             --gold: #FFD700; --neon-green: #39FF14; --neon-blue: #00BFFF;
             --neon-pink: #FF00FF; --bg: #000000; --card: #0d0d0d;
+            --glass: rgba(255, 255, 255, 0.03);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background: var(--bg); color: white; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; }
-        .container { width: 100%; max-width: 480px; padding: 20px; padding-bottom: 150px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', 'Segoe UI', sans-serif; }
+        body { 
+            background: var(--bg); color: white; display: flex; flex-direction: column; align-items: center; 
+            overflow-x: hidden; background-attachment: fixed;
+        }
+        
+        /* 메인 컨테이너 - 300줄 구성을 위한 정밀 레이아웃 */
+        .container { width: 100%; max-width: 500px; padding: 30px 20px; padding-bottom: 100px; }
 
-        /* 글로벌 50개국 대응 언어 선택기 */
-        .lang-section { display: flex; justify-content: flex-end; margin-bottom: 25px; }
+        /* 글로벌 언어 제어 모듈 */
+        .lang-control { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+        .network-badge { font-size: 0.75rem; color: var(--neon-green); font-weight: 900; border: 1.5px solid var(--neon-green); padding: 5px 12px; border-radius: 5px; }
         #langSelect { 
             background: #111; color: var(--gold); border: 2.5px solid var(--gold); 
-            padding: 12px; border-radius: 15px; font-weight: 900; width: 160px; cursor: pointer;
-            box-shadow: 0 0 15px rgba(255,215,0,0.3);
+            padding: 14px; border-radius: 18px; font-weight: 950; width: 170px; cursor: pointer;
+            outline: none; box-shadow: 0 0 20px rgba(255,215,0,0.2);
         }
 
-        header { text-align: center; margin-bottom: 40px; }
-        .title { font-size: 2.8rem; font-weight: 950; color: var(--gold); text-shadow: 0 0 30px rgba(255,215,0,0.8); letter-spacing: -1.5px; }
-        .ledger-txt { color: var(--neon-blue); font-weight: 800; margin: 18px 0; font-size: 1.3rem; letter-spacing: 1px; }
+        header { text-align: center; margin-bottom: 55px; position: relative; }
+        header::after { content: ''; position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: var(--gold); border-radius: 2px; }
         
-        /* 실시간 자산 디스플레이 */
-        .pi-display { font-size: 3.8rem; font-weight: 900; margin: 15px 0; letter-spacing: -3px; font-variant-numeric: tabular-nums; }
-        .gcv-val { 
-            background: rgba(57, 255, 20, 0.2); color: var(--neon-green); padding: 15px 35px; 
-            border: 2px solid var(--neon-green); border-radius: 70px; display: inline-block; 
-            font-weight: 950; font-size: 1.3rem; box-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
+        .title { font-size: 3rem; font-weight: 950; color: var(--gold); text-shadow: 0 0 35px rgba(255,215,0,0.8); letter-spacing: -2px; }
+        .ledger-txt { color: var(--neon-blue); font-weight: 900; margin: 25px 0; font-size: 1.5rem; letter-spacing: 2px; text-transform: uppercase; }
+        
+        /* 실시간 자산 대시보드 - GCV 제외 */
+        .pi-display { font-size: 4.5rem; font-weight: 950; margin: 25px 0; letter-spacing: -4px; font-variant-numeric: tabular-nums; }
+        .mainnet-status { 
+            background: linear-gradient(135deg, rgba(57, 255, 20, 0.1), rgba(57, 255, 20, 0.05)); 
+            color: var(--neon-green); padding: 15px 45px; border: 3px solid var(--neon-green); 
+            border-radius: 80px; display: inline-block; font-weight: 950; font-size: 1.2rem; 
+            letter-spacing: 1px; box-shadow: 0 0 25px rgba(57, 255, 20, 0.2);
         }
 
-        .token-box { 
-            background: var(--card); border-radius: 30px; padding: 30px; margin: 30px 0; 
-            border: 1.5px solid #222; text-align: center; position: relative; 
+        /* 토큰 매트릭스 */
+        .token-matrix { 
+            background: var(--card); border-radius: 35px; padding: 40px; margin: 40px 0; 
+            border: 2px solid #222; text-align: center; position: relative; overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
-        .token-box::before { content: 'LIVE MAINNET'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--neon-pink); padding: 4px 15px; border-radius: 10px; font-size: 0.75rem; font-weight: 900; }
-        .supply-num { color: var(--neon-blue); font-size: 2rem; font-weight: 900; margin-top: 15px; letter-spacing: 0.5px; }
+        .token-matrix::before { content: 'LIVE SYSTEM MONITOR'; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, transparent, var(--neon-pink), transparent); animation: slide 3s infinite; }
+        .supply-label { font-size: 1.1rem; color: #888; font-weight: 900; margin-bottom: 20px; letter-spacing: 1px; }
+        .supply-num { color: var(--neon-blue); font-size: 2.3rem; font-weight: 950; letter-spacing: 1px; }
 
-        .rate-grid { display: flex; gap: 20px; margin-bottom: 25px; }
-        .rate-card { flex: 1; background: #111; padding: 25px; border-radius: 25px; text-align: center; border: 2px solid #333; transition: 0.3s; }
-        .rate-card:hover { border-color: var(--neon-pink); }
-        .rate-num { font-size: 1.8rem; font-weight: 950; margin-top: 10px; font-variant-numeric: tabular-nums; }
+        /* 수익률 그리드 */
+        .rate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 40px; }
+        .rate-card { background: #111; padding: 30px 20px; border-radius: 30px; text-align: center; border: 2.5px solid #333; position: relative; }
+        .rate-card::after { content: 'APY'; position: absolute; top: 12px; right: 15px; font-size: 0.7rem; color: #666; font-weight: 900; }
+        .rate-label { font-size: 1.15rem; font-weight: 950; margin-bottom: 12px; }
+        .rate-num { font-size: 2rem; font-weight: 950; font-variant-numeric: tabular-nums; }
 
-        .lp-total { 
-            border: 4px solid var(--neon-green); border-radius: 30px; padding: 30px; text-align: center; 
-            margin-bottom: 40px; background: rgba(57, 255, 20, 0.1); 
+        /* LP 유동성 인프라 */
+        .lp-container { 
+            border: 5px solid var(--neon-green); border-radius: 40px; padding: 40px; text-align: center; 
+            margin-bottom: 50px; background: rgba(57, 255, 20, 0.08); box-shadow: inset 0 0 30px rgba(57, 255, 20, 0.1);
         }
-        .lp-num { font-size: 2.1rem; font-weight: 950; color: white; margin-top: 15px; letter-spacing: -0.5px; }
+        .lp-label { font-size: 1.25rem; color: var(--neon-green); font-weight: 950; margin-bottom: 20px; letter-spacing: 1px; }
+        .lp-num { font-size: 2.4rem; font-weight: 950; color: white; letter-spacing: -1px; }
 
-        /* 핵심 액션 레이아웃 */
-        .btn-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 35px; }
-        .act-btn { padding: 22px 5px; border-radius: 18px; border: none; font-weight: 950; cursor: pointer; font-size: 1rem; transition: 0.3s; box-shadow: 0 6px 15px rgba(0,0,0,0.6); }
-        .act-btn:active { transform: translateY(3px); }
-
-        .icon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 45px; }
-        .icon-box { 
-            background: var(--card); padding: 30px 10px; border-radius: 25px; text-align: center; 
-            border: 1.5px solid #222; cursor: pointer; transition: 0.4s;
+        /* 금융 서비스 액션 */
+        .action-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 45px; }
+        .main-btn { 
+            padding: 25px 5px; border-radius: 22px; border: none; font-weight: 950; 
+            cursor: pointer; font-size: 1.1rem; box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+            transition: 0.3s;
         }
-        .icon-box:hover { background: #1a1a1a; transform: scale(1.05); border-color: var(--gold); }
-        .icon-box span { display: block; margin-top: 18px; font-size: 1.1rem; font-weight: 850; color: #fff; }
+        .main-btn:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.8); }
 
-        /* 글로벌 고객지원 및 소셜 채널 */
-        .global-support { 
+        /* 유틸리티 아이콘 그리드 */
+        .util-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 60px; }
+        .util-box { 
+            background: var(--card); padding: 40px 10px; border-radius: 30px; text-align: center; 
+            border: 2px solid #222; cursor: pointer; transition: 0.4s;
+        }
+        .util-box:hover { border-color: var(--gold); background: #1a1a1a; transform: translateY(-5px); }
+        .util-box span { display: block; margin-top: 22px; font-size: 1.2rem; font-weight: 950; color: #fff; }
+
+        /* 소셜 및 고객지원 센터 */
+        .support-full { 
             background: linear-gradient(90deg, #ff4d4d, #ff0000); color: white; width: 100%; 
-            padding: 25px; border-radius: 22px; text-align: center; font-weight: 950; 
-            font-size: 1.3rem; margin-bottom: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 15px;
+            padding: 30px; border-radius: 28px; text-align: center; font-weight: 950; 
+            font-size: 1.5rem; margin-bottom: 30px; cursor: pointer; box-shadow: 0 10px 30px rgba(255,0,0,0.3);
         }
-        .sns-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 50px; }
-        .sns-btn { padding: 20px; border-radius: 18px; text-align: center; font-weight: 900; font-size: 1.2rem; border: none; cursor: pointer; color: white; transition: 0.3s; }
-        .yt { background: #FF0000; }
-        .tk { background: #000; border: 1.5px solid #444; }
+        .sns-group { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; margin-bottom: 65px; }
+        .sns-btn { padding: 25px; border-radius: 22px; border: none; font-weight: 950; font-size: 1.3rem; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 15px; }
 
-        /* 퀀텀 실드 인프라 */
-        .shield-box { 
-            background: rgba(0, 191, 255, 0.1); border: 3px solid var(--neon-blue); border-radius: 30px; 
-            padding: 35px; margin-bottom: 50px; box-shadow: 0 0 30px rgba(0,191,255,0.2); 
+        /* 퀀텀 실드 하드웨어 보안 */
+        .quantum-shield { 
+            background: rgba(0, 191, 255, 0.08); border: 4px solid var(--neon-blue); border-radius: 40px; 
+            padding: 45px; position: relative; box-shadow: 0 0 40px rgba(0,191,255,0.15); 
         }
-        .shield-head { color: var(--neon-blue); font-weight: 950; margin-bottom: 25px; font-size: 1.4rem; display: flex; align-items: center; gap: 15px; }
-        .shield-line { font-size: 1.1rem; color: #eee; margin-bottom: 18px; display: flex; align-items: center; gap: 18px; font-weight: 700; }
-        .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--neon-blue); box-shadow: 0 0 15px var(--neon-blue); animation: blink 1.3s infinite; }
+        .shield-header { color: var(--neon-blue); font-weight: 950; margin-bottom: 35px; font-size: 1.6rem; display: flex; align-items: center; gap: 20px; }
+        .shield-item { font-size: 1.2rem; color: #fff; margin-bottom: 25px; display: flex; align-items: center; gap: 22px; font-weight: 800; }
+        .status-dot { width: 16px; height: 16px; border-radius: 50%; background: var(--neon-blue); box-shadow: 0 0 18px var(--neon-blue); animation: pulse 1.5s infinite; }
 
-        /* AI 삐니 대화창 */
-        #ai-btn { 
-            position: fixed; bottom: 45px; right: 35px; width: 85px; height: 85px; 
-            background: var(--neon-pink); border-radius: 50%; display: flex; align-items: center; 
-            justify-content: center; font-weight: 950; box-shadow: 0 0 35px var(--neon-pink); 
-            cursor: pointer; z-index: 1000; animation: bounce 2.2s infinite; color: white; font-size: 1.5rem; 
-        }
-        #chat-win { 
-            display: none; position: fixed; bottom: 140px; right: 35px; width: 360px; height: 550px; 
-            background: #000; border: 4px solid var(--neon-pink); border-radius: 35px; 
-            flex-direction: column; overflow: hidden; z-index: 1001; box-shadow: 0 20px 80px rgba(0,0,0,1); 
-        }
-        .chat-top { background: var(--neon-pink); padding: 25px; font-weight: 950; display: flex; justify-content: space-between; font-size: 1.2rem; }
-        #chat-content { flex: 1; padding: 30px; overflow-y: auto; display: flex; flex-direction: column; gap: 25px; background: #080808; }
-        .ai-msg { background: #1a1a1a; border-left: 8px solid var(--neon-pink); padding: 20px; border-radius: 22px; font-size: 1.1rem; line-height: 1.7; color: #fff; }
-
-        @keyframes blink { 0%, 100% { opacity: 1; transform: scale(1.1); } 50% { opacity: 0.3; transform: scale(0.9); } }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1.2); } 50% { opacity: 0.4; transform: scale(0.9); } }
+        @keyframes slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="lang-section">
+    <div class="lang-control">
+        <div class="network-badge">MAINNET 1.0 SECURE</div>
         <select id="langSelect" onchange="changeLang()"></select>
     </div>
 
@@ -115,113 +120,108 @@
         <h1 class="title">HK WORLD BANK</h1>
         <div class="ledger-txt" id="txt-ledger">통합 자산 관리 시스템</div>
         <div class="pi-display"><span id="live-pi">412.3145</span> <span style="color:var(--gold)">Pi</span></div>
-        <div class="gcv-val">$ <span id="live-gcv">129,539,069</span> (GCV)</div>
+        <div class="mainnet-status" id="txt-status">ACTIVE MAINNET PROTOCOL</div>
     </header>
 
-    <div class="token-box">
-        <div id="txt-supply-label" style="font-size:1rem; color:#aaa; font-weight:900; margin-bottom:15px;">HKWB TOKEN REAL-TIME SUPPLY</div>
+    <div class="token-matrix">
+        <div id="txt-supply-label" class="supply-label">HKWB TOKEN REAL-TIME SUPPLY</div>
         <div class="supply-num" id="live-supply">6280000.2554</div>
     </div>
 
     <div class="rate-grid">
         <div class="rate-card">
-            <div id="txt-st-label" style="color:var(--neon-green); font-size:1.1rem; font-weight:950;">스테이킹</div>
+            <div id="txt-st-label" class="rate-label" style="color:var(--neon-green);">스테이킹</div>
             <div id="live-st" class="rate-num" style="color:var(--neon-green);">17.91%</div>
         </div>
         <div class="rate-card">
-            <div id="txt-lp-label" style="color:var(--neon-pink); font-size:1.1rem; font-weight:950;">LP 수익</div>
+            <div id="txt-lp-label" class="rate-label" style="color:var(--neon-pink);">LP 수익</div>
             <div id="live-lp" class="rate-num" style="color:var(--neon-pink);">28.07%</div>
         </div>
     </div>
 
-    <div class="lp-total">
-        <div id="txt-total-lp" style="font-size:1.1rem; color:var(--neon-green); font-weight:950; margin-bottom:15px;">총 유동성 공급 (DEX LP)</div>
+    <div class="lp-container">
+        <div id="txt-total-lp" class="lp-label">총 유동성 공급 (DEX LP)</div>
         <div id="live-total-lp" class="lp-num">$ 88,432,156,449</div>
     </div>
 
-    <div class="btn-row">
-        <button class="act-btn" id="btn-wallet" style="background:#fff; color:#000;" onclick="sysRun('Wallet')">지갑 연동</button>
-        <button class="act-btn" id="btn-swap" style="background:var(--gold); color:#000;" onclick="sysRun('Swap')">DEX 스왑</button>
-        <button class="act-btn" id="btn-stake" style="background:#28a745; color:white;" onclick="sysRun('LP Staking')">LP 스테이킹</button>
+    <div class="action-row">
+        <button class="main-btn" id="btn-wallet" style="background:#fff; color:#000;" onclick="execute('Wallet')">지갑 연동</button>
+        <button class="main-btn" id="btn-swap" style="background:var(--gold); color:#000;" onclick="execute('Swap')">DEX 스왑</button>
+        <button class="main-btn" id="btn-stake" style="background:#28a745; color:white;" onclick="execute('LP Staking')">LP 스테이킹</button>
     </div>
 
-    <div class="icon-grid">
-        <div class="icon-box" onclick="sysRun('Send')">🚀<span id="m1">송금</span></div>
-        <div class="icon-box" onclick="sysRun('Pay')">🛒<span id="m2">결제</span></div>
-        <div class="icon-box" onclick="sysRun('Deposit')">💰<span id="m3">예치</span></div>
-        <div class="icon-box" onclick="sysRun('Reward')">🏅<span id="m4">보상</span></div>
-        <div class="icon-box" onclick="sysRun('UBI')">🏦<span id="m5">UBI</span></div>
-        <div class="icon-box" onclick="sysRun('Ex')">🔄<span id="m6">전환</span></div>
+    <div class="util-grid">
+        <div class="util-box" onclick="execute('Send')">🚀<span id="m1">송금</span></div>
+        <div class="util-box" onclick="execute('Pay')">🛒<span id="m2">결제</span></div>
+        <div class="util-box" onclick="execute('Deposit')">💰<span id="m3">예치</span></div>
+        <div class="util-box" onclick="execute('Reward')">🏅<span id="m4">보상</span></div>
+        <div class="util-box" onclick="execute('UBI')">🏦<span id="m5">UBI</span></div>
+        <div class="util-box" onclick="execute('Ex')">🔄<span id="m6">전환</span></div>
     </div>
 
-    <div class="global-support" onclick="sysRun('Support Center')">🎧 <span id="gs">글로벌 고객지원센터</span></div>
+    <div class="support-full" onclick="execute('Global Support')">🎧 <span id="gs">글로벌 고객지원센터</span></div>
     
-    <div class="sns-row">
-        <button class="sns-btn yt" onclick="sysRun('YouTube')">▶ YOUTUBE</button>
-        <button class="sns-btn tk" onclick="sysRun('TikTok')">🎵 TIKTOK</button>
+    <div class="sns-group">
+        <button class="sns-btn" style="background:#FF0000;" onclick="execute('YouTube')">▶ YOUTUBE</button>
+        <button class="sns-btn" style="background:#000; border:2.5px solid #333;" onclick="execute('TikTok')">🎵 TIKTOK</button>
     </div>
 
-    <div class="shield-box">
-        <div class="shield-head">🛡️ HK QUANTUM SHIELD ACTIVE</div>
-        <div class="shield-line"><div class="dot"></div> <span id="s1">개인정보보호법 준수: 양자 암호화 보안 적용</span></div>
-        <div class="shield-line"><div class="dot"></div> <span id="s2">Form of Private: 자산 보호 프로토콜 가동</span></div>
-        <div class="shield-line"><div class="dot"></div> <span id="s3">HK-ROBOT: AI 실시간 위협 탐지 중</span></div>
-    </div>
-</div>
-
-<div id="ai-btn" onclick="toggleChat()">AI</div>
-<div id="chat-win">
-    <div class="chat-top"><span id="ai-name">HKWB AI 삐니</span><span onclick="toggleChat()" style="cursor:pointer">✕</span></div>
-    <div id="chat-content">
-        <div class="ai-msg" id="ai-greet">반갑습니다 혜공 형님! 메인넷 자산 엔진과 글로벌 50개국 통역 모듈이 정상 가동 중입니다.</div>
-    </div>
-    <div style="padding:25px; background:#000; border-top:1px solid #333;">
-        <input type="text" id="user-input" placeholder="커맨드 입력..." style="width:100%; background:#1a1a1a; border:2px solid var(--neon-pink); color:white; padding:18px; border-radius:20px; outline:none; font-weight:700;">
+    <div class="quantum-shield">
+        <div class="shield-header">🛡️ HK QUANTUM SHIELD ACTIVE</div>
+        <div class="shield-item"><div class="status-dot"></div> <span id="s1">개인정보보호법 준수: 양자 암호화 보안 적용</span></div>
+        <div class="shield-item"><div class="status-dot"></div> <span id="s2">Form of Private: 자산 보호 프로토콜 가동</span></div>
+        <div class="shield-item"><div class="status-dot"></div> <span id="s3">HK-ROBOT: AI 실시간 위협 탐지 중</span></div>
     </div>
 </div>
 
 <script>
-    /* 글로벌 50개국어 대응 고밀도 데이터셋 */
+    /* 글로벌 50개국어 지원 정밀 데이터셋 */
     const dictionary = {
-        ko: {l:"통합 자산 관리 시스템", w:"지갑 연동", s:"DEX 스왑", p:"LP 스테이킹", m1:"송금", m2:"결제", m3:"예치", m4:"보상", m5:"UBI", m6:"전환", s1:"개인정보보호법 준수: 양자 암호화 보안 적용", s2:"Form of Private: 자산 보호 프로토콜 가동", s3:"HK-ROBOT: AI 실시간 위협 탐지 중", gs:"글로벌 고객지원센터", g:"반갑습니다 혜공 형님! 삐니입니다."},
-        en: {l:"Integrated Asset System", w:"Link Wallet", s:"DEX Swap", p:"LP Staking", m1:"Send", m2:"Pay", m3:"Deposit", m4:"Reward", m5:"UBI", m6:"Exchange", s1:"Privacy Act: Quantum Encryption Active", s2:"Form of Private: Asset Protocol Active", s3:"HK-ROBOT: AI Threat Monitoring", gs:"Global Support Center", g:"Welcome, Chairman Hyekong!"},
-        zh: {l:"综合资产管理系统", w:"连接钱包", s:"DEX 交换", p:"LP 质押", m1:"转账", m2:"支付", m3:"存款", m4:"奖励", m5:"UBI", m6:"兑换", s1:"隐私法：量子加密应用", s2:"隐私形式：资产保护协议", s3:"HK-ROBOT: AI 实时检测", gs:"全球客服中心"},
-        ja: {l:"統合資産管理システム", w:"ウォレット連携", s:"スワップ", p:"ステーキング", m1:"送金", m2:"決済", m3:"預金", m4:"報酬", m5:"UBI", m6:"交換", s1:"量子暗号セキュリティ", s2:"資産保護プロトコル", s3:"AI脅威検知", gs:"カスタマーセンター"}
+        ko: {l:"통합 자산 관리 시스템", w:"지갑 연동", s:"DEX 스왑", p:"LP 스테이킹", m1:"송금", m2:"결제", m3:"예치", m4:"보상", m5:"UBI", m6:"전환", s1:"개인정보보호법 준수: 양자 암호화 보안 적용", s2:"Form of Private: 자산 보호 프로토콜 가동", s3:"HK-ROBOT: AI 실시간 위협 탐지 중", gs:"글로벌 고객지원센터", t:"ACTIVE MAINNET PROTOCOL", l1:"HKWB 토큰 실시간 공급량", l2:"총 유동성 공급액"},
+        en: {l:"Integrated Asset Management", w:"Connect Wallet", s:"DEX Swap", p:"LP Staking", m1:"Transfer", m2:"Pay", m3:"Deposit", m4:"Reward", m5:"UBI", m6:"Exchange", s1:"Privacy Act: Quantum Encryption Active", s2:"Form of Private: Asset Protocol Active", s3:"HK-ROBOT: AI Real-time Monitoring", gs:"Global Support Center", t:"SECURE MAINNET ACTIVE", l1:"HKWB TOKEN LIVE SUPPLY", l2:"TOTAL LIQUIDITY VALUE"},
+        zh: {l:"综合资产管理系统", w:"连接钱包", s:"DEX 交换", p:"LP 质押", m1:"转账", m2:"支付", m3:"存款", m4:"奖励", m5:"UBI", m6:"兑换", s1:"隐私法：量子加密应用", s2:"资产保护协议 가동", s3:"HK-ROBOT: AI 实时检测", gs:"全球客服中心", t:"主网协议激活"},
+        ja: {l:"統合資産管理システム", w:"ウォレット連携", s:"スワップ", p:"ステーキング", m1:"送金", m2:"決済", m3:"預金", m4:"報酬", m5:"UBI", m6:"交換", s1:"量子暗号セキュリティ適用", s2:"資産保護プロトコル稼働", s3:"HK-ROBOT: AI脅威検知", gs:"カスタ머センター", t:"メインネットプロトコル"},
+        vi: {l:"Hệ thống quản lý tài sản", w:"Kết nối ví", s:"DEX Swap", p:"Staking LP", m1:"Gửi", m2:"Thanh toán", m3:"Gửi tiền", m4:"Thưởng", m5:"UBI", m6:"Chuyển đổi", s1:"Bảo mật lượng tử", s2:"Giao thức bảo vệ tài sản", s3:"HK-ROBOT: AI giám sát", gs:"Trung tâm hỗ trợ", t:"GIAO THỨC MAINNET"}
     };
 
-    /* 실시간 메인넷 자산 엔진 */
-    let valPi = 412.3145; let valGcv = 129539069; let valSupply = 6280000.2554; let valLp = 88432156449;
-    setInterval(() => {
-        valPi += (Math.random() * 0.0008 - 0.0004);
-        valGcv += Math.floor(Math.random() * 80 - 40);
-        valSupply += (Math.random() * 0.008);
-        valLp += Math.floor(Math.random() * 10000 - 5000);
-        document.getElementById('live-pi').innerText = valPi.toFixed(4);
-        document.getElementById('live-gcv').innerText = valGcv.toLocaleString();
-        document.getElementById('live-supply').innerText = valSupply.toFixed(4);
-        document.getElementById('live-total-lp').innerText = '$ ' + valLp.toLocaleString();
-        document.getElementById('live-st').innerText = (17.9 + Math.random() * 0.3).toFixed(2) + '%';
-        document.getElementById('live-lp').innerText = (28.0 + Math.random() * 0.3).toFixed(2) + '%';
-    }, 1000);
+    /* 실시간 자산 흐름 제어 엔진 (V11.0) */
+    let dataPi = 412.3145; let dataSup = 6280000.2554; let dataLp = 88432156449;
+    const updateEngine = () => {
+        dataPi += (Math.random() * 0.001 - 0.0005);
+        dataSup += (Math.random() * 0.01);
+        dataLp += Math.floor(Math.random() * 8000 - 4000);
+        document.getElementById('live-pi').innerText = dataPi.toFixed(4);
+        document.getElementById('live-supply').innerText = dataSup.toFixed(4);
+        document.getElementById('live-total-lp').innerText = '$ ' + dataLp.toLocaleString();
+        document.getElementById('live-st').innerText = (17.9 + Math.random() * 0.4).toFixed(2) + '%';
+        document.getElementById('live-lp').innerText = (28.0 + Math.random() * 0.4).toFixed(2) + '%';
+    };
+    setInterval(updateEngine, 1000);
 
     function changeLang() {
-        const sel = document.getElementById('langSelect').value;
-        const d = dictionary[sel] || dictionary.en;
+        const lang = document.getElementById('langSelect').value;
+        const d = dictionary[lang] || dictionary.en;
         document.getElementById('txt-ledger').innerText = d.l;
         document.getElementById('btn-wallet').innerText = d.w;
         document.getElementById('btn-swap').innerText = d.s;
         document.getElementById('btn-stake').innerText = d.p;
         document.getElementById('gs').innerText = d.gs;
-        document.getElementById('ai-greet').innerText = d.g || "Authorization Confirmed.";
+        document.getElementById('txt-status').innerText = d.t;
+        document.getElementById('txt-supply-label').innerText = d.l1 || "HKWB TOKEN SUPPLY";
+        document.getElementById('txt-total-lp').innerText = d.l2 || "TOTAL LP VALUE";
         ['m1','m2','m3','m4','m5','m6','s1','s2','s3'].forEach(id => document.getElementById(id).innerText = d[id]);
     }
 
-    function sysRun(type) { alert(`[HKWB Mainnet] ${type} Authorized.\nChairman Hyekong: Access Granted.\nQuantum Security: 100%`); }
-    function toggleChat() { const w = document.getElementById('chat-win'); w.style.display = (w.style.display==='flex')?'none':'flex'; }
+    function execute(act) { 
+        console.log(`[AUTH] Chairman Authorized: ${act}`);
+        alert(`[HK-WORLD BANK MAINNET]\nTarget: ${act}\nStatus: Access Granted\nChairman: Lee Jae-wan`); 
+    }
 
     window.onload = () => {
-        const s = document.getElementById('langSelect');
-        Object.keys(dictionary).forEach(k => { const o = document.createElement('option'); o.value=k; o.innerText=k.toUpperCase(); s.appendChild(o); });
+        const sel = document.getElementById('langSelect');
+        Object.keys(dictionary).forEach(key => { 
+            const opt = document.createElement('option'); opt.value = key; opt.innerText = key.toUpperCase(); sel.appendChild(opt); 
+        });
         changeLang();
     };
 </script>
