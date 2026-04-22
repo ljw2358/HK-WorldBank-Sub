@@ -24,7 +24,6 @@
         .val-box { background: rgba(57, 255, 20, 0.1); color: var(--neon-green); padding: 10px 25px; border: 1px solid var(--neon-green); border-radius: 50px; display: inline-block; font-weight: bold; font-variant-numeric: tabular-nums; }
 
         .token-info { background: #1a1a1a; padding: 15px; border-radius: 15px; margin-bottom: 20px; border: 1px solid var(--neon-blue); text-align: center; }
-        /* [4번] 발행량 6,280,000.2141 고정 */
         .token-supply { color: var(--neon-blue); font-weight: bold; font-size: 1.4rem; font-variant-numeric: tabular-nums; }
 
         .lp-total-box { border: 2px solid var(--neon-green); border-radius: 20px; padding: 20px; text-align: center; margin-bottom: 20px; background: rgba(57, 255, 20, 0.05); }
@@ -37,19 +36,16 @@
         .icon-card { background: var(--card); padding: 18px 10px; border-radius: 15px; text-align: center; border: 1px solid #222; cursor: pointer; }
         .icon-card span { display: block; margin-top: 8px; font-size: 0.85rem; font-weight: bold; color: #ddd; }
 
-        /* [요청사항] 유튜브, 틱톡 버튼 강화 디자인 */
         .social-box { display: flex; gap: 10px; margin-bottom: 25px; }
         .social-link { flex: 1; padding: 15px; text-align: center; border-radius: 12px; text-decoration: none; font-weight: bold; color: white; font-size: 0.9rem; transition: 0.3s; }
         .yt-btn { background: #FF0000; border: 1px solid #cc0000; box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3); }
         .tk-btn { background: #000; border: 1px solid #fff; box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1); }
-        .social-link:active { transform: scale(0.95); }
 
         .center-btn { width: 100%; background: linear-gradient(45deg, #ff4d6d, #ff758c); color: white; padding: 18px; border-radius: 15px; border: none; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
         .faq-section { display: none; background: #0a0a0a; border-radius: 0 0 20px 20px; padding: 20px; border: 1px solid #444; border-top: none; margin-bottom: 30px; max-height: 500px; overflow-y: auto; }
         .faq-q { color: var(--gold); font-weight: bold; margin-top: 15px; border-left: 3px solid var(--gold); padding-left: 8px; }
         .faq-a { color: #ccc; font-size: 0.85rem; padding: 10px 0; border-bottom: 1px solid #222; }
 
-        /* [5번] 삐니의 분신 챗봇 */
         #ai-bot { position: fixed; bottom: 30px; right: 20px; width: 65px; height: 65px; background: var(--neon-lp); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 0 20px var(--neon-lp); cursor: pointer; z-index: 3000; color: white; animation: pulse 2s infinite; }
         #chat-window { display: none; position: fixed; bottom: 105px; right: 20px; width: 330px; height: 480px; background: #111; border: 2px solid var(--neon-lp); border-radius: 20px; z-index: 3001; flex-direction: column; overflow: hidden; }
         #chat-header { background: var(--neon-lp); padding: 15px; font-weight: bold; display: flex; justify-content: space-between; }
@@ -128,7 +124,60 @@
 </div>
 
 <script>
-    // [1번] 50개국 언어 리스트
+    // [압도적 분량] 50개국 풀 번역 데이터 세트 (i18n)
+    const i18n = {
+        ko: { ledger:"통합 자산 관리 시스템", wallet:"PI 연결", swap:"DEX 스왑", stake:"LP 예치", center:"글로벌 AI 지원센터", m1:"송금", m2:"결제", m3:"예치", m4:"보상", m5:"UBI", m6:"스왑", lp:"전체 유동성 공급" },
+        en: { ledger:"Asset Management System", wallet:"PI Connect", swap:"DEX Swap", stake:"LP Deposit", center:"Global AI Center", m1:"Send", m2:"Pay", m3:"Deposit", m4:"Reward", m5:"UBI", m6:"Swap", lp:"Total Liquidity" },
+        zh: { ledger:"资产管理系统", wallet:"PI 连接", swap:"DEX 交换", stake:"LP 存款", center:"全球 AI 中心", m1:"发送", m2:"支付", m3:"存款", m4:"奖励", m5:"UBI", m6:"交换", lp:"总流动性" },
+        ja: { ledger:"資産管理システム", wallet:"PI 接続", swap:"DEX スワップ", stake:"LP 預金", center:"グローバル AI センター", m1:"送金", m2:"決済", m3:"預金", m4:"報酬", m5:"UBI", m6:"スワップ", lp:"総流動性" },
+        vi: { ledger:"Hệ thống quản lý tài sản", wallet:"Kết nối PI", swap:"DEX Swap", stake:"LP Tiền gửi", center:"Trung tâm AI toàn cầu", m1:"Gửi", m2:"Thanh toán", m3:"Gửi tiền", m4:"Thưởng", m5:"UBI", m6:"Swap", lp:"Tổng thanh khoản" },
+        fr: { ledger:"Système de gestion", wallet:"Connexion PI", swap:"DEX Swap", stake:"LP Dépôt", center:"Centre AI mondial", m1:"Envoyer", m2:"Payer", m3:"Dépôt", m4:"Récompense", m5:"UBI", m6:"Swap", lp:"Liquidité totale" },
+        de: { ledger:"Asset-Management-System", wallet:"PI Verbinden", swap:"DEX Swap", stake:"LP Einzahlung", center:"Globales KI-Zentrum", m1:"Senden", m2:"Zahlen", m3:"Einzahlen", m4:"Belohnung", m5:"UBI", m6:"Swap", lp:"Gesamtliquidität" },
+        es: { ledger:"Sistema de gestión", wallet:"Conexión PI", swap:"DEX Swap", stake:"LP Depósito", center:"Centro AI global", m1:"Enviar", m2:"Pagar", m3:"Depósito", m4:"Premio", m5:"UBI", m6:"Swap", lp:"Liquidez total" },
+        pt: { ledger:"Sistema de gestão", wallet:"Conexão PI", swap:"DEX Swap", stake:"LP Depósito", center:"Centro AI global", m1:"Enviar", m2:"Pagar", m3:"Depósito", m4:"Prêmio", m5:"UBI", m6:"Swap", lp:"Liquidez total" },
+        ru: { ledger:"Система управления", wallet:"Подключить PI", swap:"DEX Swap", stake:"LP Депозит", center:"Глобальный AI центр", m1:"Отправить", m2:"Оплатить", m3:"Депозит", m4:"Награда", m5:"UBI", m6:"Swap", lp:"Общая ликвидность" },
+        hi: { ledger:"परिसंपत्ति प्रबंधन प्रणाली", wallet:"PI कनेक्ट", swap:"DEX स्वैप", stake:"LP जमा", center:"वैश्विक एआई केंद्र", m1:"भेजें", m2:"भुगतान", m3:"जमा", m4:"पुरस्कार", m5:"UBI", m6:"स्वैप", lp:"कुल तरलता" },
+        ar: { ledger:"نظام إدارة الأصول", wallet:"اتصال PI", swap:"DEX تبادل", stake:"LP إيداع", center:"مركز الذكاء الاصطناعي العالمي", m1:"إرسال", m2:"دفع", m3:"إيداع", m4:"مكافأة", m5:"UBI", m6:"تبادل", lp:"إجمالي السيولة" },
+        th: { ledger:"ระบบจัดการสินทรัพย์", wallet:"เชื่อมต่อ PI", swap:"DEX สวอป", stake:"LP ฝาก", center:"ศูนย์ AI ระดับโลก", m1:"ส่ง", m2:"จ่าย", m3:"ฝาก", m4:"รางวัล", m5:"UBI", m6:"สวอป", lp:"สภาพคล่องทั้งหมด" },
+        id: { ledger:"Sistem Manajemen Aset", wallet:"Hubungkan PI", swap:"DEX Swap", stake:"LP Setoran", center:"Pusat AI Global", m1:"Kirim", m2:"Bayar", m3:"Deposit", m4:"Hadiah", m5:"UBI", m6:"Swap", lp:"Total Likuiditas" },
+        tr: { ledger:"Varlık Yönetim Sistemi", wallet:"PI Bağlan", swap:"DEX Swap", stake:"LP Mevduat", center:"Küresel AI Merkezi", m1:"Gönder", m2:"Öde", m3:"Mevduat", m4:"Ödül", m5:"UBI", m6:"Swap", lp:"Toplam Likidite" },
+        it: { ledger:"Sistema di gestione", wallet:"Connetti PI", swap:"DEX Swap", stake:"LP Deposito", center:"Centro AI globale", m1:"Invia", m2:"Paga", m3:"Deposito", m4:"Premio", m5:"UBI", m6:"Swap", lp:"Liquidità totale" },
+        nl: { ledger:"Beheersysteem", wallet:"PI Verbinden", swap:"DEX Swap", stake:"LP Storting", center:"Globaal AI-centrum", m1:"Stuur", m2:"Betaal", m3:"Storten", m4:"Beloning", m5:"UBI", m6:"Swap", lp:"Totale liquiditeit" },
+        pl: { ledger:"System zarządzania", wallet:"Połącz PI", swap:"DEX Swap", stake:"LP Depozyt", center:"Globalne centrum AI", m1:"Wyślij", m2:"Zapłać", m3:"Depozyt", m4:"Nagroda", m5:"UBI", m6:"Swap", lp:"Całkowita płynność" },
+        sv: { ledger:"Hanteringssystem", wallet:"Anslut PI", swap:"DEX Swap", stake:"LP Insättning", center:"Globalt AI-center", m1:"Skicka", m2:"Betala", m3:"Insättning", m4:"Belöning", m5:"UBI", m6:"Swap", lp:"Total likviditet" },
+        no: { ledger:"Styringssystem", wallet:"Koble til PI", swap:"DEX Swap", stake:"LP Innskudd", center:"Globalt AI-senter", m1:"Send", m2:"Betal", m3:"Innskudd", m4:"Belønning", m5:"UBI", m6:"Swap", lp:"Total likviditet" },
+        fi: { ledger:"Hallintajärjestelmä", wallet:"Yhdistä PI", swap:"DEX Swap", stake:"LP Talletus", center:"Globaali AI-keskus", m1:"Lähetä", m2:"Maksa", m3:"Talletus", m4:"Palkinto", m5:"UBI", m6:"Swap", lp:"Kokonaislikviditeetti" },
+        da: { ledger:"Styresystem", wallet:"Forbind PI", swap:"DEX Swap", stake:"LP Indskud", center:"Globalt AI-center", m1:"Send", m2:"Betal", m3:"Indskud", m4:"Belønning", m5:"UBI", m6:"Swap", lp:"Total likviditet" },
+        el: { ledger:"Σύστημα διαχείρισης", wallet:"Σύνδεση PI", swap:"DEX Swap", stake:"LP Κατάθεση", center:"Παγκόσμιο κέντρο AI", m1:"Στείλε", m2:"Πλήρωσε", m3:"Κατάθεση", m4:"Αμοιβή", m5:"UBI", m6:"Swap", lp:"Συνολική ρευστότητα" },
+        he: { ledger:"מערכת ניהול", wallet:"חבר PI", swap:"DEX Swap", stake:"LP פיקדון", center:"מרכז AI גלובלי", m1:"שלח", m2:"שלם", m3:"פיקדון", m4:"פרס", m5:"UBI", m6:"Swap", lp:"נזילות כוללת" },
+        ro: { ledger:"Sistem de management", wallet:"Conectare PI", swap:"DEX Swap", stake:"LP Depozit", center:"Centrul AI global", m1:"Trimite", m2:"Plătește", m3:"Depozit", m4:"Recompensă", m5:"UBI", m6:"Swap", lp:"Lichiditate totală" },
+        hu: { ledger:"Kezelőrendszer", wallet:"PI csatlakozás", swap:"DEX Swap", stake:"LP letét", center:"Globális AI központ", m1:"Küldés", m2:"Fizetés", m3:"Letét", m4:"Jutalom", m5:"UBI", m6:"Swap", lp:"Összes likviditás" },
+        cs: { ledger:"Systém správy", wallet:"Připojit PI", swap:"DEX Swap", stake:"LP Vklad", center:"Globální AI centrum", m1:"Poslat", m2:"Zaplatit", m3:"Vklad", m4:"Odměna", m5:"UBI", m6:"Swap", lp:"Celková likvidita" },
+        uk: { ledger:"Система управління", wallet:"Підключити PI", swap:"DEX Swap", stake:"LP Депозит", center:"Глобальний AI центр", m1:"Надіслати", m2:"Оплатити", m3:"Депозит", m4:"Нагорода", m5:"UBI", m6:"Swap", lp:"Загальна ліквідність" },
+        ms: { ledger:"Sistem Pengurusan", wallet:"Sambungkan PI", swap:"DEX Swap", stake:"LP Deposit", center:"Pusat AI Global", m1:"Hantar", m2:"Bayar", m3:"Deposit", m4:"Ganjaran", m5:"UBI", m6:"Swap", lp:"Jumlah Kecairan" },
+        fil: { ledger:"Sistema ng Pamamahala", wallet:"Ikonekta ang PI", swap:"DEX Swap", stake:"LP Deposito", center:"Global AI Center", m1:"Ipadala", m2:"Magbayad", m3:"Deposito", m4:"Gantimpala", m5:"UBI", m6:"Swap", lp:"Kabuuang Liquidity" },
+        bn: { ledger:"ব্যবস্থাপনা পদ্ধতি", wallet:"PI সংযোগ করুন", swap:"DEX অদলবদল", stake:"LP আমানত", center:"গ্লোবাল এআই সেন্টার", m1:"পাঠান", m2:"পে", m3:"আমানত", m4:"পুরস্কার", m5:"UBI", m6:"অদলবদল", lp:"মোট তারল্য" },
+        pa: { ledger:"ਪ੍ਰਬੰਧਨ ਪ੍ਰਣਾਲੀ", wallet:"PI ਕਨੈਕਟ ਕਰੋ", swap:"DEX ਸਵੈਪ", stake:"LP ਜਮ੍ਹਾਂ", center:"ਗਲੋਬਲ AI ਕੇਂਦਰ", m1:"ਭੇਜੋ", m2:"ਭੁਗਤਾਨ", m3:"ਜਮ੍ਹਾਂ", m4:"ਇਨਾਮ", m5:"UBI", m6:"ਸਵੈਪ", lp:"ਕੁੱਲ ਤਰਲਤਾ" },
+        te: { ledger:"నిర్వహణ వ్యవస్థ", wallet:"PI కనెక్ట్", swap:"DEX స్వాప్", stake:"LP డిపాజిట్", center:"గ్లోబల్ AI సెంటర్", m1:"పంపు", m2:"చెల్లించు", m3:"డిపాజిట్", m4:"బహుమతి", m5:"UBI", m6:"స్వాప్", lp:"మొత్తం లిక్విడిటీ" },
+        ta: { ledger:"மேலாண்மை அமைப்பு", wallet:"PI இணைக்கவும்", swap:"DEX ஸ்வாப்", stake:"LP வைப்பு", center:"உலகளாவிய AI மையம்", m1:"அனுப்பு", m2:"பணம்", m3:"வைப்பு", m4:"வெகுமதி", m5:"UBI", m6:"ஸ்வாப்", lp:"மொத்த பணப்புழக்கம்" },
+        mr: { ledger:"व्यवस्थापन प्रणाली", wallet:"PI कनेक्ट करा", swap:"DEX स्वॅप", stake:"LP ठेव", center:"जागतिक AI केंद्र", m1:"पाठवा", m2:"पे", m3:"ठेव", m4:"बक्षीस", m5:"UBI", m6:"स्वॅप", lp:"एकूण तरलता" },
+        kn: { ledger:"ನಿರ್ವಹಣಾ ವ್ಯವಸ್ಥೆ", wallet:"PI ಸಂಪರ್ಕಿಸಿ", swap:"DEX ಸ್ವಾಪ್", stake:"LP ಠೇವಣಿ", center:"ಜಾಗತಿಕ AI ಕೇಂದ್ರ", m1:"ಕಳುಹಿಸಿ", m2:"ಪಾವತಿಸಿ", m3:"ಠೇವಣಿ", m4:"ಬಹುಮಾನ", m5:"UBI", m6:"ಸ್ವಾಪ್", lp:"ಒಟ್ಟು ದ್ರವ್ಯತೆ" },
+        gu: { ledger:"મેનેજમેન્ટ સિસ્ટમ", wallet:"PI કનેક્ટ કરો", swap:"DEX સ્વેપ", stake:"LP ડિપોઝિટ", center:"ગ્લોબલ AI સેન્ટર", m1:"મોકલો", m2:"ચૂકવો", m3:"ડિપોઝિટ", m4:"પુરસ્કાર", m5:"UBI", m6:"સ્વેપ", lp:"કુલ તરલતા" },
+        ml: { ledger:"മാനേജ് മെന്റ് സിസ്റ്റം", wallet:"PI ബന്ധിപ്പിക്കുക", swap:"DEX സ്വാപ്പ്", stake:"LP നിക്ഷേപം", center:"ഗ്ലോബൽ AI സെന്റർ", m1:"അയക്കുക", m2:"പേ", m3:"നിക്ഷേപം", m4:"പ്രതിഫലം", m5:"UBI", m6:"സ്വാപ്പ്", lp:"ആകെ ലിക്വിഡിറ്റി" },
+        my: { ledger:"စီမံခန့်ခွဲမှုစနစ်", wallet:"PI ချိတ်ဆက်ပါ", swap:"DEX Swap", stake:"LP အပ်ငွေ", center:"ကမ္ဘာလုံးဆိုင်ရာ AI စင်တာ", m1:"ပို့ပါ", m2:"ပေးချေပါ", m3:"အပ်ငွေ", m4:"ဆုလာဘ်", m5:"UBI", m6:"Swap", lp:"စုစုပေါင်းငွေဖြစ်လွယ်မှု" },
+        km: { ledger:"ប្រព័ន្ធគ្រប់គ្រង", wallet:"ភ្ជាប់ PI", swap:"DEX Swap", stake:"LP ប្រាក់បញ្ញើ", center:"មជ្ឈមណ្ឌល AI សកល", m1:"ផ្ញើ", m2:"បង់ប្រាក់", m3:"ប្រាក់បញ្ញើ", m4:"រង្វាន់", m5:"UBI", m6:"Swap", lp:"សាច់ប្រាក់សរុប" },
+        lo: { ledger:"ລະບົບການຈັດການ", wallet:"ເຊື່ອມຕໍ່ PI", swap:"DEX Swap", stake:"LP ເງິນຝາກ", center:"ສູນ AI ທົ່ວໂລກ", m1:"ສົ່ງ", m2:"ຈ່າຍ", m3:"ເງິນຝາກ", m4:"ລາງວັນ", m5:"UBI", m6:"Swap", lp:"สภาพคล่องทั้งหมด" },
+        am: { ledger:"የአስተዳደር ስርዓት", wallet:"PI ያገናኙ", swap:"DEX መለዋወጥ", stake:"LP ተቀማጭ", center:"ዓለም አቀፍ AI ማዕከል", m1:"ላክ", m2:"ክፈል", m3:"ተቀማጭ", m4:"ሽልማት", m5:"UBI", m6:"መለዋወጥ", lp:"ጠቅላላ ፈሳሽነት" },
+        sw: { ledger:"Mfumo wa usimamizi", wallet:"Unganisha PI", swap:"DEX Swap", stake:"LP Amana", center:"Kituo cha AI cha Global", m1:"Tuma", m2:"Lipa", m3:"Amana", m4:"Tuzo", m5:"UBI", m6:"Swap", lp:"Liquidity ya Jumla" },
+        zu: { ledger:"Isistimu yokuphatha", wallet:"Xhuma i-PI", swap:"DEX Swap", stake:"LP Idiphozithi", center:"Isikhungo se-AI somhlaba", m1:"Thumela", m2:"Khokha", m3:"Idiphozithi", m4:"Umklomelo", m5:"UBI", m6:"Swap", lp:"Uketshezi Lonke" },
+        af: { ledger:"Bestuurstelsel", wallet:"Koppel PI", swap:"DEX Swap", stake:"LP Deposito", center:"Globale AI-sentrum", m1:"Stuur", m2:"Betaal", m3:"Deposito", m4:"Beloning", m5:"UBI", m6:"Swap", lp:"Totale likwiditeit" },
+        bg: { ledger:"Система за управление", wallet:"Свържи PI", swap:"DEX Swap", stake:"LP Депозит", center:"Глобален AI център", m1:"Изпрати", m2:"Плати", m3:"Депозит", m4:"Награда", m5:"UBI", m6:"Swap", lp:"Обща ликвидност" },
+        sr: { ledger:"Систем управљања", wallet:"Повежи ПИ", swap:"DEX Свап", stake:"LP Депозит", center:"Глобални АИ центар", m1:"Пошаљи", m2:"Плати", m3:"Депозит", m4:"Награда", m5:"УБИ", m6:"Свап", lp:"Укупна ликвидност" },
+        hr: { ledger:"Sustav upravljanja", wallet:"Poveži PI", swap:"DEX Swap", stake:"LP Depozit", center:"Globalni AI centar", m1:"Pošalji", m2:"Plati", m3:"Depozit", m4:"Nagrada", m5:"UBI", m6:"Swap", lp:"Ukupna likvidnost" },
+        sk: { ledger:"Systém správy", wallet:"Pripojiť PI", swap:"DEX Swap", stake:"LP Vklad", center:"Globálne AI centrum", m1:"Poslať", m2:"Zaplatiť", m3:"Vklad", m4:"Odmena", m5:"UBI", m6:"Swap", lp:"Celková likvidita" },
+        sl: { ledger:"Sistem upravljanja", wallet:"Poveži PI", swap:"DEX Swap", stake:"LP Polog", center:"Globalni AI center", m1:"Pošlji", m2:"Plačaj", m3:"Polog", m4:"Nagrada", m5:"UBI", m6:"Swap", lp:"Skupna likvidnost" }
+    };
+
     const languages = [
         {c:"ko", n:"한국어"}, {c:"en", n:"English"}, {c:"zh", n:"中文"}, {c:"ja", n:"日本語"}, {c:"vi", n:"Tiếng Việt"},
         {c:"fr", n:"Français"}, {c:"de", n:"Deutsch"}, {c:"es", n:"Español"}, {c:"pt", n:"Português"}, {c:"ru", n:"Русский"},
@@ -142,67 +191,31 @@
         {c:"bg", n:"Български"}, {c:"sr", n:"Српски"}, {c:"hr", n:"Hrvatski"}, {c:"sk", n:"Slovenčina"}, {c:"sl", n:"Slovenščina"}
     ];
 
-    const i18n = {
-        ko: { ledger: "통합 자산 관리 시스템", wallet: "PI 연결", swap: "DEX 스왑", stake: "LP 예치", center: "글로벌 AI 지원센터 (FAQ 20)", m1:"송금", m2:"결제", m3:"예치", m4:"보상", m5:"UBI", m6:"스왑" },
-        en: { ledger: "Asset Management System", wallet: "PI Connect", swap: "DEX Swap", stake: "LP Deposit", center: "Global AI Support Center", m1:"Send", m2:"Pay", m3:"Deposit", m4:"Reward", m5:"UBI", m6:"Swap" }
-    };
-
-    // [3번] 파이 SDK 연동 로직
     const PiSDK = {
         connect: async () => {
             if (window.Pi) {
                 try {
                     const scopes = ['payments', 'username', 'wallet_address'];
                     const auth = await Pi.authenticate(scopes, (p) => console.log(p));
-                    alert(`[HKWB 보안] 환영합니다, ${auth.user.username}님!`);
-                } catch (e) { alert("연결 오류: 파이 브라우저에서 실행하십시오."); }
-            } else { alert("현재 테스트 모드. 파이 브라우저에서 실제 지갑과 통신합니다."); }
+                    alert(`[HKWB Security] Welcome, ${auth.user.username}!`);
+                } catch (e) { alert("Error: Use Pi Browser."); }
+            } else { alert("Test Mode: Syncs with wallet in Pi Browser."); }
         },
-        swap: () => alert("GCV $314,159 기반 전환 엔진 대기 중..."),
-        provideLP: () => alert("4월 26일 자정: 1,080 Pi 유동성 공급 프로세스 예약 완료."),
-        action: (t) => alert(`[HKWB Protocol] ${t.toUpperCase()} 모듈 정상 가동 중...`)
+        swap: () => alert("GCV $314,159 Swap Engine Ready..."),
+        provideLP: () => alert("Apr 26: 1,080 Pi LP Deposit Scheduled."),
+        action: (t) => alert(`[HKWB Protocol] ${t.toUpperCase()} Module Active.`)
     };
 
-    // [2번] FAQ 20개 리스트
     function loadFaq() {
         const faqs = [
-            {q: "UBI 비전은 무엇입니까?", a: "전 인류에게 조건 없는 디지털 기본소득을 지급하는 것입니다."},
-            {q: "4월 26일은 어떤 날입니까?", a: "1080개 파이를 LP에 예치하여 생태계 거버넌스를 선포하는 날입니다."},
-            {q: "GCV 가격은 무엇입니까?", a: "1 Pi = $314,159의 합의 가치를 지향합니다."},
-            {q: "총 발행량의 의미는?", a: "6,280,000.2141개로 희소성과 가치 안정을 동시에 잡았습니다."},
-            {q: "수수료 정책은?", a: "발생하는 모든 수수료는 UBI 재원으로 100% 환원됩니다."},
-            {q: "5월 18일 메인넷 동기화란?", a: "테스트 자산이 실제 메인넷 자산으로 인정받는 시점입니다."},
-            {q: "보안은 어떻게 관리됩니까?", a: "양자 내성 암호화와 AI 삐니가 24시간 실시간 감시합니다."},
-            {q: "글로벌 결제가 가능합니까?", a: "전 세계 어디서든 QR 코드로 즉시 결제 가능합니다."},
-            {q: "스테이킹 수익률은?", a: "현재 연 17.69%의 스테이킹 보상을 지급하고 있습니다."},
-            {q: "누가 참여할 수 있습니까?", a: "파이 네트워크 사용자라면 전 세계 누구나 참여 가능합니다."},
-            {q: "노드 운영자의 혜택은?", a: "트랜잭션 검증 보상으로 HKWB 토큰을 획득합니다."},
-            {q: "지갑 분실 시 복구는?", a: "파이 공식 복구 구절을 통해 안전하게 복구할 수 있습니다."},
-            {q: "해커톤 이후의 계획은?", a: "글로벌 금융 인프라를 통해 전 세계로 확장할 것입니다."},
-            {q: "AI 삐니의 특징은?", a: "형님의 자산 관리 및 비전을 학습한 특화 인공지능입니다."},
-            {q: "몇 개국 언어를 지원합니까?", a: "현재 50개국 이상의 글로벌 언어를 공식 지원합니다."},
-            {q: "법적 문제는 없습니까?", a: "각국의 규제 가이드라인을 준수하며 투명하게 운영됩니다."},
-            {q: "추가 발행이 있습니까?", a: "정해진 총 발행량 외에 추가 발행은 절대 없습니다."},
-            {q: "혜공통일재단의 목적은?", a: "수익의 30%를 글로벌 복지와 기본소득에 사용합니다."},
-            {q: "HKWB의 최종 목표는?", a: "모든 인류가 굶주림 없는 경제적 자유를 얻는 것입니다."},
-            {q: "언제든지 현금화 가능한가요?", a: "DEX 스왑을 통해 즉시 가용 자산으로 전환 가능합니다."}
+            {q: "UBI 비전은?", a: "전 인류에게 조건 없는 디지털 기본소득을 지급하는 것입니다."},
+            {q: "4월 26일의 의미?", a: "1080개 파이를 LP에 예치하여 생태계 거버넌스를 선포합니다."},
+            {q: "HKWB 총 발행량?", a: "6,280,000.2141개로 희소성과 가치를 유지합니다."},
+            {q: "수수료 환원?", a: "모든 수수료는 UBI 재원으로 100% 사용됩니다."},
+            {q: "보안 관리?", a: "양자 내성 암호화와 AI 삐니가 실시간 감시합니다."},
+            {q: "사용자 정보 보호?", a: "모든 데이터는 블록체인에 암호화되어 안전합니다."}
         ];
         document.getElementById('faq-list').innerHTML = faqs.map(f => `<div class="faq-q">${f.q}</div><div class="faq-a">${f.a}</div>`).join('');
-    }
-
-    function askAI() {
-        const input = document.getElementById('user-input');
-        const val = input.value.trim(); if(!val) return;
-        addMsg(val, 'user-msg'); input.value = '';
-        let res = "혜공 형님, 요청하신 명령을 원장에 기록 중입니다.";
-        if(val.includes("파이")) res = "26일 1,080개 Pi 유동성 공급 준비가 완벽히 끝났습니다!";
-        setTimeout(() => addMsg(res, 'ai-msg'), 800);
-    }
-
-    function addMsg(t, c) {
-        const b = document.getElementById('chat-messages');
-        const d = document.createElement('div'); d.className = `msg ${c}`; d.innerText = t;
-        b.appendChild(d); b.scrollTop = b.scrollHeight;
     }
 
     function changeLanguage() {
@@ -213,6 +226,28 @@
         document.getElementById('btn-swap').innerText = d.swap;
         document.getElementById('btn-stake').innerText = d.stake;
         document.getElementById('btn-center').innerText = d.center;
+        document.getElementById('txt-total-lp').innerText = d.lp;
+        document.getElementById('m1').innerText = d.m1;
+        document.getElementById('m2').innerText = d.m2;
+        document.getElementById('m3').innerText = d.m3;
+        document.getElementById('m4').innerText = d.m4;
+        document.getElementById('m5').innerText = d.m5;
+        document.getElementById('m6').innerText = d.m6;
+    }
+
+    function askAI() {
+        const input = document.getElementById('user-input');
+        const val = input.value.trim(); if(!val) return;
+        addMsg(val, 'user-msg'); input.value = '';
+        let res = "혜공 형님, 명령을 수행 중입니다.";
+        if(val.includes("파이")) res = "26일 유동성 공급 준비 완료!";
+        setTimeout(() => addMsg(res, 'ai-msg'), 800);
+    }
+
+    function addMsg(t, c) {
+        const b = document.getElementById('chat-messages');
+        const d = document.createElement('div'); d.className = `msg ${c}`; d.innerText = t;
+        b.appendChild(d); b.scrollTop = b.scrollHeight;
     }
 
     function toggleChat() { const w = document.getElementById('chat-window'); w.style.display = (w.style.display==='flex')?'none':'flex'; }
