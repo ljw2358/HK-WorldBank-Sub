@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,48 +9,48 @@
             --bg: #000000; --card: #121212; --gold: #FFD700;
             --neon-st: #00FFCC; --neon-lp: #FF00FF; --neon-green: #39FF14; --neon-blue: #00BFFF;
         }
-        body { 
-            margin: 0; padding: 0; background: var(--bg); color: white; 
-            font-family: 'Segoe UI', Roboto, sans-serif; display: flex; flex-direction: column; align-items: center; 
+        body {
+            margin: 0; padding: 0; background: var(--bg); color: white;
+            font-family: 'Segoe UI', Roboto, sans-serif; display: flex; flex-direction: column; align-items: center;
         }
         .container { width: 100%; max-width: 480px; padding: 15px; box-sizing: border-box; position: relative; }
 
         /* [1] 상단 상태바 & 50개국어 셀렉터 */
         .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        #langSelect { 
-            background: #000; color: var(--gold); border: 2px solid var(--gold); 
+        #langSelect {
+            background: #000; color: var(--gold); border: 2px solid var(--gold);
             padding: 5px 10px; border-radius: 8px; font-weight: 900; cursor: pointer; outline: none;
         }
         .node-tag { color: var(--gold); font-weight: 900; font-size: 0.8rem; }
 
-        /* [2] 사진과 100% 일치하는 헤더 섹션 */
+        /* [2] 헤더 섹션 */
         header { text-align: center; margin-bottom: 25px; }
         .title { font-size: 2.2rem; font-weight: 900; color: var(--gold); margin: 0; }
         .sub-title { font-weight: bold; margin-top: 10px; font-size: 1.1rem; color: var(--neon-st); }
         .pi-display { font-size: 3rem; font-weight: 900; margin: 15px 0; font-variant-numeric: tabular-nums; }
-        .gcv-box { 
-            background: rgba(57, 255, 20, 0.05); color: var(--neon-green); padding: 10px 30px; 
-            border: 1.5px solid var(--neon-green); border-radius: 50px; display: inline-block; 
-            font-weight: 900; font-size: 1.3rem; 
+        .gcv-box {
+            background: rgba(57, 255, 20, 0.05); color: var(--neon-green); padding: 10px 30px;
+            border: 1.5px solid var(--neon-green); border-radius: 50px; display: inline-block;
+            font-weight: 900; font-size: 1.3rem;
         }
 
         /* [3] 토큰 공급량 카드 */
-        .supply-card { 
-            background: var(--card); border: 1.5px solid var(--neon-blue); border-radius: 15px; 
+        .supply-card {
+            background: var(--card); border: 1.5px solid var(--neon-blue); border-radius: 15px;
             padding: 15px; margin: 25px 0; text-align: center;
         }
         .label { font-size: 0.75rem; color: #aaa; font-weight: bold; margin-bottom: 8px; }
         .val-blue { color: var(--neon-blue); font-weight: 900; font-size: 1.7rem; font-variant-numeric: tabular-nums; }
 
-        /* [4] 스테이킹 & LP 수익률 그리드 */
+        /* [4] 스테이킹 & LP 수익률 */
         .stat-row { display: flex; gap: 10px; margin-bottom: 15px; }
         .stat-card { flex: 1; background: var(--card); border: 1px solid #333; border-radius: 15px; padding: 15px; text-align: center; }
         .val-st { color: var(--neon-st); font-weight: 900; font-size: 1.4rem; }
         .val-lp { color: var(--neon-lp); font-weight: 900; font-size: 1.4rem; }
 
-        /* [5] 전체 유동성 공급 (DEX LP) */
-        .lp-total-box { 
-            border: 3px solid var(--neon-green); border-radius: 20px; padding: 20px; 
+        /* [5] 전체 유동성 공급 */
+        .lp-total-box {
+            border: 3px solid var(--neon-green); border-radius: 20px; padding: 20px;
             text-align: center; margin-bottom: 25px; background: rgba(57, 255, 20, 0.02);
         }
         .lp-num { font-size: 1.8rem; font-weight: 900; color: white; font-variant-numeric: tabular-nums; }
@@ -60,20 +59,20 @@
         .btn-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 25px; }
         .m-btn { padding: 15px 5px; border-radius: 12px; border: none; font-weight: 900; cursor: pointer; font-size: 0.85rem; }
 
-        /* [7] 아이콘 메뉴 그리드 */
+        /* [7] 아이콘 메뉴 */
         .icon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 30px; }
         .icon-item { background: var(--card); padding: 20px 10px; border-radius: 15px; text-align: center; border: 1px solid #222; cursor: pointer; }
         .icon-item i { font-style: normal; font-size: 1.6rem; display: block; margin-bottom: 10px; }
         .icon-item span { font-size: 0.85rem; font-weight: bold; color: #ddd; }
 
-        /* [8] AI 지원센터 및 FAQ */
-        .center-btn { 
-            width: 100%; background: #ff4d6d; color: white; padding: 20px; 
+        /* [8] AI 지원센터 */
+        .center-btn {
+            width: 100%; background: #ff4d6d; color: white; padding: 20px;
             border-radius: 15px; border: none; font-size: 1.1rem; font-weight: 900; cursor: pointer;
         }
-        .faq-box { 
-            display: none; background: #0a0a0a; border: 1px solid #444; border-top: none; 
-            border-radius: 0 0 15px 15px; padding: 20px; margin-bottom: 30px; 
+        .faq-box {
+            display: none; background: #0a0a0a; border: 1px solid #444; border-top: none;
+            border-radius: 0 0 15px 15px; padding: 20px; margin-bottom: 30px;
         }
         .faq-q { color: var(--gold); font-weight: 900; margin-top: 15px; font-size: 0.95rem; border-left: 3px solid var(--gold); padding-left: 8px; }
         .faq-a { color: #ccc; font-size: 0.85rem; margin-top: 5px; line-height: 1.5; padding-bottom: 10px; border-bottom: 1px solid #222; }
@@ -177,19 +176,72 @@
 </div>
 
 <script>
-    /* [11] 50개국어 지원 리스트 및 번역 데이터 */
+    /* [11] 50개국어 지원 리스트 */
     const languages = [
         {c:"ko", n:"한국어"}, {c:"en", n:"English"}, {c:"zh", n:"中文"}, {c:"ja", n:"日本語"}, {c:"vi", n:"Tiếng Việt"},
         {c:"es", n:"Español"}, {c:"fr", n:"Français"}, {c:"de", n:"Deutsch"}, {c:"pt", n:"Português"}, {c:"ru", n:"Русский"},
         {c:"hi", n:"हिन्दी"}, {c:"ar", n:"العربية"}, {c:"id", n:"Indonesia"}, {c:"th", n:"ไทย"}, {c:"tr", n:"Türkçe"},
         {c:"it", n:"Italiano"}, {c:"nl", n:"Nederlands"}, {c:"pl", n:"Polski"}, {c:"sv", n:"Svenska"}, {c:"fil", n:"Filipino"},
-        {c:"ms", n:"Bahasa Melayu"}, {c:"fa", n:"فارسی"}, {c:"bn", n:"বাংলা"}, {c:"pa", n:"ਪੰਜਾਬੀ"}, {c:"te", n:"తెలుగు"}
-        // ... (총 50개 언어 매핑 가능)
+        {c:"ms", n:"Bahasa Melayu"}, {c:"fa", n:"فارسی"}, {c:"bn", n:"বাংলা"}, {c:"pa", n:"ਪੰਜਾਬੀ"}, {c:"te", n:"తెలుగు"},
+        {c:"mr", n:"मराठी"}, {c:"ta", n:"தமிழ்"}, {c:"ur", n:"اردو"}, {c:"gu", n:"ગુજરાતી"}, {c:"kn", n:"ಕನ್ನಡ"},
+        {c:"ml", n:"മലയാളം"}, {c:"uk", n:"Українська"}, {c:"ro", n:"Română"}, {c:"hu", n:"Magyar"}, {c:"el", n:"Ελληνικά"},
+        {c:"cs", n:"Čeština"}, {c:"he", n:"עברית"}, {c:"da", n:"Dansk"}, {c:"fi", n:"Suomi"}, {c:"no", n:"Norsk"},
+        {c:"sk", n:"Slovenčina"}, {c:"bg", n:"Български"}, {c:"hr", n:"Hrvatski"}, {c:"sr", n:"Српски"}, {c:"sl", n:"Slovenščina"},
+        {c:"et", n:"Eesti"}, {c:"lv", n:"Latviešu"}, {c:"lt", n:"Lietuvių"}, {c:"sw", n:"Kiswahili"}, {c:"am", n:"አማርኛ"}
     ];
 
+    /* [12] 50개국어 번역 데이터베이스 */
     const i18n = {
         ko: { subtitle: "통합 자산 관리 시스템", supply: "HKWB TOKEN REAL-TIME SUPPLY", st: "스테이킹", lp: "LP 수익률", total_lp: "전체 유동성 공급 (DEX LP)", wallet: "PI 수량", swap: "DEX 스왑", stake: "LP 스테이킹", center: "글로벌 AI 지원센터", m1:"송금", m2:"결제", m3:"예치", m4:"보상", m5:"UBI", m6:"스왑" },
-        en: { subtitle: "Integrated Asset System", supply: "HKWB REAL-TIME SUPPLY", st: "Staking", lp: "LP Yield", total_lp: "Total LP Liquidity", wallet: "PI Qty", swap: "DEX Swap", stake: "LP Staking", center: "Global AI Support", m1:"Send", m2:"Pay", m3:"Deposit", m4:"Reward", m5:"UBI", m6:"Swap" }
+        en: { subtitle: "Integrated Asset System", supply: "HKWB REAL-TIME SUPPLY", st: "Staking", lp: "LP Yield", total_lp: "Total LP Liquidity", wallet: "PI Qty", swap: "DEX Swap", stake: "LP Staking", center: "Global AI Support", m1:"Send", m2:"Pay", m3:"Deposit", m4:"Reward", m5:"UBI", m6:"Swap" },
+        zh: { subtitle: "综合资产管理系统", supply: "HKWB 代币实时供应", st: "质押", lp: "LP 收益率", total_lp: "总流动性供应", wallet: "PI 数量", swap: "DEX 兑换", stake: "LP 质押", center: "全球 AI 支持中心", m1:"转账", m2:"支付", m3:"存款", m4:"奖励", m5:"基本收入", m6:"兑换" },
+        ja: { subtitle: "統合資産管理システム", supply: "HKWB リアルタイム供給", st: "ステーキング", lp: "LP 収益率", total_lp: "総流動性供給", wallet: "PI 数量", swap: "DEX スワップ", stake: "LP ステ", center: "グローバル AI サポート", m1:"送金", m2:"決済", m3:"預金", m4:"報酬", m5:"UBI", m6:"スワップ" },
+        vi: { subtitle: "Hệ thống quản lý tài sản", supply: "CUNG CẤP HKWB THỜI GIAN THỰC", st: "Đặt cọc", lp: "Lợi nhuận LP", total_lp: "Tổng cung thanh khoản", wallet: "Số lượng PI", swap: "Hoán đổi DEX", stake: "Staking LP", center: "Hỗ trợ AI toàn cầu", m1:"Gửi", m2:"Thanh toán", m3:"Gửi tiền", m4:"Thưởng", m5:"UBI", m6:"Hoán đổi" },
+        es: { subtitle: "Gestión de Activos", supply: "SUMINISTRO EN TIEMPO REAL", st: "Staking", lp: "Rendimiento LP", total_lp: "Liquidez Total", wallet: "Cant. PI", swap: "DEX Swap", stake: "Staking LP", center: "Soporte AI Global", m1:"Enviar", m2:"Pagar", m3:"Depósito", m4:"Premio", m5:"UBI", m6:"Canje" },
+        fr: { subtitle: "Gestion d'actifs", supply: "OFFRE EN TEMPS RÉEL", st: "Staking", lp: "Rendement LP", total_lp: "Liquidité totale", wallet: "Qté PI", swap: "DEX Swap", stake: "Staking LP", center: "Support AI mondial", m1:"Envoyer", m2:"Payer", m3:"Dépôt", m4:"Récompense", m5:"UBI", m6:"Échange" },
+        de: { subtitle: "Asset-Management", supply: "ANGEBOT IN ECHTZEIT", st: "Staking", lp: "LP-Rendite", total_lp: "Gesamtliquidität", wallet: "PI-Menge", swap: "DEX-Swap", stake: "LP-Staking", center: "Globaler AI-Support", m1:"Senden", m2:"Zahlen", m3:"Einzahlung", m4:"Bonus", m5:"UBI", m6:"Tausch" },
+        pt: { subtitle: "Gestão de Ativos", supply: "OFERTA EM TEMPO REAL", st: "Staking", lp: "Rendimento LP", total_lp: "Liquidez Total", wallet: "Qtd PI", swap: "DEX Swap", stake: "Staking LP", center: "Suporte AI Global", m1:"Enviar", m2:"Pagar", m3:"Depósito", m4:"Prêmio", m5:"UBI", m6:"Troca" },
+        ru: { subtitle: "Управление активами", supply: "ПРЕДЛОЖЕНИЕ В РЕАЛЬНОМ ВРЕМЕНИ", st: "Стейкинг", lp: "Доходность LP", total_lp: "Общая ликвидность", wallet: "Кол-во PI", swap: "DEX Обмен", stake: "LP Стейкинг", center: "Глобальная AI поддержка", m1:"Отправить", m2:"Оплата", m3:"Депозит", m4:"Награда", m5:"ББД", m6:"Обмен" },
+        hi: { subtitle: "एसेट मैनेजमेंट", supply: "रीयल-टाइम आपूर्ति", st: "स्टेकिंग", lp: "LP यील्ड", total_lp: "कुल तरलता", wallet: "PI मात्रा", swap: "DEX स्वैप", stake: "LP स्टेकिंग", center: "AI सहायता", m1:"भेजें", m2:"भुगतान", m3:"जमा", m4:"पुरस्कार", m5:"UBI", m6:"स्वैप" },
+        ar: { subtitle: "إدارة الأصول", supply: "العرض المباشر", st: "تخزين", lp: "عائد LP", total_lp: "إجمالي السيولة", wallet: "كمية PI", swap: "تبادل DEX", stake: "تخزين LP", center: "دعم AI", m1:"إرسال", m2:"دفع", m3:"إيداع", m4:"مكافأة", m5:"UBI", m6:"تبادل" },
+        id: { subtitle: "Manajemen Aset", supply: "PASOKAN REAL-TIME", st: "Staking", lp: "Hasil LP", total_lp: "Total Likuiditas", wallet: "Jml PI", swap: "DEX Swap", stake: "LP Staking", center: "Dukungan AI", m1:"Kirim", m2:"Bayar", m3:"Deposit", m4:"Hadiah", m5:"UBI", m6:"Tukar" },
+        th: { subtitle: "การจัดการสินทรัพย์", supply: "อุปทานเรียลไทม์", st: "การสเตกกิ้ง", lp: "กำไร LP", total_lp: "สภาพคล่องรวม", wallet: "จำนวน PI", swap: "สวอป", stake: "LP สเตกกิ้ง", center: "ศูนย์ AI", m1:"ส่ง", m2:"จ่าย", m3:"ฝาก", m4:"รางวัล", m5:"UBI", m6:"สวอป" },
+        tr: { subtitle: "Varlık Yönetimi", supply: "ANLIK ARZ", st: "Staking", lp: "LP Getirisi", total_lp: "Toplam Likidite", wallet: "PI Mik.", swap: "DEX Takas", stake: "LP Staking", center: "AI Desteği", m1:"Gönder", m2:"Öde", m3:"Mevduat", m4:"Ödül", m5:"UBI", m6:"Takas" },
+        it: { subtitle: "Gestione Asset", supply: "OFFERTA IN TEMPO REALE", st: "Staking", lp: "Resa LP", total_lp: "Liquidità Totale", wallet: "Qtà PI", swap: "DEX Swap", stake: "Staking LP", center: "Supporto AI", m1:"Invia", m2:"Paga", m3:"Deposito", m4:"Premio", m5:"UBI", m6:"Scambio" },
+        nl: { subtitle: "Activabeheer", supply: "REAL-TIME VOORRAAD", st: "Staking", lp: "LP Rendement", total_lp: "Totale liquiditeit", wallet: "PI Aantal", swap: "DEX Swap", stake: "LP Staking", center: "AI Support", m1:"Stuur", m2:"Betaal", m3:"Stort", m4:"Bonus", m5:"UBI", m6:"Swap" },
+        pl: { subtitle: "Zarządzanie Aktywami", supply: "PODAŻ W CZASIE RZECZYWISTYM", st: "Staking", lp: "Zysk LP", total_lp: "Całkowita płynność", wallet: "Ilość PI", swap: "DEX Swap", stake: "LP Staking", center: "Wsparcie AI", m1:"Wyślij", m2:"Płać", m3:"Depozyt", m4:"Nagroda", m5:"UBI", m6:"Swap" },
+        sv: { subtitle: "Tillgångshantering", supply: "REALTIDSUTBUD", st: "Staking", lp: "LP-vinst", total_lp: "Total likviditet", wallet: "PI-antal", swap: "DEX Swap", stake: "LP-staking", center: "AI-support", m1:"Skicka", m2:"Betala", m3:"Insättning", m4:"Belöning", m5:"UBI", m6:"Swap" },
+        fil: { subtitle: "Pamamahala ng Asset", supply: "REAL-TIME NA SUPPLY", st: "Staking", lp: "Kita ng LP", total_lp: "Kabuuang Likididad", wallet: "Dami ng PI", swap: "DEX Swap", stake: "LP Staking", center: "AI Support", m1:"Ipadala", m2:"Magbayad", m3:"Deposito", m4:"Gantimpala", m5:"UBI", m6:"Swap" },
+        ms: { subtitle: "Pengurusan Aset", supply: "BEKALAN MASA NYATA", st: "Staking", lp: "Hasil LP", total_lp: "Jumlah Kecairan", wallet: "Bil. PI", swap: "DEX Swap", stake: "LP Staking", center: "Sokongan AI", m1:"Hantar", m2:"Bayar", m3:"Deposit", m4:"Ganjaran", m5:"UBI", m6:"Swap" },
+        fa: { subtitle: "مدیریت دارایی", supply: "عرضه آنی", st: "استیکینگ", lp: "سود LP", total_lp: "نقدینگی کل", wallet: "تعداد PI", swap: "تبادل", stake: "استیکینگ LP", center: "پشتیبانی AI", m1:"ارسال", m2:"پرداخت", m3:"سپرده", m4:"پاداش", m5:"UBI", m6:"تبادل" },
+        bn: { subtitle: "সম্পদ ব্যবস্থাপনা", supply: "রিয়েল-টাইม সরবরাহ", st: "স্টেকিং", lp: "LP লাভ", total_lp: "মোট তারল্য", wallet: "PI পরিমাণ", swap: "DEX সোয়াপ", stake: "LP স্টেকিং", center: "AI সহায়তা", m1:"পাঠান", m2:"পেমেন্ট", m3:"আমানত", m4:"পুরস্কার", m5:"UBI", m6:"সোয়াপ" },
+        pa: { subtitle: "ਸੰਪਤੀ ਪ੍ਰਬੰਧਨ", supply: "ਰੀਅਲ-ਟਾਈਮ ਸਪਲਾਈ", st: "ਸਟੇਕਿੰਗ", lp: "LP ਲਾਭ", total_lp: "ਕੁੱਲ ਤਰਲਤਾ", wallet: "PI ਮਾਤਰਾ", swap: "DEX ਸਵੈਪ", stake: "LP ਸਟੇਕਿੰਗ", center: "AI ਸਹਾਇਤਾ", m1:"ਭੇਜੋ", m2:"ਭੁਗਤਾਨ", m3:"ਜਮ੍ਹਾਂ", m4:"ਇਨਾਮ", m5:"UBI", m6:"ਸਵੈਪ" },
+        te: { subtitle: "ఆస్తి నిర్వహణ", supply: "రియల్ టైమ్ సరఫరా", st: "స్టేకింగ్", lp: "LP లాభం", total_lp: "మొత్తం లిక్విడిటీ", wallet: "PI పరిమాణం", swap: "DEX స్వాప్", stake: "LP స్టేకింగ్", center: "AI మద్దతు", m1:"పంపండి", m2:"చెల్లించండి", m3:"డిపాజిట్", m4:"బహుమతి", m5:"UBI", m6:"స్వాప్" },
+        mr: { subtitle: "मालमत्ता व्यवस्थापन", supply: "रिअल-टाइम पुरवठा", st: "स्टेकिंग", lp: "LP नफा", total_lp: "एकूण तरलता", wallet: "PI प्रमाण", swap: "DEX स्वॅप", stake: "LP स्टेकिंग", center: "AI समर्थन", m1:"पाठवा", m2:"देयक", m3:"ठेव", m4:"बक्षीस", m5:"UBI", m6:"स्वॅप" },
+        ta: { subtitle: "சொத்து மேலாண்மை", supply: "நேரடி வழங்கல்", st: "ஸ்டேக்கிங்", lp: "LP வருவாய்", total_lp: "மொத்த பணப்புழக்கம்", wallet: "PI அளவு", swap: "DEX ஸ்வாப்", stake: "LP ஸ்டேக்கிங்", center: "AI ஆதரவு", m1:"அனுப்பு", m2:"பணம் செலுத்து", m3:"வைப்பு", m4:"பரிசு", m5:"UBI", m6:"ஸ்வாப்" },
+        ur: { subtitle: "اثاثہ جات کا انتظام", supply: "براہ راست سپلائی", st: "سٹیکنگ", lp: "LP منافع", total_lp: "کل لیکویڈیٹی", wallet: "PI مقدار", swap: "سویپ", stake: "LP سٹیکنگ", center: "AI مدد", m1:"بھجیں", m2:"ادائیگی", m3:"ڈیپازٹ", m4:"انعام", m5:"UBI", m6:"سویپ" },
+        gu: { subtitle: "સંપત્તિ સંચાલન", supply: "રીયલ-ટાઇમ સપ્લાય", st: "સ્ટેકિંગ", lp: "LP નફો", total_lp: "કુલ તરલતા", wallet: "PI જથ્થો", swap: "DEX સ્વેપ", stake: "LP સ્ટેકિંગ", center: "AI સપોર્ટ", m1:"મોકલો", m2:"ચુકવણી", m3:"ડિપોઝિટ", m4:"ઈનામ", m5:"UBI", m6:"સ્વેપ" },
+        kn: { subtitle: "ಆಸ್ತಿ ನಿರ್ವಹಣೆ", supply: "ರಿಯಲ್-ಟೈಮ್ ಪೂರೈಕೆ", st: "ಸ್ಟೇಕಿಂಗ್", lp: "LP ಲಾಭ", total_lp: "ಒಟ್ಟು ದ್ರವ્યತೆ", wallet: "PI ಪ್ರಮಾಣ", swap: "DEX ಸ್ವಾಪ್", stake: "LP ಸ್ಟೇಕಿಂಗ್", center: "AI ಬೆಂಬಲ", m1:"ಕಳುහಿಸಿ", m2:"ಪಾವತಿಸಿ", m3:"ಠೇವಣಿ", m4:"ಬಹುಮಾನ", m5:"UBI", m6:"స్వాಪ್" },
+        ml: { subtitle: "അസറ്റ് മാനേജ് മെന്റ്", supply: "തത്സമയ വിതരണം", st: "സ്റ്റേക്കിംഗ്", lp: "LP ലാഭം", total_lp: "ആകെ ലിക്വിഡിറ്റി", wallet: "PI അളവ്", swap: "DEX സ്വാപ്പ്", stake: "LP സ്റ്റേക്കിംഗ്", center: "AI പിന്തുണ", m1:"അയക്കുക", m2:"പേയ് മെന്റ്", m3:"നിക്ഷേപം", m4:"സമ്മാനം", m5:"UBI", m6:"സ്വാപ്പ്" },
+        uk: { subtitle: "Управління активами", supply: "ПРОПОЗИЦІЯ В РЕАЛЬНОМУ ЧАСІ", st: "Стейкінг", lp: "Прибуток LP", total_lp: "Загальна ліквідність", wallet: "К-сть PI", swap: "Обмін", stake: "LP Стейкінг", center: "AI Підтримка", m1:"Надіслати", m2:"Оплата", m3:"Депозит", m4:"Нагорода", m5:"UBI", m6:"Обмін" },
+        ro: { subtitle: "Management Active", supply: "OFERTĂ ÎN TIMP REAL", st: "Staking", lp: "Randament LP", total_lp: "Lichiditate Totală", wallet: "Cant. PI", swap: "DEX Swap", stake: "LP Staking", center: "Suport AI", m1:"Trimite", m2:"Plătește", m3:"Depozit", m4:"Premiu", m5:"UBI", m6:"Swap" },
+        hu: { subtitle: "Eszközkezelés", supply: "VALÓS IDEJŰ KÍNÁLAT", st: "Staking", lp: "LP hozam", total_lp: "Összes likviditás", wallet: "PI Menny.", swap: "DEX Swap", stake: "LP Staking", center: "AI Támogatás", m1:"Küldés", m2:"Fizetés", m3:"Betét", m4:"Jutalom", m5:"UBI", m6:"Csere" },
+        el: { subtitle: "Διαχείριση Περιουσίας", supply: "ΠΡΟΣΦΟΡΑ ΣΕ ΠΡΑΓΜΑΤΙΚΟ ΧΡΟΝΟ", st: "Staking", lp: "Απόδοση LP", total_lp: "Συνολική Ρευστότητα", wallet: "Ποσ. PI", swap: "DEX Swap", stake: "LP Staking", center: "Υποστήριξη AI", m1:"Αποστολή", m2:"Πληρωμή", m3:"Κατάθεση", m4:"Αμοιβή", m5:"UBI", m6:"Swap" },
+        cs: { subtitle: "Správa aktiv", supply: "NABÍDKA V REÁLNÉM ČASE", st: "Staking", lp: "Výnos LP", total_lp: "Celková likvidita", wallet: "PI Množ.", swap: "DEX Swap", stake: "LP Staking", center: "AI Podpora", m1:"Poslat", m2:"Platit", m3:"Vklad", m4:"Odměna", m5:"UBI", m6:"Swap" },
+        he: { subtitle: "ניהול נכסים", supply: "היצע בזמן אמת", st: "סטייקינג", lp: "תשואת LP", total_lp: "נזילות כוללת", wallet: "כמות PI", swap: "החלפה", stake: "סטייקינג LP", center: "תמיכת AI", m1:"שלח", m2:"שלם", m3:"הפקדה", m4:"פרס", m5:"UBI", m6:"החלפה" },
+        da: { subtitle: "Formuepleje", supply: "REALTIDSFORSYNING", st: "Staking", lp: "LP Afkast", total_lp: "Total likviditet", wallet: "PI Mængde", swap: "DEX Swap", stake: "LP Staking", center: "AI Support", m1:"Send", m2:"Betal", m3:"Indskud", m4:"Præmie", m5:"UBI", m6:"Swap" },
+        fi: { subtitle: "Varainhoito", supply: "REAALIAIKAINEN TARJONTA", st: "Staking", lp: "LP Tuotto", total_lp: "Likviditeetti", wallet: "PI Määrä", swap: "DEX Swap", stake: "LP Staking", center: "AI Tuki", m1:"Lähetä", m2:"Maksa", m3:"Talletus", m4:"Palkinto", m5:"UBI", m6:"Swap" },
+        no: { subtitle: "Formuesforvaltning", supply: "REALTIDSFORSYNING", st: "Staking", lp: "LP Avkastning", total_lp: "Total likviditet", wallet: "PI Antall", swap: "DEX Swap", stake: "LP Staking", center: "AI Støtte", m1:"Send", m2:"Betal", m3:"Innskudd", m4:"Belønning", m5:"UBI", m6:"Swap" },
+        sk: { subtitle: "Správa aktív", supply: "PONUKA V REÁLNOM ČASE", st: "Staking", lp: "Výnos LP", total_lp: "Celková likvidita", wallet: "PI Množ.", swap: "DEX Swap", stake: "LP Staking", center: "AI Podpora", m1:"Poslať", m2:"Platiť", m3:"Vklad", m4:"Odmena", m5:"UBI", m6:"Swap" },
+        bg: { subtitle: "Управление на активи", supply: "ПРЕДЛАГАНЕ В РЕАЛНО ВРЕМЕ", st: "Стейкинг", lp: "LP Доходност", total_lp: "Обща ликвидност", wallet: "PI К-во", swap: "Обмен", stake: "LP Стейкинг", center: "AI Поддръжка", m1:"Изпрати", m2:"Плати", m3:"Депозит", m4:"Награда", m5:"UBI", m6:"Обмен" },
+        hr: { subtitle: "Upravljanje imovinom", supply: "PONUDA U STVARNOM VREMENU", st: "Staking", lp: "LP Prinos", total_lp: "Ukupna likvidnost", wallet: "PI Količ.", swap: "DEX Swap", stake: "LP Staking", center: "AI Podrška", m1:"Pošalji", m2:"Plati", m3:"Polog", m4:"Nagrada", m5:"UBI", m6:"Swap" },
+        sr: { subtitle: "Управљање имовином", supply: "ПОНУДА У РЕАЛНОМ ВРЕМЕНУ", st: "Стејкинг", lp: "LP Принос", total_lp: "Укупна ликвидност", wallet: "PI Колич.", swap: "DEX Свап", stake: "LP Стејкинг", center: "AI Подршка", m1:"Пошаљи", m2:"Плати", m3:"Депозит", m4:"Награда", m5:"UBI", m6:"Свап" },
+        sl: { subtitle: "Upravljanje premoženja", supply: "PONUDBA V REALNEM ČASU", st: "Staking", lp: "LP Donos", total_lp: "Skupna likvidnost", wallet: "PI Količ.", swap: "DEX Swap", stake: "LP Staking", center: "AI Podpora", m1:"Pošlji", m2:"Plačaj", m3:"Polog", m4:"Nagrada", m5:"UBI", m6:"Swap" },
+        et: { subtitle: "Varahaldus", supply: "REAALAJAS PAKKUMINE", st: "Staking", lp: "LP Tootlus", total_lp: "Kogulikviidsus", wallet: "PI Kogus", swap: "DEX Swap", stake: "LP Staking", center: "AI Tugi", m1:"Saada", m2:"Maksa", m3:"Hoius", m4:"Preemia", m5:"UBI", m6:"Swap" },
+        lv: { subtitle: "Aktīvu pārvaldīšana", supply: "REĀLLAIKA PIEDĀVĀJUMS", st: "Staking", lp: "LP Ienesīgums", total_lp: "Kopējā likviditāte", wallet: "PI Daudz.", swap: "DEX Swap", stake: "LP Staking", center: "AI Atbalsts", m1:"Sūtīt", m2:"Maksāt", m3:"Noguldījums", m4:"Balva", m5:"UBI", m6:"Swap" },
+        lt: { subtitle: "Turto valdymas", supply: "PASIŪLA REALIU LAIKU", st: "Staking", lp: "LP Pelningumas", total_lp: "Bendra likvidumo", wallet: "PI Kiekis", swap: "DEX Swap", stake: "LP Staking", center: "AI Pagalba", m1:"Siųsti", m2:"Mokėti", m3:"Indėlis", m4:"Apdovanojimas", m5:"UBI", m6:"Swap" },
+        sw: { subtitle: "Usimamizi wa Mali", supply: "UGAVI WA MUDA HALISI", st: "Staking", lp: "Mavuno ya LP", total_lp: "Liquidity Jumla", wallet: "Kiasi cha PI", swap: "DEX Swap", stake: "LP Staking", center: "Msaada wa AI", m1:"Tuma", m2:"Lipa", m3:"Amana", m4:"Tuzo", m5:"UBI", m6:"Swap" },
+        am: { subtitle: "የሀብት አስተዳደር", supply: "የእውነተኛ ጊዜ አቅርቦት", st: "ስቴኪንግ", lp: "የLP ምርት", total_lp: "ጠቅላลา ፈሳሽ", wallet: "የPI መጠን", swap: "DEX ስዋፕ", stake: "LP ስቴኪንግ", center: "የAI ድጋፍ", m1:"ላክ", m2:"ክፈል", m3:"ተቀማጭ", m4:"ሽልมาት", m5:"UBI", m6:"ስዋፕ" }
     };
 
     const faqData = [
@@ -200,7 +252,7 @@
         {q: "6,280,000개의 의미?", a: "희소성 극대화를 통한 가치 안정을 위해 설계된 총 발행량입니다."}
     ];
 
-    /* [12] 핵심 로직 및 인터랙션 */
+    /* [13] 핵심 로직 및 인터랙션 */
     function startLiveEngine() {
         let pi = 412.3149; let gcv = 129541312; let supply = 6280000.5042; let lp = 88432103868;
         setInterval(() => {
@@ -246,15 +298,15 @@
         const f = document.getElementById('faq-box');
         const b = document.getElementById('t-center-btn');
         if(f.style.display === 'block') { f.style.display = 'none'; b.style.borderRadius = '15px'; }
-        else { 
+        else {
             f.style.display = 'block'; b.style.borderRadius = '15px 15px 0 0';
             if(!f.innerHTML) f.innerHTML = faqData.map(x => `<div class="faq-q">${x.q}</div><div class="faq-a">${x.a}</div>`).join('');
         }
     }
 
-    function toggleChat() { 
+    function toggleChat() {
         const w = document.getElementById('chat-window');
-        w.style.display = (w.style.display === 'flex') ? 'none' : 'flex'; 
+        w.style.display = (w.style.display === 'flex') ? 'none' : 'flex';
     }
 
     function askAI() {
