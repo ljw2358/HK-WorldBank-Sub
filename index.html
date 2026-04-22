@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WORLD BANK - Global Standard</title>
+    <title>HK WORLD BANK - BPINI MASTER</title>
     <style>
         :root {
             --bg: #000000; --card: #121212; --gold: #FFD700;
@@ -13,7 +14,7 @@
         .container { width: 100%; max-width: 480px; padding: 15px; box-sizing: border-box; position: relative; }
 
         /* [1] 상단 바 - 언어 선택 우측 상단 고정 */
-        .top-bar { display: flex; justify-content: flex-end; align-items: center; margin-bottom: 20px; gap: 10px; }
+        .top-bar { display: flex; justify-content: flex-end; align-items: center; margin-bottom: 20px; gap: 10px; width: 100%; }
         #langSelect { background: #000; color: var(--gold); border: 2px solid var(--gold); padding: 5px 10px; border-radius: 8px; font-weight: 900; cursor: pointer; outline: none; }
         .node-tag { color: var(--gold); font-weight: 900; font-size: 0.8rem; margin-right: auto; }
 
@@ -51,7 +52,7 @@
         footer { text-align: center; padding: 30px; border-top: 1px solid #222; color: #777; font-size: 0.8rem; }
 
         /* [7] 삐니 AI 챗봇 */
-        #bpini-trigger { position: fixed; bottom: 30px; right: 20px; width: 65px; height: 65px; background: var(--neon-lp); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; box-shadow: 0 0 20px var(--neon-lp); cursor: pointer; z-index: 999; }
+        #bpini-trigger { position: fixed; bottom: 30px; right: 20px; width: 65px; height: 65px; background: var(--neon-lp); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; box-shadow: 0 0 20px var(--neon-lp); cursor: pointer; z-index: 999; color: white; }
         #chat-window { display: none; position: fixed; bottom: 105px; right: 20px; width: 320px; height: 450px; background: #000; border: 2px solid var(--neon-lp); border-radius: 20px; flex-direction: column; overflow: hidden; z-index: 1000; }
         .chat-h { background: var(--neon-lp); padding: 15px; font-weight: 900; display: flex; justify-content: space-between; }
         .chat-b { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
@@ -72,7 +73,7 @@
 
     <header>
         <h1 class="title">HK WORLD BANK</h1>
-        <div id="t-sub" class="sub-title">Integrated Asset Management</div>
+        <div id="t-sub" class="sub-title">통합 자산 관리 시스템</div>
         <div class="pi-display"><span id="l-pi">412.3149</span> <span style="color:var(--gold)">Pi</span></div>
         <div class="gcv-box">$ <span id="l-gcv">129,541,312</span></div>
     </header>
@@ -83,31 +84,31 @@
     </div>
 
     <div style="display:flex; gap:10px; margin-bottom:15px;">
-        <div class="card" style="flex:1;"><div class="label" id="t-st">Staking</div><div class="val-st" id="l-st">17.75%</div></div>
-        <div class="card" style="flex:1;"><div class="label" id="t-lp">LP Yield</div><div class="val-lp" id="l-lp">28.80%</div></div>
+        <div class="card" style="flex:1;"><div class="label" id="t-st">스테이킹</div><div class="val-st" id="l-st">17.75%</div></div>
+        <div class="card" style="flex:1;"><div class="label" id="t-lp">LP 수익률</div><div class="val-lp" id="l-lp">28.80%</div></div>
     </div>
 
     <div class="card" style="border:3px solid var(--neon-green);">
-        <div class="label" id="t-total-lp" style="color:var(--neon-green)">Total Liquidity (DEX LP)</div>
+        <div class="label" id="t-total-lp" style="color:var(--neon-green)">전체 유동성 공급 (DEX LP)</div>
         <div class="val-blue" id="l-total-lp" style="color:white">$ 88,432,103,868</div>
     </div>
 
     <div class="btn-grid">
-        <button class="m-btn" id="t-b1" style="background:#fff;">PI Qty</button>
-        <button class="m-btn" id="t-b2" style="background:var(--gold);">DEX Swap</button>
-        <button class="m-btn" id="t-b3" style="background:var(--neon-green);">LP Staking</button>
+        <button class="m-btn" id="t-b1" style="background:#fff;">PI 수량</button>
+        <button class="m-btn" id="t-b2" style="background:var(--gold);">DEX 스왑</button>
+        <button class="m-btn" id="t-b3" style="background:var(--neon-green);">LP 스테이킹</button>
     </div>
 
     <div class="icon-grid">
-        <div class="icon-item"><i>🚀</i><span id="m1">Send</span></div>
-        <div class="icon-item"><i>🛒</i><span id="m2">Pay</span></div>
-        <div class="icon-item"><i>💰</i><span id="m3">Deposit</span></div>
-        <div class="icon-item"><i>🏅</i><span id="m4">Reward</span></div>
+        <div class="icon-item"><i>🚀</i><span id="m1">송금</span></div>
+        <div class="icon-item"><i>🛒</i><span id="m2">결제</span></div>
+        <div class="icon-item"><i>💰</i><span id="m3">예치</span></div>
+        <div class="icon-item"><i>🏅</i><span id="m4">보상</span></div>
         <div class="icon-item"><i>🏦</i><span id="m5">UBI</span></div>
-        <div class="icon-item"><i>🔄</i><span id="m6">Swap</span></div>
+        <div class="icon-item"><i>🔄</i><span id="m6">스왑</span></div>
     </div>
 
-    <button class="center-btn" id="t-center" onclick="toggleFaq()">Global AI Center</button>
+    <button class="center-btn" id="t-center" onclick="toggleFaq()">글로벌 AI 지원센터</button>
     <div class="faq-box" id="faq-box"></div>
 
     <div class="sns-row">
@@ -122,13 +123,13 @@
 
 <div id="bpini-trigger" onclick="toggleChat()">삐니</div>
 <div id="chat-window">
-    <div class="chat-h"><span id="t-chat-h">BPINI AI Manager</span><span onclick="toggleChat()">✕</span></div>
+    <div class="chat-h"><span id="t-chat-h">BPINI AI Manager</span><span onclick="toggleChat()" style="cursor:pointer;">✕</span></div>
     <div class="chat-b" id="chat-box"></div>
     <div class="chat-i"><input type="text" id="chat-input" onkeypress="if(event.key==='Enter') askAI()"></div>
 </div>
 
 <script>
-    const langs = [
+    const languages = [
         {c:"ko", n:"한국어"}, {c:"en", n:"English"}, {c:"zh", n:"中文"}, {c:"ja", n:"日本語"}, {c:"vi", n:"Tiếng Việt"},
         {c:"es", n:"Español"}, {c:"fr", n:"Français"}, {c:"de", n:"Deutsch"}, {c:"pt", n:"Português"}, {c:"ru", n:"Русский"},
         {c:"hi", n:"हिन्दी"}, {c:"ar", n:"العربية"}, {c:"id", n:"Indonesia"}, {c:"th", n:"ไทย"}, {c:"tr", n:"Türkçe"},
@@ -141,16 +142,17 @@
         {c:"et", n:"Eesti"}, {c:"lv", n:"Latviešu"}, {c:"lt", n:"Lietuvių"}, {c:"sw", n:"Kiswahili"}, {c:"am", n:"አማርኛ"}
     ];
 
-    const dic = {
-        ko: { sub:"통합 자산 관리 시스템", supply:"HKWB 실시간 공급량", st:"스테이킹", lp:"LP 수익률", total:"전체 유동성 (DEX LP)", b1:"PI 수량", b2:"DEX 스왑", b3:"LP 스테이킹", center:"글로벌 AI 지원센터", m1:"송금", m2:"결제", m3:"예치", m4:"보상", m5:"UBI", m6:"스왑", chatH:"삐니 AI 매니저", greet:"안녕하십니까. 시스템 매니저 삐니입니다. 무엇을 도와드릴까요?", win:"HKWB의 승리는 이미 시스템적으로 확정되었습니다.", sync:"데이터 동기화가 완료되었습니다." },
-        en: { sub:"Integrated Asset Management", supply:"HKWB Real-time Supply", st:"Staking", lp:"LP Yield", total:"Total Liquidity (DEX LP)", b1:"PI Qty", b2:"DEX Swap", b3:"LP Staking", center:"Global AI Center", m1:"Send", m2:"Pay", m3:"Deposit", m4:"Reward", m5:"UBI", m6:"Swap", chatH:"BPINI AI Manager", greet:"Hello. I am Bpini, the system manager. How can I help you?", win:"The victory of HKWB is already confirmed systematically.", sync:"Data synchronization complete." }
+    const i18n = {
+        ko: { sub:"통합 자산 관리 시스템", supply:"HKWB 실시간 공급량", st:"스테이킹", lp:"LP 수익률", total:"전체 유동성 (DEX LP)", b1:"PI 수량", b2:"DEX 스왑", b3:"LP 스테이킹", center:"글로벌 AI 지원센터", m1:"송금", m2:"결제", m3:"예치", m4:"보상", m5:"UBI", m6:"스왑", chatH:"삐니 AI 매니저", greet:"안녕하십니까. 시스템 매니저 삐니입니다. 무엇을 도와드릴까요?", win:"HKWB의 글로벌 승리는 이미 시스템적으로 확정되었습니다.", sync:"데이터 동기화가 완료되었습니다." },
+        en: { sub:"Integrated Asset Management", supply:"HKWB Real-time Supply", st:"Staking", lp:"LP Yield", total:"Total Liquidity (DEX LP)", b1:"PI Qty", b2:"DEX Swap", b3:"LP Staking", center:"Global AI Center", m1:"Send", m2:"Pay", m3:"Deposit", m4:"Reward", m5:"UBI", m6:"Swap", chatH:"BPINI AI Manager", greet:"Hello. I am Bpini, the system manager. How can I help you?", win:"The global victory of HKWB is already confirmed systematically.", sync:"Data synchronization complete." }
     };
 
-    const faqTopics = ["Vision", "Liquidity", "Mainnet", "Nodes", "Supply", "Staking", "GCV", "Security", "UBI", "Swap", "Bio", "UAM", "Robotics", "Space", "KYB", "Reward", "Charity", "Wallet", "Scaling", "Governance"];
+    const faqTopics = ["Vision", "Liquidity", "Mainnet Sync", "Dual Nodes", "Total Supply", "Staking Reward", "GCV Value", "Encryption", "UBI Distribution", "Instant Swap", "Bio Data", "UAM Mobility", "AI Robotics", "Space Banking", "KYB Process", "Daily Bonus", "Global Charity", "Secure Wallet", "Layer 2 scaling", "Global Governance"];
 
     function translateAll() {
         const l = document.getElementById('langSelect').value;
-        const d = dic[l] || dic.en;
+        const d = i18n[l] || i18n.en;
+        
         document.getElementById('t-sub').innerText = d.sub;
         document.getElementById('t-supply-l').innerText = d.supply;
         document.getElementById('t-st').innerText = d.st;
@@ -159,23 +161,30 @@
         document.getElementById('t-b1').innerText = d.b1; document.getElementById('t-b2').innerText = d.b2; document.getElementById('t-b3').innerText = d.b3;
         document.getElementById('t-center').innerText = d.center;
         document.getElementById('t-chat-h').innerText = d.chatH;
-        for(let i=1; i<=6; i++) document.getElementById('m'+i).innerText = d['m'+i] || dic.en['m'+i];
-        
+        for(let i=1; i<=6; i++) document.getElementById('m'+i).innerText = d['m'+i] || i18n.en['m'+i];
+
         const fBox = document.getElementById('faq-box');
-        fBox.innerHTML = faqTopics.map((t, idx) => `<div class="faq-q">${idx+1}. [${l.toUpperCase()}] ${t}?</div><div class="faq-a">Protocol ${t} is optimized for global standards.</div>`).join('');
+        fBox.innerHTML = faqTopics.map((t, idx) => `<div class="faq-q">${idx+1}. [${l.toUpperCase()}] ${t}?</div><div class="faq-a">Protocol ${t} is fully optimized for 2026 global standards.</div>`).join('');
         document.getElementById('chat-box').innerHTML = `<div class="msg ai">${d.greet}</div>`;
     }
 
     function runLiveNumbers() {
-        let pi=412.3149, supply=6280000.5042, gcv=129541312, lp=88432103868;
+        let pi=412.3149, supply=6280000.5042, gcv=129541312, lp=88432103868, st=17.75, lp_r=28.80;
         setInterval(() => {
-            pi += (Math.random()*0.0002 - 0.0001); supply += (Math.random()*0.0001);
-            gcv += Math.floor(Math.random()*20 - 10); lp += Math.floor(Math.random()*1000 - 500);
+            pi += (Math.random()*0.0004 - 0.0002);
+            supply += (Math.random()*0.0001);
+            gcv += Math.floor(Math.random()*40 - 20);
+            lp += Math.floor(Math.random()*2000 - 1000);
+            st += (Math.random()*0.02 - 0.01);
+            lp_r += (Math.random()*0.02 - 0.01);
+            
             document.getElementById('l-pi').innerText = pi.toFixed(4);
             document.getElementById('l-supply').innerText = supply.toFixed(4);
             document.getElementById('l-gcv').innerText = gcv.toLocaleString();
             document.getElementById('l-total-lp').innerText = '$ ' + lp.toLocaleString();
-        }, 1500);
+            document.getElementById('l-st').innerText = st.toFixed(2) + '%';
+            document.getElementById('l-lp').innerText = lp_r.toFixed(2) + '%';
+        }, 1200);
     }
 
     function askAI() {
@@ -183,9 +192,11 @@
         const box = document.getElementById('chat-box');
         if(!inp.value.trim()) return;
         const l = document.getElementById('langSelect').value;
-        const d = dic[l] || dic.en;
+        const d = i18n[l] || i18n.en;
+
         box.innerHTML += `<div class="msg user">${inp.value}</div>`;
         const v = inp.value; inp.value = '';
+        
         setTimeout(() => {
             let res = d.sync;
             if(v.includes("우승") || v.toLowerCase().includes("win")) res = d.win;
@@ -199,7 +210,7 @@
 
     window.onload = () => {
         const sel = document.getElementById('langSelect');
-        langs.forEach(lan => { const o = document.createElement('option'); o.value=lan.c; o.innerText=lan.n; sel.appendChild(o); });
+        languages.forEach(lan => { const o = document.createElement('option'); o.value=lan.c; o.innerText=lan.n; sel.appendChild(o); });
         translateAll(); runLiveNumbers();
     };
 </script>
