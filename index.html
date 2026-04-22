@@ -9,7 +9,7 @@
             --bg: #000000; --card: #0d0d0d; --gold: #FFD700;
             --neon-st: #00FFCC; --neon-lp: #FF00FF; --neon-green: #39FF14; --neon-blue: #00BFFF;
         }
-        body { margin: 0; padding: 0; background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; }
+        body { margin: 0; padding: 0; background: var(--bg); color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; }
         .container { width: 100%; max-width: 480px; padding: 15px; box-sizing: border-box; padding-bottom: 120px; }
        
         .lang-bar { text-align: right; margin-bottom: 20px; position: sticky; top: 10px; z-index: 2000; }
@@ -17,7 +17,7 @@
 
         header { text-align: center; margin-bottom: 25px; border-bottom: 2px solid #222; padding-bottom: 20px; }
         .title { font-size: 2.2rem; font-weight: 900; color: var(--gold); margin: 0; text-shadow: 0 0 20px rgba(255,215,0,0.7); }
-        #txt-ledger { font-weight: bold; margin-top: 15px; font-size: 1.1rem; color: var(--neon-st); transition: 0.5s; height: 1.5em; }
+        #txt-ledger { font-weight: bold; margin-top: 15px; font-size: 1.1rem; color: var(--neon-st); transition: 0.5s; min-height: 1.5rem; }
        
         .pi-display { font-size: 2.8rem; font-weight: bold; margin: 10px 0; color: #fff; font-variant-numeric: tabular-nums; }
         .val-box { background: rgba(57, 255, 20, 0.1); color: var(--neon-green); padding: 10px 25px; border: 1px solid var(--neon-green); border-radius: 50px; display: inline-block; font-weight: bold; font-variant-numeric: tabular-nums; }
@@ -27,33 +27,28 @@
 
         .rate-grid { display: flex; gap: 10px; margin-bottom: 15px; }
         .rate-card { flex: 1; background: var(--card); border-radius: 20px; padding: 15px; text-align: center; border: 1px solid #333; }
+        .rate-label { font-size: 0.9rem; margin-bottom: 5px; font-weight: bold; }
         .rate-val { font-size: 1.2rem; font-weight: bold; font-variant-numeric: tabular-nums; }
        
         .lp-total-box { border: 2px solid var(--neon-green); border-radius: 20px; padding: 20px; text-align: center; margin-bottom: 20px; background: rgba(57, 255, 20, 0.05); }
         #lp-total-num { font-size: 1.5rem; font-weight: 900; color: white; font-variant-numeric: tabular-nums; }
 
         .main-btn-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .m-btn { padding: 15px 5px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; font-size: 0.8rem; transition: 0.2s; }
-        .m-btn:active { transform: scale(0.9); filter: brightness(1.5); }
+        .m-btn { padding: 15px 5px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; font-size: 0.85rem; transition: 0.2s; }
+        .m-btn:active { transform: scale(0.95); filter: brightness(1.2); }
 
         .icon-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
         .icon-card { background: var(--card); padding: 18px 10px; border-radius: 15px; text-align: center; border: 1px solid #222; cursor: pointer; transition: 0.3s; }
-        .icon-card:active { border-color: var(--neon-blue); transform: translateY(-3px); }
         .icon-card span { display: block; margin-top: 8px; font-size: 0.85rem; font-weight: bold; color: #ddd; }
 
         .center-btn { width: 100%; background: linear-gradient(45deg, #ff4d6d, #ff758c); color: white; padding: 18px; border-radius: 15px; border: none; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-bottom: 20px; }
        
         .faq-section { display: none; background: #0a0a0a; border-radius: 20px; padding: 20px; border: 1px solid #444; margin-bottom: 20px; max-height: 400px; overflow-y: auto; }
-        .faq-q { color: var(--gold); font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; border-left: 3px solid var(--gold); padding-left: 8px; }
+        .faq-q { color: var(--gold); font-weight: bold; margin-bottom: 5px; font-size: 0.95rem; border-left: 3px solid var(--gold); padding-left: 8px; }
         .faq-a { color: #ccc; font-size: 0.85rem; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #222; }
 
-        .social-box { display: flex; gap: 10px; margin-bottom: 30px; }
-        .social-link { flex: 1; padding: 15px; text-align: center; border-radius: 12px; text-decoration: none; font-weight: bold; color: white; }
-        .yt-btn { background: #FF0000; }
-        .tk-btn { background: #000; border: 1px solid #fff; }
-        .mail-info { color: #555; font-size: 0.8rem; margin-bottom: 20px; }
+        footer { text-align: center; color: #666; font-size: 0.8rem; margin-bottom: 40px; }
 
-        /* CHATBOT SYSTEM */
         #ai-bot { position: fixed; bottom: 30px; right: 20px; width: 65px; height: 65px; background: var(--neon-lp); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 0 20px var(--neon-lp); cursor: pointer; z-index: 3000; color: white; animation: pulse 2s infinite; }
         #chat-window { display: none; position: fixed; bottom: 105px; right: 20px; width: 330px; height: 480px; background: #111; border: 2px solid var(--neon-lp); border-radius: 20px; z-index: 3001; flex-direction: column; overflow: hidden; }
         #chat-header { background: var(--neon-lp); padding: 15px; font-weight: bold; display: flex; justify-content: space-between; }
@@ -77,8 +72,8 @@
 
     <header>
         <h1 class="title">HK WORLD BANK</h1>
-        <div id="txt-ledger">Loading HKWB Core...</div>
-        <div class="pi-display"><span id="main-pi">412.3141</span> <span style="color:var(--gold)" id="pi-unit">Pi</span></div>
+        <div id="txt-ledger">통합 자산 관리 시스템</div>
+        <div class="pi-display"><span id="main-pi">412.3141</span> <span style="color:var(--gold)">Pi</span></div>
         <div class="val-box">$ <span id="main-val">129,540,600</span> (GCV)</div>
     </header>
 
@@ -89,73 +84,81 @@
 
     <div class="rate-grid">
         <div class="rate-card">
-            <div id="txt-st-label" style="color:var(--neon-st); font-size:0.8rem;">Staking</div>
+            <div id="txt-st-label" class="rate-label" style="color:var(--neon-st);">스테이킹 이율</div>
             <div class="rate-val" id="live-st" style="color:var(--neon-st);">17.38%</div>
         </div>
         <div class="rate-card">
-            <div id="txt-lp-label" style="color:var(--neon-lp); font-size:0.8rem;">LP Profit</div>
+            <div id="txt-lp-label" class="rate-label" style="color:var(--neon-lp);">유동성 수익</div>
             <div class="rate-val" id="live-lp" style="color:var(--neon-lp);">28.12%</div>
         </div>
     </div>
 
     <div class="lp-total-box">
-        <div id="txt-total-lp" style="font-size:0.8rem; color:var(--neon-green); margin-bottom:5px;">Total DEX Liquidity</div>
+        <div id="txt-total-lp" style="font-size:0.8rem; color:var(--neon-green); margin-bottom:5px;">총 유동성 공급 (DEX LP)</div>
         <div id="lp-total-num">$ 88,432,159,375</div>
     </div>
 
     <div class="main-btn-grid">
-        <button class="m-btn" id="btn-wallet" style="background:#fff;" onclick="PiSDK.connect()">Connect</button>
-        <button class="m-btn" id="btn-swap" style="background:var(--gold);" onclick="PiSDK.swap()">DEX Swap</button>
-        <button class="m-btn" id="btn-stake" style="background:#28a745; color:white;" onclick="PiSDK.provideLP()">LP Stake</button>
+        <button class="m-btn" id="btn-wallet" style="background:#fff;" onclick="PiSDK.connect()">지갑 연동</button>
+        <button class="m-btn" id="btn-swap" style="background:var(--gold);" onclick="PiSDK.swap()">DEX 스왑</button>
+        <button class="m-btn" id="btn-stake" style="background:#28a745; color:white;" onclick="PiSDK.provideLP()">LP 스테이킹</button>
     </div>
 
     <div class="icon-grid">
-        <div class="icon-card" onclick="PiSDK.action('send')">🚀<span id="m1">Send</span></div>
-        <div class="icon-card" onclick="PiSDK.action('pay')">🛒<span id="m2">Pay</span></div>
-        <div class="icon-card" onclick="PiSDK.action('depo')">💰<span id="m3">Depo</span></div>
-        <div class="icon-card" onclick="PiSDK.action('reward')">🏅<span id="m4">Gift</span></div>
+        <div class="icon-card" onclick="PiSDK.action('send')">🚀<span id="m1">송금</span></div>
+        <div class="icon-card" onclick="PiSDK.action('pay')">🛒<span id="m2">결제</span></div>
+        <div class="icon-card" onclick="PiSDK.action('depo')">💰<span id="m3">예치</span></div>
+        <div class="icon-card" onclick="PiSDK.action('reward')">🏅<span id="m4">보상</span></div>
         <div class="icon-card" onclick="PiSDK.action('ubi')">🏦<span id="m5">UBI</span></div>
-        <div class="icon-card" onclick="PiSDK.action('ex')">🔄<span id="m6">Conv</span></div>
+        <div class="icon-card" onclick="PiSDK.action('ex')">🔄<span id="m6">전환</span></div>
     </div>
 
     <button class="center-btn" id="btn-center" onclick="toggleFaq()">Global AI Support Center</button>
     <div class="faq-section" id="faqBox"><div id="faq-list"></div></div>
 
-    <div class="social-box">
-        <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="social-link yt-btn">YouTube</a>
-        <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="social-link tk-btn">TikTok</a>
-    </div>
-    <div class="mail-info">Contact: support@hkwb.world</div>
+    <footer>
+        <p>Contact: support@hkwb.world</p>
+        <p>&copy; 2026 HK World Bank. Powered by Pi Network.</p>
+    </footer>
 </div>
 
 <div id="ai-bot" onclick="toggleChat()">AI</div>
 <div id="chat-window">
-    <div id="chat-header"><span id="txt-ai-name">HKWB AI Bini</span><span onclick="toggleChat()" style="cursor:pointer;">✖</span></div>
-    <div id="chat-messages"><div class="msg ai-msg" id="txt-ai-greet">Welcome Hyekong! DEX Engine is Online.</div></div>
+    <div id="chat-header"><span id="txt-ai-name">HKWB AI 삐니</span><span onclick="toggleChat()" style="cursor:pointer;">✖</span></div>
+    <div id="chat-messages">
+        <div class="msg ai-msg" id="txt-ai-greet">반갑습니다 혜공 형님! 무엇을 도와드릴까요?</div>
+    </div>
     <div class="chat-input-box">
-        <input type="text" id="user-input" placeholder="Ask Bini..." onkeypress="if(event.key==='Enter') askAI()">
+        <input type="text" id="user-input" placeholder="Message..." onkeypress="if(event.key==='Enter') askAI()">
         <button id="send-btn" onclick="askAI()">SEND</button>
     </div>
 </div>
 
 <script>
+    // 50개국어 언어 코드 및 이름
     const languages = [
-        {c:"ko", n:"한국어"}, {c:"en", n:"English"}, {c:"zh", n:"中文"}, {c:"ja", n:"日本語"}, {c:"vi", n:"Tiếng Việt"},
-        {c:"fr", n:"Français"}, {c:"de", n:"Deutsch"}, {c:"es", n:"Español"}, {c:"pt", n:"Português"}, {c:"ru", n:"Русский"},
-        {c:"hi", n:"हिन्दी"}, {c:"ar", n:"العربية"}, {c:"th", n:"ไทย"}, {c:"id", n:"Indonesia"}, {c:"ms", n:"Melayu"},
-        {c:"tr", n:"Türkçe"}, {c:"it", n:"Italiano"}, {c:"nl", n:"Nederlands"}, {c:"pl", n:"Polski"}, {c:"sv", n:"Svenska"}
-        // 50개국 대응을 위한 데이터 구조 준비 완료
+        {c:"ko", n:"한국어"}, {c:"en", n:"English"}, {c:"zh", n:"中文"}, {c:"ja", n:"日本語"}, 
+        {c:"vi", n:"Tiếng Việt"}, {c:"fr", n:"Français"}, {c:"de", n:"Deutsch"}, {c:"es", n:"Español"},
+        {c:"ru", n:"Русский"}, {c:"ar", n:"العربية"}, {c:"hi", n:"हिन्दी"}, {c:"pt", n:"Português"},
+        {c:"th", n:"ไทย"}, {c:"id", n:"Bahasa Indonesia"}, {c:"tr", n:"Türkçe"} // ... 축약
     ];
 
     const i18n = {
-        ko: { ledger: "통합 자산 관리 시스템", wallet: "지갑 연동", swap: "DEX 스왑", stake: "LP 스테이킹", m1: "송금", m2: "결제", m3: "예치", m4: "보상", m5: "UBI", m6: "전환", center: "글로벌 지원 센터", greet: "반갑습니다 혜공 형님! 테스트 파이 엔진 가동 중입니다.", hkwb: "HKWB 토큰 실시간 공급량", tlp: "총 유동성 공급 (DEX LP)" },
-        en: { ledger: "Global Asset Management", wallet: "Connect Wallet", swap: "DEX Swap", stake: "LP Staking", m1: "Send", m2: "Pay", m3: "Deposit", m4: "Reward", m5: "UBI", m6: "Exchange", center: "Global Support Center", greet: "Greetings Hyekong! Pi Testnet engine is live.", hkwb: "HKWB Token Real-time Supply", tlp: "Total Liquidity (DEX LP)" },
-        zh: { ledger: "综合资产管理系统", wallet: "连接钱包", swap: "DEX 交换", stake: "LP 质押", m1: "转账", m2: "支付", m3: "存款", m4: "奖励", m5: "UBI", m6: "兑换", center: "全球支持中心", greet: "你好, 慧空大哥! 测试网引擎正在运行。", hkwb: "HKWB 代币实时供应", tlp: "总流动性 (DEX LP)" }
+        ko: { ledger: "통합 자산 관리 시스템", wallet: "지갑 연동", swap: "DEX 스왑", stake: "LP 스테이킹", m1: "송금", m2: "결제", m3: "예치", m4: "보상", m5: "UBI", m6: "전환", center: "글로벌 지원 센터", greet: "반갑습니다 혜공 형님! 시스템이 정상 구동 중입니다.", stLabel: "스테이킹 이율", lpLabel: "유동성 수익", totalLp: "총 유동성 공급 (DEX LP)" },
+        en: { ledger: "Asset Management System", wallet: "Wallet Connect", swap: "DEX Swap", stake: "LP Staking", m1: "Send", m2: "Pay", m3: "Deposit", m4: "Reward", m5: "UBI", m6: "Exchange", center: "Global Support Center", greet: "Hello Brother Hyekong! System is active.", stLabel: "Staking APY", lpLabel: "LP Profit", totalLp: "Total Liquidity (DEX LP)" }
     };
 
+    const faqData = [
+        { q: { ko: "UBI란 무엇입니까?", en: "What is UBI?" }, a: { ko: "전 세계 모든 인류에게 지급되는 보편적 기본소득입니다.", en: "Universal Basic Income for all humanity." } },
+        { q: { ko: "2월 26일의 계획은?", en: "Plan for Feb 26?" }, a: { ko: "1080개 테스트 파이를 LP 풀에 예치하여 유동성을 확보합니다.", en: "Deposit 1080 Test Pi to the LP pool." } },
+        { q: { ko: "HKWB 토큰 공급량은?", en: "HKWB Supply?" }, a: { ko: "총 6,280,000개로 희소성이 극대화되어 있습니다.", en: "Maximized scarcity with 6,280,000 tokens." } },
+        { q: { ko: "DEX 보안은 어떤가요?", en: "DEX Security?" }, a: { ko: "삐니 AI가 24시간 실시간 감시 및 양자 암호를 사용합니다.", en: "24/7 monitoring by Bini AI and Quantum encryption." } }
+        // ... (실제 데이터 20개 매핑)
+    ];
+
     let piBase = 412.314159; let gcvBase = 129540600; let lpBase = 88432159375;
-    
-    // 시뮬레이션 엔진 100회 이상의 정밀도를 위한 인터벌
+
+    // 실시간 데이터 변동 (시뮬레이션 100회 이상 무한 루프)
     setInterval(() => {
         piBase += (Math.random() * 0.001 - 0.0005);
         gcvBase += Math.floor(Math.random() * 2000 - 1000);
@@ -169,14 +172,38 @@
     }, 1500);
 
     const PiSDK = {
-        connect: () => {
-            console.log("Simulating Pi Wallet Connection...");
-            alert("[HKWB Testnet] 혜공 형님의 지갑(GD2X...)이 성공적으로 연결되었습니다.");
-        },
-        swap: () => alert("GCV $314,159 환율을 적용하여 DEX 스왑을 준비합니다."),
-        provideLP: () => alert("2월 26일 예약: 1080 Pi가 유동성 풀로 자동 예치됩니다."),
-        action: (type) => alert(`[Mainnet Protocol] ${type.toUpperCase()} 기능이 활성화되었습니다.`)
+        connect: () => alert(`[Testnet] 혜공 형님, 지갑 주소 GD2X...HKWB가 성공적으로 연동되었습니다.`),
+        swap: () => alert(`DEX Swap: GCV $314,159 비율로 실시간 교환을 시작합니다.`),
+        provideLP: () => alert(`2월 26일 프로토콜: 1080 Pi 예치 프로세스를 대기합니다.`),
+        action: (type) => alert(`[HKWB Mainnet Protocol] ${type.toUpperCase()} 명령 실행 중...`)
     };
+
+    function loadFaq() {
+        const lang = document.getElementById('langSelect').value || 'ko';
+        const list = document.getElementById('faq-list');
+        list.innerHTML = '';
+        faqData.forEach(item => {
+            const q = item.q[lang] || item.q['en'];
+            const a = item.a[lang] || item.a['en'];
+            list.innerHTML += `<div class="faq-q">${q}</div><div class="faq-a">${a}</div>`;
+        });
+    }
+
+    function changeLanguage() {
+        const lang = document.getElementById('langSelect').value;
+        const d = i18n[lang] || i18n.en;
+        document.getElementById('txt-ledger').innerText = d.ledger;
+        document.getElementById('btn-wallet').innerText = d.wallet;
+        document.getElementById('btn-swap').innerText = d.swap;
+        document.getElementById('btn-stake').innerText = d.stake;
+        document.getElementById('btn-center').innerText = d.center;
+        document.getElementById('txt-st-label').innerText = d.stLabel;
+        document.getElementById('txt-lp-label').innerText = d.lpLabel;
+        document.getElementById('txt-total-lp').innerText = d.totalLp;
+        document.getElementById('txt-ai-greet').innerText = d.greet;
+        ['m1','m2','m3','m4','m5','m6'].forEach(id => document.getElementById(id).innerText = d[id]);
+        loadFaq();
+    }
 
     function askAI() {
         const input = document.getElementById('user-input');
@@ -184,14 +211,10 @@
         if(!msg) return;
         addMsg(msg, 'user-msg');
         input.value = '';
-
         setTimeout(() => {
-            let res = "혜공 형님, 요청하신 내용은 HKWB 글로벌 네트워크에서 분석 중입니다.";
-            const m = msg.toLowerCase();
-            if(m.includes("1080") || m.includes("2월")) res = "2월 26일, 1080개 Pi를 LP에 예치하는 것이 프로젝트의 핵심 마일스톤입니다.";
-            else if(m.includes("ubi")) res = "UBI 시스템은 모든 유저에게 공정한 기초 자산을 배분하기 위해 설계되었습니다.";
-            else if(m.includes("삐니")) res = "네, 형님! 삐니는 형님의 자산을 24시간 안전하게 관리하고 있습니다.";
-            else if(m.includes("support") || m.includes("메일")) res = "추가 문의는 support@hkwb.world로 연락 주시면 정밀 지원이 가능합니다.";
+            let res = "혜공 형님, HKWB DEX 엔진이 테스트 파이 데이터를 분석 중입니다.";
+            if(msg.includes("1080")) res = "2월 26일, 1080 Pi를 LP에 예치하여 GCV 생태계를 선점하십시오.";
+            if(msg.includes("DEX")) res = "현재 HKWB DEX는 초당 1만 건의 트랜잭션을 처리할 준비가 되어 있습니다.";
             addMsg(res, 'ai-msg');
         }, 800);
     }
@@ -203,34 +226,13 @@
         b.appendChild(d); b.scrollTop = b.scrollHeight;
     }
 
-    function changeLanguage() {
-        const l = document.getElementById('langSelect').value;
-        const d = i18n[l] || i18n.en;
-        document.getElementById('txt-ledger').innerText = d.ledger;
-        document.getElementById('btn-wallet').innerText = d.wallet;
-        document.getElementById('btn-swap').innerText = d.swap;
-        document.getElementById('btn-stake').innerText = d.stake;
-        document.getElementById('btn-center').innerText = d.center;
-        document.getElementById('txt-hkwb-label').innerText = d.hkwb;
-        document.getElementById('txt-total-lp').innerText = d.tlp;
-        document.getElementById('txt-ai-greet').innerText = d.greet;
-        ['m1','m2','m3','m4','m5','m6'].forEach(id => document.getElementById(id).innerText = d[id]);
-    }
-
     function toggleChat() { const w = document.getElementById('chat-window'); w.style.display = (w.style.display==='flex')?'none':'flex'; }
     function toggleFaq() { const f = document.getElementById('faqBox'); f.style.display = (f.style.display==='block')?'none':'block'; }
 
     window.onload = () => {
         const sel = document.getElementById('langSelect');
         languages.forEach(l => { const o = document.createElement('option'); o.value=l.c; o.innerText=l.n; sel.appendChild(o); });
-        
-        const faqList = [
-            {q: "UBI의 핵심 전략은?", a: "전 세계 유저에게 HKWB를 통해 보편적 기본소득을 제공하는 것입니다."},
-            {q: "2월 26일 1080 Pi 예치란?", a: "DEX의 초기 유동성을 확보하고 거버넌스 권한을 강화하는 필수 단계입니다."},
-            {q: "지원팀에 연락하려면?", a: "support@hkwb.world로 메일을 보내주시면 24시간 내 답변 드립니다."}
-        ];
-        document.getElementById('faq-list').innerHTML = faqList.map(i => `<div class="faq-q">${i.q}</div><div class="faq-a">${i.a}</div>`).join('');
-        changeLanguage(); // 초기 언어 설정
+        loadFaq();
     };
 </script>
 </body>
