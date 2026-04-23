@@ -3,211 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HK WORLD BANK - HUMANITY UBI V23</title>
+    <title>HK WORLD BANK - TOTAL MASTER</title>
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <style>
         :root {
             --bg: #000; --card: #121212; --gold: #FFD700;
-            --neon-st: #00FFCC; --neon-lp: #FF00FF; --neon-green: #39FF14; --neon-blue: #00BFFF;
-            --ubi-red: #FF3B30; --yt-red: #FF0000; --tk-black: #010101;
+            --neon-pink: #FF00FF; --neon-blue: #00BFFF; --neon-green: #39FF14;
         }
-        body { margin: 0; padding: 0; background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; }
-        .container { width: 100%; max-width: 500px; padding: 20px; box-sizing: border-box; }
-        
-        /* 200개국 대응 언어바 (아이콘 중심) */
-        .top-bar { width: 100%; display: flex; gap: 10px; margin-bottom: 20px; }
-        #langSelect {
-            background: #000; color: var(--gold); border: 2px solid var(--gold);
-            padding: 12px; border-radius: 12px; font-weight: 900; flex: 1; cursor: pointer; font-size: 1.1rem;
-        }
+        body { margin: 0; background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
+        .container { width: 100%; max-width: 480px; margin: 0 auto; padding: 15px; box-sizing: border-box; }
 
+        /* 언어 선택 */
+        .top-nav { display: flex; justify-content: flex-end; margin-bottom: 10px; }
+        #langSelect { background: #000; color: var(--gold); border: 2px solid var(--gold); border-radius: 8px; padding: 5px; font-weight: 900; }
+
+        /* 대시보드 */
         header { text-align: center; margin-bottom: 20px; }
-        .title { font-size: 2.4rem; font-weight: 900; color: var(--gold); margin: 0; }
-        .foundation-tag { color: #aaa; font-size: 0.85rem; margin-top: 5px; font-weight: bold; letter-spacing: 1px; }
+        .title { color: var(--gold); font-size: 2.2rem; font-weight: 900; margin: 0; }
+        .pi-display { font-size: 3.5rem; font-weight: 900; margin: 10px 0; text-shadow: 0 0 15px rgba(255, 215, 0, 0.3); }
+        .gcv-status { color: var(--neon-green); border: 2px solid var(--neon-green); padding: 8px 25px; border-radius: 50px; font-weight: 900; display: inline-block; }
+
+        /* 메인 메뉴 그리드 */
+        .grid-6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
+        .btn-item { background: var(--card); padding: 20px 5px; border-radius: 15px; text-align: center; border: 1px solid #333; cursor: pointer; transition: 0.3s; }
+        .btn-item i { font-style: normal; font-size: 2rem; display: block; margin-bottom: 8px; }
+        .btn-item span { font-size: 0.85rem; font-weight: bold; }
+        .ubi-glow { border: 2px solid var(--neon-pink); box-shadow: 0 0 15px var(--neon-pink); animation: pulse 1.5s infinite; }
+
+        /* 통째 통합 레이어 시스템 */
+        .onion-layer { display: none; margin-top: 20px; animation: slideIn 0.4s ease-out; }
         
-        /* 문맹층을 위한 시각적 강조 */
-        .ubi-banner { background: var(--ubi-red); color: white; padding: 10px 25px; border-radius: 50px; font-weight: 900; font-size: 1.1rem; margin-top: 15px; display: inline-block; box-shadow: 0 0 20px rgba(255, 59, 48, 0.6); }
-
-        .pi-display { font-size: 3.5rem; font-weight: 900; margin: 15px 0; color: var(--gold); }
-
-        /* 유튜브/틱톡 가이드 버튼 (시각적 교육) */
-        .video-guide-row { display: flex; gap: 10px; margin-bottom: 20px; }
-        .v-btn { flex: 1; padding: 15px; border-radius: 15px; border: none; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; text-decoration: none; color: white; font-weight: 900; font-size: 1rem; }
-        .v-yt { background: var(--yt-red); }
-        .v-tk { background: var(--tk-black); border: 1px solid #fff; }
-
-        .ubi-main-btn { 
-            width: 100%; background: linear-gradient(45deg, #FF416C, #FF4B2B); color: white; 
-            padding: 30px; border-radius: 25px; border: none; font-size: 1.8rem; font-weight: 900; 
-            cursor: pointer; margin-bottom: 20px; box-shadow: 0 15px 35px rgba(255, 75, 43, 0.5); 
-        }
-
-        .card { background: var(--card); border-radius: 20px; padding: 25px; margin-bottom: 15px; text-align: center; border: 1px solid #333; }
-        .val-blue { color: var(--neon-blue); font-weight: 900; font-size: 2.2rem; }
-
-        /* 핵심 카테고리 (아이콘 강조) */
-        .icon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; }
-        .icon-item { background: var(--card); padding: 25px 10px; border-radius: 20px; text-align: center; border: 1px solid #222; }
-        .icon-item i { font-style: normal; font-size: 2.5rem; display: block; margin-bottom: 10px; }
-        .icon-item span { font-size: 0.95rem; font-weight: 900; }
-
-        /* 20개 FAQ 섹션 */
-        .faq-container { margin-top: 40px; }
-        .faq-h { color: var(--gold); font-size: 1.5rem; font-weight: 900; margin-bottom: 15px; padding-left: 10px; border-left: 5px solid var(--gold); }
-        .faq-list { max-height: 500px; overflow-y: auto; }
-        .faq-card { background: #0a0a0a; border: 1px solid #222; padding: 15px; border-radius: 15px; margin-bottom: 10px; }
-        .faq-q { color: var(--gold); font-weight: 900; font-size: 1rem; margin-bottom: 5px; }
-        .faq-a { color: #999; font-size: 0.9rem; line-height: 1.5; }
-
-        /* 삐니 챗봇 */
-        #bpini-btn { position: fixed; bottom: 30px; right: 25px; width: 80px; height: 80px; background: var(--neon-lp); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; box-shadow: 0 0 30px var(--neon-lp); cursor: pointer; z-index: 1000; border: 4px solid #fff; color: white; font-size: 1.2rem; }
-        #chat-ui { display: none; position: fixed; bottom: 120px; right: 25px; width: 350px; height: 500px; background: #000; border: 2px solid var(--neon-lp); border-radius: 30px; flex-direction: column; overflow: hidden; z-index: 1001; }
-        .chat-h { background: var(--neon-lp); padding: 20px; font-weight: 900; display: flex; justify-content: space-between; }
-        .chat-b { flex: 1; padding: 20px; overflow-y: auto; background: #050505; display: flex; flex-direction: column; gap: 15px; }
-        .msg { max-width: 85%; padding: 15px; border-radius: 20px; font-size: 1rem; }
-        .ai { background: #111; border-left: 5px solid var(--neon-lp); }
-        .user { background: var(--neon-blue); align-self: flex-end; font-weight: 900; }
-        .chat-i { display: flex; padding: 20px; background: #111; border-top: 1px solid #333; }
-        #chat-in { flex: 1; background: transparent; border: none; color: white; outline: none; font-size: 1.1rem; }
+        /* 1단계: 재단 대문 */
+        .foundation-box { background: linear-gradient(135deg, #FF00FF, #00BFFF); padding: 30px 20px; border-radius: 20px; text-align: center; cursor: pointer; }
         
-        footer { text-align: center; padding: 60px 20px; color: #444; font-size: 0.9rem; border-top: 1px solid #222; margin-top: 40px; }
+        /* 2단계: 6대 복지 메뉴 */
+        .welfare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .w-card { background: #1a1a1a; padding: 20px; border-radius: 15px; border: 1px solid var(--neon-blue); text-align: center; cursor: pointer; }
+
+        /* 3단계: 상세 내용 + 유튜브/틱톡 통합 플레이어 */
+        .detail-box { background: #080808; border: 2px solid var(--gold); border-radius: 25px; padding: 20px; }
+        .video-container { position: relative; width: 100%; padding-bottom: 56.25%; margin-bottom: 15px; border-radius: 15px; overflow: hidden; background: #000; border: 1px solid #333; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        /* 하단 미디어 퀵링크 */
+        .media-footer { display: flex; gap: 10px; margin-top: 30px; }
+        .media-btn { flex: 1; padding: 15px; border-radius: 12px; text-align: center; font-weight: 900; text-decoration: none; color: white; display: flex; align-items: center; justify-content: center; gap: 8px; }
+
+        #bpini-btn { position: fixed; bottom: 30px; right: 20px; width: 70px; height: 70px; background: var(--neon-pink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; box-shadow: 0 0 20px var(--neon-pink); cursor: pointer; z-index: 1000; border: 2px solid white; }
+
+        @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="top-bar">
-        <select id="langSelect" onchange="updateAllContents()"></select>
-    </div>
+    <div class="top-nav"><select id="langSelect" onchange="changeLanguage()"></select></div>
 
     <header>
         <h1 class="title">HK WORLD BANK</h1>
-        <div class="foundation-tag">HYEKONG UNIFICATION FOUNDATION</div>
-        <div class="ubi-banner" id="t-tag">2,000,000,000 HUMANITY UBI</div>
-        <div class="pi-display"><span id="l-pi">314,159.0000</span> <span style="color:var(--gold)">Pi</span></div>
+        <div class="pi-display"><span id="pi-balance">412.3160</span> <span style="color:var(--gold)">Pi</span></div>
+        <div class="gcv-status" id="t-gcv">$ 129,541,372</div>
     </header>
 
-    <div class="video-guide-row">
-        <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="v-btn v-yt">
-            <i>📺</i> <span id="t-yt">YouTube Guide</span>
-        </a>
-        <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="v-btn v-tk">
-            <i>📱</i> <span id="t-tk">TikTok Guide</span>
-        </a>
+    <div class="grid-6">
+        <div class="btn-item"><i>🚀</i><span id="m1">송금</span></div>
+        <div class="btn-item"><i>🛒</i><span id="m2">결제</span></div>
+        <div class="btn-item"><i>💰</i><span id="m3">예치</span></div>
+        <div class="btn-item"><i>🏅</i><span id="m4">보상</span></div>
+        <div class="btn-item ubi-glow" onclick="peel(1)"><i>🏛️</i><span id="m5">UBI</span></div>
+        <div class="btn-item"><i>🔄</i><span id="m6">스왑</span></div>
     </div>
 
-    <button class="ubi-main-btn" id="t-claim" onclick="handlePayment()">CLAIM UBI (V23)</button>
-
-    <div class="card">
-        <div class="label" id="t-supply-l">HKWB GLOBAL REAL-TIME SUPPLY</div>
-        <div class="val-blue" id="l-supply">6,280,000.5254</div>
+    <div id="layer-foundation" class="onion-layer">
+        <div class="foundation-box" onclick="peel(2)">
+            <h2 id="t-f-name" style="margin:0;">🕊️ 혜공통일재단</h2>
+            <p id="t-f-sub" style="margin:5px 0 0 0; font-size:0.9rem;">GLOBAL UNIFICATION SYSTEM</p>
+        </div>
     </div>
 
-    <div class="icon-grid">
-        <div class="icon-item"><i>🏦</i><span id="m1">Bank</span></div>
-        <div class="icon-item"><i>🏥</i><span id="m2">Health</span></div>
-        <div class="icon-item"><i>🎓</i><span id="m3">Edu</span></div>
-        <div class="icon-item"><i>🍱</i><span id="m4">Food</span></div>
-        <div class="icon-item"><i>🏠</i><span id="m5">Home</span></div>
-        <div class="icon-item"><i>🕊️</i><span id="m6">Charity</span></div>
+    <div id="layer-welfare" class="onion-layer">
+        <div class="welfare-grid">
+            <div class="w-card" onclick="peel(3, 'bank')"><i>🏦</i><span id="w1">은행</span></div>
+            <div class="w-card" onclick="peel(3, 'medical')"><i>🏥</i><span id="w2">의료</span></div>
+            <div class="w-card" onclick="peel(3, 'edu')"><i>🎓</i><span id="w3">교육</span></div>
+            <div class="w-card" onclick="peel(3, 'food')"><i>🍱</i><span id="w4">식량</span></div>
+            <div class="w-card" onclick="peel(3, 'home')"><i>🏠</i><span id="w5">주거</span></div>
+            <div class="w-card" onclick="peel(3, 'charity')"><i>🕊️</i><span id="w6">자선</span></div>
+        </div>
     </div>
 
-    <div class="faq-container">
-        <div class="faq-h" id="t-faq-h">GLOBAL MASTER FAQ 20</div>
-        <div class="faq-list" id="faq-list"></div>
+    <div id="layer-detail" class="onion-layer">
+        <div class="detail-box">
+            <div class="video-container" id="video-frame">
+                </div>
+            <div id="d-title" style="color:var(--gold); font-size:1.3rem; font-weight:900; margin-bottom:10px;"></div>
+            <div id="d-desc" style="line-height:1.6; font-size:0.95rem; color:#ccc;"></div>
+            <button onclick="peel(2)" style="width:100%; margin-top:20px; background:#222; border:none; color:white; padding:10px; border-radius:10px;">목록으로 돌아가기</button>
+        </div>
     </div>
 
-    <footer>
-        <p>© 2026 HK WORLD BANK FOUNDATION<br>CHAIRMAN LEE JAEWAN (HYEKONG)</p>
+    <div class="media-footer">
+        <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="media-btn" style="background:#f00;">YouTube</a>
+        <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="media-btn" style="background:#000; border:1px solid #444;">TikTok</a>
+    </div>
+
+    <footer style="text-align:center; padding:30px; color:#444; font-size:0.7rem;">
+        © 2026 HK WORLD BANK FOUNDATION<br>PI TESTNET ENGINE LOADED
     </footer>
 </div>
 
-<div id="bpini-btn" onclick="toggleChat()">삐니</div>
-<div id="chat-ui">
-    <div class="chat-h"><span id="t-chat-h">BPINI AI Manager</span><span onclick="toggleChat()" style="cursor:pointer;">✕</span></div>
-    <div class="chat-b" id="chat-box"></div>
-    <div class="chat-i"><input type="text" id="chat-in" onkeypress="if(event.key==='Enter') askAI()" placeholder="Voice/Text Input..."></div>
-</div>
+<div id="bpini-btn">삐니</div>
 
 <script>
-    const Pi = window.Pi;
-    const languages = [
-        {c:"ko", n:"한국어"}, {c:"en", n:"English"}, {c:"zh", n:"中文"}, {c:"ja", n:"日本語"}, {c:"vi", n:"Tiếng Việt"},
-        {c:"hi", n:"हिन्दी"}, {c:"ar", n:"العربية"}, {c:"es", n:"Español"}, {c:"fr", n:"Français"}, {c:"de", n:"Deutsch"},
-        {c:"ru", n:"Русский"}, {c:"pt", n:"Português"}, {c:"id", n:"Indonesia"}, {c:"th", n:"ไทย"}, {c:"sw", n:"Swahili"}
-    ];
-
+    const langCodes = ["ko","en","zh","ja","vi","es","fr","de","pt","ru","hi","ar","id","th","tr","it","nl","pl","sv","no"];
     const dic = {
-        ko: { tag:"20억 인류 기본소득 프로젝트", claim:"무료 기본소득 받기", supply:"전 세계 실시간 공급량", yt:"유튜브 교육", tk:"틱톡 교육", m1:"은행", m2:"의료", m3:"교육", m4:"식량", m5:"주거", m6:"자선", faq:"글로벌 마스터 질문 20", chat:"삐니 AI 비서", greet:"안녕하십니까 형님. 혜공통일재단 시스템 매니저 삐니입니다. 글자를 모르셔도 영상 가이드를 통해 누구나 혜택을 받을 수 있습니다.", win:"형님, 인류 구원의 길은 HKWB가 완성합니다." },
-        en: { tag:"2B Humanity UBI Project", claim:"Get Free UBI Now", supply:"Global Real-time Supply", yt:"YouTube Guide", tk:"TikTok Guide", m1:"Bank", m2:"Health", m3:"Edu", m4:"Food", m5:"Home", m6:"Charity", faq:"Global Master FAQ 20", chat:"BPINI AI Manager", greet:"Greetings Master. I am Bpini. Even if you cannot read, our video guides help everyone receive benefits.", win:"Master, the path to humanity's salvation is secured." }
+        ko: { m1:"송금", m2:"결제", m3:"예치", m4:"보상", m5:"UBI", m6:"스왑", fName:"🕊️ 혜공통일재단", w1:"은행", w2:"의료", w3:"교육", w4:"식량", w5:"주거", w6:"자선" },
+        en: { m1:"Send", m2:"Pay", m3:"Deposit", m4:"Reward", m5:"UBI", m6:"Swap", fName:"🕊️ HK Foundation", w1:"Bank", w2:"Medical", w3:"Edu", w4:"Food", w5:"Home", w6:"Charity" }
     };
 
-    function updateAllContents() {
-        const lang = document.getElementById('langSelect').value;
-        const d = dic[lang] || dic.en;
-        
-        document.getElementById('t-tag').innerText = d.tag;
-        document.getElementById('t-claim').innerText = d.claim;
-        document.getElementById('t-supply-l').innerText = d.supply;
-        document.getElementById('t-yt').innerText = d.yt;
-        document.getElementById('t-tk').innerText = d.tk;
-        document.getElementById('t-faq-h').innerText = d.faq;
-        document.getElementById('t-chat-h').innerText = d.chat;
-        for(let i=1; i<=6; i++) document.getElementById('m'+i).innerText = d['m'+i];
+    const content = {
+        bank: { t:"🏦 HK 금융 프로토콜", d:"전 인류 1인 1계좌 Pi 지급 실행안입니다.", vid:"https://www.youtube.com/embed/5F_P6tP_5_Y" },
+        medical: { t:"🏥 글로벌 의료 복지", d:"24시간 AI 진료 및 무상 의료 시스템입니다.", vid:"https://www.youtube.com/embed/S2nBBMvvS88" },
+        edu: { t:"🎓 혜공 기술 교육", d:"글자를 몰라도 성공하는 숏폼 기술 전수입니다.", vid:"https://www.youtube.com/embed/V6XNAn7P_3k" },
+        food: { t:"🍱 식량 주권 네트워크", d:"전 세계 기아 제로화를 위한 스마트 팜 연동입니다.", vid:"https://www.youtube.com/embed/8vR-uH4qRj8" },
+        home: { t:"🏠 스마트 주택 보급", d:"인간다운 삶을 위한 보편적 주거권 보장안입니다.", vid:"https://www.youtube.com/embed/9NfR7q_pUjI" },
+        charity: { t:"🕊️ 인류 통일 자선", d:"투명한 블록체인 기반의 글로벌 구호 시스템입니다.", vid:"https://www.youtube.com/embed/mH8XfS5L6_E" }
+    };
 
-        // FAQ 20선 자동 생성 (확장형)
-        let faqHtml = "";
-        for(let i=1; i<=20; i++) {
-            faqHtml += `<div class="faq-card">
-                <div class="faq-q">${i}. [${lang.toUpperCase()}] Protocol Query ${i}?</div>
-                <div class="faq-a">This step is explained in the YouTube video. (V23 Optimized)</div>
-            </div>`;
+    function peel(step, key) {
+        document.querySelectorAll('.onion-layer').forEach(l => l.style.display = 'none');
+        if(step === 1) document.getElementById('layer-foundation').style.display = 'block';
+        else if(step === 2) document.getElementById('layer-welfare').style.display = 'block';
+        else if(step === 3) {
+            const item = content[key];
+            document.getElementById('d-title').innerText = item.t;
+            document.getElementById('d-desc').innerText = item.d;
+            document.getElementById('video-frame').innerHTML = `<iframe src="${item.vid}" frameborder="0" allowfullscreen></iframe>`;
+            document.getElementById('layer-detail').style.display = 'block';
         }
-        document.getElementById('faq-list').innerHTML = faqHtml;
-        document.getElementById('chat-box').innerHTML = `<div class="msg ai">${d.greet}</div>`;
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
 
-    async function handlePayment() {
-        if(!Pi) return alert("Please open in Pi Browser.");
-        try {
-            await Pi.createPayment({ amount: 3.14, memo: "Humanity UBI Claim", metadata: { type: "UBI" } }, {
-                onReadyForServerCompletion: (id, txid) => alert("UBI Successfully Distributed: " + txid)
-            });
-        } catch(e) { alert("V23 Protocol Synchronized."); }
-    }
-
-    function startSimulation() {
-        let pi = 314159.0000, supply = 6280000.5254;
-        setInterval(() => {
-            pi += 0.0031; supply += 0.0001;
-            document.getElementById('l-pi').innerText = pi.toLocaleString(undefined, {minimumFractionDigits: 4});
-            document.getElementById('l-supply').innerText = supply.toLocaleString(undefined, {minimumFractionDigits: 4});
-        }, 1000);
-    }
-
-    function askAI() {
-        const inp = document.getElementById('chat-in');
-        const box = document.getElementById('chat-box');
-        if(!inp.value.trim()) return;
-        const lang = document.getElementById('langSelect').value;
-        const d = dic[lang] || dic.en;
-        box.innerHTML += `<div class="msg user">${inp.value}</div>`;
-        const v = inp.value; inp.value = '';
-        setTimeout(() => {
-            let res = "Syncing with HK-Foundation...";
-            if(v.includes("승리") || v.toLowerCase().includes("win")) res = d.win;
-            box.innerHTML += `<div class="msg ai">${res}</div>`;
-            box.scrollTop = box.scrollHeight;
-        }, 500);
-    }
-
-    function toggleChat() { const c = document.getElementById('chat-ui'); c.style.display = (c.style.display==='flex')?'none':'flex'; }
+    function changeLanguage() { /* 언어 변경 로직 */ }
 
     window.onload = () => {
         const sel = document.getElementById('langSelect');
-        languages.forEach(l => { const o = document.createElement('option'); o.value=l.c; o.innerText=l.n; sel.appendChild(o); });
-        try { Pi.init({ version: "2.0", sandbox: true }); } catch(e) {}
-        updateAllContents(); startSimulation();
+        langCodes.forEach(c => { const o = document.createElement('option'); o.value=c; o.innerText=c.toUpperCase(); sel.appendChild(o); });
+        setInterval(() => {
+            let b = document.getElementById('pi-balance');
+            b.innerText = (parseFloat(b.innerText) + 0.0001).toFixed(4);
+        }, 1000);
     };
 </script>
 </body>
