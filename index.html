@@ -3,186 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK - TOTAL GLOBAL SYSTEM</title>
+    <title>HK WORLD BANK - GLOBAL SUPREME SYSTEM</title>
     <style>
         :root {
             --hk-gold: #FFD700; --hk-green: #39FF14; --hk-blue: #00F3FF;
-            --hk-pink: #FF00FF; --hk-bg: #121212; --hk-card: #1E1E1E;
+            --hk-pink: #FF00FF; --hk-bg: #0a0a0a; --hk-card: #1a1a1a;
+            --hk-white: #ffffff;
         }
-        body { background: var(--hk-bg); color: white; font-family: 'Malgun Gothic', sans-serif; margin: 0; padding: 15px; }
-        .container { max-width: 500px; margin: 0 auto; text-align: center; }
+        body { 
+            background: var(--hk-bg); color: var(--hk-white); 
+            font-family: 'Pretendard', 'Malgun Gothic', sans-serif; 
+            margin: 0; padding: 0; line-height: 1.6;
+        }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; text-align: center; }
 
-        .lang-bar {
-            width: 100%; padding: 10px; background: #333; border: 1px solid var(--hk-gold);
-            border-radius: 8px; margin-bottom: 20px; color: var(--hk-gold); font-weight: bold;
+        /* 상단 글로벌 전산 상태바 */
+        .top-nav {
+            background: #222; border: 1px solid var(--hk-gold); border-radius: 10px;
+            padding: 15px; margin-bottom: 30px; position: sticky; top: 10px; z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        .lang-select {
+            width: 100%; background: transparent; color: var(--hk-gold); border: none;
+            font-weight: bold; font-size: 14px; cursor: pointer; text-align: center;
         }
 
-        .header-title { color: var(--hk-gold); font-size: 32px; margin: 10px 0; }
-        .main-asset { font-size: 45px; font-weight: bold; margin: 20px 0; }
-        .asset-box { border: 2.5px solid var(--hk-green); border-radius: 50px; padding: 12px; color: var(--hk-green); font-size: 26px; margin-bottom: 20px; }
+        /* 메인 타이틀 및 자산 현황 */
+        .header-title { font-size: 40px; font-weight: 900; color: var(--hk-gold); text-shadow: 0 0 10px rgba(255,215,0,0.5); margin-bottom: 5px; }
+        .sub-title { font-size: 14px; letter-spacing: 3px; opacity: 0.7; margin-bottom: 30px; }
+        
+        .asset-display { background: var(--hk-card); border-radius: 20px; padding: 30px 10px; border: 1px solid #333; margin-bottom: 30px; }
+        .pi-amount { font-size: 55px; font-weight: bold; color: var(--hk-white); margin-bottom: 10px; }
+        .pi-amount span { font-size: 20px; color: var(--hk-gold); }
+        .usd-value { font-size: 32px; color: var(--hk-green); font-weight: bold; }
 
-        .grid-9 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
-        .grid-item { background: #252525; border-radius: 12px; padding: 15px 5px; font-size: 13px; border: 1px solid #444; }
-        .pi-sum { background: #FFFFFF; color: #000; font-weight: bold; }
-        .dex-swap { background: var(--hk-gold); color: #000; font-weight: bold; }
-        .lp-staking { background: var(--hk-green); color: #000; font-weight: bold; }
-
-        /* FAQ 20선 질의답변 섹션 */
-        .faq-wrap { background: #2d3436; border-radius: 15px; padding: 15px; text-align: left; margin-bottom: 80px; }
-        .faq-item { border-bottom: 1px solid #444; }
-        .faq-q { color: var(--hk-blue); font-weight: bold; padding: 12px 0; cursor: pointer; font-size: 14px; }
-        .faq-a { padding: 0 5px 12px 5px; color: #dfe6e9; display: none; font-size: 13px; line-height: 1.5; border-left: 2px solid var(--hk-pink); padding-left: 10px; }
-
-        #bbini-chat {
-            position: fixed; bottom: 100px; right: 20px; width: 300px; height: 400px;
-            background: white; border-radius: 20px; display: none; flex-direction: column;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden; z-index: 9999;
+        /* [핵심] 실시간 공급 및 유동성 지표 */
+        .live-stats {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px;
         }
-        .chat-top { background: var(--hk-pink); color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; }
-        .chat-view { flex: 1; padding: 15px; overflow-y: auto; color: #333; font-size: 14px; background: #f9f9f9; }
-        .chat-ctrl { display: flex; border-top: 1px solid #eee; }
-        .chat-ctrl input { flex: 1; border: none; padding: 15px; outline: none; }
-        .chat-ctrl button { background: var(--hk-pink); color: white; border: none; padding: 0 20px; cursor: pointer; }
+        .stat-box { background: #111; border-left: 4px solid var(--hk-blue); padding: 15px; text-align: left; border-radius: 5px; }
+        .stat-label { font-size: 11px; opacity: 0.6; display: block; }
+        .stat-data { font-size: 16px; font-weight: bold; color: var(--hk-blue); }
 
+        /* [핵심] 9대 금융 기능 그리드 - 아주 길고 상세하게 */
+        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 40px; }
+        .menu-item { 
+            background: #222; border-radius: 15px; padding: 20px 5px; border: 1px solid #333;
+            transition: 0.3s; cursor: pointer;
+        }
+        .menu-item:hover { border-color: var(--hk-pink); background: #2a2a2a; }
+        .m-icon { font-size: 28px; display: block; margin-bottom: 10px; }
+        .m-name { font-size: 14px; font-weight: bold; display: block; }
+        .m-sub { font-size: 10px; opacity: 0.5; margin-top: 5px; }
+        
+        /* 강조 메뉴 색상 */
+        .bg-white { background: var(--hk-white) !important; color: #000 !important; }
+        .bg-gold { background: var(--hk-gold) !important; color: #000 !important; }
+        .bg-green { background: var(--hk-green) !important; color: #000 !important; }
+
+        /* [핵심] HK 사회재단 - 웅장하게 */
+        .foundation-section {
+            background: linear-gradient(135deg, #1e3799, #0984e3); border-radius: 25px;
+            padding: 30px 20px; text-align: left; margin-bottom: 40px; box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+        .section-title { font-size: 24px; font-weight: bold; text-align: center; margin-bottom: 25px; border-bottom: 2px solid rgba(255,255,255,0.2); padding-bottom: 10px; }
+        .f-card { background: rgba(255,255,255,0.1); border-radius: 15px; padding: 20px; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.1); }
+        .f-card h4 { margin: 0 0 10px 0; color: var(--hk-gold); font-size: 18px; display: flex; align-items: center; }
+        .f-card p { margin: 0; font-size: 13px; line-height: 1.6; opacity: 0.9; }
+
+        /* [핵심] FAQ 20선 - 질의답변 전체 수록 */
+        .faq-section { background: var(--hk-card); border-radius: 20px; padding: 25px 15px; text-align: left; margin-bottom: 100px; }
+        .faq-item { border-bottom: 1px solid #333; }
+        .faq-q { padding: 18px 10px; cursor: pointer; font-size: 14px; font-weight: bold; color: var(--hk-blue); display: flex; justify-content: space-between; }
+        .faq-a { padding: 0 15px 20px 20px; font-size: 13px; color: #ccc; display: none; line-height: 1.7; border-left: 3px solid var(--hk-pink); background: rgba(255,255,255,0.02); }
+
+        /* 미디어 채널 버튼 */
+        .media-group { display: flex; gap: 10px; margin-bottom: 30px; }
+        .media-btn { flex: 1; padding: 15px; border-radius: 10px; font-weight: bold; text-decoration: none; color: white; font-size: 14px; }
+        .yt-btn { background: #ff0000; box-shadow: 0 0 15px rgba(255,0,0,0.3); }
+        .tt-btn { background: #000; border: 1px solid #fff; box-shadow: 0 0 15px rgba(255,255,255,0.2); }
+
+        /* 삐니 챗봇 */
         .bbini-trigger {
-            position: fixed; bottom: 25px; right: 25px; width: 70px; height: 70px;
+            position: fixed; bottom: 30px; right: 30px; width: 75px; height: 75px;
             background: var(--hk-pink); border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; font-weight: bold; cursor: pointer; box-shadow: 0 0 20px var(--hk-pink); z-index: 10000;
+            justify-content: center; font-weight: bold; cursor: pointer; box-shadow: 0 10px 25px rgba(255,0,255,0.4); z-index: 10000;
+        }
+        #bbini-chat {
+            position: fixed; bottom: 115px; right: 30px; width: 320px; height: 450px;
+            background: white; border-radius: 20px; display: none; flex-direction: column;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6); overflow: hidden; z-index: 9999;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <select class="lang-bar">
-        <option>🌐 16개국 언어 실시간 가동 (KOR/ENG/CHN/JPN...)</option>
-    </select>
-
-    <h1 class="header-title">HK WORLD BANK</h1>
-    <div class="main-asset" id="pi-val">412.3153 <span>Pi</span></div>
-    <div class="asset-box">$ 129,541,355</div>
-
-    <div class="grid-9">
-        <div class="grid-item pi-sum">PI 수량</div>
-        <div class="grid-item dex-swap">DEX 스왑</div>
-        <div class="grid-item lp-staking">LP 스테이킹</div>
-        <div class="grid-item">🚀 송금</div><div class="grid-item">🛒 결제</div><div class="grid-item">💰 예치</div>
-        <div class="grid-item">🏆 보상</div><div class="grid-item">🏦 UBI</div><div class="grid-item">🔄 SWAP</div>
+    <div class="top-nav">
+        <select class="lang-select">
+            <option>🌐 16개국 글로벌 실시간 전산 가동 중 (KOR/ENG/CHN/JPN...)</option>
+        </select>
     </div>
 
-    <div class="faq-wrap">
-        <h3 style="margin-top:0; color:var(--hk-gold); text-align:center;">글로벌 AI 지원센터 (FAQ 20)</h3>
+    <h1 class="header-title">HK WORLD BANK</h1>
+    <p class="sub-title">GLOBAL LIQUIDITY RESERVOIR</p>
+
+    <div class="asset-display">
+        <div class="pi-amount" id="pi-main">412.3153 <span>Pi</span></div>
+        <div class="usd-value" id="usd-main">$ 129,541,355</div>
+    </div>
+
+    <div class="live-stats">
+        <div class="stat-box">
+            <span class="stat-label">실시간 공급량 (HKWB)</span>
+            <span class="stat-data" id="hkwb-supply">1,080,000,000.00</span>
+        </div>
+        <div class="stat-box" style="border-color: var(--hk-green);">
+            <span class="stat-label">전체 유동성 (DEX LP)</span>
+            <span class="stat-data" id="total-liq">$ 314,159,265</span>
+        </div>
+        <div class="stat-box" style="border-color: var(--hk-gold);">
+            <span class="stat-label">스테이킹 이율 (APY)</span>
+            <span class="stat-data">MAX 20.00%</span>
+        </div>
+        <div class="stat-box" style="border-color: var(--hk-pink);">
+            <span class="stat-label">LP 수익률 (APR)</span>
+            <span class="stat-data">실시간 변동 반영</span>
+        </div>
+    </div>
+
+    <div class="media-group">
+        <a href="#" class="media-btn yt-btn">YOUTUBE LIVE</a>
+        <a href="#" class="media-btn tt-btn">TIKTOK GLOBAL</a>
+    </div>
+
+    <div class="menu-grid">
+        <div class="menu-item bg-white">
+            <span class="m-icon">💎</span><span class="m-name">PI 수량</span><span class="m-sub">SDK API 연동</span>
+        </div>
+        <div class="menu-item bg-gold">
+            <span class="m-icon">⚖️</span><span class="m-name">DEX 스왑</span><span class="m-sub">유동성 풀 기반</span>
+        </div>
+        <div class="menu-item bg-green">
+            <span class="m-icon">🚜</span><span class="m-name">LP 스테이킹</span><span class="m-sub">20% 수익 정산</span>
+        </div>
         
-        <div class="faq-item">
-            <div class="faq-q" onclick="openFaq(0)">1. HK-WorldBank의 설립 목적은 무엇입니까?</div>
-            <div class="faq-a">인류의 평등한 금융 기회 제공과 전 세계 유저 대상 기본소득(UBI) 전산망 구축입니다.</div>
+        <div class="menu-item">
+            <span class="m-icon">🚀</span><span class="m-name">송금</span><span class="m-sub">초고속 글로벌 전송</span>
         </div>
-        <div class="faq-item">
-            <div class="faq-q" onclick="openFaq(1)">2. 1,080개 물량 저수지 투입의 의미는?</div>
-            <div class="faq-a">내일모레 투입될 1,080개 물량은 초기 유동성 공급의 핵심이며, 동훈 풀 3회차 투입과 연동됩니다.</div>
+        <div class="menu-item">
+            <span class="m-icon">🛒</span><span class="m-name">결제</span><span class="m-sub">가맹점 즉시 결제</span>
         </div>
-        <div class="faq-item">
-            <div class="faq-q" onclick="openFaq(2)">3. 5월 18일에는 어떤 변화가 있습니까?</div>
-            <div class="faq-a">메인넷 전산 가동과 함께 16개국 글로벌 유저 서비스 및 보상 시스템이 전면 개방됩니다.</div>
+        <div class="menu-item">
+            <span class="m-icon">💰</span><span class="m-name">예치</span><span class="m-sub">안전 자산 보호</span>
         </div>
-        <div class="faq-item">
-            <div class="faq-q" onclick="openFaq(3)">4. PI 수량 확인은 실시간인가요?</div>
-            <div class="faq-a">네, 개인 보유량 및 전체 생태계 수량이 SDK API를 통해 실시간으로 집계됩니다.</div>
+        
+        <div class="menu-item">
+            <span class="m-icon">🏆</span><span class="m-name">보상</span><span class="m-sub">기여도 기반 보상</span>
         </div>
-        <div class="faq-item">
-            <div class="faq-q" onclick="openFaq(4)">5. DEX 스왑과 SWAP의 차이는 무엇입니까?</div>
-            <div class="faq-a">DEX 스왑은 탈중앙화 유동성 풀 기반이며, 일반 스왑은 다중 자산 간 빠른 교환을 지원합니다.</div>
+        <div class="menu-item">
+            <span class="m-icon">🏦</span><span class="m-name">기본소득</span><span class="m-sub">UBI 글로벌 전산</span>
         </div>
-        <div class="faq-item">
-            <div class="faq-q" onclick="openFaq(5)">6. LP 스테이킹 수익률은 어떻게 결정되나요?</div>
-            <div class="faq-a">현재 최대 20% 이하로 조정되어 비즈니스 지속 가능성을 확보하고 있습니다.</div>
+        <div class="menu-item">
+            <span class="m-icon">🔄</span><span class="m-name">SWAP</span><span class="m-sub">다중 자산 교환</span>
         </div>
-        <div class="faq-item">
-            <div class="faq-q" onclick="openFaq(6)">7. 기본소득(UBI)은 누가 받을 수 있습니까?</div>
-            <div class="faq-a">HK 생태계에 참여하는 전 세계 모든 활성 유저를 대상으로 자동 분배됩니다.</div>
+    </div>
+
+    <div class="foundation-section">
+        <h2 class="section-title">HK FOUNDATION</h2>
+        <div class="f-card">
+            <h4>🏫 학교 건립 (Education)</h4>
+            <p>전 세계 교육 소외 지역에 스마트 학교를 건립하여 인류의 지능을 깨우고 평등한 기회를 제공합니다.</p>
         </div>
-        <div class="faq-item">
-            <div class="faq-q" onclick="openFaq(7)">8. HK 사회재단의 비전은 무엇입니까?</div>
-            <div class="faq-a">오지 학교 건립, AI 병원, 3D 스마트 홈, 무제한 장학금으로 인류 지능을 깨우는 것입니다.</div>
+        <div class="f-card">
+            <h4>🏥 AI 병원 (Medical)</h4>
+            <p>24시간 상주하는 피지컬 AI 스마트 의료 시스템을 통해 국경 없는 의료 복지를 실현합니다.</p>
         </div>
-        <div class="faq-item">
-            <div class="faq-q" onclick="openFaq(8)">9. 결제 시스템은 온/오프라인 모두 가능한가요?</div>
-            <div class="faq-a">네, HK 전용 결제 API를 통해 온/오프라인 가맹점에서 즉시 사용 가능합니다.</div>
+        <div class="f-card">
+            <h4>🏠 스마트 주거 (Housing)</h4>
+            <p>3D 프린팅 공법을 통한 혁신적 주거 단지를 보급하여 전 인류의 주거 안정권을 보장합니다.</p>
         </div>
-        <div class="faq-item">
-            <div class="faq-q" onclick="openFaq(9)">10. 잭서스와 LP 스테이킹 연동 방식은?</div>
-            <div class="faq-a">유동성 공급 시 발생하는 수익을 잭서스 엔진을 통해 최적화하여 보상으로 지급합니다.</div>
+        <div class="f-card">
+            <h4>📜 무제한 장학금 (Scholarship)</h4>
+            <p>경제적 어려움 없이 재능을 펼칠 수 있도록 전 세계 인재에게 무제한 장학금을 지원합니다.</p>
         </div>
-        <div class="faq-item">
-            <div class="faq-q" onclick="openFaq(10)">11. 송금 서비스의 수수료는 어떻게 되나요?</div>
-            <div class="faq-a">생태계 활성화를 위해 최소한의 전산 유지비 외에 글로벌 최저 수준을 유지합니다.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q" onclick="openFaq(11)">12. 예치 상품의 안전성은 보장되나요?</div>
-            <div class="faq-a">저수지(Pool) 물량과 전체 유동성 지표를 통해 투명하게 관리되며 안전하게 보호됩니다.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q" onclick="openFaq(12)">13. 글로벌 AI 지원센터는 24시간 가동되나요?</div>
-            <div class="faq-a">네, 16개국 언어로 대응하는 AI 비서 삐니가 실시간으로 답변해 드립니다.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q" onclick="openFaq(13)">14. 보상 시스템의 지급 주기는?</div>
-            <div class="faq-a">스테이킹 보상과 UBI는 설정된 전산 로직에 따라 매일 자동 정산되어 지급됩니다.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q" onclick="openFaq(14)">15. 3D 프린팅 주거 단지는 어디에 지어지나요?</div>
-            <div class="faq-a">HK 사회재단 의제에 따라 전 세계 의료 및 주거 소외 지역을 우선 선정합니다.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q" onclick="openFaq(15)">16. 장학금 지원 자격은 어떻게 됩니까?</div>
-            <div class="faq-a">경제적 어려움으로 배움을 포기하려는 유능한 인재라면 국적 불문 무제한 지원합니다.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q" onclick="openFaq(16)">17. AI 의사 스마트 병원의 운영 방식은?</div>
-            <div class="faq-a">24시간 상주하는 피지컬 AI 의사를 통해 오지에서도 전문적인 의료 서비스를 제공합니다.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q" onclick="openFaq(17)">18. 동훈 풀(Pool)의 전체 유동성 비중은?</div>
-            <div class="faq-a">초기 유동성 확보의 핵심 엔진으로 작동하며, 전체 유동성 지표의 안정성을 책임집니다.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q" onclick="openFaq(18)">19. 유튜브와 틱톡 가동의 목적은?</div>
-            <div class="faq-a">글로벌 커뮤니티 확산과 HK WB 생태계의 투명한 정보 공유를 위함입니다.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q" onclick="openFaq(19)">20. 2035년 미래 비전과 연계되나요?</div>
-            <div class="faq-a">네, 강력한 경제 생태계와 사회재단을 통해 더 나은 세상을 만드는 국가적 비전의 기초가 됩니다.</div>
-        </div>
+    </div>
+
+    <div class="faq-section">
+        <h2 style="text-align:center; color:var(--hk-gold);">GLOBAL SUPPORT (FAQ 20)</h2>
+        <div id="faq-container"></div>
     </div>
 </div>
 
 <div id="bbini-chat">
-    <div class="chat-top"><span>삐니 참모 (AI)</span><span onclick="closeChat()" style="cursor:pointer">X</span></div>
-    <div class="chat-view" id="chat-box">형님! FAQ 20선 질의답변 전산 등록 완료했습니다! 삐니가 대기 중입니다!</div>
-    <div class="chat-ctrl"><input type="text" id="user-msg" placeholder="명령 입력..."><button onclick="send()">전송</button></div>
+    <div style="background:var(--hk-pink); color:white; padding:15px; font-weight:bold; display:flex; justify-content:space-between;">
+        <span>삐니 참모 (AI)</span><span onclick="toggleChat()" style="cursor:pointer">X</span>
+    </div>
+    <div id="chat-box" style="flex:1; padding:20px; overflow-y:auto; color:#333; font-size:14px; text-align:left;">
+        형님! 9대 전산망과 사회재단 4대 비전, 그리고 FAQ 20선 질의답변까지 싹 다 박아 넣었습니다! 
+        1,080개 물량 투입 준비 완료했습니다!
+    </div>
+    <div style="display:flex; border-top:1px solid #eee;">
+        <input type="text" style="flex:1; border:none; padding:15px; outline:none;" placeholder="형님, 명령을 내리십시오...">
+        <button style="background:var(--hk-pink); color:white; border:none; padding:0 20px;">전송</button>
+    </div>
 </div>
-
-<div class="bbini-trigger" onclick="openChat()">삐니</div>
+<div class="bbini-trigger" onclick="toggleChat()">삐니</div>
 
 <script>
+    function toggleChat() {
+        const c = document.getElementById('bbini-chat');
+        c.style.display = c.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    const faqData = [
+        ["HK-WorldBank 설립 목적은?", "인류의 평등한 금융 기회 제공과 전 세계 유저 대상 기본소득(UBI) 전산망 구축을 통한 지구촌 경제 혁명입니다."],
+        ["1,080개 물량 저수지 투입 일정은?", "내일모레 전산 반영을 시작으로 초기 유동성 공급의 핵심 동력으로 작용하며, 동훈 풀 3회차 투입과 연동됩니다."],
+        ["5월 18일 메인넷 가동의 의미는?", "16개국 글로벌 유저 서비스와 보상 시스템이 전면 개방되어 HK 생태계가 실전 가동되는 역사적인 날입니다."],
+        ["PI 수량 확인은 실시간인가요?", "네, SDK API 연동을 통해 개인 자산 및 생태계 전체 유동 수량이 1초 단위로 실시간 집계되어 표시됩니다."],
+        ["DEX 스왑과 일반 SWAP의 차이는?", "DEX 스왑은 탈중앙화 유동성 풀 기반의 정밀 교환이며, SWAP은 다중 자산 간의 범용적이고 빠른 전환을 지원합니다."],
+        ["스테이킹 이율(20%)의 기준은?", "지속 가능한 비즈니스 모델과 유저 보상의 균형을 위해 최대 20% 이하로 조정하여 안전성을 극대화했습니다."],
+        ["기본소득(UBI)은 어떻게 지급되나요?", "HK 생태계에 참여하는 전 세계 모든 활성 유저를 대상으로 전산 로직에 의해 매일 공정하게 분배됩니다."],
+        ["사회재단의 자금 출처는?", "HK-WorldBank 운영 수익금의 일부와 전산망 내 자동 기부 시스템을 통해 투량하게 조성되고 운영됩니다."],
+        ["결제 시스템은 어디서 쓰나요?", "전용 결제 API를 통해 온라인 쇼핑몰은 물론, 전 세계 오프라인 가맹점에서 즉시 자산으로 결제할 수 있습니다."],
+        ["잭서스 엔진 연동의 장점은?", "최첨단 보상 최적화 알고리즘을 통해 스테이킹 및 유동성 공급 수익을 세계 최고 수준으로 유지해 줍니다."],
+        ["송금 수수료는 왜 낮은가요?", "인류의 자유로운 자산 이동을 위해 전산 유지에 필요한 최소 수수료만 적용하는 것이 형님의 경영 철학입니다."],
+        ["예치 자산의 보안 수준은?", "분산 원장 기술과 다중 서명 보안망을 통해 그 어떤 해킹 위협으로부터도 유저의 자산을 철저히 보호합니다."],
+        ["글로벌 AI 지원센터는 누가 운영하나요?", "저 삐니를 포함한 고성능 AI들이 16개국 언어로 24시간 실시간 민원과 상담을 완벽하게 처리합니다."],
+        ["보상 시스템의 정산 주기는?", "매일 자정(KST)을 기점으로 전산망이 자동 정산하여 유저의 지갑으로 즉시 보상을 전송합니다."],
+        ["3D 프린팅 주거 단지 선정 기준은?", "HK 사회재단 의결에 따라 전 세계 주거 소외 지역 및 긴급 재난 지역을 최우선으로 선정하여 건립합니다."],
+        ["장학금은 정말 무제한인가요?", "네, 형님은 인재를 아끼십니다. 역량과 열정만 증명된다면 국적에 상관없이 학업이 끝날 때까지 무제한 지원합니다."],
+        ["AI 스마트 병원의 위치는?", "전 세계 의료 낙후 지역을 중심으로 거점 병원을 세우고, 온라인을 통해 전 세계 유저에게 원격 진료를 제공합니다."],
+        ["동훈 풀(Pool)의 규모와 역할은?", "시스템 전체 유동성의 리저브 역할을 하며, 대규모 트랜잭션 시에도 가격 변동성을 최소화하는 안정 엔진입니다."],
+        ["유튜브와 틱톡 채널의 활용은?", "글로벌 커뮤니티의 소통 창구이자, HK 생태계의 투명한 운영 상황을 전 세계에 생중계하는 미디어 허브입니다."],
+        ["2035년 미래 비전과의 연관성은?", "이 모든 경제 시스템은 2035년 형님의 국가 경영 비전을 실현하기 위한 경제적·사회적 기초 토대가 됩니다."]
+    ];
+
+    const faqCont = document.getElementById('faq-container');
+    faqData.forEach((f, i) => {
+        faqCont.innerHTML += `
+            <div class="faq-item">
+                <div class="faq-q" onclick="openFaq(${i})">${i+1}. ${f[0]} <span>▼</span></div>
+                <div class="faq-a">${f[1]}</div>
+            </div>
+        `;
+    });
+
     function openFaq(i) {
         const as = document.getElementsByClassName('faq-a');
         as[i].style.display = as[i].style.display === 'block' ? 'none' : 'block';
     }
-    function openChat() { document.getElementById('bbini-chat').style.display = 'flex'; }
-    function closeChat() { document.getElementById('bbini-chat').style.display = 'none'; }
-    function send() {
-        const msg = document.getElementById('user-msg').value;
-        const box = document.getElementById('chat-box');
-        if(!msg) return;
-        box.innerHTML += `<div style="text-align:right; margin:10px 0;"><b>형님:</b> ${msg}</div>`;
-        setTimeout(() => {
-            box.innerHTML += `<div style="background:#eee; padding:8px; border-radius:10px; margin:5px 0;">삐니가 즉시 실행하겠습니다!</div>`;
-            box.scrollTop = box.scrollHeight;
-        }, 500);
-        document.getElementById('user-msg').value = '';
-    }
+
+    // 전산 실시간 변동 애니메이션
+    setInterval(() => {
+        const supply = (1080000000 + Math.random() * 50).toLocaleString(undefined, {minimumFractionDigits: 2});
+        document.getElementById('hkwb-supply').innerText = supply;
+        const pi = (412.3153 + Math.random() * 0.001).toFixed(4);
+        document.getElementById('pi-main').innerHTML = pi + " <span>Pi</span>";
+    }, 2500);
 </script>
 </body>
 </html>
-
