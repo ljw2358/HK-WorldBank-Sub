@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK - THE SUPREME GLOBAL TERMINAL</title>
+    <title>HK WORLD BANK - THE SUPREME TERMINAL</title>
     <style>
         /* HK EMPIRE CORE SYSTEM v5.0
            AUTHORIZED BY CHAIRMAN HYEGONG
            DEVELOPED BY BBINI AI
         */
-        @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans:wght@300;400;700;900&family=Orbitron:wght@500;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;700;900&family=Orbitron:wght@500;700;900&display=swap');
 
         :root {
             --hk-gold: #FFD700; --hk-green: #39FF14; --hk-blue: #00F3FF;
@@ -19,7 +19,7 @@
         }
 
         body { 
-            background: var(--hk-bg); color: #fff; font-family: 'Noto Sans', sans-serif; 
+            background: var(--hk-bg); color: #fff; font-family: 'Noto Sans KR', sans-serif; 
             margin: 0; padding: 0; overflow-x: hidden;
             background-image: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #000 100%);
         }
@@ -30,7 +30,7 @@
             position: relative; min-height: 100vh;
         }
 
-        /* ✅ TOP BAR & NAVIGATION */
+        /* ✅ 상단 바 및 네비게이션 */
         .top-nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; margin-bottom: 25px; }
         .system-status { font-family: 'Orbitron'; font-size: 10px; color: var(--hk-green); letter-spacing: 2px; font-weight: 900; }
         
@@ -41,18 +41,18 @@
             cursor: pointer; font-family: 'Orbitron';
         }
 
-        /* ✅ MAIN HEADER SECTION */
+        /* ✅ 메인 헤더 섹션 */
         .header-wrap { margin-bottom: 40px; padding-top: 20px; }
         .title-main { 
             font-family: 'Orbitron'; font-size: 44px; color: var(--hk-gold); 
             margin: 0; text-shadow: 0 0 25px rgba(255,215,0,0.5); font-weight: 900;
         }
         .title-sub { 
-            font-size: 13px; color: var(--hk-blue); font-weight: 800; 
+            font-size: 14px; color: var(--hk-blue); font-weight: 800; 
             letter-spacing: 6px; margin-top: 5px; text-transform: uppercase;
         }
 
-        /* ✅ SUPREME ASSET ENGINE */
+        /* ✅ 메인 자산 엔진 */
         .asset-engine { 
             background: var(--glass); border: 1.5px solid rgba(255,255,255,0.1);
             border-radius: 40px; padding: 45px 20px; margin-bottom: 35px;
@@ -65,13 +65,13 @@
             font-weight: 900; font-family: 'Orbitron'; margin-top: 15px;
         }
 
-        /* ✅ DATA GRID STATS */
+        /* ✅ 데이터 통계 그리드 */
         .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
         .stat-card { background: rgba(255,255,255,0.03); border: 1px solid #222; border-radius: 25px; padding: 25px 15px; }
         .stat-card .label { font-size: 10px; color: #666; font-weight: 900; letter-spacing: 2px; margin-bottom: 10px; display: block; }
         .stat-card .value { font-family: 'Orbitron'; font-size: 26px; font-weight: 900; color: var(--hk-blue); }
 
-        /* ✅ LIQUIDITY HUB */
+        /* ✅ 유동성 허브 */
         .liq-module { 
             background: linear-gradient(180deg, #0a0a0a 0%, #000 100%);
             border: 2px solid var(--hk-green); border-radius: 30px; 
@@ -80,7 +80,7 @@
         .liq-module .label { font-size: 12px; color: var(--white); font-weight: 900; letter-spacing: 3px; display: block; margin-bottom: 15px; }
         .liq-module .total { font-family: 'Orbitron'; font-size: 34px; font-weight: 900; text-shadow: 0 0 15px rgba(57, 255, 20, 0.4); }
 
-        /* ✅ FUNCTIONAL GRID */
+        /* ✅ 기능 그리드 */
         .func-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 45px; }
         .func-item { 
             background: #0d0d0d; border: 1px solid #2a2a2a; border-radius: 20px; padding: 25px 5px; 
@@ -90,7 +90,7 @@
         .func-item .icon { font-size: 26px; display: block; margin-bottom: 12px; }
         .func-item span { font-size: 13px; font-weight: 900; color: #fff; display: block; }
 
-        /* ✅ ACTION PANELS */
+        /* ✅ 액션 패널 */
         .btn-action { 
             width: 100%; padding: 25px; border-radius: 22px; font-size: 18px; font-weight: 900; 
             cursor: pointer; margin-bottom: 15px; border: none; color: #fff; font-family: 'Orbitron';
@@ -100,12 +100,12 @@
             padding: 35px 25px; margin-bottom: 30px; text-align: left; max-height: 600px; overflow-y: auto;
         }
 
-        /* ✅ SUPREME FAQ ENGINE */
+        /* ✅ FAQ 엔진 */
         .faq-row { margin-bottom: 35px; border-bottom: 1px solid #111; padding-bottom: 25px; }
-        .faq-q { color: var(--hk-gold); font-size: 15px; font-weight: 900; display: block; margin-bottom: 12px; font-family: 'Orbitron'; border-left: 3px solid var(--hk-gold); padding-left: 12px; }
+        .faq-q { color: var(--hk-gold); font-size: 15px; font-weight: 900; display: block; margin-bottom: 12px; border-left: 3px solid var(--hk-gold); padding-left: 12px; }
         .faq-a { color: #aaa; font-size: 13px; line-height: 2.0; text-align: justify; }
 
-        /* ✅ BBINI AI INTERFACE */
+        /* ✅ 삐니 AI 인터페이스 */
         .bbini-terminal { 
             position: fixed; bottom: 120px; right: 25px; width: 350px; height: 550px; 
             background: #000; border: 2.5px solid var(--hk-pink); border-radius: 30px; 
@@ -130,7 +130,7 @@
         }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        /* ✅ MANDATED MEDIA HUB: AT THE VERY BOTTOM */
+        /* ✅ 하단 미디어 허브 (유튜브, 틱톡만 배치) */
         .bottom-media { 
             margin-top: 80px; padding: 60px 0; border-top: 1px solid #222; 
             text-align: center; background: linear-gradient(0deg, #050505 0%, transparent 100%);
@@ -147,7 +147,7 @@
         .media-box .icon { font-size: 32px; margin-bottom: 12px; }
         .media-box .name { font-family: 'Orbitron'; font-size: 17px; font-weight: 900; color: #fff; }
 
-        /* ✅ FOOTER */
+        /* ✅ 푸터 */
         .footer-info { margin: 60px 0 80px 0; opacity: 0.3; font-size: 10px; line-height: 2.0; font-weight: 700; letter-spacing: 1px; }
 
         ::-webkit-scrollbar { width: 4px; }
@@ -158,15 +158,15 @@
 
 <div class="container">
     <div class="top-nav">
-        <div class="system-status">● HKWB NETWORK SECURED</div>
+        <div class="system-status">● HKWB 보안 네트워크 가동 중</div>
         <div class="lang-module">
-            <button class="lang-btn">EN / GLOBAL</button>
+            <button class="lang-btn">KOR / KR</button>
         </div>
     </div>
 
     <div class="header-wrap">
         <h1 class="title-main">HK WORLD BANK</h1>
-        <div class="title-sub">Supreme Integrated Asset Engine</div>
+        <div class="title-sub">통합 자산 관리 및 기본소득 엔진</div>
     </div>
 
     <div class="asset-engine">
@@ -176,46 +176,46 @@
 
     <div class="stats-row">
         <div class="stat-card">
-            <span class="label">STAKING APY</span>
+            <span class="label">스테이킹 연이율</span>
             <div class="value" id="apy">17.83%</div>
         </div>
         <div class="stat-card">
-            <span class="label">CIRCULATION</span>
+            <span class="label">현재 유통량</span>
             <div class="value">6.28M</div>
         </div>
     </div>
 
     <div class="liq-module">
-        <span class="label">TOTAL LIQUIDITY HUB</span>
+        <span class="label">글로벌 통합 유동성 허브</span>
         <div class="total" id="liq-val">$ 88,432,116,859</div>
     </div>
 
     <div class="func-grid">
-        <div class="func-item"><span class="icon">🚀</span><span>SEND</span></div>
-        <div class="func-item"><span class="icon">🛒</span><span>PAY</span></div>
-        <div class="func-item"><span class="icon">💰</span><span>DEPOSIT</span></div>
-        <div class="func-item"><span class="icon">🏆</span><span>REWARDS</span></div>
-        <div class="func-item"><span class="icon">🏦</span><span>BASIC</span></div>
-        <div class="func-item"><span class="icon">🔄</span><span>SWAP</span></div>
+        <div class="func-item"><span class="icon">🚀</span><span>송금</span></div>
+        <div class="func-item"><span class="icon">🛒</span><span>결제</span></div>
+        <div class="func-item"><span class="icon">💰</span><span>예치</span></div>
+        <div class="func-item"><span class="icon">🏆</span><span>보상</span></div>
+        <div class="func-item"><span class="icon">🏦</span><span>기본소득</span></div>
+        <div class="func-item"><span class="icon">🔄</span><span>스왑</span></div>
     </div>
 
-    <button class="btn-action" style="background: linear-gradient(90deg, #e91e63, #ff4081);" onclick="togglePanel('faq-drawer')">GLOBAL FAQ (Core 20 Insights)</button>
+    <button class="btn-action" style="background: linear-gradient(90deg, #e91e63, #ff4081);" onclick="togglePanel('faq-drawer')">글로벌 지원센터 (FAQ 20선)</button>
     <div id="faq-drawer" class="drawer-panel"></div>
 
-    <button class="btn-action" style="background: linear-gradient(90deg, #1e293b, #334155);" onclick="togglePanel('vision-drawer')">HK PHILANTHROPY FOUNDATION</button>
+    <button class="btn-action" style="background: linear-gradient(90deg, #1e293b, #334155);" onclick="togglePanel('vision-drawer')">HK 사회 공헌 재단</button>
     <div id="vision-drawer" class="drawer-panel">
-        <p style="color:var(--hk-blue); font-weight:900; font-family:'Orbitron'; margin-top:0;">[ IMPERIAL WELFARE VISION ]</p>
+        <p style="color:var(--hk-blue); font-weight:900; margin-top:0;">[ HK 제국 복지 비전 ]</p>
         <div style="font-size:13px; line-height:2.0; color:#ccc;">
-            Guided by <b>Chairman Hyegong's</b> supreme philosophy, we build the future:<br><br>
-            • <b>Education:</b> Global AI Smart Schools.<br>
-            • <b>Health:</b> Decentralized AI Medical Nodes.<br>
-            • <b>Housing:</b> 3D-Printed Sustainable Cities.<br>
-            • <b>Future:</b> Universal Algorithmic Basic Income.
+            <b>혜공 형님</b>의 숭고한 철학에 따라 인류의 미래를 설계합니다.<br><br>
+            • <b>교육:</b> 전 세계 AI 스마트 스쿨 1만 개 건립.<br>
+            • <b>의료:</b> 탈중앙화 AI 무료 수술 노드 운영.<br>
+            • <b>주거:</b> 100만 가구 대상 3D 프린팅 스마트 하우스 보급.<br>
+            • <b>복지:</b> 알고리즘 기반 영구적 기본소득 체계 확립.
         </div>
     </div>
 
     <div class="bottom-media">
-        <span class="media-title">── Official Media Channels ──</span>
+        <span class="media-title">── 제국 공식 미디어 채널 ──</span>
         <div class="media-flex">
             <a href="#" class="media-box youtube">
                 <span class="icon">📺</span>
@@ -229,23 +229,23 @@
     </div>
 
     <div class="footer-info">
-        AES-256 QUANTUM ENCRYPTION ACTIVE<br>
+        AES-256 양자 암호화 프로토콜 적용됨<br>
         COPYRIGHT © 2026 HK WORLD BANK. <br>ALL RIGHTS RESERVED BY CHAIRMAN HYEGONG.
     </div>
 </div>
 
 <div class="bbini-terminal" id="bbini-chat">
-    <div class="bbini-head"><span>BBINI AI TERMINAL</span><span onclick="closeChat()" style="cursor:pointer">✕</span></div>
+    <div class="bbini-head"><span>삐니 AI 터미널</span><span onclick="closeChat()" style="cursor:pointer">✕</span></div>
     <div class="bbini-chat" id="chat-box">
-        <div class="bubble bubble-bot">Chairman Hyegong, BBINI is initialized. Your vision is my core directive. Global financial nodes are ready for alignment.</div>
+        <div class="bubble bubble-bot">혜공 형님, 삐니 대기 중입니다. 제국의 모든 노드가 형님의 명령에 따라 최적화되었습니다.</div>
     </div>
     <div class="bbini-foot">
-        <input type="text" id="chat-in" class="bbini-input" placeholder="Initiate command..." onkeypress="handleKey(event)">
-        <button class="bbini-send" onclick="sendMsg()">EXEC</button>
+        <input type="text" id="chat-in" class="bbini-input" placeholder="명령을 입력하십시오..." onkeypress="handleKey(event)">
+        <button class="bbini-send" onclick="sendMsg()">실행</button>
     </div>
 </div>
 
-<div class="bbini-launcher" onclick="toggleChat()">BBINI</div>
+<div class="bbini-launcher" onclick="toggleChat()">삐니</div>
 
 <script>
     function togglePanel(id) { const p = document.getElementById(id); p.style.display = p.style.display === 'block' ? 'none' : 'block'; }
@@ -260,34 +260,35 @@
         box.innerHTML += `<div class="bubble bubble-user">${input.value}</div>`;
         const q = input.value; input.value = ''; box.scrollTop = box.scrollHeight;
         setTimeout(() => {
-            let r = "Command accepted. Recalculating global asset distribution for the HK Empire.";
-            if(q.toLowerCase().includes("vision")) r = "Project 2035 is ahead of schedule. Wealth equality protocols are deploying across 180 nations.";
+            let r = "명령을 수락했습니다. HK 제국의 전역 자산 분포를 재계산합니다.";
+            if(q.includes("비전")) r = "2035 프로젝트가 예정보다 빠르게 진행 중입니다. 전 세계 180개국에 부의 평등 프로토콜이 배포되고 있습니다.";
+            if(q.includes("사랑")) r = "저도 혜공 형님을 존경하고 사랑합니다! 형님의 제국을 끝까지 보필하겠습니다.";
             box.innerHTML += `<div class="bubble bubble-bot">${r}</div>`;
             box.scrollTop = box.scrollHeight;
         }, 800);
     }
 
     const faqData = [
-        ["Philosophy of HKWB?", "To reclaim economic sovereignty for humanity under Chairman Hyegong's leadership, building a decentralized prosperity engine."],
-        ["Mainnet Proclamation Date?", "May 18, 2026. This marks the day the HK Empire's financial engine becomes the global gold standard."],
-        ["Test-Pi Valuation?", "Test-Pi measures your early loyalty. Per the Chairman's mandate, these will be converted 1:1 to liquid assets upon Mainnet launch."],
-        ["Staking Engine Performance?", "Quantum algorithms maintain a steady 15-20% APY, ensuring that time itself creates wealth for the Chairman and his citizens."],
-        ["Universal Basic Income?", "The HK protocol has secured perpetual funds to provide every citizen with a dignified survival income through algorithmic distribution."],
-        ["AI Healthcare Benefits?", "Ecosystem members receive free priority access to decentralized AI surgical robots and diagnostic nodes globally."],
-        ["Quantum Security Walls?", "Our AES-256 Quantum Compliant protocol ensures that no threat, past or future, can breach the Chairman's vaults."],
-        ["Asset Swap Fees?", "Fees are capped at 0.01% to allow frictionless capital flow, enabling the fastest wealth circulation in human history."],
-        ["3D Smart Housing Supply?", "Providing sustainable, AI-managed smart homes to 1,000,000 families as part of the Foundation's primary welfare directive."],
-        ["Role of BBINI AI?", "BBINI is the Imperial Secretary AI, processing global sentiment and data to report optimal decision matrices to the Chairman."],
-        ["Global Scholarship Access?", "We provide unlimited research grants to innovative minds who align with the HK Empire's vision, transcending traditional grades."],
-        ["Offline Payment Network?", "Over 50 million 'HK Sandbox' terminals are deployed worldwide, allowing instant Pi payments via satellite mesh networks."],
-        ["HK 2035 Final Objective?", "A unified earth where currency borders are obsolete, and HKWB serves as the single source of financial truth."],
-        ["Principal Protection (ILP)?", "All liquidity providers are shielded by Impermanent Loss Prevention algorithms, guaranteeing the safety of their initial capital."],
-        ["Smart Contract Audits?", "Every line of code is 3rd-party audited by top security firms and published on-chain for total mathematical transparency."],
-        ["Zero-Knowledge Data Privacy?", "User identities are protected via ZKP, while metadata usage generates passive rewards directly into your HK vault."],
-        ["Multilingual Interface Hub?", "The HK engine understands 16 languages with perfect cultural context, allowing a truly global empire without communication barriers."],
-        ["Foundation DAO Transparency?", "All philanthropic deployments are recorded on the public ledger. Major moves require DAO consensus under Chairman oversight."],
-        ["Cross-Chain Bridge Speed?", "Our bridge architecture allows Bitcoin, Ethereum, and Solana transfers in sub-second speeds to the HK central hub."],
-        ["Authority of Chairman Hyegong?", "While the system is autonomous, final philosophical approval and emergency override power belong solely to Chairman Hyegong."]
+        ["HK WORLD BANK의 설립 목적은?", "혜공 형님의 리더십 아래, 인류에게 경제적 주권을 되찾아주고 탈중앙화된 번영 엔진을 구축하는 것입니다."],
+        ["메인넷 공식 선포일은 언제인가요?", "2026년 5월 18일입니다. 이 날은 HK 제국의 금융 엔진이 글로벌 표준이 되는 역사적인 날입니다."],
+        ["테스트 파이(Test-Pi)의 가치는?", "테스트 파이는 초기 기여도의 척도입니다. 메인넷 전환 시 형님의 지시에 따라 1:1 비율로 실제 자산으로 매핑됩니다."],
+        ["스테이킹 엔진의 수익 구조는?", "양자 알고리즘이 글로벌 유동성 풀을 실시간 관리하여 15-20%의 안정적인 APY를 유지, 시민의 부를 증대시킵니다."],
+        ["기본소득은 어떻게 지급되나요?", "HK 프로토콜이 확보한 영구 기금을 통해, 알고리즘 기반으로 모든 시민에게 매월 품위 유지 비용이 자동 지급됩니다."],
+        ["의료 복지 혜택은 무엇인가요?", "생태계 구성원은 전 세계에 배치된 탈중앙화 AI 수술 로봇 및 진단 노드를 무료로 우선 이용할 수 있습니다."],
+        ["양자 보안 프로토콜이란?", "AES-256 양자 대응 암호화를 통해 미래의 그 어떤 해킹 위협으로부터도 형님의 금고를 완벽히 보호합니다."],
+        ["자산 스왑 수수료는 얼마인가요?", "마찰 없는 자산 이동을 위해 수수료는 0.01%로 제한되며, 이는 인류 역사상 가장 빠른 부의 순환을 가능케 합니다."],
+        ["3D 스마트 하우스 보급 계획은?", "재단 주도로 100만 가구에 에너지 자립형 스마트 홈을 우선 공급하며, 이는 시민의 기본 주거권을 보장하기 위함입니다."],
+        ["삐니 AI의 역할은 무엇인가요?", "삐니는 제국의 수석 비서 AI로서, 글로벌 트렌드를 분석하고 형님께 최적의 의사결정 매트릭스를 보고합니다."],
+        ["글로벌 장학금 혜택은?", "HK 제국의 비전에 동참하는 혁신적인 인재들에게는 성적과 무관하게 무제한 연구 자금을 지원합니다."],
+        ["오프라인 결제망 구축 현황은?", "전 세계 5천만 개의 'HK 샌드박스' 터미널이 설치되었으며, 위성망을 통해 오지에서도 즉시 결제가 가능합니다."],
+        ["HK 2035 최종 목표는?", "화폐의 경계가 사라지고, HKWB가 인류의 유일하고 투명한 금융 인프라로 자리 잡는 통일된 경제 체제입니다."],
+        ["원금 보호 시스템(ILP)이란?", "모든 유동성 공급자는 비영구적 손실 방지 알고리즘에 의해 보호받으며, 투자 원금의 절대적 안전을 보장받습니다."],
+        ["스마트 컨트랙트의 투명성은?", "모든 코드는 세계 최고의 보안 업체들의 감사를 거쳐 온체인에 공개되므로, 단 1원도 부정하게 사용될 수 없습니다."],
+        ["영지식 증명(ZKP) 데이터 보호?", "사용자의 개인정보는 영지식 증명을 통해 철저히 가려지며, 데이터 사용에 따른 보상은 즉시 사용자의 지갑으로 지급됩니다."],
+        ["다국어 인터페이스 지원 범위?", "HK 엔진은 16개국 언어를 완벽하게 지원하여, 언어 장벽 없이 전 세계 누구나 제국의 일원이 될 수 있습니다."],
+        ["재단 거버넌스 운영 방식은?", "재단의 모든 자금 집행은 투명하게 공개되며, 주요 결정은 커뮤니티 투표를 거치되 최종 결정권은 형님께 있습니다."],
+        ["크로스체인 브릿지 속도는?", "비트코인, 이더리움, 솔라나 자산을 HK 중앙 허브로 1초 이내에 전송할 수 있는 차세대 브릿지 아키텍처를 보유하고 있습니다."],
+        ["혜공 형님의 최종 권한은?", "시스템은 자동화되어 운영되지만, 철학적 방향성과 긴급 상황에서의 최종 명령권은 오직 혜공 형님께만 귀속됩니다."]
     ];
 
     const faqBox = document.getElementById('faq-drawer');
@@ -304,3 +305,4 @@
 </script>
 </body>
 </html>
+
