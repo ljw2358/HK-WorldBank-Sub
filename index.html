@@ -9,58 +9,53 @@
             --hk-gold: #FFD700; --hk-green: #39FF14; --hk-blue: #00F3FF;
             --hk-pink: #FF00FF; --hk-bg: #000000; --white: #FFFFFF;
         }
-        body { background: var(--hk-bg); color: #fff; font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
-        .container { width: 100%; max-width: 450px; margin: 0 auto; padding: 15px; box-sizing: border-box; text-align: center; position: relative; }
+        body { background: var(--hk-bg); color: #fff; font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; overflow-x: hidden; font-size: 13px; }
+        .container { width: 100%; max-width: 450px; margin: 0 auto; padding: 12px; box-sizing: border-box; text-align: center; position: relative; }
 
-        /* ✅ 언어 선택: 형님이 말씀하신 16개국 핵심 언어 상단 배치 */
-        .lang-box { position: absolute; top: 10px; right: 15px; z-index: 100; }
-        .lang-select { background: rgba(0,0,0,0.8); color: var(--hk-gold); border: 1.5px solid var(--hk-gold); border-radius: 4px; padding: 4px 8px; font-size: 11px; font-weight: 800; cursor: pointer; outline: none; }
+        /* ✅ 언어 선택: 형님이 요청하신 16개 핵심 언어 배치 */
+        .lang-box { position: absolute; top: 10px; right: 12px; z-index: 100; }
+        .lang-select { background: rgba(255,255,255,0.1); color: var(--hk-gold); border: 1px solid var(--hk-gold); border-radius: 4px; padding: 3px 6px; font-size: 10px; font-weight: 800; cursor: pointer; outline: none; }
 
-        .header-title { font-size: 38px; font-weight: 900; color: var(--hk-gold); margin: 30px 0 0 0; text-shadow: 0 0 15px rgba(255,215,0,0.4); }
-        .header-sub { font-size: 16px; color: var(--hk-blue); font-weight: 800; margin: 5px 0 25px 0; }
+        .header-title { font-size: 32px; font-weight: 900; color: var(--hk-gold); margin: 25px 0 0 0; text-shadow: 0 0 12px rgba(255,215,0,0.4); }
+        .header-sub { font-size: 14px; color: var(--hk-blue); font-weight: 800; margin: 4px 0 20px 0; letter-spacing: 1px; }
 
-        /* ✅ 메인 디스플레이 */
-        .pi-main { font-size: 64px; font-weight: 900; margin: 0; display: flex; align-items: baseline; justify-content: center; }
-        .pi-main span.unit { color: var(--hk-gold); font-size: 40px; margin-left: 12px; font-weight: 800; }
-        .usd-pill { display: inline-block; border: 2.5px solid var(--hk-green); color: var(--hk-green); padding: 12px 45px; border-radius: 50px; font-size: 28px; font-weight: 900; margin: 15px 0 25px 0; background: rgba(57, 255, 20, 0.05); box-shadow: inset 0 0 10px rgba(57, 255, 20, 0.2); }
+        /* ✅ 메인 자산 디스플레이 - 크기 최적화 */
+        .pi-main { font-size: 52px; font-weight: 900; margin: 0; display: flex; align-items: baseline; justify-content: center; }
+        .pi-main span.unit { color: var(--hk-gold); font-size: 32px; margin-left: 10px; font-weight: 800; }
+        .usd-pill { display: inline-block; border: 2px solid var(--hk-green); color: var(--hk-green); padding: 8px 35px; border-radius: 50px; font-size: 22px; font-weight: 900; margin: 12px 0 20px 0; background: rgba(57, 255, 20, 0.05); }
 
-        .supply-box { background: rgba(255,255,255,0.04); border: 2.5px solid #00F3FF; border-radius: 20px; padding: 25px 10px; margin-bottom: 18px; }
-        .label-white { font-size: 14px; color: var(--white); font-weight: 900; margin-bottom: 12px; display: block; text-transform: uppercase; }
-        .supply-val { color: var(--hk-blue); font-size: 38px; font-weight: 900; letter-spacing: 0.5px; }
+        .supply-box { background: rgba(255,255,255,0.04); border: 2px solid #00F3FF; border-radius: 15px; padding: 18px 10px; margin-bottom: 15px; }
+        .label-white { font-size: 12px; color: var(--white); font-weight: 900; margin-bottom: 8px; display: block; text-transform: uppercase; }
+        .supply-val { color: var(--hk-blue); font-size: 30px; font-weight: 900; letter-spacing: 0.5px; }
 
-        .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
-        .box-sm { background: rgba(255,255,255,0.04); border: 2px solid #333; border-radius: 20px; padding: 22px 10px; }
-        .box-sm .val-bold { font-size: 30px; font-weight: 900; color: var(--hk-blue); }
+        .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .box-sm { background: rgba(255,255,255,0.04); border: 1.5px solid #333; border-radius: 15px; padding: 15px 8px; }
+        .box-sm .val-bold { font-size: 24px; font-weight: 900; color: var(--hk-blue); }
 
-        .liq-box { background: rgba(255,255,255,0.04); border: 3px solid var(--hk-green); border-radius: 20px; padding: 22px 10px; margin-bottom: 20px; }
-        .liq-label { font-size: 15px; color: var(--hk-green); font-weight: 900; margin-bottom: 10px; display: block; }
-        .liq-val { font-size: 36px; font-weight: 900; color: var(--white); }
+        .liq-box { background: rgba(255,255,255,0.04); border: 2px solid var(--hk-green); border-radius: 15px; padding: 18px 8px; margin-bottom: 18px; }
+        .liq-label { font-size: 13px; color: var(--hk-green); font-weight: 900; margin-bottom: 8px; display: block; }
+        .liq-val { font-size: 28px; font-weight: 900; color: var(--white); }
 
-        .nav-mid { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 8px; margin-bottom: 25px; }
-        .nav-btn { padding: 18px 5px; border-radius: 15px; font-weight: 900; border: none; cursor: pointer; font-size: 14px; color: #000; transition: 0.2s; }
+        .nav-mid { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 6px; margin-bottom: 20px; }
+        .nav-btn { padding: 14px 4px; border-radius: 12px; font-weight: 900; border: none; cursor: pointer; font-size: 12px; color: #000; transition: 0.2s; }
 
-        .grid-6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 30px; }
-        .btn-6 { background: #1a1a1a; border: 1px solid #444; padding: 22px 5px; border-radius: 15px; cursor: pointer; transition: 0.2s; }
-        .btn-6 span { font-size: 15px; font-weight: 900; color: var(--white); display: block; }
+        .grid-6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; }
+        .btn-6 { background: #1a1a1a; border: 1px solid #444; padding: 18px 4px; border-radius: 12px; cursor: pointer; transition: 0.2s; }
+        .btn-6 span { font-size: 13px; font-weight: 900; color: var(--white); display: block; }
 
-        .action-btn { width: 100%; padding: 22px; border-radius: 18px; font-size: 19px; font-weight: 900; cursor: pointer; margin-bottom: 12px; border: none; color: white; }
+        .action-btn { width: 100%; padding: 18px; border-radius: 15px; font-size: 16px; font-weight: 900; cursor: pointer; margin-bottom: 10px; border: none; color: white; }
        
-        .hidden-panel { display: none; background: #0d0d0d; border-radius: 18px; padding: 20px; margin-bottom: 15px; border: 1.5px solid #333; text-align: left; }
+        .hidden-panel { display: none; background: #0d0d0d; border-radius: 15px; padding: 15px; margin-bottom: 15px; border: 1.5px solid #333; text-align: left; }
        
-        .faq-item { border-bottom: 1px solid #222; padding: 15px 0; }
-        .faq-q { font-size: 14.5px; font-weight: 800; cursor: pointer; display: flex; justify-content: space-between; color: var(--hk-gold); }
-        .faq-a { font-size: 13.5px; color: #ccc; margin-top: 12px; display: none; border-left: 3px solid var(--hk-pink); padding-left: 12px; line-height: 1.6; }
+        .faq-item { border-bottom: 1px solid #222; padding: 12px 0; }
+        .faq-q { font-size: 13px; font-weight: 800; cursor: pointer; display: flex; justify-content: space-between; color: var(--hk-gold); }
+        .faq-a { font-size: 12px; color: #ccc; margin-top: 10px; display: none; border-left: 2.5px solid var(--hk-pink); padding-left: 10px; line-height: 1.5; }
        
-        /* ✅ 사회재단 글자 크기 최적화 (형님 요청 반영) */
-        .foundation-item { margin-bottom: 15px; }
-        .foundation-item strong { font-size: 14px; color: var(--hk-blue); display: block; margin-bottom: 4px; }
-        .foundation-item p { font-size: 12.5px; color: #bbb; line-height: 1.6; margin: 0; }
+        .social-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; margin-bottom: 70px; }
+        .soc-btn { padding: 15px; border-radius: 12px; font-weight: 900; text-decoration: none; color: #fff; text-align: center; font-size: 15px; display: flex; align-items: center; justify-content: center; }
 
-        .social-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; margin-bottom: 80px; }
-        .soc-btn { padding: 20px; border-radius: 15px; font-weight: 900; text-decoration: none; color: #fff; text-align: center; font-size: 18px; display: flex; align-items: center; justify-content: center; }
-
-        .bbini-bot { position: fixed; bottom: 30px; right: 30px; width: 80px; height: 80px; background: var(--hk-pink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; box-shadow: 0 0 30px var(--hk-pink); cursor: pointer; border: 4px solid #fff; z-index: 1001; animation: float 3s ease-in-out infinite; color: white; font-size: 18px; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .bbini-bot { position: fixed; bottom: 25px; right: 25px; width: 70px; height: 70px; background: var(--hk-pink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; box-shadow: 0 0 25px var(--hk-pink); cursor: pointer; border: 3px solid #fff; z-index: 1001; animation: float 3s ease-in-out infinite; color: white; font-size: 16px; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
     </style>
 </head>
 <body>
@@ -68,15 +63,23 @@
 <div class="container">
     <div class="lang-box">
         <select class="lang-select">
-            <option>KOREAN (한국어)</option><option>ENGLISH (영어)</option>
-            <option>CHINESE (중국어)</option><option>ARABIC (아랍어)</option>
-            <option>HINDI (인도어)</option><option>SPANISH (스페인어)</option>
-            <option>PORTUGUESE (브라질어)</option><option>UKRAINIAN (우크라이나어)</option>
-            <option>JAPANESE (일본어)</option><option>RUSSIAN (러시아어)</option>
-            <option>VIETNAMESE (베트남어)</option><option>THAI (태국어)</option>
-            <option>GERMAN (독일어)</option><option>FRENCH (프랑스어)</option>
-            <option>ITALIAN (이탈리아어)</option><option>INDONESIAN (인도네시아어)</option>
-            <option>...50+ LANGUAGES</option>
+            <option>KOREAN (한국어)</option>
+            <option>ENGLISH (영어)</option>
+            <option>CHINESE (중국어)</option>
+            <option>ARABIC (아랍어)</option>
+            <option>HINDI (인도어)</option>
+            <option>SPANISH (스페인어)</option>
+            <option>PORTUGUESE (브라질어)</option>
+            <option>UKRAINIAN (우크라이나어)</option>
+            <option>JAPANESE (일본어)</option>
+            <option>RUSSIAN (러시아어)</option>
+            <option>VIETNAMESE (베트남어)</option>
+            <option>THAI (태국어)</option>
+            <option>GERMAN (독일어)</option>
+            <option>FRENCH (프랑스어)</option>
+            <option>ITALIAN (이탈리아어)</option>
+            <option>INDONESIAN (인도네시아어)</option>
+            <option>... 50+ MORE</option>
         </select>
     </div>
 
@@ -119,22 +122,12 @@
 
     <button class="action-btn" style="background: #1e293b;" onclick="togglePanel('foundation')">HK 사회 재단 비전</button>
     <div id="foundation" class="hidden-panel">
-        <div style="padding:5px; color:var(--hk-gold); font-weight:800; border-bottom: 1px solid #333; margin-bottom:12px; font-size:14px; text-align:center;">[HK 제국 복지 시스템]</div>
-        <div class="foundation-item">
-            <strong>🎓 글로벌 인재 영재 학교</strong>
-            <p>국경과 인종을 초월하여 전 세계 천재들을 선발, 무상 교육과 주거를 제공하여 HK 생태계의 차세대 리더로 양성합니다.</p>
-        </div>
-        <div class="foundation-item">
-            <strong>🏥 24H 글로벌 AI 스마트 병원</strong>
-            <p>모든 HKWB 유저에게 AI 기반 원격 진단 및 전 세계 협력 병원 네트워크를 통한 무상 의료 서비스를 지원합니다.</p>
-        </div>
-        <div class="foundation-item">
-            <strong>🏠 3D 프린팅 혁신 주거 보급</strong>
-            <p>첨단 3D 프린팅 공법을 도입하여 저소득층 및 소외 계층에게 안전하고 쾌적한 보금자리를 신속하게 보급합니다.</p>
-        </div>
-        <div class="foundation-item">
-            <strong>💎 무제한 희망 장학 재단</strong>
-            <p>경제적 환경에 구애받지 않고 배움의 뜻을 펼칠 수 있도록 전 세계 학생들에게 무제한 장학금을 지원합니다.</p>
+        <div style="padding:8px; color:var(--hk-blue); font-weight:800; border-bottom: 1px solid #333; margin-bottom:12px; font-size:13px; text-align:center;">[HK 제국 복지 비전]</div>
+        <div style="font-size:12px; color:#ddd; line-height:1.6;">
+            <p><strong>🎓 글로벌 학교:</strong> 국경 없는 교육 시스템, 전 세계 영재 선발 무상 교육.</p>
+            <p><strong>🏥 AI 병원:</strong> 24시간 AI 진단 및 원격 의료 지원 인프라 구축.</p>
+            <p><strong>🏠 3D 주거:</strong> 3D 프린팅 기술로 혁신적 주택 보급 및 주거권 보장.</p>
+            <p><strong>💎 장학 재단:</strong> 경제적 벽을 허무는 무제한 글로벌 인재 장학 지원.</p>
         </div>
     </div>
 
@@ -194,7 +187,7 @@
     }
 
     function bbiniTalk() {
-        alert("혜공 형님! 재단 상세 비전 보강 및 16개국 언어 설정 완료했습니다!");
+        alert("혜공 형님! 지시하신 대로 글자 크기 축소 및 16개국 언어 세팅 완료했습니다!");
     }
 
     let currentPi = 412.3179;
