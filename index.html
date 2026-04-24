@@ -12,35 +12,35 @@
         body { background: var(--hk-bg); color: #fff; font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; overflow-x: hidden; -webkit-text-size-adjust: 100%; }
         .container { width: 100%; max-width: 450px; margin: 0 auto; padding: 15px; box-sizing: border-box; text-align: center; position: relative; }
 
-        /* ✅ 언어 선택 (폰트 크기 자동 조절을 위해 최적화) */
+        /* ✅ 언어 선택 최적화 */
         .lang-box { position: absolute; top: 10px; right: 10px; z-index: 100; }
         .lang-select { background: rgba(255,255,255,0.15); color: var(--hk-gold); border: 1.5px solid var(--hk-gold); border-radius: 6px; padding: 4px 6px; font-size: 11px; font-weight: 800; cursor: pointer; outline: none; }
 
-        /* ✅ 반응형 텍스트: 뷰포트 단위(vw)를 사용하여 기기별 자동 조절 */
-        .header-title { font-size: 8vw; max-size: 38px; font-weight: 900; color: var(--hk-gold); margin: 35px 0 0 0; text-shadow: 0 0 15px rgba(255,215,0,0.4); }
-        .header-sub { font-size: 3.5vw; color: var(--hk-blue); font-weight: 800; margin: 5px 0 20px 0; }
+        /* ✅ 반응형 폰트 (기기별 자동조정) */
+        .header-title { font-size: 8.5vw; font-weight: 900; color: var(--hk-gold); margin: 35px 0 0 0; text-shadow: 0 0 15px rgba(255,215,0,0.4); }
+        .header-sub { font-size: 3.8vw; color: var(--hk-blue); font-weight: 800; margin: 5px 0 20px 0; }
 
-        .pi-main { font-size: 14vw; font-weight: 900; margin: 0; display: flex; align-items: baseline; justify-content: center; }
-        .pi-main span.unit { color: var(--hk-gold); font-size: 8vw; margin-left: 8px; font-weight: 800; }
-        .usd-pill { display: inline-block; border: 2.5px solid var(--hk-green); color: var(--hk-green); padding: 8px 30px; border-radius: 50px; font-size: 6vw; font-weight: 900; margin: 10px 0 20px 0; background: rgba(57, 255, 20, 0.05); }
+        .pi-main { font-size: 15vw; font-weight: 900; margin: 0; display: flex; align-items: baseline; justify-content: center; }
+        .pi-main span.unit { color: var(--hk-gold); font-size: 9vw; margin-left: 8px; font-weight: 800; }
+        .usd-pill { display: inline-block; border: 2.5px solid var(--hk-green); color: var(--hk-green); padding: 8px 30px; border-radius: 50px; font-size: 6.5vw; font-weight: 900; margin: 10px 0 20px 0; background: rgba(57, 255, 20, 0.05); }
 
         .supply-box { background: rgba(255,255,255,0.04); border: 2.5px solid #00F3FF; border-radius: 15px; padding: 15px 5px; margin-bottom: 12px; }
-        .label-white { font-size: 12px; color: var(--white); font-weight: 800; margin-bottom: 8px; display: block; opacity: 0.8; }
-        .supply-val { color: var(--hk-blue); font-size: 7vw; font-weight: 900; }
+        .label-txt { font-size: 12px; color: var(--white); font-weight: 800; margin-bottom: 8px; display: block; opacity: 0.8; }
+        .supply-val { color: var(--hk-blue); font-size: 8vw; font-weight: 900; }
 
         .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
         .box-sm { background: rgba(255,255,255,0.04); border: 1.5px solid #333; border-radius: 15px; padding: 15px 5px; }
-        .val-bold { font-size: 6vw; font-weight: 900; color: var(--hk-blue); }
+        .val-bold { font-size: 6.5vw; font-weight: 900; color: var(--hk-blue); }
 
         .liq-box { background: rgba(255,255,255,0.04); border: 2.5px solid var(--hk-green); border-radius: 15px; padding: 15px 5px; margin-bottom: 20px; }
-        .liq-val { font-size: 6.5vw; font-weight: 900; color: var(--white); }
+        .liq-val { font-size: 7vw; font-weight: 900; color: var(--white); }
 
-        /* ✅ 네비게이션 버튼 (글자 크기 자동 축소) */
+        /* ✅ 버튼 레이아웃 및 텍스트 자동조정 */
         .nav-mid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 20px; }
         .nav-btn { padding: 15px 2px; border-radius: 12px; font-weight: 900; border: none; cursor: pointer; font-size: 11px; color: #000; overflow: hidden; white-space: nowrap; }
 
         .grid-6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 25px; }
-        .btn-6 { background: #1a1a1a; border: 1px solid #444; padding: 18px 2px; border-radius: 12px; cursor: pointer; }
+        .btn-6 { background: #1a1a1a; border: 1px solid #444; padding: 18px 2px; border-radius: 12px; }
         .btn-6 span { font-size: 12px; font-weight: 900; color: var(--white); display: block; white-space: nowrap; }
 
         .action-btn { width: 100%; padding: 18px; border-radius: 15px; font-size: 16px; font-weight: 900; cursor: pointer; margin-bottom: 10px; border: none; color: white; }
@@ -48,26 +48,26 @@
        
         .faq-item { border-bottom: 1px solid #222; padding: 12px 0; }
         .faq-q { font-size: 13px; font-weight: 800; cursor: pointer; color: var(--hk-gold); }
-        .faq-a { font-size: 12px; color: #ccc; margin-top: 10px; display: none; border-left: 2px solid var(--hk-pink); padding-left: 10px; }
+        .faq-a { font-size: 12px; color: #ccc; margin-top: 10px; display: none; border-left: 2px solid var(--hk-pink); padding-left: 10px; line-height: 1.5; }
 
         .support-mail { background: #111; padding: 10px; border-radius: 8px; border: 1px dashed var(--hk-pink); margin-bottom: 15px; text-align: center; font-size: 12px; }
         .support-mail a { color: var(--hk-pink); text-decoration: none; font-weight: 900; }
 
         /* ✅ 삐니 챗봇 */
-        .bbini-bot { position: fixed; bottom: 20px; right: 20px; width: 65px; height: 65px; background: var(--hk-pink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; box-shadow: 0 0 20px var(--hk-pink); cursor: pointer; border: 3px solid #fff; z-index: 1001; color: white; font-size: 14px; animation: float 3s infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        .bbini-bot { position: fixed; bottom: 20px; right: 20px; width: 70px; height: 70px; background: var(--hk-pink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; box-shadow: 0 0 20px var(--hk-pink); cursor: pointer; border: 3px solid #fff; z-index: 1001; color: white; font-size: 15px; animation: float 3s infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="lang-box">
-        <select class="lang-select" id="langSelect" onchange="updateLang()">
+        <select class="lang-select" id="langSelect" onchange="updateAllLang()">
             <option value="ko">🇰🇷 KOREAN</option><option value="en">🇺🇸 ENGLISH</option>
             <option value="cn">🇨🇳 CHINESE</option><option value="jp">🇯🇵 JAPANESE</option>
             <option value="es">🇪🇸 SPANISH</option><option value="br">🇧🇷 BRAZIL</option>
             <option value="ru">🇷🇺 RUSSIAN</option><option value="ar">🇸🇦 ARABIC</option>
-            <option value="in">🇮🇳 HINDI</option><option value="vn">🇻🇳 VIETNAMESE</option>
+            <option value="in">🇮🇳 HINDI</option><option value="vn">🇻🇳 VIETNAM</option>
             <option value="th">🇹🇭 THAI</option><option value="de">🇩🇪 GERMAN</option>
             <option value="fr">🇫🇷 FRENCH</option><option value="it">🇮🇹 ITALIAN</option>
             <option value="id">🇮🇩 INDONESIA</option><option value="ua">🇺🇦 UKRAINE</option>
@@ -81,94 +81,98 @@
     <div class="usd-pill" id="usd-val">$ 129,540,814</div>
 
     <div class="supply-box">
-        <span class="label-white" id="t-supply">HKWB 실시간 공급량</span>
+        <span class="label-txt" id="t-supply-label">HKWB 실시간 공급량</span>
         <div class="supply-val" id="supply-val">6,280,000.5215</div>
     </div>
 
     <div class="row-2">
-        <div class="box-sm"><span class="label-white" id="t-st">스테이킹 이율</span><div class="val-bold" id="st-rate">17.82%</div></div>
-        <div class="box-sm"><span class="label-white" id="t-lp">LP 수익률</span><div class="val-bold" style="color:var(--hk-pink);" id="lp-rate">28.81%</div></div>
+        <div class="box-sm"><span class="label-txt" id="t-st-label">스테이킹 이율</span><div class="val-bold" id="st-rate">17.82%</div></div>
+        <div class="box-sm"><span class="label-txt" id="t-lp-label">LP 수익률</span><div class="val-bold" style="color:var(--hk-pink);" id="lp-rate">28.81%</div></div>
     </div>
 
     <div class="liq-box">
-        <span class="label-white" id="t-liq">전체 유동성 (DEX LP)</span>
+        <span class="label-txt" id="t-liq-label">전체 유동성 (DEX LP)</span>
         <div class="liq-val" id="liq-val">$ 88,432,113,965</div>
     </div>
 
-    <div class="nav-mid" id="t-nav">
+    <div class="nav-mid" id="t-nav-btns">
         <button class="nav-btn" style="background:#e0b0ff;">PI 수량</button>
         <button class="nav-btn" style="background:#ffd700;">DEX 스왑</button>
         <button class="nav-btn" style="background:#39ff14;">LP 스테이킹</button>
     </div>
 
-    <div class="grid-6" id="t-grid">
+    <div class="grid-6" id="t-grid-btns">
         <div class="btn-6"><span>🚀 송금</span></div><div class="btn-6"><span>🛒 결제</span></div><div class="btn-6"><span>💰 예치</span></div>
         <div class="btn-6"><span>🏆 보상</span></div><div class="btn-6"><span>🏦 기본소득</span></div><div class="btn-6"><span>🔄 스왑</span></div>
     </div>
 
-    <button class="action-btn" id="t-faq-btn" style="background: #e91e63;" onclick="togglePanel('faq-center')">글로벌 AI 지원센터 (FAQ 20선)</button>
+    <button class="action-btn" id="t-faq-main-btn" style="background: #e91e63;" onclick="togglePanel('faq-center')">글로벌 AI 지원센터 (FAQ 20선)</button>
     <div id="faq-center" class="hidden-panel">
         <div class="support-mail">📧 Support: <a href="mailto:support@hkwb.world">support@hkwb.world</a></div>
         <div id="faq-inject"></div>
     </div>
 
-    <button class="action-btn" id="t-found-btn" style="background: #1e293b;" onclick="togglePanel('foundation')">HK 사회 재단</button>
+    <button class="action-btn" id="t-found-main-btn" style="background: #1e293b;" onclick="togglePanel('foundation')">HK 사회 재단</button>
     <div id="foundation" class="hidden-panel">
         <div id="t-found-head" style="color:var(--hk-blue); font-weight:800; border-bottom: 1px solid #333; margin-bottom:15px; padding-bottom:5px;">[HK 제국 복지 비전]</div>
-        <div id="vision-inject" style="font-size:13px; color:#ddd; line-height:1.7;"></div>
+        <div id="vision-inject" style="font-size:13px; color:#ddd; line-height:1.8;"></div>
     </div>
 </div>
 
-<div class="bbini-bot" onclick="bbiniTalk()" id="t-bbini">삐니</div>
+<div class="bbini-bot" onclick="bbiniTalk()" id="t-bbini-txt">삐니</div>
 
 <script>
-    // ✅ 16개국 핵심 데이터 사전 (데이터 누락 방지)
-    const dict = {
-        ko: { sub: "통합 자산 관리 시스템", supply: "HKWB 실시간 공급량", st: "스테이킹 이율", lp: "LP 수익률", liq: "전체 유동성", nav: ["PI 수량", "DEX 스왑", "LP 스테이킹"], grid: ["송금", "결제", "예치", "보상", "기본소득", "스왑"], faq: "지원센터 (FAQ)", found: "HK 사회 재단", v: ["🎓 글로벌 학교", "🏥 AI 병원", "🏠 3D 주거", "💎 장학 재단"], chat: "지원센터 정렬 완료!" },
-        en: { sub: "Total Asset System", supply: "HKWB Live Supply", st: "Staking APY", lp: "LP Yield", liq: "Total Liquidity", nav: ["PI Qty", "DEX Swap", "LP Stake"], grid: ["Send", "Pay", "Earn", "Reward", "UBI", "Swap"], faq: "Support Center", found: "HK Foundation", v: ["🎓 Global School", "🏥 AI Hospital", "🏠 3D Housing", "💎 Scholarship"], chat: "System Ready!" },
-        cn: { sub: "综合资产管理系统", supply: "实时供应量", st: "质押利率", lp: "LP收益率", liq: "总流动性", nav: ["PI 数量", "DEX 兑换", "LP 质押"], grid: ["汇款", "支付", "存款", "奖励", "基本收入", "兑换"], faq: "支持中心", found: "HK 基金会", v: ["🎓 全球学校", "🏥 AI 医院", "🏠 3D 住房", "💎 奖学金"], chat: "系统已就绪!" },
-        jp: { sub: "統合資産管理システム", supply: "リアルタイム供給", st: "ステーキング率", lp: "LP 収益率", liq: "総流動性", nav: ["PI 数量", "DEX スワップ", "LP ステーキング"], grid: ["送金", "決済", "預金", "報酬", "基本所得", "スワップ"], faq: "サポートセンター", found: "HK 社会財団", v: ["🎓 グローバル学校", "🏥 AI 病院", "🏠 3D 住宅", "💎 奨학金"], chat: "準備完了!" },
-        es: { sub: "Gestión de Activos", supply: "Suministro Real", st: "Tasa Staking", lp: "Rendimiento LP", liq: "Liquidez Total", nav: ["PI Cantidad", "DEX Swap", "LP Staking"], grid: ["Giro", "Pago", "Depósito", "Premio", "Renta", "Swap"], faq: "Centro Soporte", found: "Fundación HK", v: ["🎓 Escuela Global", "🏥 AI Hospital", "🏠 3D Vivienda", "💎 Beca"], chat: "¡Listo!" },
-        br: { sub: "Gestão de Ativos", supply: "Suprimento Real", st: "Taxa Staking", lp: "Lucro LP", liq: "Liquidez Total", nav: ["PI Qtd", "DEX Swap", "LP Stake"], grid: ["Enviar", "Pagar", "Depositar", "Prêmio", "Renda", "Swap"], faq: "Suporte", found: "Fundação HK", v: ["🎓 Escola Global", "🏥 AI Hospital", "🏠 3D Habitação", "💎 Bolsa"], chat: "Pronto!" },
-        ru: { sub: "Управление активами", supply: "Предложение", st: "Ставка", lp: "Доход LP", liq: "Ликвидность", nav: ["PI Кол-во", "DEX Своп", "LP Стейкинг"], grid: ["Перевод", "Оплата", "Вклад", "Бонус", "Доход", "Своп"], faq: "Поддержка", found: "Фонд HK", v: ["🎓 Школа", "🏥 AI Больница", "🏠 3D Жилье", "💎 Стипендия"], chat: "Готово!" },
-        ar: { sub: "إدارة الأصول", supply: "العرض المباشر", st: "فائدة التخزين", lp: "عائد LP", liq: "السيولة", nav: ["PI كمية", "DEX تبادل", "LP تخزين"], grid: ["تحويل", "دفع", "إيداع", "مكافأة", "دخل", "تبادل"], faq: "مركز الدعم", found: "مؤسسة HK", v: ["🎓 مدرسة عالمية", "🏥 مستشفى AI", "🏠 سكن 3D", "💎 منحة"], chat: "جاهز!" },
-        in: { sub: "संपत्ति प्रबंधन", supply: "लाइव आपूर्ति", st: "स्टेकिंग दर", lp: "LP लाभ", liq: "कुल तरलता", nav: ["PI मात्रा", "DEX स्वैप", "LP स्टेकिंग"], grid: ["भेजें", "भुगतान", "जमा", "इनाम", "आय", "स्वैप"], faq: "सहायता केंद्र", found: "HK फाउंडेशन", v: ["🎓 ग्लोबल स्कूल", "🏥 AI अस्पताल", "🏠 3D आवास", "💎 छात्रवृत्ति"], chat: "तैयार है!" },
-        vn: { sub: "Quản lý tài sản", supply: "Cung thực tế", st: "Lãi Staking", lp: "Lợi nhuận LP", liq: "Thanh khoản", nav: ["PI Số lượng", "DEX Swap", "LP Staking"], grid: ["Chuyển tiền", "Thanh toán", "Gửi tiền", "Thưởng", "Thu nhập", "Swap"], faq: "Hỗ trợ", found: "Quỹ HK", v: ["🎓 Trường học", "🏥 Bệnh viện AI", "🏠 Nhà ở 3D", "💎 Học bổng"], chat: "Sẵn sàng!" },
-        th: { sub: "การจัดการสินทรัพย์", supply: "อุปทานจริง", st: "ดอกเบี้ย", lp: "กำไร LP", liq: "สภาพคล่อง", nav: ["PI จำนวน", "DEX สลับ", "LP สเตกกิ้ง"], grid: ["โอน", "จ่าย", "ฝาก", "รางวัล", "รายได้", "สลับ"], faq: "ศูนย์ช่วยเหลือ", found: "มูลนิธิ HK", v: ["🎓 โรงเรียน", "🏥 โรงพยาบาล AI", "🏠 บ้าน 3D", "💎 ทุนการศึกษา"], chat: "เรียบร้อย!" },
-        de: { sub: "Asset-Management", supply: "Live-Angebot", st: "Staking-Rate", lp: "LP-Rendite", liq: "Liquidität", nav: ["PI Menge", "DEX Swap", "LP Staking"], grid: ["Senden", "Zahlen", "Sparen", "Bonus", "Einkommen", "Swap"], faq: "Support-Center", found: "HK Stiftung", v: ["🎓 Globale Schule", "🏥 AI Klinik", "🏠 3D Wohnen", "💎 Stipendium"], chat: "Bereit!" },
-        fr: { sub: "Gestion d'actifs", supply: "Offre réelle", st: "Taux Staking", lp: "Rendement LP", liq: "Liquidité", nav: ["PI Qté", "DEX Swap", "LP Staking"], grid: ["Envoi", "Paiement", "Dépôt", "Prime", "Revenu", "Swap"], faq: "Support", found: "Fondation HK", v: ["🎓 École Globale", "🏥 Hôpital AI", "🏠 Logement 3D", "💎 Bourse"], chat: "Prêt!" },
-        it: { sub: "Gestione Asset", supply: "Fornitura", st: "Tasso Staking", lp: "Resa LP", liq: "Liquidità", nav: ["PI Qtà", "DEX Swap", "LP Staking"], grid: ["Invia", "Paga", "Deposita", "Premio", "Reddito", "Swap"], faq: "Supporto", found: "Fondazione HK", v: ["🎓 Scuola", "🏥 Ospedale AI", "🏠 Casa 3D", "💎 Borsa"], chat: "Pronto!" },
-        id: { sub: "Manajemen Aset", supply: "Suplai Riil", st: "Bunga Staking", lp: "Profit LP", liq: "Likuiditas", nav: ["PI Jumlah", "DEX Swap", "LP Staking"], grid: ["Kirim", "Bayar", "Deposit", "Hadiah", "Income", "Swap"], faq: "Bantuan", found: "Yayasan HK", v: ["🎓 Sekolah Global", "🏥 RS AI", "🏠 Hunian 3D", "💎 Beasiswa"], chat: "Siap!" },
-        ua: { sub: "Управління активами", supply: "Пропозиція", st: "Ставка", lp: "Дохід LP", liq: "Ліквідність", nav: ["PI Кільк", "DEX Своп", "LP Стейкінг"], grid: ["Переказ", "Оплата", "Внесок", "Бонус", "Дохід", "Своп"], faq: "Підтримка", found: "Фонд HK", v: ["🎓 Школа", "🏥 AI Лікарня", "🏠 3D Житло", "💎 Стипендія"], chat: "Готово!" }
+    // ✅ 16개국 통합 사전 데이터
+    const i18n = {
+        ko: { sub: "통합 자산 관리 시스템", supply: "HKWB 실시간 공급량", st: "스테이킹 이율", lp: "LP 수익률", liq: "전체 유동성 (DEX LP)", nav: ["PI 수량", "DEX 스왑", "LP 스테이킹"], grid: ["송금", "결제", "예치", "보상", "기본소득", "스왑"], faq: "지원센터 (FAQ 20선)", found: "HK 사회 재단", v: ["🎓 글로벌 학교: 인재 양성", "🏥 AI 병원: 24시간 진단", "🏠 3D 주거: 혁신 주택 보급", "💎 장학 재단: 소외 계층 지원"], chat: "혜공 형님! 지원센터 정렬 완료했습니다!", faqData: [["목적?", "인류 평등 금융 기여"], ["오지 구호?", "영양실조 아동/노인 즉시 지원"]] },
+        en: { sub: "Global Asset System", supply: "HKWB Live Supply", st: "Staking APY", lp: "LP Yield", liq: "Total Liquidity", nav: ["PI Qty", "DEX Swap", "LP Stake"], grid: ["Send", "Pay", "Earn", "Reward", "UBI", "Swap"], faq: "Support (FAQ 20)", found: "HK Foundation", v: ["🎓 Global School", "🏥 AI Hospital", "🏠 3D Housing", "💎 Scholarships"], chat: "System Ready for Global Relief!", faqData: [["Purpose?", "Financial Equality"], ["Relief?", "Support for malnourished children"]] },
+        cn: { sub: "综合资产管理系统", supply: "实时供应量", st: "质押利率", lp: "LP收益率", liq: "总流动性", nav: ["PI 数量", "DEX 兑换", "LP 质押"], grid: ["汇款", "支付", "存款", "奖励", "基本收入", "兑换"], faq: "支持中心 (FAQ)", found: "HK 基金会", v: ["🎓 全球学校", "🏥 AI 医院", "🏠 3D 住房", "💎 奖学金"], chat: "系统准备就绪!", faqData: [["目的?", "金融平等"], ["救济?", "支持贫困地区"]] },
+        jp: { sub: "統合資産管理システム", supply: "供給量", st: "利回り", lp: "LP 収益", liq: "総流動性", nav: ["PI 数量", "DEX スワップ", "LP ステーキング"], grid: ["送金", "決済", "預金", "報酬", "所得", "スワップ"], faq: "サポート中心", found: "HK 社会財団", v: ["🎓 学校", "🏥 AI 病院", "🏠 3D 住宅", "💎 奨学金"], chat: "準備完了!", faqData: [["目的?", "金融の平等"], ["救済?", "困窮者の支援"]] },
+        ar: { sub: "نظام إدارة الأصول", supply: "العرض المباشر", st: "فائدة التخزين", lp: "عائد LP", liq: "السيولة", nav: ["PI كمية", "DEX تبادل", "LP تخزين"], grid: ["تحويل", "دفع", "إيداع", "مكافأة", "دخل", "تبادل"], faq: "مركز الدعم", found: "مؤسسة HK", v: ["🎓 مدرسة عالمية", "🏥 مستشفى AI", "🏠 سكن 3D", "💎 منحة"], chat: "جاهز للمساعدة!", faqData: [["الغرض؟", "المساواة المالية"], ["إغاثة؟", "دعم الجياع"]] },
+        in: { sub: "संपत्ति प्रबंधन प्रणाली", supply: "लाइव आपूर्ति", st: "स्टेकिंग दर", lp: "LP लाभ", liq: "कुल तरलता", nav: ["PI मात्रा", "DEX स्वैप", "LP स्टेकिंग"], grid: ["भेजें", "भुगतान", "जमा", "इनाम", "आय", "स्वैप"], faq: "सहायता केंद्र", found: "HK फाउंडेशन", v: ["🎓 ग्लोबल स्कूल", "🏥 AI अस्पताल", "🏠 3D आवास", "💎 छात्रवृत्ति"], chat: "प्रणाली तैयार है!", faqData: [["उद्देश्य?", "वित्तीय समानता"], ["राहत?", "बच्चों का समर्थन"]] },
+        es: { sub: "Gestión de Activos", supply: "Suministro Real", st: "Tasa Staking", lp: "Rendimiento LP", liq: "Liquidez Total", nav: ["PI Cantidad", "DEX Swap", "LP Staking"], grid: ["Giro", "Pago", "Depósito", "Premio", "Renta", "Swap"], faq: "Soporte (FAQ)", found: "Fundación HK", v: ["🎓 Escuela Global", "🏥 AI Hospital", "🏠 3D Vivienda", "💎 Beca"], chat: "¡Listo para ayudar!", faqData: [["¿Propósito?", "Igualdad financiera"], ["¿Alivio?", "Apoyo a desnutridos"]] },
+        br: { sub: "Gestão de Ativos", supply: "Suprimento", st: "Taxa Staking", lp: "Lucro LP", liq: "Liquidez", nav: ["PI Qtd", "DEX Swap", "LP Stake"], grid: ["Enviar", "Pagar", "Depositar", "Prêmio", "Renda", "Swap"], faq: "Suporte", found: "Fundação HK", v: ["🎓 Escola", "🏥 AI Hospital", "🏠 3D Habitação", "💎 Bolsa"], chat: "Sistema pronto!", faqData: [["Propósito?", "Igualdade"], ["Socorro?", "Apoio a crianças"]] },
+        ru: { sub: "Управление активами", supply: "Предложение", st: "Ставка", lp: "Доход LP", liq: "Ликвидность", nav: ["PI Кол-во", "DEX Своп", "LP Стейкинг"], grid: ["Перевод", "Оплата", "Вклад", "Бонус", "Доход", "Своп"], faq: "Поддержка", found: "Фонд HK", v: ["🎓 Школа", "🏥 Больница", "🏠 3D Жилье", "💎 Стипендия"], chat: "Готово!", faqData: [["Цель?", "Финансы"], ["Помощь?", "Поддержка детей"]] },
+        vn: { sub: "Quản lý tài sản", supply: "Cung thực tế", st: "Lãi Staking", lp: "Lợi nhuận LP", liq: "Thanh khoản", nav: ["PI Số lượng", "DEX Swap", "LP Staking"], grid: ["Chuyển tiền", "Thanh toán", "Gửi tiền", "Thưởng", "Thu nhập", "Swap"], faq: "Hỗ trợ", found: "Quỹ HK", v: ["🎓 Trường học", "🏥 Bệnh viện AI", "🏠 Nhà ở 3D", "💎 Học bổng"], chat: "Sẵn sàng!", faqData: [["Mục đích?", "Bình đẳng"], ["Cứu trợ?", "Hỗ trợ trẻ em"]] },
+        th: { sub: "การจัดการสินทรัพย์", supply: "อุปทานจริง", st: "ดอกเบี้ย", lp: "กำไร LP", liq: "สภาพคล่อง", nav: ["PI จำนวน", "DEX สลับ", "LP สเตกกิ้ง"], grid: ["โอน", "จ่าย", "ฝาก", "รางวัล", "รายได้", "สลับ"], faq: "ศูนย์ช่วยเหลือ", found: "มูลนิธิ HK", v: ["🎓 โรงเรียน", "🏥 AI โรงพยาบาล", "🏠 บ้าน 3D", "💎 ทุนการศึกษา"], chat: "พร้อมแล้ว!", faqData: [["เป้าหมาย?", "ความเท่าเทียม"], ["บรรเทาทุกข์?", "ช่วยเด็ก"]] },
+        de: { sub: "Asset-Management", supply: "Live-Angebot", st: "Staking-Rate", lp: "LP-Rendite", liq: "Liquidität", nav: ["PI Menge", "DEX Swap", "LP Staking"], grid: ["Senden", "Zahlen", "Sparen", "Bonus", "Einkommen", "Swap"], faq: "Support-Center", found: "HK Stiftung", v: ["🎓 Globale Schule", "🏥 AI Klinik", "🏠 3D Wohnen", "💎 Stipendium"], chat: "Bereit!", faqData: [["Zweck?", "Gleichheit"], ["Hilfe?", "Kinderschutz"]] },
+        fr: { sub: "Gestion d'actifs", supply: "Offre réelle", st: "Taux Staking", lp: "Rendement LP", liq: "Liquidité", nav: ["PI Qté", "DEX Swap", "LP Staking"], grid: ["Envoi", "Paiement", "Dépôt", "Prime", "Revenu", "Swap"], faq: "Support", found: "Fondation HK", v: ["🎓 École Globale", "🏥 Hôpital AI", "🏠 Logement 3D", "💎 Bourse"], chat: "Prêt à aider!", faqData: [["But?", "Égalité financière"], ["Secours?", "Soutien enfants"]] },
+        it: { sub: "Gestione Asset", supply: "Fornitura", st: "Tasso Staking", lp: "Resa LP", liq: "Liquidità", nav: ["PI Qtà", "DEX Swap", "LP Staking"], grid: ["Invia", "Paga", "Deposita", "Premio", "Reddito", "Swap"], faq: "Supporto", found: "Fondazione HK", v: ["🎓 Scuola", "🏥 Ospedale AI", "🏠 Casa 3D", "💎 Borsa"], chat: "Pronto!", faqData: [["Scopo?", "Uguaglianza"], ["Soccorso?", "Aiuto bambini"]] },
+        id: { sub: "Manajemen Aset", supply: "Suplai Riil", st: "Bunga Staking", lp: "Profit LP", liq: "Likuiditas", nav: ["PI Jumlah", "DEX Swap", "LP Staking"], grid: ["Kirim", "Bayar", "Deposit", "Hadiah", "Income", "Swap"], faq: "Bantuan", found: "Yayasan HK", v: ["🎓 Sekolah Global", "🏥 RS AI", "🏠 Hunian 3D", "💎 Beasiswa"], chat: "Siap membantu!", faqData: [["Tujuan?", "Kesetaraan"], ["Bantuan?", "Dukungan anak"]] },
+        ua: { sub: "Управління активами", supply: "Пропозиція", st: "Ставка", lp: "Дохід LP", liq: "Ліквідність", nav: ["PI Кільк", "DEX Своп", "LP Стейкінг"], grid: ["Переказ", "Оплата", "Внесок", "Бонус", "Дохід", "Своп"], faq: "Підтримка", found: "Фонд HK", v: ["🎓 Школа", "🏥 AI Лікарня", "🏠 3D Житло", "💎 Стипендія"], chat: "Готово!", faqData: [["Мета?", "Рівність"], ["Допомога?", "Дітям"]] }
     };
 
-    function updateLang() {
+    function updateAllLang() {
         const l = document.getElementById('langSelect').value;
-        const d = dict[l];
+        const d = i18n[l];
 
+        // 메인 텍스트
         document.getElementById('t-sub').innerText = d.sub;
-        document.getElementById('t-supply').innerText = d.supply;
-        document.getElementById('t-st').innerText = d.st;
-        document.getElementById('t-lp').innerText = d.lp;
-        document.getElementById('t-liq').innerText = d.liq;
-        document.getElementById('t-faq-btn').innerText = d.faq;
-        document.getElementById('t-found-btn').innerText = d.found;
+        document.getElementById('t-supply-label').innerText = d.supply;
+        document.getElementById('t-st-label').innerText = d.st;
+        document.getElementById('t-lp-label').innerText = d.lp;
+        document.getElementById('t-liq-label').innerText = d.liq;
+        document.getElementById('t-faq-main-btn').innerText = d.faq;
+        document.getElementById('t-found-main-btn').innerText = d.found;
 
-        const navBtns = document.querySelectorAll('#t-nav .nav-btn');
-        d.nav.forEach((text, i) => navBtns[i].innerText = text);
+        // 네비 버튼
+        const navs = document.querySelectorAll('#t-nav-btns .nav-btn');
+        d.nav.forEach((t, i) => navs[i].innerText = t);
 
-        const gridBtns = document.querySelectorAll('#t-grid .btn-6 span');
-        d.grid.forEach((text, i) => gridBtns[i].innerText = text);
+        // 그리드 버튼
+        const grids = document.querySelectorAll('#t-grid-btns .btn-6 span');
+        d.grid.forEach((t, i) => grids[i].innerText = t);
 
-        document.getElementById('vision-inject').innerHTML = d.v.map(v => `<p>${v}</p>`).join('');
-        
-        // FAQ 예시 데이터 렌더링
+        // 재단 비전
+        document.getElementById('vision-inject').innerHTML = d.v.map(item => `<p><strong>${item.split(':')[0]}</strong>: ${item.split(':')[1] || ''}</p>`).join('');
+
+        // FAQ 재생성
         const faqBox = document.getElementById('faq-inject');
-        faqBox.innerHTML = `
+        faqBox.innerHTML = d.faqData.map((f, i) => `
             <div class="faq-item">
-                <div class="faq-q" onclick="toggleFaq(0)">1. Vision?</div>
-                <div class="faq-a" id="faq-a-0" style="display:block">${d.sub} - HK WORLD BANK</div>
-            </div>`;
+                <div class="faq-q" onclick="toggleFaq(${i})">${i+1}. ${f[0]}</div>
+                <div class="faq-a" id="faq-a-${i}">${f[1]}</div>
+            </div>`).join('');
     }
 
     function toggleFaq(i) {
@@ -178,12 +182,14 @@
 
     function togglePanel(id) {
         const p = document.getElementById(id);
-        p.style.display = p.style.display === 'block' ? 'none' : 'block';
+        const isShow = p.style.display === 'block';
+        document.querySelectorAll('.hidden-panel').forEach(el => el.style.display = 'none');
+        p.style.display = isShow ? 'none' : 'block';
     }
 
     function bbiniTalk() {
         const l = document.getElementById('langSelect').value;
-        alert(dict[l].chat);
+        alert(i18n[l].chat);
     }
 
     // ✅ 실시간 라이브 업데이트 엔진 (0.6초)
@@ -195,22 +201,18 @@
     function liveUpdate() {
         currentPi += (Math.random() * 0.0001);
         document.getElementById('pi-val').innerText = currentPi.toFixed(4);
-
         currentSupply += (Math.random() * 0.0005);
         document.getElementById('supply-val').innerText = currentSupply.toLocaleString(undefined, {minimumFractionDigits: 4});
-
         currentLiq += Math.floor(Math.random() * 500);
         document.getElementById('liq-val').innerText = "$ " + currentLiq.toLocaleString();
-
         currentUsd += Math.floor(Math.random() * 50);
         document.getElementById('usd-val').innerText = "$ " + currentUsd.toLocaleString();
-
         document.getElementById('st-rate').innerText = (17.8 + Math.random() * 0.1).toFixed(2) + "%";
         document.getElementById('lp-rate').innerText = (28.8 + Math.random() * 0.05).toFixed(2) + "%";
     }
 
     // 초기 실행
-    updateLang();
+    updateAllLang();
     setInterval(liveUpdate, 600);
 </script>
 </body>
