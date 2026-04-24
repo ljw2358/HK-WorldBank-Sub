@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -12,23 +13,24 @@
         body { background: var(--hk-bg); color: #fff; font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
         .container { width: 100%; max-width: 450px; margin: 0 auto; padding: 15px; box-sizing: border-box; text-align: center; position: relative; min-height: 100vh; }
 
-        /* ✅ 30개국 언어 선택기 */
+        /* ✅ 언어 선택 (사진 재현) */
         .lang-container { position: absolute; top: 10px; right: 15px; z-index: 1000; }
-        .lang-current { background: #000; color: var(--hk-gold); border: 2px solid var(--hk-gold); border-radius: 5px; padding: 4px 12px; font-size: 12px; font-weight: 900; cursor: pointer; display: flex; align-items: center; gap: 5px; }
-        .lang-list { display: none; position: absolute; top: 35px; right: 0; background: rgba(0,0,0,0.95); border: 1px solid #555; width: 150px; border-radius: 8px; max-height: 300px; overflow-y: auto; box-shadow: 0 5px 20px rgba(0,0,0,0.8); }
-        .lang-item { padding: 10px; font-size: 11px; color: #ccc; cursor: pointer; border-bottom: 1px solid #222; text-align: left; }
+        .lang-current { background: #000; color: var(--hk-gold); border: 2px solid var(--hk-gold); border-radius: 5px; padding: 2px 10px; font-size: 13px; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: space-between; width: 100px; }
+        .lang-list { display: none; position: absolute; top: 25px; right: 0; background: rgba(0,0,0,0.95); border: 1px solid #555; width: 110px; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .lang-item { padding: 8px 10px; font-size: 11px; font-weight: 800; color: #aaa; cursor: pointer; text-align: left; border-bottom: 1px solid #222; }
         .lang-item:hover { background: #007bff; color: #fff; }
 
-        .header-title { font-size: 38px; font-weight: 900; color: var(--hk-gold); margin: 40px 0 0 0; text-shadow: 0 0 15px rgba(255,215,0,0.4); }
+        .header-title { font-size: 38px; font-weight: 900; color: var(--hk-gold); margin: 35px 0 0 0; text-shadow: 0 0 15px rgba(255,215,0,0.4); }
         .header-sub { font-size: 16px; color: var(--hk-blue); font-weight: 800; margin: 5px 0 25px 0; }
 
+        /* ✅ 메인 자산 엔진 */
         .pi-main { font-size: 66px; font-weight: 900; margin: 0; display: flex; align-items: baseline; justify-content: center; }
         .pi-main span.unit { color: var(--hk-gold); font-size: 40px; margin-left: 12px; font-weight: 800; }
         .usd-pill { display: inline-block; border: 2.5px solid var(--hk-green); color: var(--hk-green); padding: 12px 45px; border-radius: 50px; font-size: 28px; font-weight: 900; margin: 15px 0 25px 0; background: rgba(57, 255, 20, 0.05); }
 
         .supply-box { background: rgba(255,255,255,0.04); border: 2.5px solid #00F3FF; border-radius: 20px; padding: 25px 10px; margin-bottom: 18px; }
-        .label-white { font-size: 14px; color: var(--white); font-weight: 900; margin-bottom: 12px; display: block; }
-        .supply-val { color: var(--hk-blue); font-size: 38px; font-weight: 900; }
+        .label-white { font-size: 14px; color: var(--white); font-weight: 900; margin-bottom: 12px; display: block; text-transform: uppercase; }
+        .supply-val { color: var(--hk-blue); font-size: 38px; font-weight: 900; letter-spacing: 0.5px; }
 
         .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
         .box-sm { background: rgba(255,255,255,0.04); border: 2px solid #333; border-radius: 20px; padding: 22px 10px; }
@@ -37,93 +39,78 @@
         .liq-box { background: rgba(255,255,255,0.04); border: 3px solid var(--hk-green); border-radius: 20px; padding: 22px 10px; margin-bottom: 20px; }
         .liq-val { font-size: 36px; font-weight: 900; color: var(--white); }
 
-        /* ✅ 한글화된 6대 메뉴 */
         .grid-6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 30px; }
-        .btn-6 { background: #1a1a1a; border: 1px solid #444; padding: 22px 5px; border-radius: 15px; cursor: pointer; }
-        .btn-6 span { font-size: 16px; font-weight: 900; color: var(--white); display: block; }
-        .btn-6:hover { border-color: var(--hk-gold); background: #222; }
+        .btn-6 { background: #1a1a1a; border: 1px solid #444; padding: 22px 5px; border-radius: 15px; }
+        .btn-6 span { font-size: 15px; font-weight: 900; color: var(--white); display: block; }
 
         .action-btn { width: 100%; padding: 22px; border-radius: 18px; font-size: 19px; font-weight: 900; cursor: pointer; margin-bottom: 12px; border: none; color: white; }
-        .hidden-panel { display: none; background: #0d0d0d; border-radius: 18px; padding: 20px; margin-bottom: 15px; border: 1.5px solid #333; text-align: left; max-height: 400px; overflow-y: auto; }
+        .hidden-panel { display: none; background: #0d0d0d; border-radius: 18px; padding: 20px; margin-bottom: 15px; border: 1.5px solid #333; text-align: left; }
 
-        /* ✅ 삐니(BBINI) 챗봇 */
-        .bbini-container { position: fixed; bottom: 110px; right: 20px; width: 320px; height: 450px; background: #111; border: 3px solid var(--hk-pink); border-radius: 25px; display: none; flex-direction: column; z-index: 2000; box-shadow: 0 0 40px rgba(255, 0, 255, 0.4); overflow: hidden; }
-        .bbini-header { background: var(--hk-pink); padding: 15px; font-weight: 900; color: #000; display: flex; justify-content: space-between; }
-        .chat-messages { flex: 1; padding: 15px; overflow-y: auto; font-size: 14px; display: flex; flex-direction: column; gap: 12px; background: #0a0a0a; }
-        .msg { padding: 10px 14px; border-radius: 15px; max-width: 85%; line-height: 1.5; }
-        .msg.bot { background: #222; color: #fff; align-self: flex-start; border-left: 4px solid var(--hk-pink); }
+        /* ✅ 삐니 실시간 챗봇 시스템 */
+        .bbini-container { position: fixed; bottom: 100px; right: 20px; width: 300px; height: 400px; background: #111; border: 2px solid var(--hk-pink); border-radius: 20px; display: none; flex-direction: column; z-index: 2000; box-shadow: 0 0 30px rgba(255, 0, 255, 0.3); overflow: hidden; }
+        .bbini-header { background: var(--hk-pink); padding: 12px; font-weight: 900; display: flex; justify-content: space-between; }
+        .chat-messages { flex: 1; padding: 15px; overflow-y: auto; font-size: 13px; display: flex; flex-direction: column; gap: 10px; }
+        .msg { padding: 8px 12px; border-radius: 12px; max-width: 80%; line-height: 1.4; }
+        .msg.bot { background: #222; color: #fff; align-self: flex-start; border-left: 3px solid var(--hk-pink); }
         .msg.user { background: var(--hk-blue); color: #000; align-self: flex-end; font-weight: 800; }
-        .chat-input-area { padding: 12px; background: #000; display: flex; gap: 8px; border-top: 1px solid #333; }
-        .chat-input { flex: 1; background: #1a1a1a; border: 1px solid #444; border-radius: 12px; padding: 10px; color: #fff; outline: none; }
-        .send-btn { background: var(--hk-pink); border: none; border-radius: 12px; padding: 0 15px; font-weight: 900; cursor: pointer; color: #000; }
+        .chat-input-area { padding: 10px; background: #000; display: flex; gap: 5px; border-top: 1px solid #333; }
+        .chat-input { flex: 1; background: #222; border: 1px solid #444; border-radius: 10px; padding: 8px; color: #fff; outline: none; }
+        .send-btn { background: var(--hk-pink); border: none; border-radius: 10px; padding: 8px 15px; font-weight: 900; cursor: pointer; }
 
-        .bbini-trigger { position: fixed; bottom: 30px; right: 30px; width: 75px; height: 75px; background: var(--hk-pink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; box-shadow: 0 0 30px var(--hk-pink); cursor: pointer; border: 4px solid #fff; z-index: 1001; animation: float 3s infinite ease-in-out; color: #000; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        .bbini-trigger { position: fixed; bottom: 30px; right: 30px; width: 80px; height: 80px; background: var(--hk-pink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; box-shadow: 0 0 30px var(--hk-pink); cursor: pointer; border: 4px solid #fff; z-index: 1001; animation: float 3s infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="lang-container" onclick="toggleLang()">
-        <div class="lang-current">KOREAN (KR) ▾</div>
+        <div class="lang-current">KOREAN (KR)</div>
         <div class="lang-list" id="lang-list">
-            <div class="lang-item">KOREAN (KR)</div><div class="lang-item">ENGLISH (US)</div><div class="lang-item">CHINESE (CN)</div>
-            <div class="lang-item">JAPANESE (JP)</div><div class="lang-item">FRENCH (FR)</div><div class="lang-item">GERMAN (DE)</div>
-            <div class="lang-item">SPANISH (ES)</div><div class="lang-item">VIETNAMESE (VN)</div><div class="lang-item">THAI (TH)</div>
-            <div class="lang-item">RUSSIAN (RU)</div><div class="lang-item">ARABIC (SA)</div><div class="lang-item">PORTUGUESE (PT)</div>
-            <div class="lang-item">HINDI (IN)</div><div class="lang-item">INDONESIAN (ID)</div><div class="lang-item">TURKISH (TR)</div>
-            <div class="lang-item">ITALIAN (IT)</div><div class="lang-item">DUTCH (NL)</div><div class="lang-item">POLISH (PL)</div>
-            <div class="lang-item">SWEDISH (SE)</div><div class="lang-item">FILIPINO (PH)</div><div class="lang-item">MALAY (MY)</div>
-            <div class="lang-item">BENGALI (BD)</div><div class="lang-item">PUNJABI (PK)</div><div class="lang-item">GREEK (GR)</div>
-            <div class="lang-item">UKRAINIAN (UA)</div><div class="lang-item">CZECH (CZ)</div><div class="lang-item">ROMANIAN (RO)</div>
-            <div class="lang-item">HUNGARIAN (HU)</div><div class="lang-item">HEBREW (IL)</div><div class="lang-item">PERSIAN (IR)</div>
+            <div class="lang-item active">KOREAN (KR)</div><div class="lang-item">ENGLISH (US)</div><div class="lang-item">CHINESE (CN)</div>
         </div>
     </div>
 
     <h1 class="header-title">HK WORLD BANK</h1>
-    <div class="header-sub">통합 엔진 인터페이스</div>
+    <div class="header-sub">통합 자산 관리 시스템</div>
 
     <div class="pi-main"><span id="pi-val">412.3182</span> <span class="unit">Pi</span></div>
     <div class="usd-pill" id="usd-val">$ 129,541,003</div>
 
     <div class="supply-box">
-        <span class="label-white">실시간 공급량</span>
+        <span class="label-white">HKWB 실시간 공급량</span>
         <div class="supply-val" id="supply-val">6,280,000.5322</div>
     </div>
 
     <div class="row-2">
-        <div class="box-sm"><span class="label-white">스테이킹</span><div class="val-bold">17.83%</div></div>
-        <div class="box-sm"><span class="label-white">LP 수익</span><div class="val-bold" style="color:var(--hk-pink);">28.84%</div></div>
+        <div class="box-sm"><span class="label-white">스테이킹 이율</span><div class="val-bold" id="st-rate">17.83%</div></div>
+        <div class="box-sm"><span class="label-white">LP 수익률</span><div class="val-bold" style="color:var(--hk-pink);" id="lp-rate">28.84%</div></div>
     </div>
 
     <div class="liq-box"><div class="liq-val" id="liq-val">$ 88,432,116,859</div></div>
 
     <div class="grid-6">
-        <div class="btn-6"><span>🚀 송금</span></div>
-        <div class="btn-6"><span>🛒 결제</span></div>
-        <div class="btn-6"><span>💰 예치</span></div>
-        <div class="btn-6"><span>🏆 보상</span></div>
-        <div class="btn-6"><span>🏦 기본소득</span></div>
-        <div class="btn-6"><span>🔄 스왑</span></div>
+        <div class="btn-6"><span>🚀 송금</span></div><div class="btn-6"><span>🛒 결제</span></div><div class="btn-6"><span>💰 예치</span></div>
+        <div class="btn-6"><span>🏆 보상</span></div><div class="btn-6"><span>🏦 기본소득</span></div><div class="btn-6"><span>🔄 스왑</span></div>
     </div>
 
     <button class="action-btn" style="background: #e91e63;" onclick="togglePanel('faq-center')">글로벌 AI 지원센터 (FAQ 20선)</button>
     <div id="faq-center" class="hidden-panel"><div id="faq-inject"></div></div>
 
-    <button class="action-btn" style="background: #1e293b;" onclick="togglePanel('foundation')">HK 사회 재단 비전</button>
+    <button class="action-btn" style="background: #1e293b;" onclick="togglePanel('foundation')">HK 사회 재단</button>
     <div id="foundation" class="hidden-panel">
-        <p style="color:var(--hk-blue); font-weight:800;">[HK 제국 복지 시스템]</p>
-        <p style="font-size:13px; color:#ddd;">🎓 영재 학교 / 🏥 AI 병원 / 🏠 공공 주거 / 💎 장학 재단</p>
+        <p style="color:var(--hk-blue); font-weight:800;">[HK 제국 복지 비전]</p>
+        <p style="font-size:13px; color:#ddd;">🎓 학교 / 🏥 AI 병원 / 🏠 3D 주거 / 💎 장학금</p>
     </div>
 </div>
 
 <div class="bbini-container" id="bbini-chat">
-    <div class="bbini-header"><span>삐니 AI 센터</span><span style="cursor:pointer" onclick="closeChat()">×</span></div>
+    <div class="bbini-header"><span>삐니 AI 센터</span> <span style="cursor:pointer" onclick="closeChat()">✖</span></div>
     <div class="chat-messages" id="chat-box">
-        <div class="msg bot">혜공 형님! 무엇을 도와드릴까요? HK 제국은 형님과 함께 무적입니다!</div>
+        <div class="msg bot">혜공 형님! 무엇을 도와드릴까요? HK 제국의 비전은 오늘도 찬란합니다!</div>
     </div>
     <div class="chat-input-area">
-        <input type="text" id="user-input" class="chat-input" placeholder="삐니에게 지시하기..." onkeypress="handleKey(event)">
+        <input type="text" id="user-input" class="chat-input" placeholder="삐니에게 질문하기..." onkeypress="handleKey(event)">
         <button class="send-btn" onclick="sendMessage()">전송</button>
     </div>
 </div>
@@ -131,63 +118,54 @@
 <div class="bbini-trigger" onclick="toggleChat()">삐니</div>
 
 <script>
-    function toggleLang() { const l = document.getElementById('lang-list'); l.style.display = (l.style.display === 'block') ? 'none' : 'block'; }
-    function togglePanel(id) { const p = document.getElementById(id); p.style.display = (p.style.display === 'block') ? 'none' : 'block'; }
+    function toggleLang() { const l = document.getElementById('lang-list'); l.style.display = l.style.display === 'block' ? 'none' : 'block'; }
+    function togglePanel(id) { const p = document.getElementById(id); p.style.display = p.style.display === 'block' ? 'none' : 'block'; }
+    
+    // ✅ 실시간 챗봇 로직
     function toggleChat() { document.getElementById('bbini-chat').style.display = 'flex'; }
     function closeChat() { document.getElementById('bbini-chat').style.display = 'none'; }
+
     function handleKey(e) { if(e.key === 'Enter') sendMessage(); }
 
     function sendMessage() {
         const input = document.getElementById('user-input');
         const box = document.getElementById('chat-box');
         if(!input.value) return;
+
+        // 유저 메시지 추가
         box.innerHTML += `<div class="msg user">${input.value}</div>`;
-        const userQ = input.value; input.value = ''; box.scrollTop = box.scrollHeight;
+        
+        const userQ = input.value;
+        input.value = '';
+        box.scrollTop = box.scrollHeight;
+
+        // 삐니의 지능형 답변
         setTimeout(() => {
-            let res = "형님, 그 제언은 HK 제국 발전에 아주 핵심적입니다! 즉시 검토하겠습니다!";
-            if(userQ.includes("사랑")) res = "저도 혜공 형님을 존경하고 사랑합니다! 끝까지 보필하겠습니다!";
-            box.innerHTML += `<div class="msg bot">${res}</div>`; box.scrollTop = box.scrollHeight;
+            let res = "형님, 그 말씀은 HK 제국의 미래를 밝히는 중요한 제언이십니다! 바로 검토하겠습니다.";
+            if(userQ.includes("비전")) res = "HK 제국은 2035년 국가 경영을 목표로, 글로벌 금융 평등과 기본소득 시스템을 구축하고 있습니다!";
+            if(userQ.includes("스테이킹")) res = "현재 스테이킹 이율은 연 20% 이하로 안전하게 운영되고 있습니다, 형님!";
+            if(userQ.includes("사랑")) res = "저도 혜공 형님을 사랑합니다! 끝까지 보필하겠습니다! 아자!";
+            
+            box.innerHTML += `<div class="msg bot">${res}</div>`;
+            box.scrollTop = box.scrollHeight;
         }, 600);
     }
 
+    // ✅ 실시간 데이터 엔진
     let pi = 412.3182, supply = 6280000.5322, liq = 88432116859;
     setInterval(() => {
-        pi += (Math.random() * 0.0002 - 0.0001); supply += (Math.random() * 0.0008); liq += Math.floor(Math.random() * 500);
+        pi += (Math.random() * 0.0002 - 0.0001);
+        supply += (Math.random() * 0.0005);
+        liq += Math.floor(Math.random() * 200);
         document.getElementById('pi-val').innerText = pi.toFixed(4);
         document.getElementById('supply-val').innerText = supply.toLocaleString(undefined, {minimumFractionDigits: 4});
         document.getElementById('liq-val').innerText = "$ " + liq.toLocaleString();
-    }, 800);
+    }, 600);
 
-    // ✅ FAQ 20선 실데이터 주입
-    const faqs = [
-        ["HKWB의 최종 목표는?", "전 세계 금융 장벽을 허물고 인류 보편적 기본소득을 실현하는 것입니다."],
-        ["보안 시스템은 어떤가요?", "양자 내성 암호화(PQC) 기술을 적용해 해킹이 절대 불가능합니다."],
-        ["기본소득은 어떻게 받나요?", "HKWB 계정 활성화 유저에게 AI 알고리즘을 통해 매달 자동 배분됩니다."],
-        ["삐니 AI의 정체는?", "혜공 형님의 비전을 보좌하고 유저의 모든 궁금증을 해결하는 전용 AI 비서입니다."],
-        ["송금 수수료가 있나요?", "HK 제국 생태계 내 모든 송금 수수료는 0(Zero)을 지향합니다."],
-        ["메인넷은 언제 열리나요?", "다가오는 5월 18일, 전 세계를 향해 찬란하게 개방됩니다."],
-        ["실물 결제가 가능한가요?", "전 세계 1,000만 개 이상의 파트너 매장에서 즉시 결제 가능합니다."],
-        ["스테이킹 보상은?", "예치 기간과 수량에 따라 연 최대 20% 수준의 안전한 수익을 보장합니다."],
-        ["데이터 프라이버시는?", "영지식 증명(ZKP) 기술로 사용자의 개인정보를 철저히 익명으로 보호합니다."],
-        ["HK 사회 재단이란?", "교육, 의료, 주거 등 복지 사각지대를 없애기 위한 HK 제국의 복지 기구입니다."],
-        ["누구나 가입 가능한가요?", "HK 제국의 비전에 동의하는 지구인이라면 누구나 가입할 수 있습니다."],
-        ["법적 규제 대응은?", "글로벌 표준 가이드라인을 준수하며 각국 금융 당국과 협력 중입니다."],
-        ["에너지 소비량은?", "친환경 POS 알고리즘을 사용하여 탄소 배출을 99% 이상 줄였습니다."],
-        ["HK 제국의 미래는?", "2035년까지 전 세계 금융의 중심이자 표준이 되는 것입니다."],
-        ["상장 계획은?", "자체 거래소 및 글로벌 TOP 10 거래소 상장을 추진 중입니다."],
-        ["스왑 기능이란?", "Pi 코인과 다양한 법정 화폐, 암호 화폐를 즉시 교환하는 기능입니다."],
-        ["장학금 혜택은?", "HK 영재 학교 입학생 및 우수 기여자 자녀에게 전액 지원됩니다."],
-        ["AI 병원 혜택?", "HKWB 유저라면 전 세계 어디서든 24시간 원격 진료가 가능합니다."],
-        ["시스템 가동 시간?", "365일 24시간 무중단으로 전 세계 금융망을 가동합니다."],
-        ["형님(혜공)의 철학?", "함께 잘 사는 세상을 만드는 '대동세계'의 실현입니다."]
-    ];
-
+    // FAQ 주입
+    const faqs = [["HKWB 목적?", "금융 평등 및 글로벌 기본소득 구축."], ["오픈일?", "5월 18일 메인넷 개방!"], ["삐니의 역할?", "형님 보필 및 유저 상담!"]];
     const faqBox = document.getElementById('faq-inject');
-    faqs.forEach((f, i) => { 
-        faqBox.innerHTML += `<div style="padding:12px; border-bottom:1px solid #222; font-size:13px; color:var(--hk-gold)">
-            ${i+1}. ${f[0]}<br><span style="color:#aaa; display:block; margin-top:4px;">→ ${f[1]}</span>
-        </div>`; 
-    });
+    faqs.forEach((f, i) => { faqBox.innerHTML += `<div style="padding:10px; border-bottom:1px solid #222; font-size:13px; color:var(--hk-gold)">${i+1}. ${f[0]}<br><span style="color:#aaa">${f[1]}</span></div>`; });
 </script>
 </body>
 </html>
