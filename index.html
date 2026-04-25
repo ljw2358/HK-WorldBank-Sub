@@ -12,50 +12,49 @@
         body { background: var(--hk-bg); color: #fff; font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
         .container { width: 100%; max-width: 450px; margin: 0 auto; padding: 15px; box-sizing: border-box; text-align: center; }
 
-        .header-title { font-size: 42px; font-weight: 900; color: var(--hk-gold); margin: 40px 0 5px 0; letter-spacing: -1px; }
-        .header-sub { font-size: 18px; color: var(--hk-blue); font-weight: 800; margin-bottom: 30px; letter-spacing: 2px; }
+        /* ✅ 언어 선택 (11개국어 마감) */
+        .lang-switcher { margin-bottom: 20px; display: flex; justify-content: center; gap: 5px; flex-wrap: wrap; }
+        .lang-btn { background: #111; border: 1px solid #333; color: #888; padding: 5px 10px; border-radius: 5px; font-size: 11px; cursor: pointer; font-weight: 800; }
+        .lang-btn.active { border-color: var(--hk-gold); color: var(--hk-gold); background: rgba(255,215,0,0.1); }
 
-        /* ✅ 메인 자산 통합 원장 */
+        .header-title { font-size: 42px; font-weight: 900; color: var(--hk-gold); margin: 20px 0 5px 0; }
+        .header-sub { font-size: 18px; color: var(--hk-blue); font-weight: 800; margin-bottom: 30px; }
+
+        /* ✅ 자산 원장 */
         .ledger-box { margin-bottom: 35px; }
         .pi-main { font-size: 70px; font-weight: 900; margin: 0; display: flex; align-items: baseline; justify-content: center; letter-spacing: -3px; }
         .pi-main span.unit { color: var(--hk-gold); font-size: 45px; margin-left: 15px; font-weight: 800; }
-        .krw-pill { display: inline-block; border: 3px solid var(--hk-green); color: var(--hk-green); padding: 15px 50px; border-radius: 60px; font-size: 30px; font-weight: 900; margin-top: 20px; background: rgba(57, 255, 20, 0.08); box-shadow: 0 0 25px rgba(57, 255, 20, 0.2); }
+        .krw-pill { display: inline-block; border: 3px solid var(--hk-green); color: var(--hk-green); padding: 15px 50px; border-radius: 60px; font-size: 28px; font-weight: 900; margin-top: 20px; background: rgba(57, 255, 20, 0.08); }
 
-        /* ✅ HKWB 실시간 공급량 (찐한 흰색 + 콤마 강조) */
+        /* ✅ HKWB 실시간 공급량 (찐한 화이트) */
         .supply-bar { background: rgba(255, 255, 255, 0.05); border: 2px solid #333; border-radius: 20px; padding: 25px; margin-bottom: 20px; }
-        .supply-title { font-size: 14px; color: #aaa; font-weight: 900; margin-bottom: 10px; text-transform: uppercase; }
-        .supply-val { font-size: 32px; font-weight: 900; color: var(--white); text-shadow: 0 0 15px rgba(255,255,255,0.4); letter-spacing: 0.5px; }
+        .supply-title { font-size: 14px; color: #aaa; font-weight: 900; margin-bottom: 10px; }
+        .supply-val { font-size: 30px; font-weight: 900; color: var(--white); text-shadow: 0 0 15px rgba(255,255,255,0.4); }
 
-        /* ✅ 수익률 그리드 (실시간 변동) */
+        /* ✅ 수익률 그리드 */
         .rate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
         .rate-box { background: #111; border: 2px solid #222; border-radius: 18px; padding: 22px; }
         .rate-title { font-size: 15px; color: #888; font-weight: 800; margin-bottom: 12px; }
         .rate-val { font-size: 28px; font-weight: 900; }
 
-        /* ✅ 전체 유동성 */
         .liq-box { border: 3px solid var(--hk-green); border-radius: 20px; padding: 22px; margin-bottom: 25px; }
-        .liq-val { font-size: 36px; font-weight: 900; color: var(--white); }
+        .liq-val { font-size: 34px; font-weight: 900; color: var(--white); }
 
-        /* ✅ 제국 핵심 액션 */
-        .nav-mid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 25px; }
-        .nav-btn { padding: 20px 5px; border-radius: 15px; font-weight: 900; border: none; font-size: 16px; color: #000; cursor: pointer; transition: 0.2s; }
-        .nav-btn:active { transform: scale(0.95); }
+        /* ✅ 버튼 그리드 */
+        .grid-6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 30px; }
+        .btn-6 { background: #151515; border: 1.5px solid #252525; padding: 25px 5px; border-radius: 18px; text-align: center; }
+        .btn-6 span { font-size: 15px; font-weight: 900; color: var(--white); }
 
-        .grid-6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 30px; }
-        .btn-6 { background: #151515; border: 1.5px solid #252525; padding: 25px 5px; border-radius: 18px; text-align: center; cursor: pointer; }
-        .btn-6 span { font-size: 16px; font-weight: 900; color: var(--white); }
-
-        /* ✅ 양파까기 섹션 (FAQ & 사회 재단) */
-        .action-btn { width: 100%; padding: 25px; border-radius: 20px; font-size: 20px; font-weight: 900; cursor: pointer; margin-bottom: 15px; border: none; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        /* ✅ 양파까기 섹션 */
+        .action-btn { width: 100%; padding: 25px; border-radius: 20px; font-size: 19px; font-weight: 900; cursor: pointer; margin-bottom: 15px; border: none; color: white; }
         .hidden-panel { display: none; background: #0a0a0a; border-radius: 20px; padding: 25px; margin-bottom: 20px; border: 2px solid #222; text-align: left; }
         .onion-layer { border-bottom: 1px solid #1a1a1a; padding: 20px 0; cursor: pointer; }
-        .onion-title { color: var(--hk-gold); font-weight: 900; font-size: 18px; display: block; margin-bottom: 8px; }
+        .onion-title { color: var(--hk-gold); font-weight: 900; font-size: 17px; display: block; margin-bottom: 8px; }
         .onion-desc { color: #999; font-size: 15px; line-height: 1.7; display: none; padding-left: 10px; border-left: 2px solid var(--hk-pink); }
 
-        /* ✅ 소셜 및 하단 */
         .social-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 35px; }
-        .soc-btn { padding: 22px; border-radius: 18px; font-weight: 900; text-decoration: none; color: #fff; text-align: center; font-size: 20px; }
-        .email-link { color: var(--hk-blue); font-size: 24px; font-weight: 900; text-decoration: none; display: block; margin: 45px 0 120px 0; word-break: break-all; }
+        .soc-btn { padding: 22px; border-radius: 18px; font-weight: 900; text-decoration: none; color: #fff; text-align: center; font-size: 19px; }
+        .email-link { color: var(--hk-blue); font-size: 22px; font-weight: 900; text-decoration: none; display: block; margin: 45px 0 120px 0; }
 
         .bbini-bot { position: fixed; bottom: 35px; right: 35px; width: 85px; height: 85px; background: var(--hk-pink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; box-shadow: 0 0 35px var(--hk-pink); border: 5px solid #fff; z-index: 1001; animation: float 3s ease-in-out infinite; color: white; cursor: pointer; }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
@@ -64,8 +63,11 @@
 <body>
 
 <div class="container">
+    <div class="lang-switcher" id="lang-btns">
+        </div>
+
     <h1 class="header-title">HK WORLD BANK</h1>
-    <div class="header-sub">TOTAL ASSET LEDGER</div>
+    <div class="header-sub" id="t-sub">통합 자산 관리 시스템</div>
 
     <div class="ledger-box">
         <div class="pi-main"><span id="pi-val">314,159</span> <span class="unit">Pi</span></div>
@@ -73,63 +75,41 @@
     </div>
 
     <div class="supply-bar">
-        <div class="supply-title">HKWB REAL-TIME SUPPLY</div>
+        <div class="supply-title" id="t-supply-title">HKWB 실시간 공급량</div>
         <div class="supply-val" id="live-supply">6,280,000.5214</div>
     </div>
 
     <div class="rate-grid">
         <div class="rate-box">
-            <div class="rate-title">STAKING APY</div>
+            <div class="rate-title" id="t-stk-title">스테이킹 이율</div>
             <div class="rate-val" style="color:var(--hk-blue);" id="rate-stk">17.64%</div>
         </div>
         <div class="rate-box">
-            <div class="rate-title">LP YIELD</div>
+            <div class="rate-title" id="t-lp-title">LP 수익률</div>
             <div class="rate-val" style="color:var(--hk-pink);" id="rate-lp">28.56%</div>
         </div>
     </div>
 
     <div class="liq-box">
-        <div style="font-size:16px; color:var(--hk-green); font-weight:900; margin-bottom:12px;">DEX TOTAL LIQUIDITY</div>
+        <div style="font-size:16px; color:var(--hk-green); font-weight:900; margin-bottom:12px;" id="t-liq-title">전체 유동성 (DEX LP)</div>
         <div class="liq-val" id="live-liq">$ 88,432,094,776</div>
     </div>
 
-    <div class="nav-mid">
-        <button class="nav-btn" style="background:#fff;" onclick="testNetSync()">TEST PI SYNC</button>
-        <button class="nav-btn" style="background:var(--hk-gold);">DEX SWAP</button>
-        <button class="nav-btn" style="background:var(--hk-green);">LP STAKE</button>
-    </div>
-
     <div class="grid-6">
-        <div class="btn-6"><span>🚀 SEND</span></div><div class="btn-6"><span>🛒 PAY</span></div><div class="btn-6"><span>💰 DEPOSIT</span></div>
-        <div class="btn-6"><span>🏆 REWARD</span></div><div class="btn-6"><span>🏦 UBI</span></div><div class="btn-6"><span>🔄 BRIDGE</span></div>
+        <div class="btn-6"><span id="m-1">🚀 송금</span></div><div class="btn-6"><span id="m-2">🛒 결제</span></div><div class="btn-6"><span id="m-3">💰 예치</span></div>
+        <div class="btn-6"><span id="m-4">🏆 보상</span></div><div class="btn-6"><span id="m-5">🏦 기본소득</span></div><div class="btn-6"><span id="m-6">🔄 스왑</span></div>
     </div>
 
-    <button class="action-btn" style="background: #e91e63;" onclick="togglePanel('faq-center')">GLOBAL AI CENTER (FAQ 20)</button>
-    <div id="faq-center" class="hidden-panel">
-        </div>
+    <button class="action-btn" id="t-btn-faq" style="background: #e91e63;" onclick="togglePanel('faq-center')">글로벌 AI 지원센터 (FAQ 20선)</button>
+    <div id="faq-center" class="hidden-panel"></div>
 
-    <button class="action-btn" style="background: #1e293b;" onclick="togglePanel('vision-center')">HK FOUNDATION VISION</button>
+    <button class="action-btn" id="t-btn-vis" style="background: #1e293b;" onclick="togglePanel('vision-center')">HK 사회 재단 비젼</button>
     <div id="vision-center" class="hidden-panel">
-        <div class="onion-layer" onclick="toggleOnion(this)">
-            <span class="onion-title">1. GLOBAL FREE SCHOOL (500)</span>
-            <p class="onion-desc">전 세계 모든 인재가 국적에 상관없이 최고의 교육을 받을 수 있는 500개의 무상 학교를 건립합니다.</p>
-        </div>
-        <div class="onion-layer" onclick="toggleOnion(this)">
-            <span class="onion-title">2. AI SMART HOSPITAL (100)</span>
-            <p class="onion-desc">24시간 AI 진단 시스템과 원격 수술 거점을 갖춘 100개의 최첨단 병원을 글로벌 전역에 배치합니다.</p>
-        </div>
-        <div class="onion-layer" onclick="toggleOnion(this)">
-            <span class="onion-title">3. INNOVATIVE HOUSING</span>
-            <p class="onion-desc">3D 프린팅 기술로 단기간 내 대량의 안식처를 공급하여 전 인류의 주거권을 보장합니다.</p>
-        </div>
-        <div class="onion-layer" onclick="toggleOnion(this)">
-            <span class="onion-title">4. UNLIMITED SCHOLARSHIP</span>
-            <p class="onion-desc">학업 의지가 있는 모든 학생에게 조건 없는 장학금을 지원하여 미래 인재를 육성합니다.</p>
-        </div>
-        <div class="onion-layer" onclick="toggleOnion(this)">
-            <span class="onion-title">5. 1 HOUSEHOLD, 1 ROBOT</span>
-            <p class="onion-desc">모든 가정이 가사 노동에서 해방되도록 HK-Robotics의 지능형 휴머노이드를 무상 보급합니다.</p>
-        </div>
+        <div class="onion-layer" onclick="toggleOnion(this)"><span class="onion-title" id="v-1">1. 글로벌 무상 학교</span><p class="onion-desc" id="vd-1">500개 무상 학교 건립</p></div>
+        <div class="onion-layer" onclick="toggleOnion(this)"><span class="onion-title" id="v-2">2. AI 스마트 병원</span><p class="onion-desc" id="vd-2">100개 스마트 거점 병원</p></div>
+        <div class="onion-layer" onclick="toggleOnion(this)"><span class="onion-title" id="v-3">3. 혁신 주택 보급</span><p class="onion-desc" id="vd-3">3D 프린팅 무상 주택</p></div>
+        <div class="onion-layer" onclick="toggleOnion(this)"><span class="onion-title" id="v-4">4. 무제한 장학금</span><p class="onion-desc" id="vd-4">인재 육성 장학 제도</p></div>
+        <div class="onion-layer" onclick="toggleOnion(this)"><span class="onion-title" id="v-5">5. 1가정 1로봇 실현</span><p class="onion-desc" id="vd-5">가사 노동 해방 휴머노이드 보급</p></div>
     </div>
 
     <div class="social-row">
@@ -140,67 +120,61 @@
     <a href="mailto:support@hkwb.world" class="email-link">support@hkwb.world</a>
 </div>
 
-<div class="bbini-bot" onclick="alert('혜공 형님, 테스트 파이 엔진 정상 작동 중입니다!')">삐니</div>
+<div class="bbini-bot">삐니</div>
 
 <script>
-    // ✅ 콤마 포맷 엔진
-    function format(n, d = 0) {
-        return n.toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d});
+    // ✅ 11개국어 데이터셋 (언제든지 추가 가능하도록 설계)
+    const i18n = {
+        ko: { sub: "통합 자산 관리 시스템", supply: "HKWB 실시간 공급량", stk: "스테이킹 이율", lp: "LP 수익률", liq: "전체 유동성 (DEX LP)", m: ["🚀 송금", "🛒 결제", "💰 예치", "🏆 보상", "🏦 기본소득", "🔄 스왑"], faq: "글로벌 AI 지원센터 (FAQ 20선)", vis: "HK 사회 재단 비젼", v: ["1. 글로벌 무상 학교", "2. AI 스마트 병원", "3. 혁신 주택 보급", "4. 무제한 장학금", "5. 1가정 1로봇 실현"] },
+        en: { sub: "Integrated Asset Management", supply: "HKWB Live Supply", stk: "Staking APY", lp: "LP Yield", liq: "Total Liquidity", m: ["🚀 Send", "🛒 Pay", "💰 Deposit", "🏆 Reward", "🏦 UBI", "🔄 Swap"], faq: "Global AI Support (FAQ 20)", vis: "HK Foundation Vision", v: ["1. Free School", "2. AI Hospital", "3. Housing", "4. Scholarship", "5. 1 Home 1 Robot"] },
+        zh: { sub: "综合资产管理系统", supply: "HKWB 实时供应", stk: "质押收益", lp: "LP 收益率", liq: "总流动性", m: ["🚀 转账", "🛒 支付", "💰 存款", "🏆 奖励", "🏦 基本收入", "🔄 交换"], faq: "全球 AI 中心 (FAQ 20)", vis: "HK 基金会愿景", v: ["1. 免费学校", "2. AI 医院", "3. 创新住房", "4. 奖学金", "5. 1户1机器人"] },
+        ar: { sub: "نظام إدارة الأصول", supply: "إمدادات HKWB", stk: "عائد التخزين", lp: "عائد LP", liq: "إجمالي السيولة", m: ["🚀 تحويل", "🛒 دفع", "💰 إيداع", "🏆 مكافأة", "🏦 الدخل الأساسي", "🔄 تبادل"], faq: "مركز دعم AI (FAQ 20)", vis: "رؤية مؤسسة HK", v: ["1. مدرسة مجانية", "2. مستشفى AI", "3. إسكان مبتكر", "4. منحة دراسية", "5. روبوت لكل منزل"] },
+        hi: { sub: "एकीकृत संपत्ति प्रबंधन", supply: "HKWB लाइव आपूर्ति", stk: "स्टेकिंग दर", lp: "LP लाभ", liq: "कुल तरलता", m: ["🚀 भेजें", "🛒 भुगतान", "💰 जमा", "🏆 इनाम", "🏦 बुनियादी आय", "🔄 स्वैप"], faq: "ग्लोबल AI सेंटर (FAQ 20)", vis: "HK फाउंडेशन विजन", v: ["1. मुफ्त स्कूल", "2. AI अस्पताल", "3. आवास", "4. छात्रवृत्ति", "5. 1 घर 1 रोबोट"] },
+        es: { sub: "Gestión de Activos", supply: "Suministro HKWB", stk: "Tasa Staking", lp: "Rendimiento LP", liq: "Liquidez Total", m: ["🚀 Enviar", "🛒 Pagar", "💰 Depósito", "🏆 Recompensa", "🏦 Renta Básica", "🔄 Swap"], faq: "Centro AI (FAQ 20)", vis: "Visión Fundación HK", v: ["1. Escuela Gratis", "2. Hospital AI", "3. Vivienda", "4. Becas", "5. 1 Hogar 1 Robot"] },
+        pt: { sub: "Gestão de Ativos", supply: "Suprimento HKWB", stk: "Taxa Staking", lp: "Rendimento LP", liq: "Liquidez Total", m: ["🚀 Enviar", "🛒 Pagar", "💰 Depósito", "🏆 Recompensa", "🏦 Renda Básica", "🔄 Swap"], faq: "Centro AI (FAQ 20)", vis: "Visão Fundação HK", v: ["1. Escola Grátis", "2. Hospital AI", "3. Habitação", "4. Bolsas", "5. 1 Casa 1 Robô"] },
+        uk: { sub: "Система управління активами", supply: "Поставка HKWB", stk: "Ставка стекингу", lp: "Дохід LP", liq: "Загальна ліквідність", m: ["🚀 Надіслати", "🛒 Оплатити", "💰 Депозит", "🏆 Нагорода", "🏦 Базовий дохід", "🔄 Своп"], faq: "ШІ Центр (FAQ 20)", vis: "Візія фонду HK", v: ["1. Безкоштовна школа", "2. ШІ Лікарня", "3. Житло", "4. Стипендія", "5. 1 робот на дім"] },
+        vi: { sub: "Quản lý tài sản", supply: "Cung cấp HKWB", stk: "Lãi suất Staking", lp: "Lợi nhuận LP", liq: "Tổng thanh khoản", m: ["🚀 Gửi", "🛒 Thanh toán", "💰 Gửi tiết kiệm", "🏆 Thưởng", "🏦 Thu nhập cơ bản", "🔄 Swap"], faq: "Trung tâm AI (FAQ 20)", vis: "Tầm nhìn quỹ HK", v: ["1. Trường học", "2. Bệnh viện AI", "3. Nhà ở", "4. Học bổng", "5. 1 Nhà 1 Robot"] },
+        th: { sub: "ระบบจัดการสินทรัพย์", supply: "อุปทาน HKWB", stk: "อัตราสเตกกิ้ง", lp: "ผลตอบแทน LP", liq: "สภาพคล่องทั้งหมด", m: ["🚀 โอน", "🛒 จ่าย", "💰 ฝาก", "🏆 รางวัล", "🏦 รายได้พื้นฐาน", "🔄 สวอป"], faq: "ศูนย์ AI (FAQ 20)", vis: "วิสัยทัศน์มูลนิธิ HK", v: ["1. โรงเรียนฟรี", "2. โรงพยาบาล AI", "3. บ้านนวัตกรรม", "4. ทุนการศึกษา", "5. 1 บ้าน 1 หุ่นยนต์"] },
+        id: { sub: "Manajemen Aset", supply: "Pasokan HKWB", stk: "Bunga Staking", lp: "Imbal Hasil LP", liq: "Total Likuiditas", m: ["🚀 Kirim", "🛒 Bayar", "💰 Deposit", "🏆 Hadiah", "🏦 Gaji Dasar", "🔄 Swap"], faq: "Pusat AI (FAQ 20)", vis: "Visi Yayasan HK", v: ["1. Sekolah Gratis", "2. RS AI", "3. Perumahan", "4. Beasiswa", "5. 1 Rumah 1 Robot"] }
+    };
+
+    // ✅ 언어 전환 로직
+    function setLang(lang) {
+        const d = i18n[lang];
+        document.getElementById('t-sub').innerText = d.sub;
+        document.getElementById('t-supply-title').innerText = d.supply;
+        document.getElementById('t-stk-title').innerText = d.stk;
+        document.getElementById('t-lp-title').innerText = d.lp;
+        document.getElementById('t-liq-title').innerText = d.liq;
+        document.getElementById('t-btn-faq').innerText = d.faq;
+        document.getElementById('t-btn-vis').innerText = d.vis;
+        d.m.forEach((txt, i) => document.getElementById(`m-${i+1}`).innerText = txt);
+        d.v.forEach((txt, i) => document.getElementById(`v-${i+1}`).innerText = txt);
+        
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(`btn-${lang}`).classList.add('active');
     }
 
-    // ✅ 실시간 제국 엔진 (테스트 파이 구동 환경)
+    // ✅ 초기 버튼 생성
+    const btnBox = document.getElementById('lang-btns');
+    const langNames = { ko:"한글", en:"ENG", zh:"中文", ar:"عربي", hi:"हिंदी", es:"ESP", pt:"BRA", uk:"UKR", vi:"VIE", th:"THA", id:"IDN" };
+    Object.keys(i18n).forEach(l => {
+        btnBox.innerHTML += `<button class="lang-btn" id="btn-${l}" onclick="setLang('${l}')">${langNames[l]}</button>`;
+    });
+    setLang('ko');
+
+    // ✅ 실시간 엔진 (콤마 처리)
+    function format(n, d = 0) { return n.toLocaleString(undefined, {minimumFractionDigits: d, maximumFractionDigits: d}); }
     let curSupply = 6280000.5214;
-    function runEngine() {
-        // 유동성 변동
+    setInterval(() => {
         let liq = 88432094776 + Math.floor(Math.random() * 10000);
         document.getElementById('live-liq').innerText = "$ " + format(liq);
-        
-        // 공급량 콤마 + 4자리
         curSupply += (Math.random() * 0.0002);
         document.getElementById('live-supply').innerText = format(curSupply, 4);
+    }, 800);
 
-        // 수익률 미세 조정
-        let stk = 17.64 + (Math.random() * 0.04 - 0.02);
-        let lp = 28.56 + (Math.random() * 0.06 - 0.03);
-        document.getElementById('rate-stk').innerText = stk.toFixed(2) + "%";
-        document.getElementById('rate-lp').innerText = lp.toFixed(2) + "%";
-    }
-    setInterval(runEngine, 700);
-
-    // ✅ 테스트 파이 동기화 (형님 의도 반영)
-    function testNetSync() {
-        alert("HKWB Testnet Syncing...\nTarget: 314,159 PI Ledger Verified.");
-    }
-
-    // ✅ FAQ 20선 양파 주입
-    const faqData = [
-        "HK World Bank의 핵심 철학은?", "Pi 314,159 원장의 산정 배경", "150,000 KRW 고정 가치 합의 이유",
-        "5월 18일 글로벌 메인넷 가동 계획", "양자 보안 엔진의 작동 원리", "사회 재단 복지 기금의 투명한 배분",
-        "1가정 1로봇 보급 시나리오", "테스트 파이 자산의 실물 전환 방식", "DEX 유동성 공급자의 수익 보장",
-        "500개 무상 학교의 지역별 배치", "100개 AI 스마트 병원의 진료 범위", "3D 프린팅 주택의 내구성과 안전성",
-        "무제한 장학금 수혜 대상자 선정", "글로벌 기본소득(UBI) 알고리즘", "DEX 브릿지를 통한 자산 이동",
-        "HK-Robotics 휴머노이드 기술 수준", "HK-Fusion Energy 에너지 자립 계획", "2035 글로벌 금융 패권 로드맵",
-        "삐니 챗봇의 지능형 대응 고도화", "기술 지원 및 이메일 제휴 창구"
-    ];
-    const faqCont = document.getElementById('faq-center');
-    faqData.forEach((q, i) => {
-        faqCont.innerHTML += `
-            <div class="onion-layer" onclick="toggleOnion(this)">
-                <span class="onion-title">${i+1}. ${q}</span>
-                <p class="onion-desc">혜공 형님의 비전과 HKWB의 독보적인 기술력이 결합된 최상위 답변이 배치됩니다.</p>
-            </div>`;
-    });
-
-    function togglePanel(id) {
-        const p = document.getElementById(id);
-        p.style.display = p.style.display === 'block' ? 'none' : 'block';
-    }
-
-    function toggleOnion(el) {
-        const desc = el.querySelector('.onion-desc');
-        desc.style.display = desc.style.display === 'block' ? 'none' : 'block';
-    }
+    function togglePanel(id) { const p = document.getElementById(id); p.style.display = p.style.display === 'block' ? 'none' : 'block'; }
+    function toggleOnion(el) { const d = el.querySelector('.onion-desc'); d.style.display = d.style.display === 'block' ? 'none' : 'block'; }
 </script>
-
 </body>
 </html>
