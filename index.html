@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HK WORLD BANK - GLOBAL LEDGER v3.0</title>
-  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-   <style>
+    <style>
         :root {
             --hk-gold: #FFD700; --hk-green: #39FF14; --hk-blue: #00F3FF;
             --hk-pink: #FF00FF; --hk-bg: #000000; --hk-card: #0d0d0d;
@@ -130,12 +129,11 @@
     </div>
 
     <div class="btn-group-label" id="txt-main-assets">MAIN ASSETS</div>
- <div class="top-btn-grid">
-    <button class="top-btn" style="background: #E8D7FF;" id="btn-pi-qty" onclick="startstaking()">PI 수량</button>
-    <button class="top-btn" style="background: #FFD700;" id="btn-dex-swap" onclick="startstaking()">DEX 스왑</button>
-    <button class="top-btn" style="background: #39FF14;" id="btn-lp-staking" onclick="startstaking()">LP 스테이킹</button>
-</div>
-</div> 
+    <div class="top-btn-grid">
+        <button class="top-btn" style="background: #E0D7FF;" id="btn-pi-qty">PI 수량</button>
+        <button class="top-btn" style="background: #FFD700;" id="btn-dex-swap">DEX 스왑</button>
+        <button class="top-btn" style="background: #39FF14;" id="btn-lp-staking">LP 스테이킹</button>
+    </div>
 
     <div class="btn-group-label" id="txt-ecosystem">HK ECOSYSTEM</div>
     <div class="menu-grid">
@@ -342,32 +340,6 @@
     // 초기 실행
     renderFAQ();
     renderVision();
-// 파이 SDK 초기화 (샌드박스 모드 true가 테스트 파이용입니다)
-Pi.init({ version: "2.0", sandbox: true });
-
-async function startStaking() {
-    try {
-        const payment = await Pi.createPayment({
-            amount: 100, // 테스트할 파이 수량
-            memo: "HK-WorldBank Liquidity Pool Test",
-            metadata: { type: "staking" }
-        }, {
-            onReadyForServerApproval: (paymentId) => { 
-                /* 서버 승인 대기 */ 
-                console.log("승인 대기:", paymentId);
-            },
-            onReadyForServerCompletion: (paymentId, txid) => { 
-                /* 입금 완료 */ 
-                alert("테스트 파이 예치 성공! TXID: " + txid);
-            },
-            onCancel: (pId) => { console.log("취소"); },
-            onError: (error, p) => { console.error("에러 발생", error); }
-        });
-    } catch (err) {
-        alert("파이 브라우저에서 실행해 주세요!");
-    }
-}
-
 </script>
 
 </body>
