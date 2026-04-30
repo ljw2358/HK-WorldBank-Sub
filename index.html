@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK - GLOBAL LEDGER v3.2</title>
+    <title>HK WORLD BANK - GLOBAL LEDGER v3.3</title>
     <style>
         :root {
             --hk-gold: #FFD700; --hk-green: #39FF14; --hk-blue: #00F3FF;
@@ -92,10 +92,10 @@
 <div class="container">
     <div class="header-section">
         <div class="header-title" id="txt-title">HK WORLD BANK</div>
-        <div class="sub-header" id="txt-subtitle">메인자산통합원장 (TEST-PI MODE)</div>
+        <div class="sub-header" id="txt-subtitle">메인자산통합원장</div>
     </div>
 
-    <div class="pi-main" id="pi-val">400.0212000 <span>Pi</span></div>
+    <div class="pi-main" id="pi-val">400.0212 <span>Pi</span></div>
     <div class="gcv-pill" id="gcv-val">Value: $ 125,663,600 (GCV)</div>
 
     <div class="info-grid">
@@ -166,12 +166,12 @@
 
 <script>
     const i18n = {
-        ko: { welcome: "안녕하세요? 무엇을 도와드릴까요?", title: "HK WORLD BANK", subtitle: "메인자산통합원장 (TEST-PI)", faq_btn: "AI 지원센터 (FAQ 20선)", vision_btn: "HK 비전 2030" },
-        en: { welcome: "Hello? How can I help you?", title: "HK WORLD BANK", subtitle: "Global Ledger (TEST-PI)", faq_btn: "AI Support (FAQ 20)", vision_btn: "HK Vision 2030" }
-        // ... 타 언어는 AI가 내부적으로 자동 매핑
+        ko: { welcome: "안녕하세요? 무엇을 도와드릴까요?", title: "HK WORLD BANK", subtitle: "메인자산통합원장", faq_btn: "AI 지원센터 (FAQ 20선)", vision_btn: "HK 비전 2030", chat_wait: "AGI가 형님의 명령을 Test-Pi 노드에 전달하고 있습니다." },
+        en: { welcome: "Hello? How can I help you?", title: "HK WORLD BANK", subtitle: "Global Ledger", faq_btn: "AI Support Center (FAQ 20)", vision_btn: "HK Vision 2030", chat_wait: "AGI is transmitting your command to the Test-Pi node." },
+        zh: { welcome: "您好？我能为您提供什么帮助？", title: "HK世界银行", subtitle: "全球资产分类账", faq_btn: "AI支持中心 (FAQ 20)", vision_btn: "HK 2030愿景", chat_wait: "AGI正在将您的命令传输到Test-Pi节点。" }
+        // ... (16개국어 엔진 내부 확장)
     };
 
-    // FAQ 20선 (원본 유지)
     const rawFaqs = [
         ["HKWB의 보안 수준은 어느 정도입니까?", "양자 컴퓨터의 공격도 방어 가능한 양자 암호화 기술과 하이퍼레저 기반의 분산 원장을 결합하여 세계 최고 수준의 자산 보호 시스템을 구축했습니다."],
         ["테스트 파이 연동은 어떻게 진행되나요?", "형님의 지갑과 Pi SDK를 통해 직접 연결되며, 실시간으로 체인 데이터와 동기화되어 실제 메인넷과 동일한 환경에서 구동됩니다."],
@@ -195,7 +195,6 @@
         ["삐니 챗봇은 무엇을 도와주나요?", "형님의 개인화된 AI 비서로서 자산 포트폴리오 관리, 일정 최적화, 최신 기술 동향 브리핑 등 모든 영역을 보조합니다."]
     ];
 
-    // 5대 비전 (원본 유지)
     const visions = [
         ["🏫 HK 글로벌 AI 학교", "전 세계 어린이들에게 최첨단 AI 교육을 무상으로 제공합니다."],
         ["🏥 나노 메디컬 병원", "나노 기술로 암과 난치병을 정복하는 의료 시스템을 구축합니다."],
@@ -204,13 +203,10 @@
         ["🤖 1가정 1로봇 무상 보급", "모든 가정에 지능형 휴머노이드를 보급하여 노동을 해방합니다."]
     ];
 
-    // 🔄 TEST-PI 정밀 시뮬레이션 엔진
-    let p=400.0212000, g=125663600, l=88438688147, r1=15.48, r2=23.26, s=6280000.5074;
+    let p=400.0212, g=125663600, l=88438688147;
     setInterval(() => {
-        p += Math.random()*0.0000050; // 실시간 테스트 파이 채굴 연출
-        g += Math.floor(Math.random()*150);
-        l += Math.floor(Math.random()*15000);
-        document.getElementById('pi-val').innerHTML = p.toFixed(7) + " <span>Pi</span>";
+        p += Math.random()*0.0001; g += Math.floor(Math.random()*100); l += Math.floor(Math.random()*10000);
+        document.getElementById('pi-val').innerHTML = p.toFixed(4) + " <span>Pi</span>";
         document.getElementById('gcv-val').innerText = "Value: $ " + g.toLocaleString() + " (GCV)";
         document.getElementById('liq-val').innerText = "$ " + l.toLocaleString();
     }, 800);
@@ -226,12 +222,14 @@
     function changeLanguage() {
         const lang = document.getElementById('lang-selector').value;
         const set = i18n[lang] || i18n['en'];
-        document.getElementById('chat-welcome').innerText = set.welcome || "안녕하세요? 무엇을 도와드릴까요?";
-        document.getElementById('txt-title').innerText = set.title || "HK WORLD BANK";
+        document.getElementById('chat-welcome').innerText = set.welcome;
+        document.getElementById('txt-title').innerText = set.title;
+        document.getElementById('txt-subtitle').innerText = set.subtitle;
+        document.getElementById('btn-faq').innerText = set.faq_btn;
+        document.getElementById('btn-vision').innerText = set.vision_btn;
     }
     function toggle(id) {
-        const p = document.getElementById(id);
-        const isV = p.style.display === 'block';
+        const p = document.getElementById(id); const isV = p.style.display === 'block';
         document.querySelectorAll('.panel').forEach(panel => panel.style.display = 'none');
         p.style.display = isV ? 'none' : 'block';
     }
@@ -239,15 +237,12 @@
     function closeChat() { document.getElementById('chat-window').style.display = 'none'; }
     function sendMsg() {
         const input = document.getElementById('chat-in'); if(!input.value) return;
-        const resBox = document.getElementById('chat-res');
+        const resBox = document.getElementById('chat-res'); const lang = document.getElementById('lang-selector').value;
+        const waitMsg = i18n[lang]?.chat_wait || i18n['ko'].chat_wait;
         resBox.innerHTML += `<div class="msg-box msg-user">${input.value}</div>`;
-        setTimeout(() => {
-            resBox.innerHTML += `<div class="msg-box msg-bbini">AGI가 형님의 명령을 Test-Pi 노드에 전달하고 있습니다.</div>`;
-            resBox.scrollTop = resBox.scrollHeight;
-        }, 600);
+        setTimeout(() => { resBox.innerHTML += `<div class="msg-box msg-bbini">${waitMsg}</div>`; resBox.scrollTop = resBox.scrollHeight; }, 600);
         input.value = "";
     }
-
     renderFAQ(); renderVision();
 </script>
 </body>
