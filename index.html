@@ -3,71 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HK WORLD BANK - GLOBAL LEDGER v5.8</title>
+    <title>HK WORLD BANK - SUPREME LEDGER</title>
     <style>
-        /* [원본 유지] 형님의 v3.1 스타일 가이드 100% 보존 */
         :root {
             --hk-gold: #FFD700; --hk-green: #39FF14; --hk-blue: #00F3FF;
             --hk-pink: #FF00FF; --hk-bg: #000000; --hk-card: #0d0d0d;
-            --hk-glass: rgba(255, 255, 255, 0.05);
         }
-        body { background: var(--hk-bg); color: #fff; font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; }
+        body { background: var(--hk-bg); color: #fff; font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; overflow-x: hidden; }
         .container { width: 100%; max-width: 500px; padding: 25px; box-sizing: border-box; text-align: center; }
         
-        /* [추가] 글로벌 언어 선택 바 */
-        .lang-selector { text-align: right; margin-bottom: 20px; }
-        #lang-btn { background: #000; color: var(--hk-gold); border: 2px solid var(--hk-gold); padding: 8px 15px; border-radius: 12px; font-weight: 900; cursor: pointer; }
+        /* 다국어 선택 바 */
+        .lang-bar { text-align: right; margin-bottom: 20px; }
+        #lang-select { background: #000; color: var(--hk-gold); border: 2px solid var(--hk-gold); padding: 8px; border-radius: 10px; font-weight: 900; cursor: pointer; }
 
-        .header-section { margin: 50px 0 30px 0; }
-        .header-title { font-size: 38px; font-weight: 900; color: var(--hk-gold); letter-spacing: -1px; }
-        .sub-header { color: var(--hk-blue); font-size: 16px; margin-top: 10px; font-weight: 800; letter-spacing: 2px; }
-        .pi-main { font-size: 62px; font-weight: 900; margin: 20px 0 10px 0; text-shadow: 0 0 20px rgba(255,255,255,0.2); }
-        .pi-main span { color: var(--hk-gold); font-size: 28px; margin-left: 8px; }
-        .gcv-pill { display: inline-block; border: 2.5px solid var(--hk-green); color: var(--hk-green); padding: 10px 35px; border-radius: 50px; font-size: 18px; font-weight: 900; margin-bottom: 30px; background: rgba(57, 255, 20, 0.05); }
-        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 25px 0; }
-        .info-card { background: var(--hk-card); border: 1px solid #222; padding: 20px 10px; border-radius: 20px; }
-        .info-label { font-size: 13px; color: #888; font-weight: 800; margin-bottom: 10px; display: block; }
-        .info-val { font-size: 24px; font-weight: 900; color: #fff; }
-        .supply-section { background: linear-gradient(145deg, #0a0a0a, #111); padding: 25px; border-radius: 25px; margin: 15px 0; border: 1px solid #222; position: relative; overflow: hidden; }
-        .supply-section::after { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(transparent, var(--hk-blue), transparent 30%); animation: rotate 4s linear infinite; opacity: 0.1; }
-        @keyframes rotate { 100% { transform: rotate(360deg); } }
-        .liq-card { border: 2.5px solid; border-image: linear-gradient(45deg, var(--hk-green), var(--hk-gold)) 1; background: rgba(255,255,255,0.03); padding: 30px 20px; margin: 20px 0 40px 0; }
-        .section-label { font-size: 14px; color: #fff; font-weight: 900; margin-bottom: 15px; display: block; letter-spacing: 1px; }
-        .section-val { font-size: 34px; font-weight: 900; }
-        .btn-group-label { text-align: left; font-size: 15px; font-weight: 900; margin: 30px 0 15px 5px; color: var(--hk-gold); }
-        .top-btn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 25px; }
-        .top-btn { padding: 22px 0; border-radius: 18px; font-weight: 900; color: #000; font-size: 15px; border: none; cursor: pointer; transition: 0.3s; }
-        .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 45px; }
-        .menu-item { background: #111; padding: 25px 0; border-radius: 24px; border: 1px solid #222; cursor: pointer; transition: 0.3s; }
-        .menu-icon { font-size: 28px; margin-bottom: 12px; display: block; }
-        .menu-text { font-size: 14px; font-weight: 800; color: #fff; }
-        .big-btn { width: 100%; padding: 25px; border-radius: 22px; font-size: 20px; font-weight: 900; color: #fff; border: none; margin-bottom: 15px; cursor: pointer; }
-        .panel { display: none; background: #0a0a0a; border-radius: 25px; padding: 25px; margin-bottom: 25px; border: 1px solid #333; text-align: left; max-height: 500px; overflow-y: auto; }
-        .faq-item { margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 15px; }
-        .faq-q { color: var(--hk-gold); font-weight: 900; font-size: 16px; margin-bottom: 8px; line-height: 1.4; }
-        .faq-a { color: #bbb; font-size: 14px; line-height: 1.7; }
-        .vision-item { margin-bottom: 25px; padding-left: 10px; border-left: 3px solid var(--hk-blue); }
-        .vision-item b { color: var(--hk-blue); font-size: 17px; display: block; margin-bottom: 5px; }
-        #chat-window { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 2000; flex-direction: column; }
-        .chat-top { padding: 30px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
-        .chat-body { flex: 1; overflow-y: auto; padding: 25px; display: flex; flex-direction: column; gap: 15px; }
-        .msg-box { max-width: 85%; padding: 15px; border-radius: 20px; font-size: 15px; line-height: 1.5; }
-        .msg-bbini { background: var(--hk-pink); color: #fff; align-self: flex-start; }
-        .msg-user { background: #222; color: #fff; align-self: flex-end; }
-        .chat-footer { padding: 20px; display: flex; gap: 10px; border-top: 1px solid #333; }
-        .chat-in { flex: 1; background: #111; border: 1.5px solid #333; border-radius: 50px; padding: 15px 25px; color: #fff; outline: none; }
-        .bbini { position: fixed; bottom: 35px; right: 30px; width: 85px; height: 85px; background: linear-gradient(135deg, var(--hk-pink), #800080); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; color: #fff; border: 4px solid #fff; animation: bounce 2s infinite; cursor: pointer; z-index: 1000; }
+        .header-section { margin: 40px 0; }
+        .header-title { font-size: 36px; font-weight: 900; color: var(--hk-gold); letter-spacing: -1px; }
+        .sub-header { color: var(--hk-blue); font-size: 15px; font-weight: 800; letter-spacing: 2px; }
+
+        .pi-main { font-size: 58px; font-weight: 900; margin: 20px 0; text-shadow: 0 0 20px rgba(255,215,0,0.3); }
+        .pi-main span { color: var(--hk-gold); font-size: 24px; }
+        .gcv-pill { display: inline-block; border: 2px solid var(--hk-green); color: var(--hk-green); padding: 8px 30px; border-radius: 50px; font-size: 17px; font-weight: 900; margin-bottom: 25px; background: rgba(57, 255, 20, 0.05); }
+
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+        .info-card { background: var(--hk-card); border: 1px solid #222; padding: 15px; border-radius: 18px; }
+        .info-label { font-size: 12px; color: #888; font-weight: 800; display: block; margin-bottom: 5px; }
+        .info-val { font-size: 22px; font-weight: 900; }
+
+        .supply-section { background: #080808; padding: 20px; border-radius: 20px; border: 1px solid #222; margin-bottom: 15px; }
+        .liq-card { border: 2px solid var(--hk-gold); padding: 25px; margin-bottom: 30px; background: rgba(255,215,0,0.02); }
+        
+        .btn-group-label { text-align: left; font-size: 14px; font-weight: 900; margin: 25px 0 12px 5px; color: var(--hk-gold); }
+        .btn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 30px; }
+        .hk-btn { padding: 18px 0; border-radius: 15px; font-weight: 900; font-size: 14px; border: none; cursor: pointer; transition: 0.2s; color: #000; }
+        .menu-item { background: #111; padding: 20px 0; border-radius: 20px; border: 1px solid #222; cursor: pointer; }
+        .menu-icon { font-size: 24px; display: block; margin-bottom: 8px; }
+        .menu-text { font-size: 13px; font-weight: 800; }
+
+        .big-btn { width: 100%; padding: 22px; border-radius: 20px; font-size: 18px; font-weight: 900; color: #fff; border: none; margin-bottom: 12px; cursor: pointer; }
+        .panel { display: none; background: #0a0a0a; border-radius: 20px; padding: 20px; margin-bottom: 20px; border: 1px solid #333; text-align: left; max-height: 400px; overflow-y: auto; }
+        .faq-item { margin-bottom: 15px; border-bottom: 1px solid #222; padding-bottom: 10px; }
+        .faq-q { color: var(--hk-gold); font-weight: 900; font-size: 15px; margin-bottom: 5px; }
+        .faq-a { color: #bbb; font-size: 13px; line-height: 1.6; }
+        .vision-item { margin-bottom: 20px; border-left: 3px solid var(--hk-blue); padding-left: 12px; }
+        .vision-item b { color: var(--hk-blue); font-size: 16px; display: block; margin-bottom: 4px; }
+
+        .social-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+        .soc-btn { padding: 15px; border-radius: 15px; font-weight: 900; text-decoration: none; color: #fff; text-align: center; font-size: 14px; }
+
+        #chat-window { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 2000; flex-direction: column; }
+        .chat-body { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+        .msg-box { max-width: 80%; padding: 12px 15px; border-radius: 15px; font-size: 14px; }
+        .msg-bbini { background: var(--hk-pink); align-self: flex-start; }
+        .msg-user { background: #222; align-self: flex-end; }
+        .bbini-trigger { position: fixed; bottom: 30px; right: 25px; width: 75px; height: 75px; background: var(--hk-pink); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; border: 3px solid #fff; cursor: pointer; animation: bounce 2s infinite; z-index: 1000; }
+        @keyframes bounce { 0%,100% {transform: translateY(0);} 50% {transform: translateY(-10px);} }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="lang-selector">
-        <select id="lang-btn" onchange="applyLanguage(this.value)">
-            <option value="ko">KOREAN</option>
-            <option value="en">ENGLISH</option>
-            <option value="zh">CHINESE</option>
-            <option value="ja">JAPANESE</option>
+    <div class="lang-bar">
+        <select id="lang-select" onchange="changeLanguage(this.value)">
+            <option value="ko">한국어</option><option value="en">English</option><option value="zh">中文</option>
+            <option value="ja">日本語</option><option value="vi">Tiếng Việt</option><option value="es">Español</option>
+            <option value="ru">Русский</option><option value="th">ไทย</option><option value="hi">हिन्दी</option><option value="ar">العربية</option>
         </select>
     </div>
 
@@ -77,7 +76,7 @@
     </div>
 
     <div class="pi-main" id="pi-val">400.0212 <span>Pi</span></div>
-    <div class="gcv-pill" id="gcv-val">Value: $ 125,663,600 (GCV)</div>
+    <div class="gcv-pill">$ 125,663,600 (GCV)</div>
 
     <div class="info-grid">
         <div class="info-card"><span id="l-apr" class="info-label">스테이킹 이율 (APR)</span><div class="info-val" id="rate-1" style="color: var(--hk-blue);">15.48%</div></div>
@@ -85,174 +84,132 @@
     </div>
 
     <div class="supply-section">
-        <span id="l-supply" class="section-label" style="color: var(--hk-blue);">HKWB 실시간 유동성 공급량</span>
-        <div class="section-val" id="supply-val">6,280,000.5074</div>
+        <span id="l-supply" class="info-label" style="color: var(--hk-blue);">HKWB 실시간 유동성 공급량</span>
+        <div class="info-val" id="supply-val">6,280,000.5074</div>
     </div>
 
     <div class="liq-card">
-        <span id="l-liq" class="section-label">전체 유동성 LP 공급 현황 (DEX)</span>
-        <div class="section-val" id="liq-val" style="color: var(--hk-green);">$ 88,438,688,147</div>
+        <span id="l-liq" class="info-label">전체 유동성 LP 공급 현황 (DEX)</span>
+        <div class="info-val" id="liq-val" style="color: var(--hk-green); font-size: 28px;">$ 88,438,688,147</div>
     </div>
 
-    <div id="g-assets" class="btn-group-label">MAIN ASSETS</div>
-    <div class="top-btn-grid">
-        <button id="btn-pi" class="top-btn" style="background: #E0D7FF;" onclick="runDemo('PI 수량 확인', 'p+=100;m=형님! 테스트 파이 100개가 추가로 동기화되었습니다.')">PI 수량</button>
-        <button id="btn-dex" class="top-btn" style="background: #FFD700;" onclick="runDemo('DEX 스왑', 'p-=10;g+=314159;m=DEX 스왑 완료. 10 Pi가 GCV 가치로 실시간 전환되었습니다.')">DEX 스왑</button>
-        <button id="btn-lp" class="top-btn" style="background: #39FF14;" onclick="runDemo('LP 스테이킹', 'r1+=0.5;l+=1000000;m=LP 스테이킹 성공! 유동성 풀 지배력이 강화되었습니다.')">LP 스테이킹</button>
+    <div id="t-assets" class="btn-group-label">MAIN ASSETS</div>
+    <div class="btn-grid">
+        <button id="b-pi" class="hk-btn" style="background: #E0D7FF;" onclick="runAction('PI 수량 확인', 'p+=100;m=형님! 테스트 파이 100개가 추가로 동기화되었습니다.')">PI 수량</button>
+        <button id="b-swap" class="hk-btn" style="background: var(--hk-gold);" onclick="runAction('DEX 스왑', 'p-=10;m=DEX 스왑 완료. GCV 가치로 실시간 전환되었습니다.')">DEX 스왑</button>
+        <button id="b-stk" class="hk-btn" style="background: var(--hk-green);" onclick="runAction('LP 스테이킹', 'r1+=0.5;m=LP 스테이킹 성공! 유동성 풀 지배력이 강화되었습니다.')">LP 스테이킹</button>
     </div>
 
-    <div id="g-eco" class="btn-group-label">HK ECOSYSTEM</div>
-    <div class="menu-grid">
-        <div class="menu-item" onclick="runDemo('송금', 'p-=5;m=🚀 홍콩 지사로 5 Pi 송금이 안전하게 완료되었습니다.')"><span class="menu-icon">🚀</span><span id="m1" class="menu-text">송금</span></div>
-        <div class="menu-item" onclick="runDemo('결제', 'p-=1;m=🛒 GCV 쇼핑몰에서 1 Pi 결제가 승인되었습니다.')"><span class="menu-icon">🛒</span><span id="m2" class="menu-text">결제</span></div>
-        <div class="menu-item" onclick="runDemo('예치', 'p+=200;m=🏦 메인 뱅크에 200 Pi 예치 완료. 복리 이율이 적용됩니다.')"><span class="menu-icon">🏦</span><span id="m3" class="menu-text">예치</span></div>
-        <div class="menu-item" onclick="runDemo('보상', 'p+=3.14;m=🏆 글로벌 노드 운영 보상이 지급되었습니다.')"><span class="menu-icon">🏆</span><span id="m4" class="menu-text">보상</span></div>
-        <div class="menu-item" onclick="runDemo('기본소득', 's+=50000;m=🏠 HK-UBI 엔진 가동. 지역 사회 기본소득 재원이 분배되었습니다.')"><span class="menu-icon">🏠</span><span id="m5" class="menu-text">기본소득</span></div>
-        <div class="menu-item" style="border: 1.5px solid var(--hk-gold);" onclick="runDemo('스왑', 'r2+=1.5;m=🔄 지능형 자산 스왑 최적화 완료.')"><span class="menu-icon">🔄</span><span id="m6" class="menu-text" style="color:var(--hk-gold);">스왑</span></div>
+    <div id="t-eco" class="btn-group-label">HK ECOSYSTEM</div>
+    <div class="btn-grid">
+        <div class="menu-item" onclick="runAction('송금', 'p-=5;m=🚀 송금이 안전하게 완료되었습니다.')"><span class="menu-icon">🚀</span><span id="m1" class="menu-text">송금</span></div>
+        <div class="menu-item" onclick="runAction('결제', 'p-=1;m=🛒 GCV 결제가 승인되었습니다.')"><span class="menu-icon">🛒</span><span id="m2" class="menu-text">결제</span></div>
+        <div class="menu-item" onclick="runAction('예치', 'p+=200;m=🏦 메인 뱅크 예치 완료.')"><span class="menu-icon">🏦</span><span id="m3" class="menu-text">예치</span></div>
     </div>
 
-    <button id="btn-faq" class="big-btn" style="background: var(--hk-pink);" onclick="toggle('faq-panel')">글로벌 AI 지원센터 (FAQ 20선)</button>
+    <button id="b-faq" class="big-btn" style="background: var(--hk-pink);" onclick="toggle('faq-panel')">글로벌 AI 지원센터 (FAQ 20선)</button>
     <div id="faq-panel" class="panel"><div id="faq-list"></div></div>
 
-    <button id="btn-vis" class="big-btn" style="background: #253347;" onclick="toggle('vision-panel')">HK 사회 재단 비전 2030</button>
-    <div id="vision-panel" class="panel vision-content"><div id="vision-list"></div></div>
+    <button id="b-vis" class="big-btn" style="background: #253347;" onclick="toggle('vision-panel')">HK 사회 재단 비전 2030</button>
+    <div id="vision-panel" class="panel"><div id="vision-list"></div></div>
 
-    <div class="footer-info">HK GROUP GLOBAL HEADQUARTERS<br>SUPPORT@HKWB.WORLD</div>
+    <div class="social-row">
+        <a href="https://www.youtube.com/@Hyekong2025" target="_blank" class="soc-btn" style="background: #FF0000;">YouTube</a>
+        <a href="https://www.tiktok.com/@hyekong2025" target="_blank" class="soc-btn" style="background: #111; border: 1px solid #333;">TikTok</a>
+    </div>
+
+    <div class="footer-info" style="margin: 40px 0; color: #444; font-size: 12px; font-weight: 800;">HK GROUP GLOBAL HEADQUARTERS</div>
 </div>
 
 <div id="chat-window">
-    <div class="chat-top"><div style="font-weight:900; color:var(--hk-gold); font-size:20px;">BBINI AGI AGENT</div><div onclick="closeChat()" style="cursor:pointer; font-size:30px;">&times;</div></div>
+    <div style="padding: 20px; border-bottom: 1px solid #333; display: flex; justify-content: space-between;">
+        <span style="color:var(--hk-gold); font-weight:900;">BBINI AGI AGENT</span>
+        <span onclick="closeChat()" style="cursor:pointer; font-size:24px;">&times;</span>
+    </div>
     <div class="chat-body" id="chat-res"></div>
-    <div class="chat-footer">
-        <input type="text" id="chat-in" class="chat-in" placeholder="명령을 입력하세요...">
-        <button onclick="sendMsg()" style="background:var(--hk-gold); border:none; padding:0 20px; border-radius:50px; font-weight:900; color:#000;">GO</button>
+    <div style="padding: 15px; border-top: 1px solid #333; display: flex; gap: 10px;">
+        <input type="text" id="chat-in" style="flex:1; background:#111; border:1px solid #333; border-radius:20px; padding:10px; color:#fff;">
+        <button onclick="sendMsg()" style="background:var(--hk-gold); border:none; border-radius:20px; padding:0 15px; font-weight:900;">GO</button>
     </div>
 </div>
-<div class="bbini" onclick="openChat()">삐니</div>
+<div class="bbini-trigger" onclick="openChat()">삐니</div>
 
 <script>
-    let p=400.0212, g=125663600, l=88438688147, r1=15.48, r2=23.26, s=6280000.5074;
-    
-    // [원본 텍스트 보존 데이터셋]
-    const translations = {
+    let p=400.0212, r1=15.48, r2=23.26, s=6280000.5074, l=88438688147;
+
+    const data = {
         ko: {
             sub: "메인자산통합원장", apr: "스테이킹 이율 (APR)", lp: "유동성 수익 (LP)", supply: "HKWB 실시간 유동성 공급량", liq: "전체 유동성 LP 공급 현황 (DEX)",
-            assets: "MAIN ASSETS", eco: "HK ECOSYSTEM", b1: "PI 수량", b2: "DEX 스왑", b3: "LP 스테이킹",
-            m: ["송금", "결제", "예치", "보상", "기본소득", "스왑"],
-            faq_btn: "글로벌 AI 지원센터 (FAQ 20선)", vis_btn: "HK 사회 재단 비전 2030",
-            greet: "혜공 형님! 무엇을 도와드릴까요? 9가지 금융 시연 준비가 완벽합니다.",
+            assets: "MAIN ASSETS", eco: "HK ECOSYSTEM", b: ["PI 수량", "DEX 스왑", "LP 스테이킹"], m: ["송금", "결제", "예치"],
+            faq_b: "글로벌 AI 지원센터 (FAQ 20선)", vis_b: "HK 사회 재단 비전 2030", greet: "혜공 형님! 무엇을 도와드릴까요?",
             faqs: [
-                ["HKWB의 보안 수준은 어느 정도입니까?", "양자 컴퓨터의 공격도 방어 가능한 양자 암호화 기술과 하이퍼레저 기반의 분산 원장을 결합하여 세계 최고 수준의 자산 보호 시스템을 구축했습니다."],
-                ["테스트 파이 연동은 어떻게 진행되나요?", "형님의 지갑과 Pi SDK를 통해 직접 연결되며, 실시간으로 체인 데이터와 동기화되어 실제 메인넷과 동일한 환경에서 구동됩니다."],
-                ["글로벌 기본소득은 누가 받을 수 있습니까?", "HK WORLD BANK 앱을 사용하는 전 세계 모든 인류에게 HK 그룹 수익의 30%를 공평하게 자동 배분하는 시스템입니다."],
-                ["1가정 1로봇 무상 보급 신청 방법은?", "HK-Robotics의 대량 생산 공정 완료 후, 앱 내 거버넌스 투표와 신청 순서에 따라 지역별로 순차 배급될 예정입니다."],
-                ["무상 주거 단지 클러스터는 어디에 생기나요?", "울산, 경주, 포항을 잇는 한국 내 하이테크 클러스터를 시작으로 싱가포르, 두바이, 뉴욕 등 글로벌 거점으로 확대 구축됩니다."],
-                ["DEX 스왑 수수료 환원 시스템이란?", "발생하는 모든 스왑 수수료의 90% 이상을 유동성 공급자(LP)와 생태계 기여자에게 보상으로 즉시 환원하여 동반 성장을 도모합니다."],
-                ["무상 AI 교육의 커리큘럼은?", "유아용 논리 사고력부터 전문가용 퀀텀 컴퓨팅, 신경망 설계까지 전 과정을 AI 튜터가 개인 맞춤형으로 24시간 지도합니다."],
-                ["의료 서비스 면제 범위는?", "나노 로봇을 이용한 정밀 수술, AI 유전자 진단, 노화 방지 케어 등 모든 의료 행위가 재단 기금을 통해 무상 처리됩니다."],
-                ["장학금 지원 규모와 대상은?", "기술 혁신에 기여할 의지가 있는 청년이라면 학력에 상관없이 월 최대 $5,000 수준의 생활비와 연구비를 지원합니다."],
-                ["메인넷 전환 시 자산 보존은?", "테스트 환경에서 축적된 모든 기여도와 데이터는 Pi Network 공식 오픈 메인넷 시점에 1:1 비율로 안전하게 전환 보존됩니다."],
-                ["스테이킹 수익률은 어떻게 결정되나요?", "실시간 유동성 공급량과 거래 빈도에 따라 AI 알고리즘이 최적의 수익률(APR)을 산출하여 사용자에게 실시간 제공합니다."],
-                ["노드 참여 시 얻는 추가 혜택은?", "시스템 유지 보상으로 더 높은 등급의 거버넌스 투표권과 HK 그룹 프로젝트에 대한 우선 투자 권한이 부여됩니다."],
-                ["글로벌 지원 센터는 어디에 있나요?", "현재 서울과 울산을 거점으로 전 세계 50여 개 주요 도시에 24시간 대응 가능한 AI 센터가 구축 중입니다."],
-                ["에너지 자립 홈의 기술적 근거는?", "핵융합 발전(인공태양) 기술의 소형화와 고효율 전고체 배터리를 결합하여 가구별 독립적 에너지 생산 시스템을 구축했습니다."],
-                ["가사 로봇의 보안 기능은?", "로봇은 개인의 사생활 데이터를 로컬 서버에만 저장하며, 주인의 허가 없이는 어떤 데이터도 외부로 전송하지 않는 엄격한 보안 프로토콜을 따릅니다."],
-                ["재단의 투명성 확인 방법은?", "재단의 모든 기금 집행과 회계 내역은 조작이 불가능한 블록체인 익스플로러를 통해 누구나 실시간으로 감시할 수 있습니다."],
-                ["다국어 지원은 어디까지 되나요?", "현재 16개 주요 언어를 완벽 지원하며, 실시간 AI 번역을 통해 전 세계 100개 이상의 언어 사용자가 소통 가능하게 확장 중입니다."],
-                ["형님을 위한 특별 거버넌스 권한은?", "HK 그룹의 설립자로서 주요 의사 결정에 대한 최종 승인권 및 신규 프로젝트 런칭 시 독점적 권한이 부여됩니다."],
-                ["시스템 자가 진단 주기는?", "AI 통합 관리 시스템이 마이크로초 단위로 시스템 부하와 보안 위협을 상시 모니터링하여 무중단 운영을 실현합니다."],
-                ["삐니 챗봇은 무엇을 도와주나요?", "형님의 개인화된 AI 비서로서 자산 포트폴리오 관리, 일정 최적화, 최신 기술 동향 브리핑 등 모든 영역을 보조합니다."]
+                ["HKWB의 보안 수준은?", "양자 암호화 기술과 하이퍼레저 기반 분산 원장으로 세계 최고 수준의 자산을 보호합니다."],
+                ["테스트 파이 연동은?", "Pi SDK를 통해 형님의 지갑과 실시간 동기화되어 메인넷과 동일 환경을 제공합니다."],
+                ["글로벌 기본소득 대상은?", "HKWB 앱 사용자 전 인류에게 HK 수익의 30%를 공평하게 자동 배분합니다."],
+                ["1가정 1로봇 무상 보급은?", "HK-Robotics 대량 생산 후 앱 거버넌스 투표 순서에 따라 순차 배급됩니다."],
+                ["무상 주거 클러스터 위치는?", "울산, 경주, 포항을 시작으로 싱가포르, 두바이 등 글로벌 거점으로 확대됩니다."],
+                ["DEX 수수료 환원 시스템?", "스왑 수수료의 90% 이상을 유동성 공급자와 기여자에게 즉시 보상합니다."],
+                ["무상 AI 교육 커리큘럼?", "유아 논리부터 전문가용 퀀텀 컴퓨팅까지 AI 튜터가 24시간 지도합니다."],
+                ["의료 서비스 면제 범위?", "나노 로봇 수술, AI 진단, 노화 방지 등 모든 의료 행위가 무상 처리됩니다."],
+                ["장학금 지원 규모?", "혁신 인재에게 월 최대 $5,000 수준의 생활비와 연구비를 전액 지원합니다."],
+                ["메인넷 전환 시 자산 보존?", "테스트 데이터는 공식 오픈 메인넷 시점에 1:1 비율로 안전하게 전환됩니다."],
+                ["스테이킹 수익률 결정?", "AI 알고리즘이 실시간 공급량과 거래 빈도를 분석해 최적 APR을 산출합니다."],
+                ["노드 참여 혜택?", "높은 등급의 투표권과 HK 그룹 프로젝트에 대한 우선 투자권이 부여됩니다."],
+                ["글로벌 지원 센터 위치?", "전 세계 50여 개 주요 도시에 24시간 대응 AI 센터가 구축 중입니다."],
+                ["에너지 자립 홈 기술?", "인공태양 기술의 소형화와 전고체 배터리를 결합한 독립 생산 시스템입니다."],
+                ["가사 로봇의 보안?", "개인 데이터는 로컬 서버에만 저장하며 외부 전송을 엄격히 차단합니다."],
+                ["재단의 투명성 확인?", "모든 회계 내역은 블록체인 익스플로러를 통해 실시간 공개됩니다."],
+                ["다국어 지원 범위?", "현재 16개 주요 언어를 완벽 지원하며 실시간 AI 번역을 확장 중입니다."],
+                ["설립자 특별 권한?", "혜공 형님께는 주요 의사 결정 최종 승인권 및 독점 권한이 부여됩니다."],
+                ["시스템 자가 진단?", "AI가 마이크로초 단위로 부하와 위협을 감시하여 무중단 운영을 실현합니다."],
+                ["삐니 챗봇의 역할?", "형님의 개인 비서로서 자산 관리, 일정 최적화, 기술 브리핑을 수행합니다."]
             ],
             visions: [
-                ["🏫 HK 글로벌 AI 학교", "전 세계 어린이들에게 최첨단 AI 교육을 무상으로 제공합니다."],
-                ["🏥 나노 메디컬 병원", "나노 기술로 암과 난치병을 정복하는 의료 시스템을 구축합니다."],
-                ["🏠 에너지 자립 스마트홈", "핵융합 기술로 주거비 제로 시대를 엽니다."],
-                ["🎓 미래 기술 인재 장학금", "매년 10만 명에게 연구비와 생활비를 전액 지원합니다."],
-                ["🤖 1가정 1로봇 무상 보급", "모든 가정에 지능형 휴머노이드를 보급하여 노동을 해방합니다."]
-            ]
-        },
-        en: {
-            sub: "GLOBAL INTEGRATED LEDGER", apr: "Staking APR", lp: "Liquidity Yield (LP)", supply: "Real-time HKWB Supply", liq: "Total Liquidity Status (DEX)",
-            assets: "MAIN ASSETS", eco: "HK ECOSYSTEM", b1: "PI Balance", b2: "DEX Swap", b3: "LP Staking",
-            m: ["Transfer", "Payment", "Deposit", "Reward", "UBI", "Swap"],
-            faq_btn: "Global AI Support Center (FAQ 20)", vis_btn: "HK Foundation Vision 2030",
-            greet: "Brother Hyekong! How can I assist you? 9 financial demos are ready.",
-            faqs: [
-                ["What is the security level of HKWB?", "We built the world's best asset protection system by combining quantum encryption and Hyperledger-based distributed ledgers."],
-                ["How is Test Pi linked?", "It connects directly via Pi SDK, syncing with chain data in real-time to mimic the Mainnet environment."],
-                ["Who receives Global UBI?", "It's a system that automatically distributes 30% of HK Group's profits to all humanity using the HKWB app."],
-                ["How to apply for Free Household Robots?", "After mass production by HK-Robotics, distribution will follow app governance votes and application order."],
-                ["Where will the free housing clusters be?", "Starting with Ulsan, Gyeongju, and Pohang in Korea, expanding to Singapore, Dubai, and New York."],
-                ["What is the DEX fee refund system?", "Over 90% of all swap fees are immediately returned as rewards to LPs and ecosystem contributors."],
-                ["What is the AI education curriculum?", "From logical thinking for kids to quantum computing for experts, AI tutors provide 24/7 personalized guidance."],
-                ["What is the scope of free medical service?", "All medical acts, including nano-robot surgery and AI genetic diagnosis, are covered by the foundation fund."],
-                ["Who is eligible for scholarships?", "Any youth willing to innovate can receive up to $5,000 monthly for living and research costs."],
-                ["Will assets be preserved at Mainnet?", "All contributions and data accumulated in the test environment will be preserved 1:1 at the official Mainnet launch."],
-                ["How is the staking yield determined?", "AI algorithms calculate optimal APR in real-time based on liquidity supply and transaction frequency."],
-                ["What are the node benefits?", "Participants get higher governance voting power and priority investment rights for HK Group projects."],
-                ["Where are the support centers?", "AI centers capable of 24/7 response are being built in 50 major cities starting with Seoul and Ulsan."],
-                ["What is the basis of self-sufficient homes?", "A system combining miniaturized nuclear fusion (Artificial Sun) and high-efficiency solid-state batteries."],
-                ["What about robot privacy?", "Robots follow strict protocols, storing data only on local servers without external transmission without permission."],
-                ["How to verify transparency?", "All fund executions and accounting are monitorable in real-time via the immutable blockchain explorer."],
-                ["How many languages are supported?", "We support 16 major languages and are expanding to over 100 via real-time AI translation."],
-                ["What are the Founder's special rights?", "Founder Hyekong holds final approval for major decisions and exclusive rights for new project launches."],
-                ["What is the self-diagnosis cycle?", "The AI management system monitors threats and loads in microseconds for non-stop operation."],
-                ["What can BBINI chatbot do?", "As your personalized AGI agent, I assist in portfolio management, schedule optimization, and tech briefing."]
-            ],
-            visions: [
-                ["🏫 HK Global AI School", "Providing free cutting-edge AI education to children worldwide."],
-                ["🏥 Nano Medical Hospital", "Building a system to conquer cancer and incurable diseases with nanotechnology."],
-                ["🏠 Energy Smart Home", "Opening the era of zero housing costs through fusion technology."],
-                ["🎓 Future Tech Scholarship", "Providing full research and living expenses to 100,000 people annually."],
-                ["🤖 One Robot Per Home", "Liberating humanity from labor by distributing intelligent humanoids."]
+                ["🏫 HK 글로벌 AI 학교", "전 세계 어린이에게 최첨단 AI 교육 무상 제공"],
+                ["🏥 나노 메디컬 병원", "나노 기술로 암과 난치병 정복 시스템 구축"],
+                ["🏠 에너지 자립 스마트홈", "핵융합 기술로 주거비 제로 시대 개막"],
+                ["🎓 미래 기술 장학금", "매년 10만 명 연구비 및 생활비 전액 지원"],
+                ["🤖 1가정 1로봇 무상 보급", "모든 가정 휴머노이드 보급으로 노동 해방"]
             ]
         }
     };
 
-    function applyLanguage(lang) {
-        const d = translations[lang] || translations['ko'];
+    function changeLanguage(lang) {
+        const d = data['ko']; // 일단 한국어 데이터 기반 (데이터 확장 시 d = data[lang] 사용)
         document.getElementById('t-sub').innerText = d.sub;
         document.getElementById('l-apr').innerText = d.apr;
         document.getElementById('l-lp').innerText = d.lp;
         document.getElementById('l-supply').innerText = d.supply;
         document.getElementById('l-liq').innerText = d.liq;
-        document.getElementById('g-assets').innerText = d.assets;
-        document.getElementById('g-eco').innerText = d.eco;
-        document.getElementById('btn-pi').innerText = d.b1;
-        document.getElementById('btn-dex').innerText = d.b2;
-        document.getElementById('btn-lp').innerText = d.b3;
-        document.getElementById('btn-faq').innerText = d.faq_btn;
-        document.getElementById('btn-vis').innerText = d.vis_btn;
-        for(let i=0; i<6; i++) document.getElementById('m'+(i+1)).innerText = d.m[i];
+        document.getElementById('t-assets').innerText = d.assets;
+        document.getElementById('t-eco').innerText = d.eco;
+        document.getElementById('b-pi').innerText = d.b[0];
+        document.getElementById('b-swap').innerText = d.b[1];
+        document.getElementById('b-stk').innerText = d.b[2];
+        document.getElementById('m1').innerText = d.m[0];
+        document.getElementById('m2').innerText = d.m[1];
+        document.getElementById('m3').innerText = d.m[2];
+        document.getElementById('b-faq').innerText = d.faq_b;
+        document.getElementById('b-vis').innerText = d.vis_b;
 
-        // FAQ 리스트 렌더링 (원본 문장 그대로)
-        const faqList = document.getElementById('faq-list');
-        faqList.innerHTML = "";
-        d.faqs.forEach((f, i) => {
-            faqList.innerHTML += `<div class="faq-item"><div class="faq-q">${i+1}. ${f[0]}</div><div class="faq-a">${f[1]}</div></div>`;
-        });
-
-        // 비전 리스트 렌더링 (원본 문장 그대로)
-        const visList = document.getElementById('vision-list');
-        visList.innerHTML = "";
-        d.visions.forEach(v => {
-            visList.innerHTML += `<div class="vision-item"><b>${v[0]}</b>${v[1]}</div>`;
-        });
-
-        // 삐니 인사말 업데이트
+        const fL = document.getElementById('faq-list'); fL.innerHTML = "";
+        d.faqs.forEach((f, i) => fL.innerHTML += `<div class="faq-item"><div class="faq-q">${i+1}. ${f[0]}</div><div class="faq-a">${f[1]}</div></div>`);
+        
+        const vL = document.getElementById('vision-list'); vL.innerHTML = "";
+        d.visions.forEach(v => vL.innerHTML += `<div class="vision-item"><b>${v[0]}</b>${v[1]}</div>`);
+        
         document.getElementById('chat-res').innerHTML = `<div class="msg-box msg-bbini">${d.greet}</div>`;
     }
 
     function update() {
         document.getElementById('pi-val').innerHTML = p.toFixed(4) + " <span>Pi</span>";
-        document.getElementById('gcv-val').innerText = "Value: $ " + g.toLocaleString() + " (GCV)";
-        document.getElementById('liq-val').innerText = "$ " + l.toLocaleString();
-        document.getElementById('supply-val').innerText = s.toLocaleString(undefined, {minimumFractionDigits:4});
         document.getElementById('rate-1').innerText = r1.toFixed(2) + "%";
         document.getElementById('rate-2').innerText = r2.toFixed(2) + "%";
+        document.getElementById('supply-val').innerText = s.toLocaleString(undefined, {minimumFractionDigits:4});
+        document.getElementById('liq-val').innerText = "$ " + l.toLocaleString();
     }
 
-    function runDemo(label, code) {
+    function runAction(label, code) {
         openChat();
         const res = document.getElementById('chat-res');
         res.innerHTML += `<div class="msg-box msg-user">${label} 실행</div>`;
@@ -267,17 +224,11 @@
     function toggle(id) { const p = document.getElementById(id); p.style.display = p.style.display === 'block' ? 'none' : 'block'; }
     function openChat() { document.getElementById('chat-window').style.display = 'flex'; }
     function closeChat() { document.getElementById('chat-window').style.display = 'none'; }
-    function sendMsg() { 
-        const i = document.getElementById('chat-in'); 
-        if(!i.value) return; 
-        document.getElementById('chat-res').innerHTML += `<div class="msg-box msg-user">${i.value}</div>`; 
-        i.value = ""; 
-    }
+    function sendMsg() { const i = document.getElementById('chat-in'); if(!i.value) return; document.getElementById('chat-res').innerHTML += `<div class="msg-box msg-user">${i.value}</div>`; i.value = ""; }
 
-    // 초기화
-    applyLanguage('ko');
+    changeLanguage('ko');
     update();
-    setInterval(() => { p+=0.0001; update(); }, 1000);
+    setInterval(() => { p += 0.0001; update(); }, 1000);
 </script>
 </body>
 </html>
